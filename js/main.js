@@ -2000,9 +2000,9 @@
       {
         id: 'aprendiz',
         code: 'FASE 01',
-        status: 'CONCLUÍDA · 19 MESES',
+        status: 'CONCLUÍDA',
         period: 'JUN/2024 – DEZ/2025',
-        mobLabel: 'Aprendiz · 19m',
+        mobLabel: 'Aprendiz · Base',
         mobSub: 'Jun/2024–Dez/2025',
         role: 'Jovem Aprendiz',
         area: 'Actech · Operação & Processos Industriais',
@@ -2078,7 +2078,7 @@
                   <span>${ph.code} · ${ph.period}</span>
                 </span>
                 <span class="px-2 py-0.5 rounded-full text-[9px] font-semibold border" style="color:${ph.accent}; border-color:${ph.border}; background:${ph.glow};">
-                  ${idx === 0 ? 'ATUAL' : '19 MESES'}
+                  ${idx === 0 ? 'ATUAL' : 'CONCLUÍDA'}
                 </span>
               </div>
               <div>
@@ -2163,7 +2163,7 @@
               <div class="space-y-1 min-w-0 flex-1">
                 <div class="font-mono text-[10px] uppercase tracking-[0.14em] text-[#F59E0B] font-semibold">PONTE PARA A FASE 02</div>
                 <p class="text-xs text-ink/85 leading-relaxed">
-                  Os 19 meses medindo tempos, padronizando documentos no Qualyteam e observando gargalos em área deram a base para digitalizar a triagem e automatizar o ETL no estágio.
+                  O ciclo como Jovem Aprendiz medindo tempos, padronizando documentos no Qualyteam e observando gargalos em área deu a base para digitalizar a triagem e automatizar o ETL no estágio.
                 </p>
               </div>
               <button
@@ -2306,7 +2306,7 @@
         : `
           <div class="flex items-center justify-between gap-2 pt-2.5 border-t hairline-dark font-mono text-[9.5px] uppercase tracking-wider">
             <span class="text-muted">Qualyteam · Cronoanálises · KPIs</span>
-            <span class="font-semibold shrink-0" style="color:${ph.accent};">19 MESES</span>
+            <span class="font-semibold shrink-0" style="color:${ph.accent};">CONCLUÍDA</span>
           </div>`;
 
       mobStageEl.innerHTML = `
