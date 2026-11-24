@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#0B0C0B" stroke="#262A26" stroke-width="2"/>
+  <!-- Technical precision corner reticle in limeTech -->
+  <path d="M10 17V10H17" fill="none" stroke="#C6F135" stroke-width="2" stroke-linecap="square"/>
+  <circle cx="51" cy="13" r="3" fill="#C6F135"/>
+  <!-- Bold geometric L (white) -->
+  <path d="M14 21H21.5V39.5H31V46H14V21Z" fill="#F3F4F0"/>
+  <!-- Bold geometric R (limeTech) -->
+  <path d="M34 21H45.2C50.4 21 53.5 23.8 53.5 28.4C53.5 31.8 51.7 34.2 48.6 35.1L54 46H46.1L41.6 36.2H40.8V46H34V21ZM40.8 26.5V31.2H44.4C46.3 31.2 47.4 30.3 47.4 28.8C47.4 27.3 46.3 26.5 44.4 26.5H40.8Z" fill="#C6F135"/>
+</svg>
