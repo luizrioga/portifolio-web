@@ -1871,11 +1871,9 @@ button.bg-limeTech:active {
   backface-visibility: hidden;
   will-change: transform, opacity;
   transition:
-    transform 0.76s var(--ease-editorial),
-    opacity 0.62s var(--ease-editorial),
-    border-color 0.45s var(--ease-editorial),
-    box-shadow 0.55s var(--ease-editorial),
-    filter 0.55s var(--ease-editorial);
+    transform 0.72s var(--ease-editorial),
+    opacity 0.56s var(--ease-editorial),
+    border-color 0.36s var(--ease-editorial);
 }
 
 .principle-slide::before {
@@ -1893,7 +1891,6 @@ button.bg-limeTech:active {
 .principle-slide[data-pos="center"] {
   z-index: 20;
   opacity: 1;
-  filter: none;
   pointer-events: auto;
   cursor: default;
   border-color: color-mix(in srgb, var(--p-accent, #C6F135) 48%, rgba(255, 255, 255, 0.12));
@@ -1905,8 +1902,7 @@ button.bg-limeTech:active {
 
 .principle-slide[data-pos="left"] {
   z-index: 10;
-  opacity: 0.28;
-  filter: saturate(0.65) brightness(0.76);
+  opacity: 0.24;
   pointer-events: auto;
   cursor: pointer;
   transform: translate3d(-66%, 0, -190px) rotateY(25deg) scale(0.84);
@@ -1914,8 +1910,7 @@ button.bg-limeTech:active {
 
 .principle-slide[data-pos="right"] {
   z-index: 10;
-  opacity: 0.28;
-  filter: saturate(0.65) brightness(0.76);
+  opacity: 0.24;
   pointer-events: auto;
   cursor: pointer;
   transform: translate3d(66%, 0, -190px) rotateY(-25deg) scale(0.84);
@@ -1945,18 +1940,16 @@ button.bg-limeTech:active {
 @media (hover: hover) and (pointer: fine) {
   .principle-slide[data-pos="left"]:hover {
     opacity: 0.56;
-    filter: saturate(0.88) brightness(0.92);
     transform: translate3d(-62%, 0, -165px) rotateY(21deg) scale(0.86);
   }
   .principle-slide[data-pos="right"]:hover {
     opacity: 0.56;
-    filter: saturate(0.88) brightness(0.92);
     transform: translate3d(62%, 0, -165px) rotateY(-21deg) scale(0.86);
   }
 }
 
 .principle-quote-text {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Syne', 'Syne Fallback', sans-serif;
   font-weight: 700;
   line-height: 1.12;
   letter-spacing: -0.028em;
@@ -1964,22 +1957,12 @@ button.bg-limeTech:active {
 }
 
 .principles-progress-fill {
-  width: 0%;
+  width: 100%;
   height: 100%;
   background: var(--p-accent, var(--accent-lime));
-}
-
-.principles-progress-fill.is-running {
-  animation: principlesSweep 6000ms linear forwards;
-}
-
-.principles-orbit-wrap[data-paused="true"] .principles-progress-fill.is-running {
-  animation-play-state: paused;
-}
-
-@keyframes principlesSweep {
-  from { width: 0%; }
-  to { width: 100%; }
+  transform-origin: left center;
+  transform: scaleX(0);
+  will-change: transform;
 }
 
 .principle-pill {

@@ -1501,9 +1501,11 @@
       { code: '06', name: 'Envio Semanal', tag: 'Visibilidade', detail: 'Distribuição semanal de estoque, backlog e chegadas para os interessados da empresa.', io: 'Indicadores → Equipe alinhada' }
     ];
 
-    const FRETEFY_KPIS = [
-      'TPV Mensal (< 5 min)', 'Histórico de Pátio', 'Desempenho por Turno', 'Dia da Semana',
-      'Tipo de Veículo', 'Capacidade Utilizada', 'Volume de Cargas', 'Eficiência Operacional'
+    const FRETEFY_NODES = [
+      { code: '01', name: 'Extração Fretefy', tag: 'Base Bruta', detail: 'Exportação das movimentações de carregamento e pátio diretamente do Fretefy sem retrabalho na origem.', io: 'Fretefy → Base bruta' },
+      { code: '02', name: 'Power Query ETL', tag: 'Tratamento', detail: 'Pipeline reutilizável com limpeza, padronização de datas/horários e cálculo automático de intervalos operacionais.', io: 'Base bruta → Dados tratados' },
+      { code: '03', name: 'Modelo & 8 KPIs', tag: 'Tabelas Dinâmicas', detail: 'Fechamento do TPV mensal em menos de 5 minutos e estruturação de 8 KPIs por turno, dia da semana, doca e frota.', io: 'Dados tratados → TPV & 8 KPIs' },
+      { code: '04', name: 'Painel Operacional', tag: 'BI Logístico', detail: 'Visão analítica consolidada substituindo acompanhamento empírico por leitura objetiva de gargalos e capacidade.', io: 'Indicadores → Visibilidade em área' }
     ];
 
     const AGROBIT_SOURCES = [
@@ -1648,13 +1650,14 @@
       }
 
       if (p.id === 'fretefy') {
+        const firstFr = FRETEFY_NODES[0];
         return `
           <div class="h-full flex flex-col justify-between gap-3.5 rounded-2xl bg-[#0B0907] border border-[#F59E0B]/30 p-4 lg:p-5">
             <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-widest">
               <span class="text-[#F59E0B] flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B] acad-node-pulse"></span>AUTOMAÇÃO ETL · FRETEFY</span>
               <div class="inline-flex p-0.5 rounded-lg bg-carbon border hairline-dark text-[9.5px]">
                 <button type="button" data-deck-fr-view="ui" class="px-2.5 py-1 rounded bg-[#F59E0B] text-inkDark font-semibold transition-colors">Painel BI</button>
-                <button type="button" data-deck-fr-view="sim" class="px-2.5 py-1 rounded text-muted hover:text-ink transition-colors">Simulador ETL</button>
+                <button type="button" data-deck-fr-view="arch" class="px-2.5 py-1 rounded text-muted hover:text-ink transition-colors">Arquitetura (04)</button>
               </div>
             </div>
 
@@ -1669,33 +1672,27 @@
               </div>
             </div>
 
-            <!-- Visão 2: Telemetria do Pipeline Power Query ETL -->
-            <div id="deck-fr-panel-sim" class="hidden flex-1 flex-col justify-between gap-3.5">
-              <div class="grid grid-cols-12 gap-4 items-end pt-2">
-                <div id="deck-etl-bars" class="col-span-7 flex items-end gap-2 h-32 pt-1">
-                  <span class="etl-live-bar flex-1 rounded-t bg-[#F59E0B]/45" style="height:52%"></span>
-                  <span class="etl-live-bar flex-1 rounded-t bg-[#F59E0B]/65" style="height:74%"></span>
-                  <span class="etl-live-bar flex-1 rounded-t bg-[#F59E0B]/90" style="height:95%"></span>
-                  <span class="etl-live-bar flex-1 rounded-t bg-[#F59E0B]/55" style="height:64%"></span>
-                  <span class="etl-live-bar flex-1 rounded-t bg-limeTech/85" style="height:86%"></span>
-                  <span class="etl-live-bar flex-1 rounded-t bg-[#F59E0B]/70" style="height:72%"></span>
-                </div>
-                <div class="col-span-5 text-right font-mono space-y-2">
-                  <div class="p-2.5 rounded-xl bg-carbon border border-[#F59E0B]/30">
-                    <div class="text-[8.5px] text-muted uppercase">FECHAMENTO TPV</div>
-                    <div id="deck-etl-time" class="text-lg font-extrabold text-limeTech tabular-nums">&lt; 5 min</div>
-                  </div>
-                  <div class="p-2.5 rounded-xl bg-carbon border hairline-dark">
-                    <div class="text-[8.5px] text-muted uppercase">KPIS ESTRUTURADOS</div>
-                    <div id="deck-etl-kpis-num" class="text-lg font-extrabold text-[#F59E0B] tabular-nums">08 KPIs</div>
-                  </div>
-                </div>
+            <!-- Visão 2: Arquitetura interativa de 4 etapas (mesmo padrão do case Big Bags) -->
+            <div id="deck-fr-panel-arch" class="hidden flex-1 flex-col justify-between gap-3">
+              <div class="relative h-[2px] w-full rounded-full bg-white/10 overflow-hidden" aria-hidden="true">
+                <div class="mission-pipe-beam h-full w-1/2 bg-gradient-to-r from-transparent via-[#F59E0B] to-transparent"></div>
               </div>
-              <div class="space-y-2">
-                <div id="deck-etl-status" class="font-mono text-[9.5px] text-[#F59E0B] uppercase tracking-wider">POWER QUERY ETL // 8 INDICADORES AUTOMATIZADOS</div>
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 font-mono text-[9px]">
-                  ${FRETEFY_KPIS.map((k) => `<span class="px-1.5 py-1.5 rounded-lg bg-carbon border hairline-dark text-ink/85 truncate text-center">${k}</span>`).join('')}
+              <div class="grid grid-cols-2 gap-2.5">
+                ${FRETEFY_NODES.map((n, i) => `
+                  <button type="button" data-deck-fr="${i}" data-active="${i === 0}" style="--node-accent:#F59E0B;" class="stage-node-btn text-left p-3.5 rounded-xl bg-[#120F0A] border border-white/10 space-y-1.5 cursor-pointer">
+                    <div class="flex items-center justify-between font-mono text-[9.5px]">
+                      <span class="text-[#F59E0B] font-semibold">${n.code}</span>
+                      <span class="text-muted truncate">${n.tag}</span>
+                    </div>
+                    <div class="font-display text-xs sm:text-[13px] font-bold text-ink leading-tight">${n.name}</div>
+                  </button>`).join('')}
+              </div>
+              <div id="deck-fr-readout" class="p-3.5 rounded-xl bg-carbon border border-[#F59E0B]/30 space-y-1.5">
+                <div class="flex items-center justify-between gap-2 font-mono text-[10px]">
+                  <span class="text-[#F59E0B] font-semibold">ETAPA ${firstFr.code} // ${firstFr.name.toUpperCase()}</span>
+                  <span class="text-muted truncate">${firstFr.io}</span>
                 </div>
+                <p class="text-xs text-ink/85 leading-relaxed">${firstFr.detail}</p>
               </div>
             </div>
           </div>`;
@@ -1795,14 +1792,14 @@
       } else if (p.id === 'fretefy') {
         const viewBtns = stageWrap.querySelectorAll('[data-deck-fr-view]');
         const uiPanel = document.getElementById('deck-fr-panel-ui');
-        const simPanel = document.getElementById('deck-fr-panel-sim');
+        const archPanel = document.getElementById('deck-fr-panel-arch');
         viewBtns.forEach((btn) => {
           btn.addEventListener('click', () => {
             const v = btn.getAttribute('data-deck-fr-view');
             if (uiPanel) uiPanel.classList.toggle('hidden', v !== 'ui');
-            if (simPanel) {
-              simPanel.classList.toggle('hidden', v !== 'sim');
-              simPanel.classList.toggle('flex', v === 'sim');
+            if (archPanel) {
+              archPanel.classList.toggle('hidden', v !== 'arch');
+              archPanel.classList.toggle('flex', v === 'arch');
             }
             viewBtns.forEach((b) => {
               const on = b === btn;
@@ -1810,6 +1807,22 @@
                 ? 'px-2.5 py-1 rounded bg-[#F59E0B] text-inkDark font-semibold transition-colors'
                 : 'px-2.5 py-1 rounded text-muted hover:text-ink transition-colors';
             });
+          });
+        });
+
+        const btns = stageWrap.querySelectorAll('[data-deck-fr]');
+        const readout = document.getElementById('deck-fr-readout');
+        btns.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const node = FRETEFY_NODES[Number(btn.getAttribute('data-deck-fr'))];
+            if (!node || !readout) return;
+            btns.forEach((b) => b.setAttribute('data-active', String(b === btn)));
+            readout.innerHTML = `
+              <div class="flex items-center justify-between gap-2 font-mono text-[10px]">
+                <span class="text-[#F59E0B] font-semibold">ETAPA ${node.code} // ${node.name.toUpperCase()}</span>
+                <span class="text-muted truncate">${node.io}</span>
+              </div>
+              <p class="text-xs text-ink/85 leading-relaxed">${node.detail}</p>`;
           });
         });
       } else if (p.id === 'agrobit') {
@@ -3846,9 +3859,23 @@
     const AUTO_MS = 6000;
     let activeIdx = 0;
     let rotTurns = 0;
-    let autoTimer = null;
-    let paused = false;
-    let inView = true;
+    let elapsedMs = 0;
+    let isHoverPaused = false;
+    let isKeyboardFocused = false;
+    let inView = false;
+
+    const isPaused = () => isHoverPaused || isKeyboardFocused;
+    const syncPausedAttr = () => wrap.setAttribute('data-paused', String(isPaused()));
+
+    function syncProgressBar() {
+      if (!progressFill) return;
+      if (prefersReducedMotion) {
+        progressFill.style.transform = 'scaleX(1)';
+        return;
+      }
+      const ratio = clamp(elapsedMs / AUTO_MS, 0, 1);
+      progressFill.style.transform = `scaleX(${ratio.toFixed(4)})`;
+    }
 
     stage.innerHTML = PRINCIPLES.map(
       (item, idx) => `
@@ -3911,18 +3938,6 @@
     const slides = Array.from(stage.querySelectorAll('[data-slide-idx]'));
     const pills = authorRail ? Array.from(authorRail.querySelectorAll('[data-principle-pill]')) : [];
 
-    function restartProgress(accent) {
-      if (!progressFill) return;
-      progressFill.style.setProperty('--p-accent', accent);
-      progressFill.classList.remove('is-running');
-      if (prefersReducedMotion) {
-        progressFill.style.width = '100%';
-        return;
-      }
-      void progressFill.offsetWidth;
-      progressFill.classList.add('is-running');
-    }
-
     function updatePositions(nextIdx, dirHint = 0) {
       const prevIdx = activeIdx;
       const targetIdx = (nextIdx + total) % total;
@@ -3936,6 +3951,7 @@
       }
       rotTurns += delta;
       activeIdx = targetIdx;
+      elapsedMs = 0;
 
       const cur = PRINCIPLES[activeIdx];
       if (liveCounter) {
@@ -3944,6 +3960,9 @@
       }
       if (compassRing && !prefersReducedMotion) {
         compassRing.style.transform = `rotate(${(rotTurns * (360 / total)).toFixed(1)}deg)`;
+      }
+      if (progressFill) {
+        progressFill.style.setProperty('--p-accent', cur.accent);
       }
 
       slides.forEach((slide, i) => {
@@ -3967,25 +3986,23 @@
         pill.setAttribute('aria-selected', String(isAct));
       });
 
-      restartProgress(cur.accent);
+      syncProgressBar();
     }
 
-    function resetAuto() {
-      if (autoTimer) {
-        clearInterval(autoTimer);
-        autoTimer = null;
+    // Relógio único sincronizado (barra GPU scaleX + troca de slide nunca dessincronizam nem travam)
+    const cycleLoop = createLoop((dt) => {
+      if (prefersReducedMotion || !inView || document.hidden || isPaused()) return;
+      elapsedMs += dt;
+      if (elapsedMs >= AUTO_MS) {
+        updatePositions(activeIdx + 1, 1);
+      } else {
+        syncProgressBar();
       }
-      if (prefersReducedMotion) return;
-      autoTimer = setInterval(() => {
-        if (!paused && inView && !document.hidden) {
-          updatePositions(activeIdx + 1, 1);
-        }
-      }, AUTO_MS);
-    }
+    });
 
     function step(dir) {
       updatePositions(activeIdx + dir, dir);
-      resetAuto();
+      if (!prefersReducedMotion && inView && !cycleLoop.running) cycleLoop.start();
     }
 
     slides.forEach((slide) => {
@@ -3997,25 +4014,45 @@
     });
 
     pills.forEach((pill) => {
-      pill.addEventListener('click', () => {
+      pill.addEventListener('click', (e) => {
+        if (e.detail > 0) pill.blur(); // Clique de mouse/toque não prende focusin
+        isKeyboardFocused = false;
+        syncPausedAttr();
         const idx = Number(pill.getAttribute('data-principle-pill'));
         if (idx === activeIdx) return;
         updatePositions(idx, 0);
-        resetAuto();
+        if (!prefersReducedMotion && inView && !cycleLoop.running) cycleLoop.start();
       });
     });
 
-    if (prevBtn) prevBtn.addEventListener('click', () => step(-1));
-    if (nextBtn) nextBtn.addEventListener('click', () => step(1));
+    if (prevBtn) prevBtn.addEventListener('click', (e) => { if (e.detail > 0) prevBtn.blur(); step(-1); });
+    if (nextBtn) nextBtn.addEventListener('click', (e) => { if (e.detail > 0) nextBtn.blur(); step(1); });
 
-    const setPaused = (val) => {
-      paused = val;
-      wrap.setAttribute('data-paused', String(val));
-    };
-    wrap.addEventListener('pointerenter', () => setPaused(true));
-    wrap.addEventListener('pointerleave', () => setPaused(false));
-    wrap.addEventListener('focusin', () => setPaused(true));
-    wrap.addEventListener('focusout', () => setPaused(false));
+    // Pausa com cursor do mouse mantida — mas nunca trava no toque ou após clique
+    if (isFinePointer && canHover) {
+      wrap.addEventListener('pointerenter', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        isHoverPaused = true;
+        syncPausedAttr();
+      });
+      wrap.addEventListener('pointerleave', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        isHoverPaused = false;
+        syncPausedAttr();
+      });
+    }
+    wrap.addEventListener('focusin', (e) => {
+      if (e.target && e.target.matches && e.target.matches(':focus-visible')) {
+        isKeyboardFocused = true;
+        syncPausedAttr();
+      }
+    });
+    wrap.addEventListener('focusout', (e) => {
+      if (!e.relatedTarget || !wrap.contains(e.relatedTarget)) {
+        isKeyboardFocused = false;
+        syncPausedAttr();
+      }
+    });
 
     let touchStartX = 0;
     let touchStartY = 0;
@@ -4035,10 +4072,22 @@
 
     bindVisibility(wrap, (visible) => {
       inView = visible;
-    }, '120px');
+      if (visible) {
+        // Limpa estado preso ao chegar na seção (só pausa se o cursor realmente estiver sobre o bloco)
+        isHoverPaused = Boolean(isFinePointer && canHover && wrap.matches(':hover'));
+        isKeyboardFocused = false;
+        syncPausedAttr();
+        if (elapsedMs >= AUTO_MS * 0.92) elapsedMs = 0;
+        syncProgressBar();
+        if (!prefersReducedMotion) cycleLoop.start();
+      } else {
+        isHoverPaused = false;
+        syncPausedAttr();
+        cycleLoop.stop();
+      }
+    }, '80px');
 
     updatePositions(0, 0);
-    resetAuto();
   })();
 
   /* ==========================================================================
