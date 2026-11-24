@@ -62,7 +62,7 @@
     };
   </script>
 
-  <link rel="stylesheet" href="css/styles.css?v=20261124c" />
+  <link rel="stylesheet" href="css/styles.css?v=20261124e" />
 </head>
 <body class="bg-carbon text-ink antialiased selection:bg-limeTech selection:text-inkDark">
 
@@ -863,15 +863,17 @@
     </section>
 
     <!-- ======================================================================
-         03 // EXPERIÊNCIA INDUSTRIAL — ACTECH (ORDEM ORIGINAL + TOM FACTUAL)
+         03 // EXPERIÊNCIA INDUSTRIAL — ACTECH (CONSOLE INTERATIVO + MOBILE 1 TELA)
          ====================================================================== -->
-    <section id="experience" data-module="03 // ACTECH" class="py-10 md:py-28 lg:py-32 bg-[#070807] border-b hairline-dark relative">
+    <section id="experience" data-module="03 // ACTECH" class="py-10 md:py-16 lg:py-20 bg-[#070807] border-b hairline-dark relative overflow-hidden">
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 md:gap-8 items-end mb-5 md:mb-10 lg:mb-12 reveal">
-          <div class="lg:col-span-7 space-y-1.5 md:space-y-4">
-            <div class="font-mono text-xs tracking-[0.14em] uppercase text-limeTech">
-              03 // EXPERIÊNCIA INDUSTRIAL · ACTECH
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 md:gap-6 items-end mb-5 md:mb-7 reveal">
+          <div class="lg:col-span-7 space-y-1.5 md:space-y-3.5">
+            <div class="inline-flex items-center gap-2 font-mono text-[11px] md:text-xs tracking-[0.14em] uppercase text-limeTech">
+              <span class="w-1.5 h-1.5 rounded-full bg-limeTech acad-node-pulse shrink-0" aria-hidden="true"></span>
+              <span class="md:hidden">03 // ACTECH · 2+ ANOS</span>
+              <span class="hidden md:inline">03 // EXPERIÊNCIA INDUSTRIAL · ACTECH · 2+ ANOS</span>
             </div>
             <h2 class="section-title text-ink">
               Da rotina operacional<br />
@@ -879,245 +881,43 @@
             </h2>
           </div>
           <div class="hidden md:flex lg:col-span-5 flex-col items-start lg:items-end">
-            <p class="text-base text-ink/80 lg:text-right leading-relaxed">
+            <p class="text-sm lg:text-base text-ink/80 lg:text-right leading-relaxed max-w-lg">
               Mais de dois anos em ambiente industrial na Actech: comecei como Jovem Aprendiz medindo tempos e padronizando rotinas, e hoje atuo como Estagiário de Embalagem &amp; Expedição estruturando dados e ferramentas para a área.
             </p>
           </div>
         </div>
 
-        <!-- Trilho cronológico factual (desktop/tablet apenas — Print 3 removido no mobile) -->
-        <div class="hidden md:block actech-promo-rail mb-6 rounded-xl bg-graphite/95 border border-white/10 px-6 py-4 reveal">
-          <div class="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] items-center gap-2.5 sm:gap-3.5 lg:gap-5">
-            <div class="flex items-center gap-3 min-w-0 text-left">
-              <span class="w-2.5 h-2.5 rounded-full bg-[#F59E0B] ring-4 ring-[#F59E0B]/15 shrink-0" aria-hidden="true"></span>
-              <div class="min-w-0">
-                <div class="font-mono text-[9.5px] sm:text-[10px] uppercase tracking-[0.14em] text-[#F59E0B] font-semibold">
-                  FASE 01 · JUN/2024 – DEZ/2025
-                </div>
-                <div class="font-display text-xs sm:text-sm font-bold text-ink lg:truncate">
-                  Jovem Aprendiz · Operação &amp; Processos
-                </div>
+        <!-- Mobile (<768px): Seletor compacto em abas cabendo em ~1 tela -->
+        <div class="md:hidden space-y-3">
+          <div id="actech-mobile-tabs" class="grid grid-cols-2 gap-1.5 p-1 rounded-xl bg-graphite border hairline-dark" role="tablist" aria-label="Alternar fases na Actech"></div>
+          <div id="actech-mobile-stage" role="tabpanel" aria-live="polite"></div>
+        </div>
+
+        <!-- Desktop/Tablet (>=768px): Console Interativo de Evolução Industrial -->
+        <div id="experience-container" class="hidden md:grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-stretch reveal">
+          <!-- Coluna Esquerda: Espinha Cronológica Interativa + Telemetria Factual -->
+          <div class="lg:col-span-5 flex flex-col justify-between gap-4">
+            <div id="actech-phase-spine" class="flex flex-col gap-3 flex-1" role="tablist" aria-label="Selecionar fase na Actech"></div>
+
+            <!-- Barra de Fatos da Planta -->
+            <div class="grid grid-cols-3 gap-2.5">
+              <div class="p-3 rounded-xl bg-graphite/95 border hairline-dark space-y-0.5">
+                <div class="font-display text-lg font-extrabold text-limeTech tabular-nums leading-none">2+ anos</div>
+                <div class="font-mono text-[9px] uppercase tracking-wider text-muted pt-1">Desde Jun/2024</div>
               </div>
-            </div>
-
-            <div class="flex items-center gap-3 lg:px-2">
-              <span class="hidden lg:block w-14 h-[2px] rounded-full bg-gradient-to-r from-[#F59E0B]/70 to-limeTech/80 relative overflow-hidden" aria-hidden="true">
-                <span class="actech-promo-beam absolute inset-y-0 left-0 w-7 bg-gradient-to-r from-transparent via-white to-transparent"></span>
-              </span>
-              <span class="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-limeTech/10 border border-limeTech/40 font-mono text-[9.5px] sm:text-[10px] uppercase tracking-[0.13em] text-limeTech font-semibold whitespace-nowrap">
-                <span>FEV/2026</span>
-                <span aria-hidden="true">→</span>
-              </span>
-              <span class="hidden lg:block w-14 h-[2px] rounded-full bg-gradient-to-r from-limeTech/80 to-[#38BDF8]/70 relative overflow-hidden" aria-hidden="true">
-                <span class="actech-promo-beam absolute inset-y-0 left-0 w-7 bg-gradient-to-r from-transparent via-white to-transparent" style="animation-delay: 0.45s;"></span>
-              </span>
-            </div>
-
-            <div class="flex items-center lg:justify-end gap-3 min-w-0 text-left lg:text-right">
-              <span class="w-2.5 h-2.5 rounded-full bg-limeTech ring-4 ring-limeTech/20 acad-node-pulse shrink-0 lg:order-2" aria-hidden="true"></span>
-              <div class="min-w-0">
-                <div class="font-mono text-[9.5px] sm:text-[10px] uppercase tracking-[0.14em] text-limeTech font-semibold">
-                  FASE 02 · FEV/2026 – ATUAL
-                </div>
-                <div class="font-display text-xs sm:text-sm font-bold text-ink lg:truncate">
-                  Estagiário de Embalagem &amp; Expedição
-                </div>
+              <div class="p-3 rounded-xl bg-graphite/95 border hairline-dark space-y-0.5">
+                <div class="font-display text-lg font-extrabold text-[#F59E0B] tabular-nums leading-none">19 meses</div>
+                <div class="font-mono text-[9px] uppercase tracking-wider text-muted pt-1">Ciclo Aprendiz</div>
+              </div>
+              <div class="p-3 rounded-xl bg-graphite/95 border hairline-dark space-y-0.5">
+                <div class="font-display text-lg font-extrabold text-[#38BDF8] tabular-nums leading-none">02 fases</div>
+                <div class="font-mono text-[9px] uppercase tracking-wider text-muted pt-1">Evolução na área</div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Os dois ciclos apresentados juntos -->
-        <div id="experience-container" class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-stretch">
-
-          <!-- FASE 01: JOVEM APRENDIZ -->
-          <article data-tilt-max="3" class="order-2 lg:order-1 spatial-tilt actech-role-card actech-role-card--aprendiz reveal relative overflow-hidden rounded-2xl bg-graphite border border-[#F59E0B]/25 p-4 sm:p-8 flex flex-col justify-between gap-4 sm:gap-7 transition-all duration-300">
-            <svg class="actech-card-watermark pointer-events-none" viewBox="0 0 220 220" fill="none" aria-hidden="true">
-              <circle cx="152" cy="76" r="46" stroke="currentColor" stroke-width="1" />
-              <path d="M152 46v30l20 14M140 22h24" stroke="#F59E0B" stroke-width="1.15" stroke-linecap="round" />
-              <path d="M24 166h140M24 148h84M24 184h112" stroke="currentColor" stroke-width="1" stroke-dasharray="3 5" />
-            </svg>
-
-            <div class="relative z-10 space-y-4 sm:space-y-6">
-              <div class="flex items-start justify-between gap-3 sm:gap-4 pb-3.5 sm:pb-5 border-b hairline-dark">
-                <div class="space-y-1 sm:space-y-1.5 min-w-0 flex-1">
-                  <div class="inline-flex items-center gap-2 font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.14em] text-[#F59E0B]">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B]"></span>
-                    <span>JUN/2024 – DEZ/2025</span>
-                  </div>
-                  <h3 class="font-display text-xl sm:text-[1.85rem] font-bold text-ink leading-[1.12] tracking-tight">
-                    Jovem Aprendiz
-                  </h3>
-                  <div class="font-mono text-[11px] sm:text-xs text-muted">Actech · Operação &amp; Processos Industriais</div>
-                </div>
-                <span class="shrink-0 px-2.5 sm:px-3 py-1 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/35 font-mono text-[10px] sm:text-[10.5px] tracking-wider text-[#F59E0B] font-semibold">
-                  FASE 01
-                </span>
-              </div>
-
-              <p class="text-xs sm:text-[15px] text-ink/85 leading-relaxed">
-                Atuei na rotina operacional e administrativa da planta: medi tempos em campo com cronoanálises, acompanhei estoque e checklists, padronizei procedimentos no Qualyteam e mapeei gargalos do fluxo.
-              </p>
-
-              <div class="space-y-2.5 sm:space-y-3">
-                <div class="flex items-center justify-between font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.14em] text-muted">
-                  <span>ATIVIDADES CONCRETAS</span>
-                  <span class="text-[#F59E0B]/85">04 FRENTES</span>
-                </div>
-                <div class="grid grid-cols-2 gap-2 sm:gap-3 text-sm">
-                  <div class="actech-pillar actech-pillar--aprendiz p-2.5 sm:p-4 rounded-xl bg-carbon/90 border hairline-dark space-y-1.5 sm:space-y-2">
-                    <div class="flex items-center justify-between gap-1.5 sm:gap-2">
-                      <span class="font-mono text-[9px] sm:text-[10px] text-[#F59E0B] font-semibold tracking-wider">01 / MEDIÇÃO</span>
-                      <svg class="hidden sm:block w-4 h-4 text-[#F59E0B]/85 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
-                        <circle cx="12" cy="13" r="8" />
-                        <path stroke-linecap="round" d="M12 9v4l2.5 2M9 2h6" />
-                      </svg>
-                    </div>
-                    <div class="text-ink/90 text-[11px] sm:text-[13px] leading-snug sm:leading-relaxed">Medi tempos em cronoanálises e levantei KPIs de operadores e equipamentos.</div>
-                  </div>
-                  <div class="actech-pillar actech-pillar--aprendiz p-2.5 sm:p-4 rounded-xl bg-carbon/90 border hairline-dark space-y-1.5 sm:space-y-2">
-                    <div class="flex items-center justify-between gap-1.5 sm:gap-2">
-                      <span class="font-mono text-[9px] sm:text-[10px] text-[#F59E0B] font-semibold tracking-wider">02 / ESTOQUE</span>
-                      <svg class="hidden sm:block w-4 h-4 text-[#F59E0B]/85 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8l-9-5-9 5v8l9 5 9-5V8zm-9 5l9-5m-9 5v8m0-8L3 8" />
-                      </svg>
-                    </div>
-                    <div class="text-ink/90 text-[11px] sm:text-[13px] leading-snug sm:leading-relaxed">Acompanhei estoque, embalagens e listas de verificação de carregamento.</div>
-                  </div>
-                  <div class="actech-pillar actech-pillar--aprendiz p-2.5 sm:p-4 rounded-xl bg-carbon/90 border hairline-dark space-y-1.5 sm:space-y-2">
-                    <div class="flex items-center justify-between gap-1.5 sm:gap-2">
-                      <span class="font-mono text-[9px] sm:text-[10px] text-[#F59E0B] font-semibold tracking-wider">03 / QUALIDADE</span>
-                      <svg class="hidden sm:block w-4 h-4 text-[#F59E0B]/85 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </div>
-                    <div class="text-ink/90 text-[11px] sm:text-[13px] leading-snug sm:leading-relaxed">Padronizei procedimentos operacionais e controle documental no Qualyteam.</div>
-                  </div>
-                  <div class="actech-pillar actech-pillar--aprendiz p-2.5 sm:p-4 rounded-xl bg-carbon/90 border hairline-dark space-y-1.5 sm:space-y-2">
-                    <div class="flex items-center justify-between gap-1.5 sm:gap-2">
-                      <span class="font-mono text-[9px] sm:text-[10px] text-[#F59E0B] font-semibold tracking-wider">04 / DIAGNÓSTICO</span>
-                      <svg class="hidden sm:block w-4 h-4 text-[#F59E0B]/85 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
-                        <circle cx="11" cy="11" r="7" />
-                        <path stroke-linecap="round" d="M20 20l-3.5-3.5M11 8v6m-3-3h6" />
-                      </svg>
-                    </div>
-                    <div class="text-ink/90 text-[11px] sm:text-[13px] leading-snug sm:leading-relaxed">Mapeei gargalos na área e apoiei a digitalização inicial e a rastreabilidade.</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="relative z-10 space-y-2.5 sm:space-y-3.5 pt-3.5 sm:pt-5 border-t hairline-dark">
-              <div class="hidden sm:flex flex-wrap gap-1.5 font-mono text-[10.5px] text-ink/85">
-                <span class="px-2.5 py-1 rounded-md bg-carbon border hairline-dark">Cronoanálises</span>
-                <span class="px-2.5 py-1 rounded-md bg-carbon border hairline-dark">Qualyteam</span>
-                <span class="px-2.5 py-1 rounded-md bg-carbon border hairline-dark">KPIs</span>
-                <span class="px-2.5 py-1 rounded-md bg-carbon border hairline-dark">Rastreabilidade</span>
-              </div>
-              <div class="flex flex-wrap items-center justify-between gap-2 sm:pt-2.5 sm:border-t sm:border-white/5 font-mono text-[9.5px] sm:text-[10px] uppercase tracking-wider">
-                <span class="text-muted">CICLO CONCLUÍDO</span>
-                <span class="text-[#F59E0B] font-semibold">19 MESES EM PLANTA</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- FASE 02: ESTAGIÁRIO DE EMBALAGEM & EXPEDIÇÃO -->
-          <article data-tilt-max="3" class="order-1 lg:order-2 spatial-tilt actech-role-card actech-role-card--estagio reveal relative overflow-hidden rounded-2xl bg-graphite border border-limeTech/40 p-4 sm:p-8 flex flex-col justify-between gap-4 sm:gap-7 transition-all duration-300">
-            <svg class="actech-card-watermark pointer-events-none" viewBox="0 0 220 220" fill="none" aria-hidden="true">
-              <circle cx="150" cy="70" r="54" stroke="currentColor" stroke-width="1" stroke-dasharray="4 6" />
-              <circle cx="150" cy="70" r="28" stroke="#C6F135" stroke-width="1.1" />
-              <path d="M40 160h56l26-38h48" stroke="currentColor" stroke-width="1.2" />
-              <rect x="26" y="148" width="24" height="24" rx="4" stroke="currentColor" stroke-width="1" />
-              <circle cx="150" cy="70" r="4" fill="#C6F135" />
-            </svg>
-
-            <div class="relative z-10 space-y-4 sm:space-y-6">
-              <div class="flex items-start justify-between gap-3 sm:gap-4 pb-3.5 sm:pb-5 border-b hairline-dark">
-                <div class="space-y-1 sm:space-y-1.5 min-w-0 flex-1">
-                  <div class="inline-flex items-center gap-2 font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.14em] text-limeTech">
-                    <span class="w-2 h-2 rounded-full bg-limeTech acad-node-pulse shrink-0"></span>
-                    <span>ATUAL · FEV/2026 – ATUAL</span>
-                  </div>
-                  <h3 class="font-display text-xl sm:text-[1.85rem] font-bold text-ink leading-[1.12] tracking-tight">
-                    Estagiário de Embalagem &amp; Expedição
-                  </h3>
-                  <div class="font-mono text-[11px] sm:text-xs text-muted">Actech · Processos, Dados &amp; Digitalização</div>
-                </div>
-                <span class="shrink-0 px-2.5 sm:px-3 py-1 rounded-full bg-limeTech/12 border border-limeTech/45 font-mono text-[10px] sm:text-[10.5px] tracking-wider text-limeTech font-semibold">
-                  FASE 02
-                </span>
-              </div>
-
-              <p class="text-xs sm:text-[15px] text-ink/90 leading-relaxed">
-                Atuo na área de Embalagem &amp; Expedição organizando rotinas em campo, automatizando o tratamento de dados logísticos e construindo ferramentas web para reduzir conferências manuais e dar visibilidade à operação.
-              </p>
-
-              <div class="space-y-2.5 sm:space-y-3">
-                <div class="flex items-center justify-between font-mono text-[10px] sm:text-[10.5px] uppercase tracking-[0.14em] text-muted">
-                  <span>ATIVIDADES CONCRETAS</span>
-                  <span class="text-limeTech/90">04 FRENTES</span>
-                </div>
-                <div class="grid grid-cols-2 gap-2 sm:gap-3 text-sm">
-                  <div class="actech-pillar actech-pillar--estagio p-2.5 sm:p-4 rounded-xl bg-carbon/90 border hairline-dark space-y-1.5 sm:space-y-2">
-                    <div class="flex items-center justify-between gap-1.5 sm:gap-2">
-                      <span class="font-mono text-[9px] sm:text-[10px] text-limeTech font-semibold tracking-wider">01 / DADOS &amp; KPIS</span>
-                      <svg class="hidden sm:block w-4 h-4 text-limeTech/90 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 19h16M7 15v-4m5 4V7m5 8v-6" />
-                      </svg>
-                    </div>
-                    <div class="text-ink/90 text-[11px] sm:text-[13px] leading-snug sm:leading-relaxed">Estruturei bases de carregamento e consolidei indicadores operacionais da expedição.</div>
-                  </div>
-                  <div class="actech-pillar actech-pillar--estagio p-2.5 sm:p-4 rounded-xl bg-carbon/90 border hairline-dark space-y-1.5 sm:space-y-2">
-                    <div class="flex items-center justify-between gap-1.5 sm:gap-2">
-                      <span class="font-mono text-[9px] sm:text-[10px] text-limeTech font-semibold tracking-wider">02 / AUTOMAÇÃO</span>
-                      <svg class="hidden sm:block w-4 h-4 text-limeTech/90 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 3L4 14h7l-1 7 9-11h-7l1-7z" />
-                      </svg>
-                    </div>
-                    <div class="text-ink/90 text-[11px] sm:text-[13px] leading-snug sm:leading-relaxed">Automatizei fluxos de planilhas e envios semanais para cortar trabalho manual.</div>
-                  </div>
-                  <div class="actech-pillar actech-pillar--estagio p-2.5 sm:p-4 rounded-xl bg-carbon/90 border hairline-dark space-y-1.5 sm:space-y-2">
-                    <div class="flex items-center justify-between gap-1.5 sm:gap-2">
-                      <span class="font-mono text-[9px] sm:text-[10px] text-limeTech font-semibold tracking-wider">03 / DIGITALIZAÇÃO</span>
-                      <svg class="hidden sm:block w-4 h-4 text-limeTech/90 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 7l8-4 8 4-8 4-8-4zm0 5l8 4 8-4M4 17l8 4 8-4" />
-                      </svg>
-                    </div>
-                    <div class="text-ink/90 text-[11px] sm:text-[13px] leading-snug sm:leading-relaxed">Construí aplicação web em nuvem para centralizar a triagem de Big Bags.</div>
-                  </div>
-                  <div class="actech-pillar actech-pillar--estagio p-2.5 sm:p-4 rounded-xl bg-carbon/90 border hairline-dark space-y-1.5 sm:space-y-2">
-                    <div class="flex items-center justify-between gap-1.5 sm:gap-2">
-                      <span class="font-mono text-[9px] sm:text-[10px] text-limeTech font-semibold tracking-wider">04 / PROCESSOS</span>
-                      <svg class="hidden sm:block w-4 h-4 text-limeTech/90 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 12a8 8 0 0114.93-4M20 4v4h-4M20 12a8 8 0 01-14.93 4M4 20v-4h4" />
-                      </svg>
-                    </div>
-                    <div class="text-ink/90 text-[11px] sm:text-[13px] leading-snug sm:leading-relaxed">Acompanhei a rotina em área, redigi procedimentos e treinei a equipe no fluxo.</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="relative z-10 space-y-2.5 sm:space-y-3.5 pt-3.5 sm:pt-5 border-t hairline-dark">
-              <div class="hidden sm:flex flex-wrap gap-1.5 font-mono text-[10.5px] text-ink">
-                <span class="px-2.5 py-1 rounded-md bg-carbon border border-limeTech/20">Operações</span>
-                <span class="px-2.5 py-1 rounded-md bg-carbon border border-limeTech/20">Análise de dados</span>
-                <span class="px-2.5 py-1 rounded-md bg-carbon border border-limeTech/20">Automação</span>
-                <span class="px-2.5 py-1 rounded-md bg-carbon border border-limeTech/20">Padronização</span>
-              </div>
-              <div class="flex flex-wrap items-center justify-between gap-2 sm:pt-2.5 sm:border-t sm:border-white/5 font-mono text-[9.5px] sm:text-[10px] uppercase tracking-wider">
-                <span class="text-muted">Projetos desta fase</span>
-                <div class="flex flex-wrap items-center gap-2">
-                  <button type="button" data-open-project-by-id="bigbag" class="px-2.5 py-1 rounded-md bg-[#38BDF8]/10 border border-[#38BDF8]/35 text-[#38BDF8] hover:bg-[#38BDF8]/20 transition-colors font-semibold">
-                    02 Big Bag ↗
-                  </button>
-                  <button type="button" data-open-project-by-id="fretefy" class="px-2.5 py-1 rounded-md bg-[#F59E0B]/10 border border-[#F59E0B]/35 text-[#F59E0B] hover:bg-[#F59E0B]/20 transition-colors font-semibold">
-                    03 Fretefy ↗
-                  </button>
-                </div>
-              </div>
-            </div>
-          </article>
+          <!-- Coluna Direita: Palco Interativo da Fase + Fluxo Clicável + Preview Visual -->
+          <div id="actech-desktop-stage" class="actech-stage-panel lg:col-span-7 relative rounded-2xl bg-[#0D100F] border border-white/10 overflow-hidden flex flex-col justify-between" role="tabpanel" aria-live="polite"></div>
         </div>
       </div>
     </section>
@@ -1625,6 +1425,6 @@
   <script src="js/journey/fallback-2d.js?v=20261124c" defer></script>
   <script src="js/journey/engine.js?v=20261124c" defer></script>
 
-  <script src="js/main.js?v=20261124d" defer></script>
+  <script src="js/main.js?v=20261124e" defer></script>
 </body>
 </html>

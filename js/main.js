@@ -1918,6 +1918,430 @@
     renderStage(false);
   })();
 
+  /* ==========================================================================
+     13b. EXPERIÊNCIA INDUSTRIAL — ACTECH (CONSOLE INTERATIVO + MOBILE 1 TELA)
+     ========================================================================== */
+  (function initActechExperience() {
+    const spineEl = document.getElementById('actech-phase-spine');
+    const deskStageEl = document.getElementById('actech-desktop-stage');
+    const mobTabsEl = document.getElementById('actech-mobile-tabs');
+    const mobStageEl = document.getElementById('actech-mobile-stage');
+    if (!spineEl && !mobStageEl) return;
+
+    const PHASES = [
+      {
+        id: 'estagio',
+        code: 'FASE 02',
+        status: 'ATUAL',
+        period: 'FEV/2026 – ATUAL',
+        mobLabel: 'Estágio · Atual',
+        mobSub: 'Fev/2026–Atual',
+        role: 'Estagiário de Embalagem & Expedição',
+        area: 'Actech · Processos, Dados & Digitalização',
+        accent: '#C6F135',
+        border: 'rgba(198, 241, 53, 0.48)',
+        glow: 'rgba(198, 241, 53, 0.14)',
+        summary: 'Organizo rotinas em campo, automatizo o tratamento de dados logísticos e construo ferramentas web para reduzir conferências manuais e dar visibilidade à expedição.',
+        spineDesc: 'Estruturação de 8 KPIs logísticos, app web de Big Bags em nuvem, procedimentos e treinamento em área.',
+        spineChips: ['ETL & 8 KPIs', 'Web & Nuvem', 'Procedimentos'],
+        frentes: [
+          {
+            num: '01',
+            key: 'DADOS & KPIS',
+            title: 'Bases de carregamento & 8 KPIs',
+            detail: 'Estruturei bases de carregamento do Fretefy em Power Query, gerando o TPV mensal em menos de 5 minutos e consolidando 8 indicadores operacionais da expedição.',
+            short: 'Bases de carregamento e 8 KPIs (TPV < 5 min).',
+            tags: ['Excel', 'Power Query', 'ETL', 'TPV']
+          },
+          {
+            num: '02',
+            key: 'AUTOMAÇÃO',
+            title: 'Fluxos automáticos & envios semanais',
+            detail: 'Automatizei planilhas, tratamentos recorrentes e o disparo semanal de estoque, backlog e chegadas aos interessados para cortar trabalho manual repetitivo.',
+            short: 'Planilhas automatizadas e envios semanais à equipe.',
+            tags: ['Power Automate', 'Apps Script', 'Relatórios']
+          },
+          {
+            num: '03',
+            key: 'DIGITALIZAÇÃO',
+            title: 'Sistema web de Triagem de Big Bags',
+            detail: 'Construí aplicação web em nuvem (HTML/CSS/JS, Firebase, Cloudflare R2 e Gemini API) centralizando apontamentos diários, evidências e rastreabilidade da triagem.',
+            short: 'App web em nuvem para a triagem de Big Bags.',
+            tags: ['HTML/CSS/JS', 'Firebase', 'Cloudflare R2', 'Gemini API']
+          },
+          {
+            num: '04',
+            key: 'PROCESSOS',
+            title: 'Rotina em área, padrões & treinamento',
+            detail: 'Acompanhei a rotina diretamente em área, redigi procedimentos operacionais claros e apoiei o treinamento da equipe na adoção dos fluxos digitais.',
+            short: 'Rotina em área, procedimentos e treinamento.',
+            tags: ['Embalagem', 'Padronização', 'Treinamento']
+          }
+        ],
+        projects: [
+          {
+            id: 'bigbag',
+            index: '02',
+            title: 'Triagem de Big Bags',
+            sub: 'Web · Firebase · R2 · Gemini API',
+            accent: '#38BDF8',
+            img: 'assets/bigbag-app.png?v=20261124b'
+          },
+          {
+            id: 'fretefy',
+            index: '03',
+            title: 'Automação Fretefy',
+            sub: 'Power Query · TPV < 5 min · 8 KPIs',
+            accent: '#F59E0B',
+            img: 'assets/fretefy-panel.png?v=20261124b'
+          }
+        ]
+      },
+      {
+        id: 'aprendiz',
+        code: 'FASE 01',
+        status: 'CONCLUÍDA · 19 MESES',
+        period: 'JUN/2024 – DEZ/2025',
+        mobLabel: 'Aprendiz · 19m',
+        mobSub: 'Jun/2024–Dez/2025',
+        role: 'Jovem Aprendiz',
+        area: 'Actech · Operação & Processos Industriais',
+        accent: '#F59E0B',
+        border: 'rgba(245, 158, 11, 0.45)',
+        glow: 'rgba(245, 158, 11, 0.13)',
+        summary: 'Base prática no chão de fábrica: medi tempos em campo com cronoanálises, acompanhei estoque e checklists, padronizei documentos no Qualyteam e mapeei gargalos do fluxo.',
+        spineDesc: 'Cronoanálises em campo, controle de estoque e checklists, Qualyteam e diagnóstico de gargalos.',
+        spineChips: ['Cronoanálises', 'Qualyteam', 'Estoque & KPIs'],
+        frentes: [
+          {
+            num: '01',
+            key: 'MEDIÇÃO',
+            title: 'Cronoanálises & indicadores em campo',
+            detail: 'Medi tempos diretamente no chão de fábrica com cronoanálises e levantei KPIs de desempenho de operadores e equipamentos na rotina produtiva.',
+            short: 'Cronoanálises e KPIs de operadores e equipamentos.',
+            tags: ['Cronoanálise', 'KPIs', 'Chão de fábrica']
+          },
+          {
+            num: '02',
+            key: 'ESTOQUE',
+            title: 'Estoque, embalagens & checklists',
+            detail: 'Acompanhei controle de estoque, organização de embalagens e listas de verificação de carregamento no fluxo diário da planta.',
+            short: 'Controle de estoque, embalagens e checklists.',
+            tags: ['Estoque', 'Embalagens', 'Checklists']
+          },
+          {
+            num: '03',
+            key: 'QUALIDADE',
+            title: 'Padronização documental no Qualyteam',
+            detail: 'Padronizei procedimentos operacionais e apoiei a organização e controle de documentos da área dentro do sistema Qualyteam.',
+            short: 'Procedimentos e controle documental no Qualyteam.',
+            tags: ['Qualyteam', 'Procedimentos', 'Qualidade']
+          },
+          {
+            num: '04',
+            key: 'DIAGNÓSTICO',
+            title: 'Mapeamento de gargalos & rastreabilidade',
+            detail: 'Mapeei gargalos reais da rotina física e apoiei iniciativas iniciais de rastreabilidade e digitalização que prepararam a transição para a Fase 02.',
+            short: 'Mapeamento de gargalos e base para digitalização.',
+            tags: ['Diagnóstico', 'Rastreabilidade', 'Melhoria contínua']
+          }
+        ],
+        projects: []
+      }
+    ];
+
+    let activePhaseIdx = 0; // Fase 02 (Estágio · Atual) aberta por padrão
+    let activeFrenteIdx = 0;
+
+    function renderDesktopSpine() {
+      if (!spineEl) return;
+      const p2 = PHASES[0];
+      const p1 = PHASES[1];
+
+      const cardHTML = (ph, idx) => {
+        const isSel = idx === activePhaseIdx;
+        return `
+          <button
+            type="button"
+            role="tab"
+            id="actech-tab-${ph.id}"
+            aria-selected="${isSel}"
+            aria-controls="actech-desktop-stage"
+            data-actech-phase="${idx}"
+            class="actech-spine-btn w-full rounded-2xl p-4 lg:p-5 flex flex-col justify-between gap-3 cursor-pointer flex-1"
+            style="--phase-accent:${ph.accent}; --phase-border:${ph.border}; --phase-glow:${ph.glow};"
+          >
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.14em]">
+                <span class="inline-flex items-center gap-2 font-semibold" style="color:${ph.accent};">
+                  <span class="w-2 h-2 rounded-full ${idx === 0 ? 'acad-node-pulse' : ''}" style="background:${ph.accent};"></span>
+                  <span>${ph.code} · ${ph.period}</span>
+                </span>
+                <span class="px-2 py-0.5 rounded-full text-[9px] font-semibold border" style="color:${ph.accent}; border-color:${ph.border}; background:${ph.glow};">
+                  ${idx === 0 ? 'ATUAL' : '19 MESES'}
+                </span>
+              </div>
+              <div>
+                <h3 class="font-display text-base lg:text-lg font-bold text-ink leading-snug">${ph.role}</h3>
+                <div class="font-mono text-[10.5px] text-muted mt-0.5">${ph.area}</div>
+              </div>
+              <p class="text-xs text-ink/75 leading-relaxed pt-1">${ph.spineDesc}</p>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 pt-2.5 border-t border-white/8">
+              <div class="flex flex-wrap gap-1.5 font-mono text-[9.5px] text-ink/80">
+                ${ph.spineChips.map((c) => `<span class="px-2 py-0.5 rounded bg-carbon border hairline-dark">${c}</span>`).join('')}
+              </div>
+              <span class="font-mono text-xs shrink-0 transition-transform ${isSel ? 'translate-x-0.5' : 'opacity-45'}" style="color:${ph.accent};" aria-hidden="true">→</span>
+            </div>
+          </button>`;
+      };
+
+      spineEl.innerHTML = `
+        ${cardHTML(p2, 0)}
+        <div class="flex items-center gap-3 px-4 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.15em] text-muted select-none" aria-hidden="true">
+          <span class="h-[1px] flex-1 bg-gradient-to-r from-[#F59E0B]/40 via-limeTech/50 to-transparent"></span>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-graphite border border-limeTech/30 text-limeTech font-semibold">
+            <span>↑</span>
+            <span>EVOLUÇÃO INTERNA · FEV/2026</span>
+          </span>
+          <span class="h-[1px] flex-1 bg-gradient-to-l from-[#F59E0B]/40 via-limeTech/50 to-transparent"></span>
+        </div>
+        ${cardHTML(p1, 1)}
+      `;
+
+      spineEl.querySelectorAll('[data-actech-phase]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const next = Number(btn.getAttribute('data-actech-phase'));
+          if (next === activePhaseIdx) return;
+          activePhaseIdx = next;
+          activeFrenteIdx = 0;
+          renderAll(true);
+        });
+      });
+    }
+
+    function renderDesktopStage(animate = false) {
+      if (!deskStageEl) return;
+      const ph = PHASES[activePhaseIdx];
+      const f = ph.frentes[activeFrenteIdx] || ph.frentes[0];
+      deskStageEl.style.setProperty('--phase-accent', ph.accent);
+      deskStageEl.style.setProperty('--phase-border', ph.border);
+      deskStageEl.style.setProperty('--phase-glow', ph.glow);
+
+      const bottomBand = ph.projects.length
+        ? `
+          <div class="space-y-2.5 pt-4 border-t hairline-dark">
+            <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.14em]">
+              <span class="text-muted">PROJETOS DESTA FASE</span>
+              <span class="text-limeTech/90">CLIQUE PARA ABRIR O DOSSIÊ</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              ${ph.projects.map((pr) => `
+                <button
+                  type="button"
+                  data-open-project-by-id="${pr.id}"
+                  class="actech-proj-card group text-left p-2.5 rounded-xl bg-carbon border hairline-dark hover:border-white/25 flex items-center gap-3 cursor-pointer"
+                >
+                  <div class="w-20 h-14 rounded-lg overflow-hidden border border-white/10 bg-[#070A0D] shrink-0">
+                    <img src="${pr.img}" alt="Prévia ${pr.title}" loading="lazy" decoding="async" class="w-full h-full object-cover object-left-top group-hover:scale-105 transition-transform duration-500" />
+                  </div>
+                  <div class="min-w-0 flex-1 space-y-0.5">
+                    <div class="flex items-center gap-1.5 font-mono text-[9.5px] uppercase tracking-wider">
+                      <span class="px-1.5 py-0.5 rounded font-semibold text-[#050606] leading-none" style="background:${pr.accent};">${pr.index}</span>
+                      <span class="truncate font-semibold" style="color:${pr.accent};">DOSSIÊ ↗</span>
+                    </div>
+                    <div class="font-display text-sm font-bold text-ink truncate group-hover:text-limeTech transition-colors">${pr.title}</div>
+                    <div class="font-mono text-[9.5px] text-muted truncate">${pr.sub}</div>
+                  </div>
+                </button>`).join('')}
+            </div>
+          </div>`
+        : `
+          <div class="pt-4 border-t hairline-dark">
+            <div class="p-4 rounded-xl bg-carbon border border-[#F59E0B]/25 flex flex-wrap items-center justify-between gap-3">
+              <div class="space-y-1 min-w-0 flex-1">
+                <div class="font-mono text-[10px] uppercase tracking-[0.14em] text-[#F59E0B] font-semibold">PONTE PARA A FASE 02</div>
+                <p class="text-xs text-ink/85 leading-relaxed">
+                  Os 19 meses medindo tempos, padronizando documentos no Qualyteam e observando gargalos em área deram a base para digitalizar a triagem e automatizar o ETL no estágio.
+                </p>
+              </div>
+              <button
+                type="button"
+                id="actech-jump-phase2"
+                class="px-3.5 py-2 rounded-lg bg-limeTech text-inkDark font-mono text-[10.5px] font-semibold uppercase tracking-wider hover:bg-[#d5ff4d] transition-colors shrink-0 cursor-pointer"
+              >
+                Ver Fase 02 →
+              </button>
+            </div>
+          </div>`;
+
+      deskStageEl.innerHTML = `
+        <div class="${animate && !prefersReducedMotion ? 'actech-stage-enter ' : ''}p-5 lg:p-6 flex flex-col justify-between gap-4 h-full">
+          <div class="space-y-4">
+            <!-- Cabeçalho da Fase Ativa -->
+            <div class="flex flex-wrap items-start justify-between gap-3 pb-3.5 border-b hairline-dark">
+              <div class="space-y-1 min-w-0 flex-1">
+                <div class="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em]" style="color:${ph.accent};">
+                  <span class="font-semibold">${ph.code} // ${ph.status}</span>
+                  <span class="text-muted">· ${ph.period}</span>
+                </div>
+                <h3 class="font-display text-xl lg:text-[1.42rem] font-extrabold text-ink tracking-tight leading-snug">${ph.role}</h3>
+              </div>
+              <span class="font-mono text-[9.5px] uppercase tracking-wider px-2.5 py-1 rounded-lg bg-carbon border hairline-dark text-muted shrink-0">
+                04 FRENTES CONCRETAS
+              </span>
+            </div>
+
+            <p class="text-[13.5px] text-ink/85 leading-relaxed">${ph.summary}</p>
+
+            <!-- Fluxo Interativo em 4 Etapas (Clique para inspecionar) -->
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
+                <span>FLUXO DE ATUAÇÃO · SELECIONE UMA FRENTE</span>
+                <span style="color:${ph.accent};" class="font-semibold">${f.num} / 04</span>
+              </div>
+
+              <div class="relative h-[2px] w-full rounded-full bg-white/8 overflow-hidden" aria-hidden="true">
+                <div class="h-full transition-all duration-300" style="width:${((activeFrenteIdx + 1) / 4) * 100}%; background:${ph.accent};"></div>
+              </div>
+
+              <div class="grid grid-cols-4 gap-2">
+                ${ph.frentes.map((item, idx) => `
+                  <button
+                    type="button"
+                    data-actech-frente="${idx}"
+                    data-active="${idx === activeFrenteIdx}"
+                    class="actech-flow-node text-left p-2.5 rounded-xl space-y-1 cursor-pointer"
+                  >
+                    <div class="flex items-center justify-between font-mono text-[9.5px]">
+                      <span class="font-semibold" style="color:${ph.accent};">${item.num}</span>
+                      <span class="w-1.5 h-1.5 rounded-full ${idx === activeFrenteIdx ? 'opacity-100' : 'opacity-20'}" style="background:${ph.accent};"></span>
+                    </div>
+                    <div class="font-mono text-[10px] font-semibold text-ink truncate">${item.key}</div>
+                  </button>`).join('')}
+              </div>
+
+              <!-- Leitura detalhada da frente selecionada -->
+              <div id="actech-frente-readout" class="p-3.5 rounded-xl bg-carbon border space-y-2" style="border-color:${ph.border};">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <div class="font-display text-[15px] font-bold text-ink">${f.num} · ${f.title}</div>
+                  <div class="flex flex-wrap gap-1 font-mono text-[9.5px]">
+                    ${f.tags.map((t) => `<span class="px-2 py-0.5 rounded bg-graphite border hairline-dark text-ink/85">${t}</span>`).join('')}
+                  </div>
+                </div>
+                <p class="text-xs sm:text-[13px] text-ink/85 leading-relaxed">${f.detail}</p>
+              </div>
+            </div>
+          </div>
+
+          ${bottomBand}
+        </div>
+      `;
+
+      deskStageEl.querySelectorAll('[data-actech-frente]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const nextF = Number(btn.getAttribute('data-actech-frente'));
+          if (nextF === activeFrenteIdx) return;
+          activeFrenteIdx = nextF;
+          renderDesktopStage(false);
+        });
+      });
+
+      document.getElementById('actech-jump-phase2')?.addEventListener('click', () => {
+        activePhaseIdx = 0;
+        activeFrenteIdx = 0;
+        renderAll(true);
+      });
+    }
+
+    function renderMobile() {
+      if (!mobTabsEl || !mobStageEl) return;
+      mobTabsEl.innerHTML = PHASES.map((ph, idx) => {
+        const isSel = idx === activePhaseIdx;
+        return `
+          <button
+            type="button"
+            role="tab"
+            aria-selected="${isSel}"
+            data-actech-mob="${idx}"
+            class="actech-mob-tab py-2 px-2.5 rounded-lg border border-transparent text-left flex flex-col gap-0.5 cursor-pointer"
+            style="--phase-accent:${ph.accent}; --phase-border:${ph.border};"
+          >
+            <span class="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider" style="color:${isSel ? ph.accent : '#9EA59B'};">
+              <span class="w-1.5 h-1.5 rounded-full" style="background:${isSel ? ph.accent : '#4D524B'};"></span>
+              <span>${ph.mobLabel}</span>
+            </span>
+            <span class="font-mono text-[9px] text-muted pl-3">${ph.mobSub}</span>
+          </button>`;
+      }).join('');
+
+      mobTabsEl.querySelectorAll('[data-actech-mob]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const next = Number(btn.getAttribute('data-actech-mob'));
+          if (next === activePhaseIdx) return;
+          activePhaseIdx = next;
+          activeFrenteIdx = 0;
+          renderAll(false);
+        });
+      });
+
+      const ph = PHASES[activePhaseIdx];
+      const mobFooter = ph.projects.length
+        ? `
+          <div class="grid grid-cols-2 gap-2 pt-2.5 border-t hairline-dark">
+            ${ph.projects.map((pr) => `
+              <button
+                type="button"
+                data-open-project-by-id="${pr.id}"
+                class="p-2 rounded-xl bg-carbon border hairline-dark flex items-center gap-2 text-left cursor-pointer"
+              >
+                <img src="${pr.img}" alt="" loading="lazy" decoding="async" class="w-9 h-9 rounded-md object-cover object-left-top border border-white/10 shrink-0" />
+                <div class="min-w-0">
+                  <div class="font-mono text-[9px] font-semibold uppercase" style="color:${pr.accent};">${pr.index} · Abrir ↗</div>
+                  <div class="font-display text-[11px] font-bold text-ink truncate">${pr.title.replace('Triagem de ', '').replace('Automação ', '')}</div>
+                </div>
+              </button>`).join('')}
+          </div>`
+        : `
+          <div class="flex items-center justify-between gap-2 pt-2.5 border-t hairline-dark font-mono text-[9.5px] uppercase tracking-wider">
+            <span class="text-muted">Qualyteam · Cronoanálises · KPIs</span>
+            <span class="font-semibold shrink-0" style="color:${ph.accent};">19 MESES</span>
+          </div>`;
+
+      mobStageEl.innerHTML = `
+        <article class="rounded-2xl bg-graphite border p-4 space-y-3" style="border-color:${ph.border};">
+          <div class="flex items-start justify-between gap-2 pb-2.5 border-b hairline-dark">
+            <div class="min-w-0">
+              <div class="font-mono text-[9.5px] uppercase tracking-widest font-semibold" style="color:${ph.accent};">${ph.code} · ${ph.period}</div>
+              <h3 class="font-display text-lg font-bold text-ink leading-snug mt-0.5">${ph.role}</h3>
+            </div>
+            <span class="px-2 py-0.5 rounded-full font-mono text-[9px] font-semibold shrink-0" style="color:${ph.accent}; background:${ph.glow}; border:1px solid ${ph.border};">
+              ${activePhaseIdx === 0 ? 'ATUAL' : 'BASE'}
+            </span>
+          </div>
+
+          <ul class="space-y-1.5">
+            ${ph.frentes.map((item) => `
+              <li class="flex items-start gap-2 text-xs text-ink/90 leading-snug">
+                <span class="font-mono text-[9.5px] font-semibold pt-0.5 shrink-0" style="color:${ph.accent};">${item.num}</span>
+                <span><strong class="text-ink font-semibold">${item.key}:</strong> ${item.short}</span>
+              </li>`).join('')}
+          </ul>
+
+          ${mobFooter}
+        </article>`;
+    }
+
+    function renderAll(animate = false) {
+      renderDesktopSpine();
+      renderDesktopStage(animate);
+      renderMobile();
+    }
+
+    renderAll(false);
+  })();
+
   document.addEventListener('click', (e) => {
     if (e.target.closest('[data-iris-card-bit]')) return;
     const byIdx = e.target.closest('[data-open-project]');
