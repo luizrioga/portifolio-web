@@ -1731,10 +1731,10 @@
             </div>
           </div>
 
-          <!-- Visão 1: Foto da equipe + legenda curta (mesmo padrão dos demais cases) -->
+          <!-- Visão 1: Foto da equipe preenchendo todo o quadro interno + legenda curta -->
           <div id="deck-agro-panel-ui" class="flex-1 flex flex-col justify-between gap-3">
-            <div class="relative rounded-xl overflow-hidden border border-[#34D399]/30 bg-carbon flex-1 min-h-[290px] group/agro">
-              <img src="assets/agrobit-team.jpg" alt="Equipe Bitmindop apresentando a plataforma AGROBIT" loading="lazy" decoding="async" class="w-full h-full max-h-[345px] object-cover object-[50%_22%] contrast-[1.04] saturate-[1.08] group-hover/agro:scale-[1.02] transition-transform duration-500" />
+            <div class="relative rounded-xl overflow-hidden border border-[#34D399]/30 bg-carbon flex-1 min-h-[320px] group/agro">
+              <img src="assets/agrobit-team.jpg" alt="Equipe Bitmindop apresentando a plataforma AGROBIT" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover object-[50%_20%] contrast-[1.04] saturate-[1.08] group-hover/agro:scale-[1.02] transition-transform duration-500" />
             </div>
             <div class="px-3.5 py-2.5 rounded-xl bg-carbon border hairline-dark font-mono text-[10px] text-ink/80 flex items-center justify-between gap-2">
               <span>Plataforma web agrícola · mapa, clima, solo e IA com equipe Bitmindop</span>
