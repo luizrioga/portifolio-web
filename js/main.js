@@ -1722,27 +1722,45 @@
 
       const firstSrc = AGROBIT_SOURCES[0];
       return `
-        <div class="h-full flex flex-col justify-between gap-3">
-          <div class="relative rounded-2xl overflow-hidden border border-[#34D399]/35 bg-carbon flex-1 min-h-[215px] group/agro">
-            <img src="assets/agrobit-team.jpg" alt="Equipe Bitmindop apresentando a plataforma AGROBIT" loading="lazy" decoding="async" class="w-full h-full object-cover object-[50%_22%] contrast-[1.04] saturate-[1.08] group-hover/agro:scale-[1.03] transition-transform duration-700" />
-            <div class="absolute inset-0 bg-gradient-to-t from-[#050606]/90 via-[#050606]/20 to-transparent pointer-events-none"></div>
-            <div class="absolute bottom-3 inset-x-3.5 flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-wider">
-              <span class="px-2.5 py-0.5 rounded bg-[#050606]/85 border border-[#34D399]/45 text-[#34D399]">EQUIPE BITMINDOP</span>
-              <span class="text-ink/85">INTEGRAÇÃO MULTI-FONTES</span>
+        <div class="h-full flex flex-col justify-between gap-3.5 rounded-2xl bg-[#070B09] border border-[#34D399]/30 p-4 lg:p-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-widest">
+            <span class="text-[#34D399] flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#34D399] acad-node-pulse"></span>AGTECH · BITMINDOP</span>
+            <div class="inline-flex p-0.5 rounded-lg bg-carbon border hairline-dark text-[9.5px]">
+              <button type="button" data-deck-agro-view="ui" class="px-2.5 py-1 rounded bg-[#34D399] text-[#050606] font-semibold transition-colors">Equipe</button>
+              <button type="button" data-deck-agro-view="arch" class="px-2.5 py-1 rounded text-muted hover:text-ink transition-colors">Arquitetura (04)</button>
             </div>
           </div>
 
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
-            ${AGROBIT_SOURCES.map((s, i) => `
-              <button type="button" data-deck-agro="${i}" data-active="${i === 0}" style="--node-accent:#34D399;" class="stage-node-btn px-2.5 py-2 rounded-xl bg-carbon border hairline-dark font-mono text-[10px] text-left cursor-pointer">
-                <div class="text-[#34D399] font-semibold">${s.code}</div>
-                <div class="text-ink font-medium truncate">${s.name}</div>
-              </button>`).join('')}
+          <!-- Visão 1: Foto da equipe + legenda curta (mesmo padrão dos demais cases) -->
+          <div id="deck-agro-panel-ui" class="flex-1 flex flex-col justify-between gap-3">
+            <div class="relative rounded-xl overflow-hidden border border-[#34D399]/30 bg-carbon flex-1 min-h-[290px] group/agro">
+              <img src="assets/agrobit-team.jpg" alt="Equipe Bitmindop apresentando a plataforma AGROBIT" loading="lazy" decoding="async" class="w-full h-full max-h-[345px] object-cover object-[50%_22%] contrast-[1.04] saturate-[1.08] group-hover/agro:scale-[1.02] transition-transform duration-500" />
+            </div>
+            <div class="px-3.5 py-2.5 rounded-xl bg-carbon border hairline-dark font-mono text-[10px] text-ink/80 flex items-center justify-between gap-2">
+              <span>Plataforma web agrícola · mapa, clima, solo e IA com equipe Bitmindop</span>
+              <span class="text-[#34D399] shrink-0">OSM · NASA · ESP32</span>
+            </div>
           </div>
 
-          <div id="deck-agro-readout" class="p-3 rounded-xl bg-carbon border border-[#34D399]/30 space-y-1">
-            <div class="font-mono text-[10px] text-[#34D399] uppercase tracking-wider">${firstSrc.name} // ${firstSrc.tag}</div>
-            <p class="text-xs text-ink/85 leading-relaxed">${firstSrc.detail}</p>
+          <!-- Visão 2: Arquitetura interativa de 4 integrações (mesmo padrão de Big Bags e Fretefy) -->
+          <div id="deck-agro-panel-arch" class="hidden flex-1 flex-col justify-between gap-3">
+            <div class="relative h-[2px] w-full rounded-full bg-white/10 overflow-hidden" aria-hidden="true">
+              <div class="mission-pipe-beam h-full w-1/2 bg-gradient-to-r from-transparent via-[#34D399] to-transparent"></div>
+            </div>
+            <div class="grid grid-cols-2 gap-2.5">
+              ${AGROBIT_SOURCES.map((s, i) => `
+                <button type="button" data-deck-agro="${i}" data-active="${i === 0}" style="--node-accent:#34D399;" class="stage-node-btn text-left p-3.5 rounded-xl bg-[#0B120F] border border-white/10 space-y-1.5 cursor-pointer">
+                  <div class="flex items-center justify-between font-mono text-[9.5px]">
+                    <span class="text-[#34D399] font-semibold">${s.code}</span>
+                    <span class="text-muted truncate">${s.tag}</span>
+                  </div>
+                  <div class="font-display text-xs sm:text-[13px] font-bold text-ink leading-tight">${s.name}</div>
+                </button>`).join('')}
+            </div>
+            <div id="deck-agro-readout" class="p-3.5 rounded-xl bg-carbon border border-[#34D399]/30 space-y-1.5">
+              <div class="font-mono text-[10px] text-[#34D399] font-semibold uppercase tracking-wider">FONTE ${firstSrc.code} // ${firstSrc.name.toUpperCase()}</div>
+              <p class="text-xs text-ink/85 leading-relaxed">${firstSrc.detail}</p>
+            </div>
           </div>
         </div>`;
     }
@@ -1848,6 +1866,26 @@
           });
         });
       } else if (p.id === 'agrobit') {
+        const viewBtns = stageWrap.querySelectorAll('[data-deck-agro-view]');
+        const uiPanel = document.getElementById('deck-agro-panel-ui');
+        const archPanel = document.getElementById('deck-agro-panel-arch');
+        viewBtns.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const v = btn.getAttribute('data-deck-agro-view');
+            if (uiPanel) uiPanel.classList.toggle('hidden', v !== 'ui');
+            if (archPanel) {
+              archPanel.classList.toggle('hidden', v !== 'arch');
+              archPanel.classList.toggle('flex', v === 'arch');
+            }
+            viewBtns.forEach((b) => {
+              const on = b === btn;
+              b.className = on
+                ? 'px-2.5 py-1 rounded bg-[#34D399] text-[#050606] font-semibold transition-colors'
+                : 'px-2.5 py-1 rounded text-muted hover:text-ink transition-colors';
+            });
+          });
+        });
+
         const btns = stageWrap.querySelectorAll('[data-deck-agro]');
         const readout = document.getElementById('deck-agro-readout');
         btns.forEach((btn) => {
@@ -1856,7 +1894,7 @@
             if (!src || !readout) return;
             btns.forEach((b) => b.setAttribute('data-active', String(b === btn)));
             readout.innerHTML = `
-              <div class="font-mono text-[10px] text-[#34D399] uppercase tracking-wider">${src.name} // ${src.tag}</div>
+              <div class="font-mono text-[10px] text-[#34D399] font-semibold uppercase tracking-wider">FONTE ${src.code} // ${src.name.toUpperCase()}</div>
               <p class="text-xs text-ink/85 leading-relaxed">${src.detail}</p>`;
           });
         });
