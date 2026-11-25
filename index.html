@@ -62,7 +62,7 @@
     };
   </script>
 
-  <link rel="stylesheet" href="css/styles.css?v=20261124i" />
+  <link rel="stylesheet" href="css/styles.css?v=20261124j" />
 </head>
 <body class="bg-carbon text-ink antialiased selection:bg-limeTech selection:text-inkDark">
 
@@ -89,15 +89,16 @@
       <nav
         id="desktop-nav-rail"
         aria-label="Navegação principal"
-        class="hidden lg:flex relative items-center p-1 rounded-full bg-graphite/80 border hairline-dark font-mono text-[11px] tracking-wider shrink-0 flex-nowrap whitespace-nowrap"
+        class="hidden lg:flex relative items-center p-1 rounded-full bg-graphite/80 border hairline-dark font-mono text-[10.5px] xl:text-[11px] tracking-wider shrink-0 flex-nowrap whitespace-nowrap"
       >
         <span id="nav-pill-slider" class="nav-pill-slider" aria-hidden="true"></span>
-        <a href="#thinking" data-nav="thinking" class="nav-link relative z-10 px-3 py-1.5 rounded-full text-muted hover:text-ink transition-colors whitespace-nowrap shrink-0">01.SOBRE</a>
-        <a href="#works" data-nav="works" class="nav-link relative z-10 px-3 py-1.5 rounded-full text-muted hover:text-ink transition-colors whitespace-nowrap shrink-0">02.PROJETOS</a>
-        <a href="#experience" data-nav="experience" class="nav-link relative z-10 px-3 py-1.5 rounded-full text-muted hover:text-ink transition-colors whitespace-nowrap shrink-0">03.ACTECH</a>
-        <a href="#toolbox" data-nav="toolbox" class="nav-link relative z-10 px-3 py-1.5 rounded-full text-muted hover:text-ink transition-colors whitespace-nowrap shrink-0">04.FERRAMENTAS</a>
-        <a href="#principles" data-nav="principles" class="nav-link relative z-10 px-3 py-1.5 rounded-full text-muted hover:text-ink transition-colors whitespace-nowrap shrink-0">05.PRINCÍPIOS</a>
-        <a href="#outside" data-nav="outside" class="nav-link relative z-10 px-3 py-1.5 rounded-full text-muted hover:text-ink transition-colors whitespace-nowrap shrink-0">06.CAMPO</a>
+        <a href="#thinking" data-nav="thinking" class="nav-link relative z-10 px-2.5 xl:px-3 py-1.5 rounded-full text-muted hover:text-ink transition-colors whitespace-nowrap shrink-0">01.SOBRE</a>
+        <a href="#works" data-nav="works" class="nav-link relative z-10 px-2.5 xl:px-3 py-1.5 rounded-full text-muted hover:text-ink transition-colors whitespace-nowrap shrink-0">02.PROJETOS</a>
+        <a href="#experience" data-nav="experience" class="nav-link relative z-10 px-2.5 xl:px-3 py-1.5 rounded-full text-muted hover:text-ink transition-colors whitespace-nowrap shrink-0">03.ACTECH</a>
+        <a href="#academic" data-nav="academic" class="nav-link relative z-10 px-2.5 xl:px-3 py-1.5 rounded-full text-muted hover:text-ink transition-colors whitespace-nowrap shrink-0">04.FORMAÇÃO</a>
+        <a href="#toolbox" data-nav="toolbox" class="nav-link relative z-10 px-2.5 xl:px-3 py-1.5 rounded-full text-muted hover:text-ink transition-colors whitespace-nowrap shrink-0">05.FERRAMENTAS</a>
+        <a href="#principles" data-nav="principles" class="nav-link relative z-10 px-2.5 xl:px-3 py-1.5 rounded-full text-muted hover:text-ink transition-colors whitespace-nowrap shrink-0">06.PRINCÍPIOS</a>
+        <a href="#outside" data-nav="outside" class="nav-link relative z-10 px-2.5 xl:px-3 py-1.5 rounded-full text-muted hover:text-ink transition-colors whitespace-nowrap shrink-0">07.CAMPO</a>
       </nav>
 
       <!-- Ação direta (Desktop) -->
@@ -141,49 +142,53 @@
   <!-- Gaveta mobile (ordem original) -->
   <div id="mobile-drawer" data-open="false" aria-hidden="true" class="mobile-drawer fixed inset-x-0 top-14 bottom-0 z-40 bg-[#070808]/98 backdrop-blur-xl flex flex-col justify-between p-5 sm:p-6 border-t hairline-dark overflow-y-auto lg:hidden">
     <nav aria-label="Navegação móvel" class="flex flex-col divide-y divide-white/10 mt-1">
-      <a href="#intro" data-mobile-nav="intro" class="mobile-nav-link py-3.5 min-h-[52px] flex items-center justify-between group">
+      <a href="#intro" data-mobile-nav="intro" class="mobile-nav-link py-3 min-h-[48px] flex items-center justify-between group">
         <span class="font-display text-2xl font-bold text-ink group-hover:text-limeTech transition-colors">Início</span>
         <span class="font-mono text-xs text-muted">00</span>
       </a>
-      <a href="#thinking" data-mobile-nav="thinking" class="mobile-nav-link py-3.5 min-h-[52px] flex items-center justify-between group">
+      <a href="#thinking" data-mobile-nav="thinking" class="mobile-nav-link py-3 min-h-[48px] flex items-center justify-between group">
         <span class="font-display text-2xl font-bold text-ink group-hover:text-limeTech transition-colors">Sobre</span>
         <span class="font-mono text-xs text-muted">01</span>
       </a>
-      <a href="#works" data-mobile-nav="works" class="mobile-nav-link py-3.5 min-h-[52px] flex items-center justify-between group">
+      <a href="#works" data-mobile-nav="works" class="mobile-nav-link py-3 min-h-[48px] flex items-center justify-between group">
         <span class="font-display text-2xl font-bold text-ink group-hover:text-limeTech transition-colors">Projetos</span>
         <span class="font-mono text-xs text-limeTech">02</span>
       </a>
-      <a href="#experience" data-mobile-nav="experience" class="mobile-nav-link py-3.5 min-h-[52px] flex items-center justify-between group">
+      <a href="#experience" data-mobile-nav="experience" class="mobile-nav-link py-3 min-h-[48px] flex items-center justify-between group">
         <span class="font-display text-2xl font-bold text-ink group-hover:text-limeTech transition-colors">Actech</span>
         <span class="font-mono text-xs text-muted">03</span>
       </a>
-      <a href="#toolbox" data-mobile-nav="toolbox" class="mobile-nav-link py-3.5 min-h-[52px] flex items-center justify-between group">
-        <span class="font-display text-2xl font-bold text-ink group-hover:text-limeTech transition-colors">Ferramentas</span>
+      <a href="#academic" data-mobile-nav="academic" class="mobile-nav-link py-3 min-h-[48px] flex items-center justify-between group">
+        <span class="font-display text-2xl font-bold text-ink group-hover:text-limeTech transition-colors">Formação</span>
         <span class="font-mono text-xs text-muted">04</span>
       </a>
-      <a href="#principles" data-mobile-nav="principles" class="mobile-nav-link py-3.5 min-h-[52px] flex items-center justify-between group">
-        <span class="font-display text-2xl font-bold text-ink group-hover:text-limeTech transition-colors">Princípios</span>
+      <a href="#toolbox" data-mobile-nav="toolbox" class="mobile-nav-link py-3 min-h-[48px] flex items-center justify-between group">
+        <span class="font-display text-2xl font-bold text-ink group-hover:text-limeTech transition-colors">Ferramentas</span>
         <span class="font-mono text-xs text-muted">05</span>
       </a>
-      <a href="#outside" data-mobile-nav="outside" class="mobile-nav-link py-3.5 min-h-[52px] flex items-center justify-between group">
-        <span class="font-display text-2xl font-bold text-ink group-hover:text-limeTech transition-colors">Campo</span>
+      <a href="#principles" data-mobile-nav="principles" class="mobile-nav-link py-3 min-h-[48px] flex items-center justify-between group">
+        <span class="font-display text-2xl font-bold text-ink group-hover:text-limeTech transition-colors">Princípios</span>
         <span class="font-mono text-xs text-muted">06</span>
       </a>
-      <a href="#connect" data-mobile-nav="connect" class="mobile-nav-link py-3.5 min-h-[52px] flex items-center justify-between group">
+      <a href="#outside" data-mobile-nav="outside" class="mobile-nav-link py-3 min-h-[48px] flex items-center justify-between group">
+        <span class="font-display text-2xl font-bold text-ink group-hover:text-limeTech transition-colors">Campo</span>
+        <span class="font-mono text-xs text-muted">07</span>
+      </a>
+      <a href="#connect" data-mobile-nav="connect" class="mobile-nav-link py-3 min-h-[48px] flex items-center justify-between group">
         <span class="font-display text-2xl font-bold text-limeTech">Contato</span>
-        <span class="font-mono text-xs text-limeTech">07 ↗</span>
+        <span class="font-mono text-xs text-limeTech">08 ↗</span>
       </a>
     </nav>
 
     <div class="pt-5 mt-5 border-t hairline-dark space-y-3">
-      <div class="grid grid-cols-3 gap-2 font-mono text-[10.5px] uppercase tracking-wider">
-        <a href="https://www.linkedin.com/in/luiz-rioga/" target="_blank" rel="noopener noreferrer" class="py-2.5 px-2 rounded-lg bg-graphite border hairline-dark text-center text-ink hover:border-limeTech transition-colors">
+      <div class="grid grid-cols-3 gap-2 font-mono text-[10px] uppercase tracking-wider">
+        <a href="https://www.linkedin.com/in/luiz-rioga/" target="_blank" rel="noopener noreferrer" class="min-h-[42px] py-2.5 px-1.5 rounded-lg bg-graphite border hairline-dark flex items-center justify-center text-ink hover:border-limeTech transition-colors whitespace-nowrap">
           LinkedIn ↗
         </a>
-        <a href="https://github.com/luizrioga" target="_blank" rel="noopener noreferrer" class="py-2.5 px-2 rounded-lg bg-graphite border hairline-dark text-center text-ink hover:border-limeTech transition-colors">
+        <a href="https://github.com/luizrioga" target="_blank" rel="noopener noreferrer" class="min-h-[42px] py-2.5 px-1.5 rounded-lg bg-graphite border hairline-dark flex items-center justify-center text-ink hover:border-limeTech transition-colors whitespace-nowrap">
           GitHub ↗
         </a>
-        <button id="mobile-copy-email-btn" type="button" class="py-2.5 px-2 rounded-lg bg-limeTech text-inkDark font-semibold text-center">
+        <button id="mobile-copy-email-btn" type="button" class="min-h-[42px] py-2.5 px-1.5 rounded-lg bg-limeTech text-inkDark font-semibold flex items-center justify-center whitespace-nowrap">
           Copiar e-mail
         </button>
       </div>
@@ -310,9 +315,9 @@
     </div>
 
     <!-- ======================================================================
-         01 // SOBRE & TRAJETÓRIA (ORDEM ORIGINAL + GALERIA 3D DE CERTIFICADOS)
+         01 // SOBRE & TRAJETÓRIA (PILARES + RETRATO + DESTAQUE BITMIND RIW)
          ====================================================================== -->
-    <section id="thinking" data-module="01 // SOBRE" class="py-12 sm:py-28 lg:py-32 bg-carbon border-b hairline-dark relative">
+    <section id="thinking" data-module="01 // SOBRE" class="pt-12 pb-10 sm:pt-28 lg:pt-32 md:pb-0 bg-carbon border-b hairline-dark relative">
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
 
         <!-- Intro + 3 Pilares + Retrato no Palco -->
@@ -452,7 +457,7 @@
         </div>
 
         <!-- DESTAQUE EDITORIAL: EQUIPE BITMIND · RIO INNOVATION WEEK 2023 -->
-        <div class="spacex-cinema-band mb-8 md:mb-16 lg:mb-24 reveal">
+        <div class="spacex-cinema-band mb-0 reveal">
           <img
             src="assets/bitmind-riw.jpg"
             alt="Equipe Bitmind no estande do Instituto Federal durante a Rio Innovation Week 2023"
@@ -504,18 +509,121 @@
           </div>
         </div>
 
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         02 // PROJETOS SELECIONADOS — 4 CASES DO MESMO TAMANHO (ÍRIS EM 1º)
+         ====================================================================== -->
+    <section id="works" data-module="02 // PROJETOS" class="py-8 md:py-28 lg:py-32 bg-carbon border-b hairline-dark bg-tech-grid">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-2 md:gap-6 items-end mb-4 md:mb-10 reveal">
+          <div class="lg:col-span-8 space-y-1.5 md:space-y-3">
+            <div class="font-mono text-[11px] md:text-xs tracking-[0.14em] uppercase text-limeTech">
+              02 // PROJETOS SELECIONADOS · [<span data-projects-count>04</span>]
+            </div>
+            <h2 class="section-title text-ink">
+              Hardware, dados,<br />
+              nuvem &amp; software.
+            </h2>
+          </div>
+          <div class="lg:col-span-4 lg:text-right">
+            <p class="font-mono text-[10px] md:text-xs text-muted uppercase tracking-wider">
+              <span class="md:hidden">TOQUE EM UM CASE PARA ABRIR O DOSSIÊ</span>
+              <span class="hidden md:inline">ESCOLHA UM PROJETO PARA EXPLORAR A ARQUITETURA E O DOSSIÊ</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Mobile (<768px): 4 tiles compactos cabendo em 1 tela sem scroll -->
+        <div id="projects-grid" class="grid grid-cols-1 gap-2.5 md:hidden"></div>
+
+        <!-- Desktop/Tablet (>=768px): Console Interativo de Cases (seletor 4x + palco vivo sem rotação) -->
+        <div id="projects-showcase" class="hidden md:block space-y-5 reveal">
+          <div id="case-deck-tabs" class="grid grid-cols-2 lg:grid-cols-4 gap-3.5" role="tablist" aria-label="Selecionar projeto para inspecionar"></div>
+          <div id="case-deck-stage" class="case-deck-stage relative rounded-3xl bg-[#0D100F] border border-white/10 overflow-hidden" role="tabpanel" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         03 // EXPERIÊNCIA INDUSTRIAL — ACTECH (CONSOLE INTERATIVO + MOBILE 1 TELA)
+         ====================================================================== -->
+    <section id="experience" data-module="03 // ACTECH" class="py-10 md:py-16 lg:py-20 bg-[#070807] border-b hairline-dark relative overflow-hidden">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 md:gap-6 items-end mb-5 md:mb-7 reveal">
+          <div class="lg:col-span-7 space-y-1.5 md:space-y-3.5">
+            <div class="inline-flex items-center gap-2 font-mono text-[9.5px] sm:text-xs tracking-[0.05em] sm:tracking-[0.14em] uppercase text-limeTech leading-snug">
+              <span class="w-1.5 h-1.5 rounded-full bg-limeTech acad-node-pulse shrink-0" aria-hidden="true"></span>
+              <span>03 // EXPERIÊNCIA PROFISSIONAL · ACTECH · 2+ ANOS</span>
+            </div>
+            <h2 class="section-title text-ink">
+              Da rotina operacional<br />
+              à digitalização.
+            </h2>
+          </div>
+          <div class="hidden md:flex lg:col-span-5 flex-col items-start lg:items-end">
+            <p class="text-sm lg:text-base text-ink/80 lg:text-right leading-relaxed max-w-lg">
+              Mais de dois anos em ambiente industrial na Actech: comecei como Jovem Aprendiz medindo tempos e padronizando rotinas, e hoje atuo como Estagiário de Embalagem &amp; Expedição estruturando dados e ferramentas para a área.
+            </p>
+          </div>
+        </div>
+
+        <!-- Mobile (<768px): Seletor compacto em abas cabendo em ~1 tela -->
+        <div class="md:hidden space-y-3">
+          <div id="actech-mobile-tabs" class="grid grid-cols-2 gap-1.5 p-1 rounded-xl bg-graphite border hairline-dark" role="tablist" aria-label="Alternar fases na Actech"></div>
+          <div id="actech-mobile-stage" role="tabpanel" aria-live="polite"></div>
+        </div>
+
+        <!-- Desktop/Tablet (>=768px): Console Interativo de Evolução Industrial -->
+        <div id="experience-container" class="hidden md:grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-stretch reveal">
+          <!-- Coluna Esquerda: Espinha Cronológica Interativa + Telemetria Factual -->
+          <div class="lg:col-span-5 flex flex-col justify-between gap-4">
+            <div id="actech-phase-spine" class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-col gap-3 flex-1" role="tablist" aria-label="Selecionar fase na Actech"></div>
+
+            <!-- Barra de Fatos da Planta (faixa aberta contínua, sem 3 caixas separadas) -->
+            <div class="grid grid-cols-3 divide-x divide-white/10 border-y hairline-dark py-3.5">
+              <div class="pr-3 space-y-0.5">
+                <div class="font-display text-lg font-extrabold text-limeTech tabular-nums leading-none">2+ anos</div>
+                <div class="font-mono text-[9.5px] uppercase tracking-wider text-muted pt-1">Desde Jun/2024</div>
+              </div>
+              <div class="px-3 space-y-0.5">
+                <div class="font-display text-lg font-extrabold text-[#F59E0B] tabular-nums leading-none">02 fases</div>
+                <div class="font-mono text-[9.5px] uppercase tracking-wider text-muted pt-1">Aprendiz → Estágio</div>
+              </div>
+              <div class="pl-3 space-y-0.5">
+                <div class="font-display text-lg font-extrabold text-[#38BDF8] tabular-nums leading-none">02 cases</div>
+                <div class="font-mono text-[9.5px] uppercase tracking-wider text-muted pt-1">Big Bags · Fretefy</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coluna Direita: Palco Interativo da Fase + Fluxo Clicável + Preview Visual -->
+          <div id="actech-desktop-stage" class="actech-stage-panel lg:col-span-7 relative rounded-2xl bg-[#0D100F] border border-white/10 overflow-hidden flex flex-col justify-between" role="tabpanel" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ======================================================================
+         04 // FORMAÇÃO & CERTIFICAÇÕES (REGISTRO ACADÊMICO + ACERVO 3D)
+         ====================================================================== -->
+    <section id="academic" data-module="04 // FORMAÇÃO" class="py-12 sm:py-24 lg:py-28 bg-carbon border-b hairline-dark relative">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <!-- REGISTRO ACADÊMICO (Mobile: Formação antes de Reconhecimentos · Desktop: 2 colunas preservadas) -->
-        <div id="academic-record" class="grid grid-cols-1 lg:grid-cols-12 lg:grid-rows-[auto_1fr] gap-y-6 sm:gap-y-7 lg:gap-y-5 lg:gap-x-10 pt-8 sm:pt-12 border-t hairline-dark reveal items-start">
+        <div id="academic-record" class="grid grid-cols-1 lg:grid-cols-12 lg:grid-rows-[auto_1fr] gap-y-6 sm:gap-y-7 lg:gap-y-5 lg:gap-x-10 reveal items-start">
           <!-- Bloco 1: Cabeçalho + Matriz interativa (Desktop col esquerda linha 1) -->
           <div class="order-1 lg:col-span-4 lg:col-start-1 lg:row-start-1 space-y-5">
             <div class="space-y-2.5">
               <div class="inline-flex items-center gap-2 font-mono text-xs tracking-[0.14em] uppercase text-limeTech">
                 <span class="w-1.5 h-1.5 rounded-full bg-limeTech"></span>
-                <span>REGISTRO ACADÊMICO</span>
+                <span>04 // FORMAÇÃO &amp; CERTIFICAÇÕES</span>
               </div>
-              <h3 class="font-display text-2xl sm:text-3xl font-bold text-ink leading-tight">
+              <h2 class="font-display text-3xl sm:text-4xl lg:text-[2.55rem] font-extrabold tracking-tight text-ink leading-[1.04]">
                 Formação &amp; méritos.
-              </h3>
+              </h2>
               <p class="hidden md:block text-sm text-ink/75 leading-relaxed">
                 Formação que une teoria rigorosa de engenharia à execução em bancadas de testes e chão de fábrica — da microeletrônica embarcada à arquitetura de software, dados e IA.
               </p>
@@ -843,109 +951,15 @@
     </section>
 
     <!-- ======================================================================
-         02 // PROJETOS SELECIONADOS — 4 CASES DO MESMO TAMANHO (ÍRIS EM 1º)
+         05 // FERRAMENTAS & STACK (100% PT-BR)
          ====================================================================== -->
-    <section id="works" data-module="02 // PROJETOS" class="py-8 md:py-28 lg:py-32 bg-carbon border-b hairline-dark bg-tech-grid">
-      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-2 md:gap-6 items-end mb-4 md:mb-10 reveal">
-          <div class="lg:col-span-8 space-y-1.5 md:space-y-3">
-            <div class="font-mono text-[11px] md:text-xs tracking-[0.14em] uppercase text-limeTech">
-              02 // PROJETOS SELECIONADOS · [<span data-projects-count>04</span>]
-            </div>
-            <h2 class="section-title text-ink">
-              Hardware, dados,<br />
-              nuvem &amp; software.
-            </h2>
-          </div>
-          <div class="lg:col-span-4 lg:text-right">
-            <p class="font-mono text-[10px] md:text-xs text-muted uppercase tracking-wider">
-              <span class="md:hidden">TOQUE EM UM CASE PARA ABRIR O DOSSIÊ</span>
-              <span class="hidden md:inline">ESCOLHA UM PROJETO PARA EXPLORAR A ARQUITETURA E O DOSSIÊ</span>
-            </p>
-          </div>
-        </div>
-
-        <!-- Mobile (<768px): 4 tiles compactos cabendo em 1 tela sem scroll -->
-        <div id="projects-grid" class="grid grid-cols-1 gap-2.5 md:hidden"></div>
-
-        <!-- Desktop/Tablet (>=768px): Console Interativo de Cases (seletor 4x + palco vivo sem rotação) -->
-        <div id="projects-showcase" class="hidden md:block space-y-5 reveal">
-          <div id="case-deck-tabs" class="grid grid-cols-2 lg:grid-cols-4 gap-3.5" role="tablist" aria-label="Selecionar projeto para inspecionar"></div>
-          <div id="case-deck-stage" class="case-deck-stage relative rounded-3xl bg-[#0D100F] border border-white/10 overflow-hidden" role="tabpanel" aria-live="polite"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================================================
-         03 // EXPERIÊNCIA INDUSTRIAL — ACTECH (CONSOLE INTERATIVO + MOBILE 1 TELA)
-         ====================================================================== -->
-    <section id="experience" data-module="03 // ACTECH" class="py-10 md:py-16 lg:py-20 bg-[#070807] border-b hairline-dark relative overflow-hidden">
-      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 md:gap-6 items-end mb-5 md:mb-7 reveal">
-          <div class="lg:col-span-7 space-y-1.5 md:space-y-3.5">
-            <div class="inline-flex items-center gap-2 font-mono text-[9.5px] sm:text-xs tracking-[0.05em] sm:tracking-[0.14em] uppercase text-limeTech leading-snug">
-              <span class="w-1.5 h-1.5 rounded-full bg-limeTech acad-node-pulse shrink-0" aria-hidden="true"></span>
-              <span>03 // EXPERIÊNCIA PROFISSIONAL · ACTECH · 2+ ANOS</span>
-            </div>
-            <h2 class="section-title text-ink">
-              Da rotina operacional<br />
-              à digitalização.
-            </h2>
-          </div>
-          <div class="hidden md:flex lg:col-span-5 flex-col items-start lg:items-end">
-            <p class="text-sm lg:text-base text-ink/80 lg:text-right leading-relaxed max-w-lg">
-              Mais de dois anos em ambiente industrial na Actech: comecei como Jovem Aprendiz medindo tempos e padronizando rotinas, e hoje atuo como Estagiário de Embalagem &amp; Expedição estruturando dados e ferramentas para a área.
-            </p>
-          </div>
-        </div>
-
-        <!-- Mobile (<768px): Seletor compacto em abas cabendo em ~1 tela -->
-        <div class="md:hidden space-y-3">
-          <div id="actech-mobile-tabs" class="grid grid-cols-2 gap-1.5 p-1 rounded-xl bg-graphite border hairline-dark" role="tablist" aria-label="Alternar fases na Actech"></div>
-          <div id="actech-mobile-stage" role="tabpanel" aria-live="polite"></div>
-        </div>
-
-        <!-- Desktop/Tablet (>=768px): Console Interativo de Evolução Industrial -->
-        <div id="experience-container" class="hidden md:grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-stretch reveal">
-          <!-- Coluna Esquerda: Espinha Cronológica Interativa + Telemetria Factual -->
-          <div class="lg:col-span-5 flex flex-col justify-between gap-4">
-            <div id="actech-phase-spine" class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-col gap-3 flex-1" role="tablist" aria-label="Selecionar fase na Actech"></div>
-
-            <!-- Barra de Fatos da Planta (faixa aberta contínua, sem 3 caixas separadas) -->
-            <div class="grid grid-cols-3 divide-x divide-white/10 border-y hairline-dark py-3.5">
-              <div class="pr-3 space-y-0.5">
-                <div class="font-display text-lg font-extrabold text-limeTech tabular-nums leading-none">2+ anos</div>
-                <div class="font-mono text-[9.5px] uppercase tracking-wider text-muted pt-1">Desde Jun/2024</div>
-              </div>
-              <div class="px-3 space-y-0.5">
-                <div class="font-display text-lg font-extrabold text-[#F59E0B] tabular-nums leading-none">02 fases</div>
-                <div class="font-mono text-[9.5px] uppercase tracking-wider text-muted pt-1">Aprendiz → Estágio</div>
-              </div>
-              <div class="pl-3 space-y-0.5">
-                <div class="font-display text-lg font-extrabold text-[#38BDF8] tabular-nums leading-none">02 cases</div>
-                <div class="font-mono text-[9.5px] uppercase tracking-wider text-muted pt-1">Big Bags · Fretefy</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Coluna Direita: Palco Interativo da Fase + Fluxo Clicável + Preview Visual -->
-          <div id="actech-desktop-stage" class="actech-stage-panel lg:col-span-7 relative rounded-2xl bg-[#0D100F] border border-white/10 overflow-hidden flex flex-col justify-between" role="tabpanel" aria-live="polite"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================================================
-         04 // FERRAMENTAS & STACK (ORDEM ORIGINAL + 100% PT-BR)
-         ====================================================================== -->
-    <section id="toolbox" data-module="04 // FERRAMENTAS" class="py-12 sm:py-28 lg:py-32 bg-carbon border-b hairline-dark">
+    <section id="toolbox" data-module="05 // FERRAMENTAS" class="py-12 sm:py-28 lg:py-32 bg-[#080A08] border-b hairline-dark">
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 items-end mb-4 md:mb-10 reveal">
           <div class="lg:col-span-7 space-y-1.5 md:space-y-3">
             <div class="font-mono text-xs tracking-[0.14em] uppercase text-limeTech">
-              04 // FERRAMENTAS &amp; STACK
+              05 // FERRAMENTAS &amp; STACK
             </div>
             <h2 class="section-title text-ink">
               Arsenal modular.
@@ -998,16 +1012,16 @@
     </section>
 
     <!-- ======================================================================
-         05 // PRINCÍPIOS — CARROSSEL ORBITAL 3D RESTAURADO (10 PENSADORES)
+         06 // PRINCÍPIOS — CARROSSEL ORBITAL 3D RESTAURADO (10 PENSADORES)
          ====================================================================== -->
-    <section id="principles" data-module="05 // PRINCÍPIOS" class="py-12 sm:py-28 lg:py-32 bg-[#050606] border-b hairline-dark relative overflow-hidden">
+    <section id="principles" data-module="06 // PRINCÍPIOS" class="py-12 sm:py-28 lg:py-32 bg-[#050606] border-b hairline-dark relative overflow-hidden">
       <div class="cosmos-horizon-glow" aria-hidden="true"></div>
       <div class="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
 
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-12 reveal">
           <div class="space-y-3">
             <div class="font-mono text-xs tracking-[0.14em] uppercase text-limeTech">
-              05 // PRINCÍPIOS
+              06 // PRINCÍPIOS
             </div>
             <h2 class="section-title text-ink">
               Modelos mentais.
@@ -1065,9 +1079,9 @@
     </section>
 
     <!-- ======================================================================
-         06 // FORA DA TELA (CAMPO) — TERRENO TOPOGRÁFICO 3D (ORDEM ORIGINAL)
+         07 // FORA DA TELA (CAMPO) — TERRENO TOPOGRÁFICO 3D
          ====================================================================== -->
-    <section id="outside" data-module="06 // CAMPO" class="relative py-12 sm:py-32 lg:py-36 bg-editorial text-inkDark border-b hairline-light overflow-hidden">
+    <section id="outside" data-module="07 // CAMPO" class="relative py-12 sm:py-32 lg:py-36 bg-editorial text-inkDark border-b hairline-light overflow-hidden">
       <div id="topo-3d-wrap" class="absolute inset-0 z-0 pointer-events-none">
         <canvas id="topo-3d-canvas" class="w-full h-full block" aria-hidden="true"></canvas>
       </div>
@@ -1077,7 +1091,7 @@
           <div class="lg:col-span-7 space-y-2.5 sm:space-y-3">
             <div class="inline-flex items-center gap-2 font-mono text-xs tracking-[0.14em] uppercase text-inkDark/70">
               <span class="w-2 h-2 rounded-full bg-inkDark"></span>
-              <span>06 // FORA DA TELA</span>
+              <span>07 // FORA DA TELA</span>
             </div>
             <h2 class="section-title text-inkDark">
               A curiosidade não para<br />
@@ -1172,9 +1186,9 @@
     </section>
 
     <!-- ======================================================================
-         07 // CONTATO — PT-BR + BAIXAR CV + CANAIS DIRETOS
+         08 // CONTATO — PT-BR + BAIXAR CV + CANAIS DIRETOS
          ====================================================================== -->
-    <section id="connect" data-module="07 // CONTATO" class="pt-12 sm:pt-32 pb-8 sm:pb-12 bg-[#050606] text-ink relative overflow-hidden">
+    <section id="connect" data-module="08 // CONTATO" class="pt-12 sm:pt-32 pb-8 sm:pb-12 bg-[#050606] text-ink relative overflow-hidden">
       <div class="cosmos-horizon-glow" aria-hidden="true"></div>
       <div class="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
 
@@ -1184,7 +1198,7 @@
             <div class="space-y-3 sm:space-y-4">
               <div class="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-graphite border border-limeTech/35 font-mono text-[10px] sm:text-[10.5px] tracking-[0.14em] uppercase text-limeTech">
                 <span class="w-1.5 h-1.5 rounded-full bg-limeTech acad-node-pulse" aria-hidden="true"></span>
-                <span>07 // CONTATO · ABERTO A OPORTUNIDADES</span>
+                <span>08 // CONTATO · ABERTO A OPORTUNIDADES</span>
               </div>
               <h2 class="connect-title text-ink">
                 Tem um processo<br />
@@ -1461,6 +1475,6 @@
   <script src="js/journey/fallback-2d.js?v=20261124c" defer></script>
   <script src="js/journey/engine.js?v=20261124c" defer></script>
 
-  <script src="js/main.js?v=20261124i" defer></script>
+  <script src="js/main.js?v=20261124j" defer></script>
 </body>
 </html>

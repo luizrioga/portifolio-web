@@ -60,7 +60,8 @@ main > section[id] {
   scroll-margin-top: 66px;
 }
 
-#thinking {
+#thinking,
+#academic {
   overflow-x: clip;
 }
 

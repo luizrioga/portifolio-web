@@ -608,10 +608,11 @@
     thinking: '01 · SOBRE',
     works: '02 · PROJETOS',
     experience: '03 · ACTECH',
-    toolbox: '04 · STACK',
-    principles: '05 · PRINCÍPIOS',
-    outside: '06 · CAMPO',
-    connect: '07 · CONTATO'
+    academic: '04 · FORMAÇÃO',
+    toolbox: '05 · STACK',
+    principles: '06 · PRINCÍPIOS',
+    outside: '07 · CAMPO',
+    connect: '08 · CONTATO'
   };
 
   const sectionObserver = new IntersectionObserver(
@@ -4744,7 +4745,7 @@
       return isNew;
     }
 
-    const trackIds = ['intro', 'thinking', 'works', 'experience', 'toolbox', 'principles', 'outside', 'connect'];
+    const trackIds = ['intro', 'thinking', 'works', 'experience', 'academic', 'toolbox', 'principles', 'outside', 'connect'];
     if ('IntersectionObserver' in window) {
       const secObs = new IntersectionObserver((entries) => {
         entries.forEach((en) => {
@@ -4834,7 +4835,7 @@
     }
 
     function renderExplorerModal() {
-      const secCount = Math.min(7, Math.max(1, visitedSections.size - (visitedSections.has('intro') ? 1 : 0)));
+      const secCount = Math.min(8, Math.max(1, visitedSections.size - (visitedSections.has('intro') ? 1 : 0)));
       const found = countSecrets();
       const totalCasesPadded = String(PROJECTS.length).padStart(2, '0');
       const badgeTitle = found === 3
@@ -4846,7 +4847,7 @@
       const secretRows = [
         { ok: secrets.blueprint, code: 'SEG.01', title: 'Modo Planta (Grade Técnica)', hint: 'Clique 5× rápido em "LUIZ RIOGA" no topo.' },
         { ok: secrets.orbit, code: 'SEG.02', title: 'Transmissão Orbital', hint: 'Digite IRIS no teclado (ou use a sequência de setas).' },
-        { ok: secrets.serra, code: 'SEG.03', title: 'Coordenadas da Serra', hint: 'Clique na altitude de Ouro Preto na seção 06.CAMPO.' }
+        { ok: secrets.serra, code: 'SEG.03', title: 'Coordenadas da Serra', hint: 'Clique na altitude de Ouro Preto na seção 07.CAMPO.' }
       ];
 
       modalBody.innerHTML = `
@@ -4860,7 +4861,7 @@
 
         <div class="grid grid-cols-3 gap-2.5 font-mono text-center">
           <div class="p-3 rounded-xl bg-graphite border hairline-dark">
-            <div class="font-display text-xl font-bold text-limeTech tabular-nums">${String(secCount).padStart(2, '0')}/07</div>
+            <div class="font-display text-xl font-bold text-limeTech tabular-nums">${String(secCount).padStart(2, '0')}/08</div>
             <div class="text-[9px] text-muted uppercase mt-0.5">Seções</div>
           </div>
           <div class="p-3 rounded-xl bg-graphite border hairline-dark">
