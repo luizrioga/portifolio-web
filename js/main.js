@@ -1391,9 +1391,8 @@
   })();
 
   /* ==========================================================================
-     13. GRADE DE PROJETOS (2x2 SEM CARROSSEL) + MODAL DE DOSSIÊ
+     13. CENTER-MODE CAROUSEL DE PROJETOS (PEEK EFFECT + PILL DOTS) + MODAL
      ========================================================================== */
-  const projectsGrid = document.getElementById('projects-grid');
   const modalEl = document.getElementById('case-modal');
   const modalBody = document.getElementById('modal-scroll-body');
   const modalIdxEl = document.getElementById('modal-project-index');
@@ -1409,106 +1408,39 @@
     bigbag: {
       accent: '#38BDF8',
       border: 'rgba(56, 189, 248, 0.45)',
-      glow: 'rgba(56, 189, 248, 0.20)',
+      glow: 'rgba(56, 189, 248, 0.22)',
       badgeBg: 'rgba(56, 189, 248, 0.10)'
     },
     fretefy: {
       accent: '#F59E0B',
       border: 'rgba(245, 158, 11, 0.45)',
-      glow: 'rgba(245, 158, 11, 0.20)',
+      glow: 'rgba(245, 158, 11, 0.22)',
       badgeBg: 'rgba(245, 158, 11, 0.10)'
     },
     agrobit: {
       accent: '#34D399',
       border: 'rgba(52, 211, 153, 0.45)',
-      glow: 'rgba(52, 211, 153, 0.20)',
+      glow: 'rgba(52, 211, 153, 0.22)',
       badgeBg: 'rgba(52, 211, 153, 0.10)'
     },
     iris: {
       accent: '#C6F135',
-      border: 'rgba(198, 241, 53, 0.45)',
-      glow: 'rgba(198, 241, 53, 0.20)',
+      border: 'rgba(198, 241, 53, 0.48)',
+      glow: 'rgba(198, 241, 53, 0.22)',
       badgeBg: 'rgba(198, 241, 53, 0.09)'
     }
   };
 
-  function getMobileThumb(project) {
-    if (project.id === 'iris') {
-      return `
-        <div class="w-16 h-16 rounded-xl border border-limeTech/35 bg-[#EEEDE7] flex items-center justify-center p-0.5 shrink-0 overflow-hidden">
-          <img src="assets/bit-2.jpg?v=20261124a" alt="" loading="lazy" decoding="async" class="w-full h-full object-contain mix-blend-multiply select-none" />
-        </div>`;
-    }
-    if (project.id === 'bigbag') {
-      return `
-        <div class="w-16 h-16 rounded-xl border border-[#38BDF8]/35 bg-[#07090B] shrink-0 overflow-hidden">
-          <img src="assets/bigbag-app.png?v=20261124b" alt="" loading="lazy" decoding="async" class="w-full h-full object-cover object-left-top" />
-        </div>`;
-    }
-    if (project.id === 'fretefy') {
-      return `
-        <div class="w-16 h-16 rounded-xl border border-[#F59E0B]/40 bg-[#0B0907] shrink-0 overflow-hidden">
-          <img src="assets/fretefy-panel.png?v=20261124b" alt="" loading="lazy" decoding="async" class="w-full h-full object-cover object-top" />
-        </div>`;
-    }
-    return `
-      <div class="w-16 h-16 rounded-xl border border-[#34D399]/35 bg-carbon shrink-0 overflow-hidden">
-        <img src="assets/agrobit-team.jpg" alt="" loading="lazy" decoding="async" class="w-full h-full object-cover object-[50%_20%]" />
-      </div>`;
-  }
-
-  const MOBILE_CASE_META = {
-    iris: { title: 'Projeto Íris · Bitmind', meta: '2023 · Bit I → Bit II · IFMG / RIW', pill: 'Bit I → Bit II' },
-    bigbag: { title: 'Triagem de Big Bags', meta: '2026 · Firebase, R2 & Gemini API', pill: '6 Camadas · Nuvem' },
-    fretefy: { title: 'Automação Fretefy', meta: '2026 · 8 KPIs · TPV < 5 min', pill: 'Power Query · 8 KPIs' },
-    agrobit: { title: 'AGROBIT · Bitmindop', meta: '2026 · OSM, NASA, Embrapa & ESP32', pill: 'Geo · IA · ESP32' }
-  };
-
-  if (projectsGrid) {
-    projectsGrid.innerHTML = PROJECTS
-      .map((p, realIdx) => {
-        const th = CASE_THEMES[p.id] || {
-          accent: '#C6F135',
-          border: 'rgba(198, 241, 53, 0.45)',
-          glow: 'rgba(198, 241, 53, 0.2)',
-          badgeBg: 'rgba(198, 241, 53, 0.1)'
-        };
-        const mInfo = MOBILE_CASE_META[p.id] || { title: p.name, meta: p.period };
-        return `
-        <article
-          class="project-card mission-case-card reveal rounded-xl p-3 min-h-[82px] flex flex-col justify-center cursor-pointer"
-          style="--reveal-delay: ${realIdx * 55}ms; --case-accent: ${th.accent}; --case-accent-border: ${th.border}; --case-accent-glow: ${th.glow};"
-          data-open-project="${realIdx}"
-          tabindex="0"
-          role="button"
-          aria-label="Abrir dossiê ${p.name}"
-        >
-          <div class="flex items-center gap-3">
-            ${getMobileThumb(p)}
-            <div class="min-w-0 flex-1 space-y-0.5">
-              <div class="flex items-center gap-1.5 font-mono text-[9.5px] uppercase tracking-wider">
-                <span class="px-1.5 py-0.5 rounded font-semibold text-[#050606] leading-none shrink-0" style="background:${th.accent};">${p.index}</span>
-                <span class="font-medium truncate" style="color:${th.accent};">${p.shortTag}</span>
-              </div>
-              <h3 class="font-display text-[15.5px] font-bold text-ink leading-tight truncate">${mInfo.title}</h3>
-              <p class="font-mono text-[10.5px] text-ink/70 truncate">${mInfo.meta}</p>
-            </div>
-            <span class="w-9 h-9 rounded-lg bg-carbon border hairline-dark flex items-center justify-center shrink-0 font-mono text-xs font-semibold" style="color:${th.accent};" aria-hidden="true">↗</span>
-          </div>
-        </article>`;
-      })
-      .join('');
-
-    observeReveals(projectsGrid);
-  }
-
-  /* Console Interativo de Cases (Desktop/Tablet >= 768px — sem rotação, com micro-labs vivos) */
-  (function initDesktopCaseDeck() {
-    const tabsWrap = document.getElementById('case-deck-tabs');
-    const stageWrap = document.getElementById('case-deck-stage');
-    if (!tabsWrap || !stageWrap) return;
-
-    let activeIdx = 0;
+  /* Center-Mode Carousel com Peek Effect (Desktop ~80% / Mobile ~88%, gap 24px, Expanding Pill Dots) */
+  (function initProjectsCarousel() {
+    const carouselEl = document.getElementById('works-carousel');
+    const viewport = document.getElementById('works-carousel-viewport');
+    const track = document.getElementById('works-carousel-track');
+    const dotsWrap = document.getElementById('works-carousel-dots');
+    const prevBtn = document.getElementById('works-carousel-prev');
+    const nextBtn = document.getElementById('works-carousel-next');
+    const statusEl = document.getElementById('works-carousel-status');
+    if (!carouselEl || !viewport || !track || !dotsWrap || !PROJECTS.length) return;
 
     const BIGBAG_NODES = [
       { code: '01', name: 'Sistema Web', tag: 'HTML · CSS · JS', detail: 'Interface de chão de fábrica para registro diário de triagem, estoque, backlog e chegadas.', io: 'Operação → Registro estruturado' },
@@ -1533,64 +1465,41 @@
       { code: '04', name: 'Gemini + ESP32', tag: 'IA & Conceito IoT', detail: 'Síntese inteligente das fontes somada ao conceito de sensor de solo local com ESP32/Arduino.' }
     ];
 
-    function renderTabs() {
-      tabsWrap.innerHTML = PROJECTS.map((p, idx) => {
-        const th = CASE_THEMES[p.id] || { accent: '#C6F135', border: 'rgba(198,241,53,0.45)', glow: 'rgba(198,241,53,0.2)' };
-        const mInfo = MOBILE_CASE_META[p.id] || { title: p.name, pill: p.period };
-        const isSel = idx === activeIdx;
-        const year = (p.period || '').split(' · ')[0];
-        return `
-          <button
-            type="button"
-            role="tab"
-            id="case-tab-${idx}"
-            aria-selected="${isSel}"
-            aria-controls="case-deck-stage"
-            data-deck-idx="${idx}"
-            class="case-deck-tab text-left rounded-2xl p-4 flex flex-col justify-between gap-2.5 cursor-pointer"
-            style="--case-accent:${th.accent}; --case-accent-border:${th.border}; --case-accent-glow:${th.glow};"
-          >
-            <div class="flex items-center justify-between gap-2 font-mono text-[10px]">
-              <div class="flex items-center gap-2 min-w-0">
-                <span class="px-1.5 py-0.5 rounded font-semibold text-[#050606] leading-none shrink-0" style="background:${th.accent};">${p.index}</span>
-                <span class="uppercase tracking-wider truncate" style="color:${th.accent};">${p.shortTag}</span>
-              </div>
-              <span class="inline-flex items-center gap-1.5 text-muted shrink-0">
-                <span>${year}</span>
-                <span class="w-1.5 h-1.5 rounded-full transition-opacity ${isSel ? 'opacity-100 acad-node-pulse' : 'opacity-20'}" style="background:${th.accent};"></span>
-              </span>
+    function buildMobilePreviewHTML(p, th) {
+      const year = (p.period || '').split(' · ')[0];
+      let mediaInner = '';
+      if (p.id === 'iris') {
+        mediaInner = `
+          <div class="relative w-full h-[154px] rounded-[14px] overflow-hidden border border-limeTech/35 bg-[#EEEDE7] flex items-center justify-center p-2">
+            <img src="assets/bit-2.jpg?v=20261124a" alt="Protótipo Bit II do Projeto Íris" loading="lazy" decoding="async" draggable="false" class="max-h-full max-w-full object-contain mix-blend-multiply select-none" />
+          </div>`;
+      } else if (p.id === 'bigbag') {
+        mediaInner = `
+          <div class="relative w-full h-[154px] rounded-[14px] overflow-hidden border border-[#38BDF8]/35 bg-[#070A0D] flex items-center justify-center p-1">
+            <img src="assets/bigbag-app.png?v=20261124b" alt="Interface do sistema de Triagem de Big Bags" loading="lazy" decoding="async" draggable="false" class="w-full h-full object-cover object-left-top rounded-[10px] select-none" />
+          </div>`;
+      } else if (p.id === 'fretefy') {
+        mediaInner = `
+          <div class="relative w-full h-[154px] rounded-[14px] overflow-hidden border border-[#F59E0B]/35 bg-[#090806] flex items-center justify-center p-1">
+            <img src="assets/fretefy-panel.png?v=20261124b" alt="Painel BI de carregamento Fretefy" loading="lazy" decoding="async" draggable="false" class="w-full h-full object-cover object-top rounded-[10px] select-none" />
+          </div>`;
+      } else {
+        mediaInner = `
+          <div class="relative w-full h-[154px] rounded-[14px] overflow-hidden border border-[#34D399]/35 bg-carbon">
+            <img src="assets/agrobit-team.jpg" alt="Equipe Bitmindop apresentando a plataforma AGROBIT" loading="lazy" decoding="async" draggable="false" class="w-full h-full object-cover object-[50%_20%] contrast-[1.04] saturate-[1.08] select-none" />
+          </div>`;
+      }
+      return `
+        <div class="space-y-2">
+          <div class="flex items-center justify-between gap-2 font-mono text-[9.5px] uppercase tracking-wider">
+            <div class="flex items-center gap-1.5 min-w-0">
+              <span class="px-1.5 py-0.5 rounded font-semibold text-[#050606] leading-none shrink-0" style="background:${th.accent};">${p.index}</span>
+              <span class="font-semibold truncate" style="color:${th.accent};">${p.shortTag}</span>
             </div>
-            <div class="space-y-0.5">
-              <div class="font-display text-[15px] lg:text-base font-bold text-ink leading-snug truncate">${mInfo.title}</div>
-              <div class="font-mono text-[10px] text-ink/65 truncate">${mInfo.pill}</div>
-            </div>
-          </button>`;
-      }).join('');
-
-      tabsWrap.querySelectorAll('[data-deck-idx]').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const next = Number(btn.getAttribute('data-deck-idx'));
-          if (next === activeIdx) return;
-          activeIdx = next;
-          renderTabs();
-          renderStage(true);
-        });
-        btn.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            activeIdx = (activeIdx + 1) % PROJECTS.length;
-            renderTabs();
-            renderStage(true);
-            document.getElementById(`case-tab-${activeIdx}`)?.focus();
-          } else if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            activeIdx = (activeIdx - 1 + PROJECTS.length) % PROJECTS.length;
-            renderTabs();
-            renderStage(true);
-            document.getElementById(`case-tab-${activeIdx}`)?.focus();
-          }
-        });
-      });
+            <span class="text-muted shrink-0">${year}</span>
+          </div>
+          ${mediaInner}
+        </div>`;
     }
 
     function buildInteractiveLabHTML(p) {
@@ -1599,23 +1508,23 @@
           <div class="h-full flex flex-col gap-3">
             <div class="flex items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-widest">
               <span class="text-limeTech flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-limeTech acad-node-pulse"></span>LABORATÓRIO HARDWARE · BIT I ↔ BIT II</span>
-              <span id="deck-iris-spec-tag" class="text-muted">PORTÁTIL · 2 BATERIAS</span>
+              <span data-deck-iris-tag class="text-muted">PORTÁTIL · 2 BATERIAS</span>
             </div>
-            <div id="deck-iris-stage" data-current-bit="bit2" class="specimen-stage relative rounded-2xl border border-limeTech/35 flex-1 min-h-[330px] w-full flex items-center justify-center p-3 pb-12">
+            <div data-deck-iris-stage data-current-bit="bit2" class="specimen-stage relative rounded-2xl border border-limeTech/35 flex-1 min-h-[320px] w-full flex items-center justify-center p-3 pb-12">
               <div class="spec-grid-overlay absolute inset-0"></div>
               <span class="pointer-events-none absolute top-2.5 left-2.5 w-3 h-3 reticle-tl"></span>
               <span class="pointer-events-none absolute top-2.5 right-2.5 w-3 h-3 reticle-tr"></span>
               <span class="pointer-events-none absolute bottom-2.5 left-2.5 w-3 h-3 reticle-bl"></span>
               <span class="pointer-events-none absolute bottom-2.5 right-2.5 w-3 h-3 reticle-br"></span>
               <div class="w-full h-full flex items-center justify-center">
-                <img id="deck-iris-img" src="assets/bit-2.jpg?v=20261124a" alt="Protótipo Bit II do Projeto Íris" loading="lazy" decoding="async" class="specimen-img max-h-[320px] max-w-[92%] object-contain select-none" />
+                <img data-deck-iris-img src="assets/bit-2.jpg?v=20261124a" alt="Protótipo Bit II do Projeto Íris" loading="lazy" decoding="async" draggable="false" class="specimen-img max-h-[310px] max-w-[92%] object-contain select-none" />
               </div>
               <div class="absolute bottom-2.5 left-3 z-20 inline-flex p-0.5 rounded-lg bg-carbon/95 border hairline-dark font-mono text-[10px]">
-                <button type="button" data-deck-bit="bit1" class="px-2.5 py-1 rounded-md text-muted hover:text-ink transition-colors">Bit I · REV.01</button>
-                <button type="button" data-deck-bit="bit2" class="px-2.5 py-1 rounded-md bg-limeTech text-inkDark font-semibold transition-colors">Bit II · REV.02</button>
+                <button type="button" data-deck-bit="bit1" class="px-2.5 py-1 rounded-md text-muted hover:text-ink transition-colors cursor-pointer">Bit I · REV.01</button>
+                <button type="button" data-deck-bit="bit2" class="px-2.5 py-1 rounded-md bg-limeTech text-inkDark font-semibold transition-colors cursor-pointer">Bit II · REV.02</button>
               </div>
             </div>
-            <div id="deck-iris-caption" class="px-3.5 py-2.5 rounded-xl bg-carbon border hairline-dark font-mono text-[10.5px] text-ink/85 flex items-center justify-between gap-2">
+            <div data-deck-iris-caption class="px-3.5 py-2.5 rounded-xl bg-carbon border hairline-dark font-mono text-[10.5px] text-ink/85 flex items-center justify-between gap-2">
               <span>REV.02 · Autônomo com 2 baterias, carregamento embarcado e cabos reforçados</span>
               <span class="text-limeTech shrink-0">RIW 2023</span>
             </div>
@@ -1629,15 +1538,14 @@
             <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-widest">
               <span class="text-[#38BDF8] flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#38BDF8] acad-node-pulse"></span>ECOSSISTEMA WEB · BIG BAGS</span>
               <div class="inline-flex p-0.5 rounded-lg bg-carbon border hairline-dark text-[9.5px]">
-                <button type="button" data-deck-bb-view="ui" class="px-2.5 py-1 rounded bg-[#38BDF8] text-[#050606] font-semibold transition-colors">Interface</button>
-                <button type="button" data-deck-bb-view="arch" class="px-2.5 py-1 rounded text-muted hover:text-ink transition-colors">Arquitetura (06)</button>
+                <button type="button" data-deck-bb-view="ui" class="px-2.5 py-1 rounded bg-[#38BDF8] text-[#050606] font-semibold transition-colors cursor-pointer">Interface</button>
+                <button type="button" data-deck-bb-view="arch" class="px-2.5 py-1 rounded text-muted hover:text-ink transition-colors cursor-pointer">Arquitetura (06)</button>
               </div>
             </div>
 
-            <!-- Visão 1: Interface estilizada fiel ao sistema real -->
-            <div id="deck-bb-panel-ui" class="flex-1 flex flex-col justify-between gap-3">
-              <div class="relative rounded-xl overflow-hidden border border-[#38BDF8]/30 bg-[#070A0D] flex-1 min-h-[290px] flex items-center justify-center p-1.5 group/bb">
-                <img src="assets/bigbag-app.png?v=20261124b" alt="Interface executiva do sistema de Triagem de Big Bags" loading="lazy" decoding="async" class="w-full h-full max-h-[345px] object-contain rounded-lg group-hover/bb:scale-[1.015] transition-transform duration-500" />
+            <div data-deck-bb-panel="ui" class="flex-1 flex flex-col justify-between gap-3">
+              <div class="relative rounded-xl overflow-hidden border border-[#38BDF8]/30 bg-[#070A0D] flex-1 min-h-[285px] flex items-center justify-center p-1.5 group/bb">
+                <img src="assets/bigbag-app.png?v=20261124b" alt="Interface executiva do sistema de Triagem de Big Bags" loading="lazy" decoding="async" draggable="false" class="w-full h-full max-h-[335px] object-contain rounded-lg group-hover/bb:scale-[1.015] transition-transform duration-500 select-none" />
               </div>
               <div class="px-3.5 py-2.5 rounded-xl bg-carbon border hairline-dark font-mono text-[10px] text-ink/80 flex items-center justify-between gap-2">
                 <span>Visão Executiva em tempo real · triagem, estoque e backlog</span>
@@ -1645,8 +1553,7 @@
               </div>
             </div>
 
-            <!-- Visão 2: Arquitetura interativa de 6 camadas -->
-            <div id="deck-bb-panel-arch" class="hidden flex-1 flex-col justify-between gap-3">
+            <div data-deck-bb-panel="arch" class="hidden flex-1 flex-col justify-between gap-3">
               <div class="relative h-[2px] w-full rounded-full bg-white/10 overflow-hidden" aria-hidden="true">
                 <div class="mission-pipe-beam h-full w-1/2 bg-gradient-to-r from-transparent via-[#38BDF8] to-transparent"></div>
               </div>
@@ -1660,7 +1567,7 @@
                     <div class="font-display text-xs font-bold text-ink leading-tight">${n.name}</div>
                   </button>`).join('')}
               </div>
-              <div id="deck-bb-readout" class="p-3.5 rounded-xl bg-carbon border border-[#38BDF8]/30 space-y-1.5">
+              <div data-deck-bb-readout class="p-3.5 rounded-xl bg-carbon border border-[#38BDF8]/30 space-y-1.5">
                 <div class="flex items-center justify-between gap-2 font-mono text-[10px]">
                   <span class="text-[#38BDF8] font-semibold">CAMADA ${first.code} // ${first.name.toUpperCase()}</span>
                   <span class="text-muted truncate">${first.io}</span>
@@ -1678,15 +1585,14 @@
             <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-widest">
               <span class="text-[#F59E0B] flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B] acad-node-pulse"></span>AUTOMAÇÃO ETL · FRETEFY</span>
               <div class="inline-flex p-0.5 rounded-lg bg-carbon border hairline-dark text-[9.5px]">
-                <button type="button" data-deck-fr-view="ui" class="px-2.5 py-1 rounded bg-[#F59E0B] text-inkDark font-semibold transition-colors">Painel BI</button>
-                <button type="button" data-deck-fr-view="arch" class="px-2.5 py-1 rounded text-muted hover:text-ink transition-colors">Arquitetura (04)</button>
+                <button type="button" data-deck-fr-view="ui" class="px-2.5 py-1 rounded bg-[#F59E0B] text-inkDark font-semibold transition-colors cursor-pointer">Painel BI</button>
+                <button type="button" data-deck-fr-view="arch" class="px-2.5 py-1 rounded text-muted hover:text-ink transition-colors cursor-pointer">Arquitetura (04)</button>
               </div>
             </div>
 
-            <!-- Visão 1: Painel estilizado fiel ao BI de carregamento -->
-            <div id="deck-fr-panel-ui" class="flex-1 flex flex-col justify-between gap-3">
-              <div class="relative rounded-xl overflow-hidden border border-[#F59E0B]/30 bg-[#090806] flex-1 min-h-[290px] flex items-center justify-center p-1.5 group/fr">
-                <img src="assets/fretefy-panel.png?v=20261124b" alt="Painel operacional de carregamento gerado pelo pipeline ETL em Power Query" loading="lazy" decoding="async" class="w-full h-full max-h-[345px] object-contain rounded-lg group-hover/fr:scale-[1.015] transition-transform duration-500" />
+            <div data-deck-fr-panel="ui" class="flex-1 flex flex-col justify-between gap-3">
+              <div class="relative rounded-xl overflow-hidden border border-[#F59E0B]/30 bg-[#090806] flex-1 min-h-[285px] flex items-center justify-center p-1.5 group/fr">
+                <img src="assets/fretefy-panel.png?v=20261124b" alt="Painel operacional de carregamento gerado pelo pipeline ETL em Power Query" loading="lazy" decoding="async" draggable="false" class="w-full h-full max-h-[335px] object-contain rounded-lg group-hover/fr:scale-[1.015] transition-transform duration-500 select-none" />
               </div>
               <div class="px-3.5 py-2.5 rounded-xl bg-carbon border hairline-dark font-mono text-[10px] text-ink/80 flex items-center justify-between gap-2">
                 <span>Painel de carregamento · 8 KPIs por dia, turno, doca e frota</span>
@@ -1694,8 +1600,7 @@
               </div>
             </div>
 
-            <!-- Visão 2: Arquitetura interativa de 4 etapas (mesmo padrão do case Big Bags) -->
-            <div id="deck-fr-panel-arch" class="hidden flex-1 flex-col justify-between gap-3">
+            <div data-deck-fr-panel="arch" class="hidden flex-1 flex-col justify-between gap-3">
               <div class="relative h-[2px] w-full rounded-full bg-white/10 overflow-hidden" aria-hidden="true">
                 <div class="mission-pipe-beam h-full w-1/2 bg-gradient-to-r from-transparent via-[#F59E0B] to-transparent"></div>
               </div>
@@ -1709,7 +1614,7 @@
                     <div class="font-display text-xs sm:text-[13px] font-bold text-ink leading-tight">${n.name}</div>
                   </button>`).join('')}
               </div>
-              <div id="deck-fr-readout" class="p-3.5 rounded-xl bg-carbon border border-[#F59E0B]/30 space-y-1.5">
+              <div data-deck-fr-readout class="p-3.5 rounded-xl bg-carbon border border-[#F59E0B]/30 space-y-1.5">
                 <div class="flex items-center justify-between gap-2 font-mono text-[10px]">
                   <span class="text-[#F59E0B] font-semibold">ETAPA ${firstFr.code} // ${firstFr.name.toUpperCase()}</span>
                   <span class="text-muted truncate">${firstFr.io}</span>
@@ -1726,15 +1631,14 @@
           <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-widest">
             <span class="text-[#34D399] flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#34D399] acad-node-pulse"></span>AGTECH · BITMINDOP</span>
             <div class="inline-flex p-0.5 rounded-lg bg-carbon border hairline-dark text-[9.5px]">
-              <button type="button" data-deck-agro-view="ui" class="px-2.5 py-1 rounded bg-[#34D399] text-[#050606] font-semibold transition-colors">Equipe</button>
-              <button type="button" data-deck-agro-view="arch" class="px-2.5 py-1 rounded text-muted hover:text-ink transition-colors">Arquitetura (04)</button>
+              <button type="button" data-deck-agro-view="ui" class="px-2.5 py-1 rounded bg-[#34D399] text-[#050606] font-semibold transition-colors cursor-pointer">Equipe</button>
+              <button type="button" data-deck-agro-view="arch" class="px-2.5 py-1 rounded text-muted hover:text-ink transition-colors cursor-pointer">Arquitetura (04)</button>
             </div>
           </div>
 
-          <!-- Visão 1: Foto da equipe preenchendo todo o quadro interno + legenda curta -->
-          <div id="deck-agro-panel-ui" class="flex-1 flex flex-col justify-between gap-3">
-            <div class="relative rounded-xl overflow-hidden border border-[#34D399]/30 bg-carbon flex-1 min-h-[320px] group/agro">
-              <img src="assets/agrobit-team.jpg" alt="Equipe Bitmindop apresentando a plataforma AGROBIT" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover object-[50%_20%] contrast-[1.04] saturate-[1.08] group-hover/agro:scale-[1.02] transition-transform duration-500" />
+          <div data-deck-agro-panel="ui" class="flex-1 flex flex-col justify-between gap-3">
+            <div class="relative rounded-xl overflow-hidden border border-[#34D399]/30 bg-carbon flex-1 min-h-[310px] group/agro">
+              <img src="assets/agrobit-team.jpg" alt="Equipe Bitmindop apresentando a plataforma AGROBIT" loading="lazy" decoding="async" draggable="false" class="absolute inset-0 w-full h-full object-cover object-[50%_20%] contrast-[1.04] saturate-[1.08] group-hover/agro:scale-[1.02] transition-transform duration-500 select-none" />
             </div>
             <div class="px-3.5 py-2.5 rounded-xl bg-carbon border hairline-dark font-mono text-[10px] text-ink/80 flex items-center justify-between gap-2">
               <span>Plataforma web agrícola · mapa, clima, solo e IA com equipe Bitmindop</span>
@@ -1742,8 +1646,7 @@
             </div>
           </div>
 
-          <!-- Visão 2: Arquitetura interativa de 4 integrações (mesmo padrão de Big Bags e Fretefy) -->
-          <div id="deck-agro-panel-arch" class="hidden flex-1 flex-col justify-between gap-3">
+          <div data-deck-agro-panel="arch" class="hidden flex-1 flex-col justify-between gap-3">
             <div class="relative h-[2px] w-full rounded-full bg-white/10 overflow-hidden" aria-hidden="true">
               <div class="mission-pipe-beam h-full w-1/2 bg-gradient-to-r from-transparent via-[#34D399] to-transparent"></div>
             </div>
@@ -1757,7 +1660,7 @@
                   <div class="font-display text-xs sm:text-[13px] font-bold text-ink leading-tight">${s.name}</div>
                 </button>`).join('')}
             </div>
-            <div id="deck-agro-readout" class="p-3.5 rounded-xl bg-carbon border border-[#34D399]/30 space-y-1.5">
+            <div data-deck-agro-readout class="p-3.5 rounded-xl bg-carbon border border-[#34D399]/30 space-y-1.5">
               <div class="font-mono text-[10px] text-[#34D399] font-semibold uppercase tracking-wider">FONTE ${firstSrc.code} // ${firstSrc.name.toUpperCase()}</div>
               <p class="text-xs text-ink/85 leading-relaxed">${firstSrc.detail}</p>
             </div>
@@ -1765,13 +1668,13 @@
         </div>`;
     }
 
-    function bindLabInteractions(p) {
+    function bindSlideLabs(slideEl, p) {
       if (p.id === 'iris') {
-        const st = document.getElementById('deck-iris-stage');
-        const img = document.getElementById('deck-iris-img');
-        const cap = document.getElementById('deck-iris-caption');
-        const tag = document.getElementById('deck-iris-spec-tag');
-        const btns = stageWrap.querySelectorAll('[data-deck-bit]');
+        const st = slideEl.querySelector('[data-deck-iris-stage]');
+        const img = slideEl.querySelector('[data-deck-iris-img]');
+        const cap = slideEl.querySelector('[data-deck-iris-caption]');
+        const tag = slideEl.querySelector('[data-deck-iris-tag]');
+        const btns = slideEl.querySelectorAll('[data-deck-bit]');
         btns.forEach((btn) => {
           btn.addEventListener('click', () => {
             const key = btn.getAttribute('data-deck-bit');
@@ -1788,15 +1691,15 @@
             btns.forEach((b) => {
               const on = b.getAttribute('data-deck-bit') === key;
               b.className = on
-                ? 'px-2.5 py-1 rounded-md bg-limeTech text-inkDark font-semibold transition-colors'
-                : 'px-2.5 py-1 rounded-md text-muted hover:text-ink transition-colors';
+                ? 'px-2.5 py-1 rounded-md bg-limeTech text-inkDark font-semibold transition-colors cursor-pointer'
+                : 'px-2.5 py-1 rounded-md text-muted hover:text-ink transition-colors cursor-pointer';
             });
           });
         });
       } else if (p.id === 'bigbag') {
-        const viewBtns = stageWrap.querySelectorAll('[data-deck-bb-view]');
-        const uiPanel = document.getElementById('deck-bb-panel-ui');
-        const archPanel = document.getElementById('deck-bb-panel-arch');
+        const viewBtns = slideEl.querySelectorAll('[data-deck-bb-view]');
+        const uiPanel = slideEl.querySelector('[data-deck-bb-panel="ui"]');
+        const archPanel = slideEl.querySelector('[data-deck-bb-panel="arch"]');
         viewBtns.forEach((btn) => {
           btn.addEventListener('click', () => {
             const v = btn.getAttribute('data-deck-bb-view');
@@ -1808,14 +1711,14 @@
             viewBtns.forEach((b) => {
               const on = b === btn;
               b.className = on
-                ? 'px-2.5 py-1 rounded bg-[#38BDF8] text-[#050606] font-semibold transition-colors'
-                : 'px-2.5 py-1 rounded text-muted hover:text-ink transition-colors';
+                ? 'px-2.5 py-1 rounded bg-[#38BDF8] text-[#050606] font-semibold transition-colors cursor-pointer'
+                : 'px-2.5 py-1 rounded text-muted hover:text-ink transition-colors cursor-pointer';
             });
           });
         });
 
-        const btns = stageWrap.querySelectorAll('[data-deck-bb]');
-        const readout = document.getElementById('deck-bb-readout');
+        const btns = slideEl.querySelectorAll('[data-deck-bb]');
+        const readout = slideEl.querySelector('[data-deck-bb-readout]');
         btns.forEach((btn) => {
           btn.addEventListener('click', () => {
             const node = BIGBAG_NODES[Number(btn.getAttribute('data-deck-bb'))];
@@ -1830,9 +1733,9 @@
           });
         });
       } else if (p.id === 'fretefy') {
-        const viewBtns = stageWrap.querySelectorAll('[data-deck-fr-view]');
-        const uiPanel = document.getElementById('deck-fr-panel-ui');
-        const archPanel = document.getElementById('deck-fr-panel-arch');
+        const viewBtns = slideEl.querySelectorAll('[data-deck-fr-view]');
+        const uiPanel = slideEl.querySelector('[data-deck-fr-panel="ui"]');
+        const archPanel = slideEl.querySelector('[data-deck-fr-panel="arch"]');
         viewBtns.forEach((btn) => {
           btn.addEventListener('click', () => {
             const v = btn.getAttribute('data-deck-fr-view');
@@ -1844,14 +1747,14 @@
             viewBtns.forEach((b) => {
               const on = b === btn;
               b.className = on
-                ? 'px-2.5 py-1 rounded bg-[#F59E0B] text-inkDark font-semibold transition-colors'
-                : 'px-2.5 py-1 rounded text-muted hover:text-ink transition-colors';
+                ? 'px-2.5 py-1 rounded bg-[#F59E0B] text-inkDark font-semibold transition-colors cursor-pointer'
+                : 'px-2.5 py-1 rounded text-muted hover:text-ink transition-colors cursor-pointer';
             });
           });
         });
 
-        const btns = stageWrap.querySelectorAll('[data-deck-fr]');
-        const readout = document.getElementById('deck-fr-readout');
+        const btns = slideEl.querySelectorAll('[data-deck-fr]');
+        const readout = slideEl.querySelector('[data-deck-fr-readout]');
         btns.forEach((btn) => {
           btn.addEventListener('click', () => {
             const node = FRETEFY_NODES[Number(btn.getAttribute('data-deck-fr'))];
@@ -1866,9 +1769,9 @@
           });
         });
       } else if (p.id === 'agrobit') {
-        const viewBtns = stageWrap.querySelectorAll('[data-deck-agro-view]');
-        const uiPanel = document.getElementById('deck-agro-panel-ui');
-        const archPanel = document.getElementById('deck-agro-panel-arch');
+        const viewBtns = slideEl.querySelectorAll('[data-deck-agro-view]');
+        const uiPanel = slideEl.querySelector('[data-deck-agro-panel="ui"]');
+        const archPanel = slideEl.querySelector('[data-deck-agro-panel="arch"]');
         viewBtns.forEach((btn) => {
           btn.addEventListener('click', () => {
             const v = btn.getAttribute('data-deck-agro-view');
@@ -1880,14 +1783,14 @@
             viewBtns.forEach((b) => {
               const on = b === btn;
               b.className = on
-                ? 'px-2.5 py-1 rounded bg-[#34D399] text-[#050606] font-semibold transition-colors'
-                : 'px-2.5 py-1 rounded text-muted hover:text-ink transition-colors';
+                ? 'px-2.5 py-1 rounded bg-[#34D399] text-[#050606] font-semibold transition-colors cursor-pointer'
+                : 'px-2.5 py-1 rounded text-muted hover:text-ink transition-colors cursor-pointer';
             });
           });
         });
 
-        const btns = stageWrap.querySelectorAll('[data-deck-agro]');
-        const readout = document.getElementById('deck-agro-readout');
+        const btns = slideEl.querySelectorAll('[data-deck-agro]');
+        const readout = slideEl.querySelector('[data-deck-agro-readout]');
         btns.forEach((btn) => {
           btn.addEventListener('click', () => {
             const src = AGROBIT_SOURCES[Number(btn.getAttribute('data-deck-agro'))];
@@ -1901,70 +1804,61 @@
       }
     }
 
-    function renderStage(animate = false) {
-      const p = PROJECTS[activeIdx];
-      const th = CASE_THEMES[p.id] || { accent: '#C6F135', border: 'rgba(198,241,53,0.45)', glow: 'rgba(198,241,53,0.16)', badgeBg: 'rgba(198,241,53,0.09)' };
+    function buildSlideHTML(realIdx, trackIdx, isClone) {
+      const p = PROJECTS[realIdx];
+      const th = CASE_THEMES[p.id] || {
+        accent: '#C6F135',
+        border: 'rgba(198, 241, 53, 0.48)',
+        glow: 'rgba(198, 241, 53, 0.22)',
+        badgeBg: 'rgba(198, 241, 53, 0.09)'
+      };
       const totalPadded = String(PROJECTS.length).padStart(2, '0');
-      stageWrap.style.setProperty('--stage-glow', th.glow);
-      stageWrap.style.setProperty('--stage-border', th.border);
+      const isInitialActive = trackIdx === 1;
 
-      stageWrap.innerHTML = `
-        <div class="${animate && !prefersReducedMotion ? 'case-stage-enter ' : ''}grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 p-5 lg:p-7 items-stretch">
-          <div class="lg:col-span-7 flex flex-col">
-            ${buildInteractiveLabHTML(p)}
-          </div>
+      return `
+        <article
+          class="works-slide"
+          data-track-idx="${trackIdx}"
+          data-real-idx="${realIdx}"
+          data-clone="${isClone}"
+          data-active="${isInitialActive}"
+          ${isClone ? 'aria-hidden="true"' : `role="tabpanel" aria-label="Projeto ${p.index} de ${totalPadded}: ${p.name}"`}
+          style="--case-accent:${th.accent}; --stage-border:${th.border}; --stage-glow:${th.glow};"
+        >
+          <div class="works-slide-card">
+            <!-- Camada clicável nos slides laterais ("peek") para centralizá-los ao clicar -->
+            <button
+              type="button"
+              class="works-slide-peek-shield"
+              data-peek-track-idx="${trackIdx}"
+              tabindex="${isInitialActive ? '-1' : '0'}"
+              aria-label="Centralizar projeto ${p.name}"
+            ></button>
 
-          <div class="lg:col-span-5 flex flex-col justify-between gap-5">
-            <div class="space-y-4">
-              <div class="flex items-center justify-between gap-3 font-mono text-[10.5px] uppercase tracking-widest">
-                <div class="flex items-center gap-2 min-w-0">
-                  <span class="px-2 py-0.5 rounded font-semibold text-[#050606] shrink-0" style="background:${th.accent};">CASE ${p.index} / ${totalPadded}</span>
-                  <span class="text-muted truncate">${p.period}</span>
+            <!-- MOBILE (<768px): Card vertical compacto cabendo em 1 tela com Expanding Pill Dots -->
+            <div class="md:hidden flex flex-col justify-between h-full p-3.5 gap-2.5">
+              <div class="space-y-2.5">
+                ${buildMobilePreviewHTML(p, th)}
+
+                <div class="space-y-1">
+                  <h3 class="font-display text-[1.08rem] font-extrabold text-ink tracking-tight leading-snug">${p.name}</h3>
+                  <p class="text-[12px] text-ink/80 leading-snug">${p.cardSummary}</p>
                 </div>
-                <div class="inline-flex items-center gap-1.5 shrink-0">
-                  <button type="button" id="deck-prev-btn" aria-label="Projeto anterior" class="w-9 h-9 rounded-lg bg-carbon border hairline-dark hover:border-limeTech text-ink hover:text-limeTech transition-colors inline-flex items-center justify-center">←</button>
-                  <button type="button" id="deck-next-btn" aria-label="Próximo projeto" class="w-9 h-9 rounded-lg bg-carbon border hairline-dark hover:border-limeTech text-ink hover:text-limeTech transition-colors inline-flex items-center justify-center">→</button>
-                </div>
-              </div>
 
-              <div class="space-y-1.5">
-                <h3 class="font-display text-2xl lg:text-[2rem] font-extrabold text-ink tracking-tight leading-[1.06]">${p.name}</h3>
-                <p class="text-sm text-ink/80 leading-relaxed">${p.summary}</p>
-              </div>
-
-              <!-- Fatos-chave em faixa contínua (sem 3 caixas separadas) -->
-              <div class="grid grid-cols-3 divide-x divide-white/10 border-y hairline-dark py-3">
-                ${(p.highlights || []).map((h, hi) => `
-                  <div class="${hi === 0 ? 'pr-3' : hi === 2 ? 'pl-3' : 'px-3'} space-y-0.5 min-w-0">
-                    <div class="font-mono text-[9px] uppercase tracking-wider text-muted truncate">${h.k}</div>
-                    <div class="font-sans text-xs font-bold text-ink leading-snug">${h.v}</div>
-                  </div>`).join('')}
-              </div>
-
-              <!-- Antes (discreto) → Depois / Resultado (destaque editorial) -->
-              <div class="space-y-3">
-                <div class="pl-3 border-l border-white/15 space-y-0.5">
-                  <div class="font-mono text-[9px] uppercase tracking-widest text-muted">ANTES</div>
-                  <p class="text-xs text-ink/72 leading-relaxed">${p.before}</p>
-                </div>
-                <div class="p-3 rounded-r-xl border-l-2 space-y-1" style="background:${th.badgeBg}; border-left-color:${th.accent};">
-                  <div class="font-mono text-[9.5px] font-semibold uppercase tracking-widest" style="color:${th.accent};">DEPOIS // ${p.resultLabel.replace(' //', '')}</div>
-                  <p class="text-xs text-ink/95 leading-relaxed">${p.after}</p>
+                <div class="p-2.5 rounded-r-xl border-l-2 space-y-0.5" style="background:${th.badgeBg}; border-left-color:${th.accent};">
+                  <div class="font-mono text-[9px] font-semibold uppercase tracking-widest" style="color:${th.accent};">${p.resultLabel}</div>
+                  <p class="text-[11.5px] text-ink/95 leading-snug">${p.cardResult}</p>
                 </div>
               </div>
-            </div>
 
-            <div class="pt-4 border-t hairline-dark space-y-3.5">
-              <div class="flex flex-wrap gap-1.5 font-mono text-[10px] text-ink/80">
-                ${p.stack.map((t) => `<span class="px-2 py-0.5 rounded bg-white/[0.05]">${t}</span>`).join('')}
-              </div>
-
-              <div class="flex flex-wrap items-center justify-between gap-3">
-                <span class="font-mono text-[10px] uppercase tracking-wider text-muted">${p.roleShort}</span>
+              <div class="pt-2.5 border-t hairline-dark space-y-2.5">
+                <div class="flex flex-wrap gap-1 font-mono text-[9px] text-ink/80">
+                  ${p.stack.slice(0, 3).map((t) => `<span class="px-2 py-0.5 rounded bg-white/[0.06]">${t}</span>`).join('')}
+                </div>
                 <button
                   type="button"
-                  data-open-project="${activeIdx}"
-                  class="min-h-[42px] inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-mono text-[11px] font-semibold uppercase tracking-wider text-[#050606] transition-transform hover:-translate-y-0.5 cursor-pointer"
+                  data-open-project="${realIdx}"
+                  class="min-h-[42px] w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-mono text-[10px] font-semibold uppercase tracking-wider text-[#050606] cursor-pointer"
                   style="background:${th.accent};"
                 >
                   <span>Abrir dossiê completo</span>
@@ -1972,25 +1866,370 @@
                 </button>
               </div>
             </div>
+
+            <!-- DESKTOP/TABLET (>=768px): Palco rico 12 colunas com micro-lab vivo (~80% largura + peek lateral) -->
+            <div class="hidden md:grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-7 p-5 lg:p-7 items-stretch h-full">
+              <div class="lg:col-span-7 flex flex-col">
+                ${buildInteractiveLabHTML(p)}
+              </div>
+
+              <div class="lg:col-span-5 flex flex-col justify-between gap-4">
+                <div class="space-y-3.5">
+                  <div class="flex items-center justify-between gap-3 font-mono text-[10.5px] uppercase tracking-widest">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="px-2 py-0.5 rounded font-semibold text-[#050606] shrink-0" style="background:${th.accent};">CASE ${p.index} / ${totalPadded}</span>
+                      <span class="text-muted truncate">${p.period}</span>
+                    </div>
+                    <span class="font-mono text-[9.5px] uppercase tracking-wider shrink-0" style="color:${th.accent};">${p.shortTag}</span>
+                  </div>
+
+                  <div class="space-y-1.5">
+                    <h3 class="font-display text-2xl lg:text-[1.92rem] font-extrabold text-ink tracking-tight leading-[1.06]">${p.name}</h3>
+                    <p class="text-[13.5px] text-ink/80 leading-relaxed">${p.summary}</p>
+                  </div>
+
+                  <div class="grid grid-cols-3 divide-x divide-white/10 border-y hairline-dark py-2.5">
+                    ${(p.highlights || []).map((h, hi) => `
+                      <div class="${hi === 0 ? 'pr-3' : hi === 2 ? 'pl-3' : 'px-3'} space-y-0.5 min-w-0">
+                        <div class="font-mono text-[9px] uppercase tracking-wider text-muted truncate">${h.k}</div>
+                        <div class="font-sans text-xs font-bold text-ink leading-snug">${h.v}</div>
+                      </div>`).join('')}
+                  </div>
+
+                  <div class="space-y-2.5">
+                    <div class="pl-3 border-l border-white/15 space-y-0.5">
+                      <div class="font-mono text-[9px] uppercase tracking-widest text-muted">ANTES</div>
+                      <p class="text-xs text-ink/72 leading-relaxed">${p.before}</p>
+                    </div>
+                    <div class="p-3 rounded-r-xl border-l-2 space-y-1" style="background:${th.badgeBg}; border-left-color:${th.accent};">
+                      <div class="font-mono text-[9.5px] font-semibold uppercase tracking-widest" style="color:${th.accent};">DEPOIS // ${p.resultLabel.replace(' //', '')}</div>
+                      <p class="text-xs text-ink/95 leading-relaxed">${p.after}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pt-3.5 border-t hairline-dark space-y-3">
+                  <div class="flex flex-wrap gap-1.5 font-mono text-[10px] text-ink/80">
+                    ${p.stack.map((t) => `<span class="px-2 py-0.5 rounded bg-white/[0.05]">${t}</span>`).join('')}
+                  </div>
+
+                  <div class="flex flex-wrap items-center justify-between gap-3">
+                    <span class="font-mono text-[10px] uppercase tracking-wider text-muted">${p.roleShort}</span>
+                    <button
+                      type="button"
+                      data-open-project="${realIdx}"
+                      class="min-h-[42px] inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-mono text-[11px] font-semibold uppercase tracking-wider text-[#050606] transition-transform hover:-translate-y-0.5 cursor-pointer"
+                      style="background:${th.accent};"
+                    >
+                      <span>Abrir dossiê completo</span>
+                      <span aria-hidden="true">↗</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>`;
-
-      bindLabInteractions(p);
-
-      document.getElementById('deck-prev-btn')?.addEventListener('click', () => {
-        activeIdx = (activeIdx - 1 + PROJECTS.length) % PROJECTS.length;
-        renderTabs();
-        renderStage(true);
-      });
-      document.getElementById('deck-next-btn')?.addEventListener('click', () => {
-        activeIdx = (activeIdx + 1) % PROJECTS.length;
-        renderTabs();
-        renderStage(true);
-      });
+        </article>`;
     }
 
-    renderTabs();
-    renderStage(false);
+    // Monta trilha cíclica contínua: [Clone último, 0, 1, 2, 3, Clone primeiro]
+    const N = PROJECTS.length;
+    const trackOrder = [
+      { realIdx: N - 1, isClone: true },
+      ...PROJECTS.map((_, idx) => ({ realIdx: idx, isClone: false })),
+      { realIdx: 0, isClone: true }
+    ];
+
+    track.innerHTML = trackOrder.map((entry, tIdx) => buildSlideHTML(entry.realIdx, tIdx, entry.isClone)).join('');
+    const slideEls = Array.from(track.querySelectorAll('.works-slide'));
+
+    // Liga micro-labs internos em cada slide (incluindo clones para consistência visual)
+    slideEls.forEach((sEl, tIdx) => {
+      bindSlideLabs(sEl, PROJECTS[trackOrder[tIdx].realIdx]);
+    });
+
+    // Renderiza Expanding Pill Dots
+    dotsWrap.innerHTML = PROJECTS.map((p, idx) => {
+      const th = CASE_THEMES[p.id] || { accent: '#C6F135', glow: 'rgba(198,241,53,0.35)' };
+      return `
+        <button
+          type="button"
+          role="tab"
+          aria-selected="${idx === 0}"
+          aria-label="Ir para projeto ${p.index}: ${p.name}"
+          data-pill-idx="${idx}"
+          class="works-pill-dot"
+          style="--pill-accent:${th.accent}; --pill-glow:${th.glow};"
+        >
+          <span class="works-pill-dot-bar" aria-hidden="true"></span>
+        </button>`;
+    }).join('');
+    const dotBtns = Array.from(dotsWrap.querySelectorAll('[data-pill-idx]'));
+
+    let trackIdx = 1; // Começa centralizado no Case 01 (Projeto Íris)
+    let wrapTimer = null;
+    let justDragged = false;
+
+    function realIdxFromTrack(tIdx) {
+      if (tIdx <= 0) return N - 1;
+      if (tIdx >= N + 1) return 0;
+      return tIdx - 1;
+    }
+
+    function getOffsetForTrackIdx(tIdx) {
+      const vpW = viewport.clientWidth;
+      const slideEl = slideEls[tIdx];
+      if (!slideEl || !vpW) return 0;
+      return (vpW - slideEl.offsetWidth) / 2 - slideEl.offsetLeft;
+    }
+
+    function syncIndicators(rIdx) {
+      const p = PROJECTS[rIdx];
+      const th = CASE_THEMES[p.id] || { accent: '#C6F135', glow: 'rgba(198,241,53,0.22)' };
+      carouselEl.style.setProperty('--active-accent', th.accent);
+      carouselEl.style.setProperty('--active-glow', th.glow);
+
+      dotBtns.forEach((btn, idx) => {
+        btn.setAttribute('aria-selected', String(idx === rIdx));
+      });
+
+      if (statusEl) {
+        const totalPadded = String(N).padStart(2, '0');
+        statusEl.textContent = `${p.index} / ${totalPadded} · ${p.name.toUpperCase()}`;
+      }
+    }
+
+    function syncActiveSlideAttributes(tIdx, silentJump = false) {
+      slideEls.forEach((el, idx) => {
+        const isOn = idx === tIdx;
+        if (silentJump) el.classList.add('is-jumping');
+        el.setAttribute('data-active', String(isOn));
+        const shield = el.querySelector('.works-slide-peek-shield');
+        if (shield) shield.setAttribute('tabindex', isOn ? '-1' : '0');
+      });
+      if (silentJump) {
+        void track.offsetWidth;
+        slideEls.forEach((el) => el.classList.remove('is-jumping'));
+      }
+    }
+
+    function normalizeCloneIfNeeded() {
+      if (trackIdx !== 0 && trackIdx !== N + 1) return false;
+      const targetRealTrack = trackIdx === 0 ? N : 1;
+      track.classList.add('is-jumping');
+      trackIdx = targetRealTrack;
+      syncActiveSlideAttributes(trackIdx, true);
+      track.style.transform = `translate3d(${getOffsetForTrackIdx(trackIdx)}px, 0, 0)`;
+      void track.offsetWidth;
+      track.classList.remove('is-jumping');
+      return true;
+    }
+
+    function goToTrackIdx(nextTrackIdx, animate = true) {
+      if (wrapTimer) {
+        clearTimeout(wrapTimer);
+        wrapTimer = null;
+      }
+
+      const clamped = Math.max(0, Math.min(N + 1, nextTrackIdx));
+      trackIdx = clamped;
+      const rIdx = realIdxFromTrack(trackIdx);
+
+      if (!animate || prefersReducedMotion) {
+        track.classList.add('is-jumping');
+        syncActiveSlideAttributes(trackIdx, true);
+        track.style.transform = `translate3d(${getOffsetForTrackIdx(trackIdx)}px, 0, 0)`;
+        void track.offsetWidth;
+        track.classList.remove('is-jumping');
+        syncIndicators(rIdx);
+        normalizeCloneIfNeeded();
+        return;
+      }
+
+      syncActiveSlideAttributes(trackIdx, false);
+      syncIndicators(rIdx);
+      track.style.transform = `translate3d(${getOffsetForTrackIdx(trackIdx)}px, 0, 0)`;
+
+      if (trackIdx === 0 || trackIdx === N + 1) {
+        wrapTimer = setTimeout(() => {
+          wrapTimer = null;
+          normalizeCloneIfNeeded();
+        }, 650);
+      }
+    }
+
+    function stepCarousel(delta) {
+      if (trackIdx === 0 || trackIdx === N + 1) {
+        normalizeCloneIfNeeded();
+      }
+      goToTrackIdx(trackIdx + delta, true);
+    }
+
+    track.addEventListener('transitionend', (e) => {
+      if (e.target !== track || e.propertyName !== 'transform') return;
+      if (trackIdx === 0 || trackIdx === N + 1) {
+        if (wrapTimer) {
+          clearTimeout(wrapTimer);
+          wrapTimer = null;
+        }
+        normalizeCloneIfNeeded();
+      }
+    });
+
+    // Clique nos slides laterais ("peek")
+    track.addEventListener('click', (e) => {
+      const shield = e.target.closest('[data-peek-track-idx]');
+      if (!shield) return;
+      if (justDragged) {
+        e.preventDefault();
+        return;
+      }
+      const targetIdx = Number(shield.getAttribute('data-peek-track-idx'));
+      if (!Number.isNaN(targetIdx) && targetIdx !== trackIdx) {
+        goToTrackIdx(targetIdx, true);
+      }
+    });
+
+    // Expanding Pill Dots
+    dotBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const targetReal = Number(btn.getAttribute('data-pill-idx'));
+        if (trackIdx === 0 || trackIdx === N + 1) normalizeCloneIfNeeded();
+        goToTrackIdx(targetReal + 1, true);
+      });
+    });
+
+    // Botões ← / →
+    prevBtn?.addEventListener('click', () => stepCarousel(-1));
+    nextBtn?.addEventListener('click', () => stepCarousel(1));
+
+    // Navegação por teclado (ArrowLeft / ArrowRight)
+    function handleCarouselKeydown(e) {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      if (document.body.classList.contains('is-modal-open')) return;
+      const tag = (e.target && e.target.tagName) || '';
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+      if (e.target && e.target.closest && (e.target.closest('#experience') || e.target.closest('#academic') || e.target.closest('#toolbox'))) return;
+
+      const isFocusedInCarousel = carouselEl.contains(document.activeElement);
+      const worksRect = carouselEl.getBoundingClientRect();
+      const isVisibleCenter = worksRect.top < window.innerHeight * 0.68 && worksRect.bottom > window.innerHeight * 0.32;
+      if (!isFocusedInCarousel && !isVisibleCenter) return;
+
+      e.preventDefault();
+      stepCarousel(e.key === 'ArrowRight' ? 1 : -1);
+    }
+    document.addEventListener('keydown', handleCarouselKeydown);
+
+    // Arraste (mouse drag) e deslize (touch swipe)
+    let pointerActive = false;
+    let isDragging = false;
+    let activePointerId = null;
+    let startX = 0;
+    let startY = 0;
+    let lastDx = 0;
+    let dragStartTime = 0;
+    let dragBaseOffset = 0;
+
+    viewport.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      if (e.pointerType === 'mouse' && e.target.closest('button:not(.works-slide-peek-shield), a')) return;
+      if (trackIdx === 0 || trackIdx === N + 1) normalizeCloneIfNeeded();
+
+      pointerActive = true;
+      isDragging = false;
+      activePointerId = e.pointerId;
+      startX = e.clientX;
+      startY = e.clientY;
+      lastDx = 0;
+      dragStartTime = performance.now();
+      dragBaseOffset = getOffsetForTrackIdx(trackIdx);
+    });
+
+    viewport.addEventListener('pointermove', (e) => {
+      if (!pointerActive || e.pointerId !== activePointerId) return;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+
+      if (!isDragging) {
+        if (Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) {
+          pointerActive = false;
+          activePointerId = null;
+          return;
+        }
+        if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy) * 1.1) {
+          isDragging = true;
+          viewport.classList.add('is-dragging');
+          track.classList.add('is-dragging');
+          try { viewport.setPointerCapture(e.pointerId); } catch (_) {}
+        } else {
+          return;
+        }
+      }
+
+      lastDx = dx;
+      track.style.transform = `translate3d(${dragBaseOffset + dx}px, 0, 0)`;
+    });
+
+    function finishDrag(e) {
+      if (!pointerActive || (activePointerId !== null && e.pointerId !== activePointerId)) return;
+      const wasDragging = isDragging;
+      const dx = lastDx;
+      const elapsed = Math.max(1, performance.now() - dragStartTime);
+      pointerActive = false;
+      isDragging = false;
+      activePointerId = null;
+      viewport.classList.remove('is-dragging');
+      track.classList.remove('is-dragging');
+      try { viewport.releasePointerCapture(e.pointerId); } catch (_) {}
+
+      if (!wasDragging) return;
+
+      justDragged = true;
+      setTimeout(() => { justDragged = false; }, 160);
+
+      const slideW = slideEls[trackIdx]?.offsetWidth || 320;
+      const threshold = slideW * 0.14;
+      const velocity = Math.abs(dx) / elapsed;
+
+      if (dx < -threshold || (dx < -28 && velocity > 0.35)) {
+        goToTrackIdx(trackIdx + 1, true);
+      } else if (dx > threshold || (dx > 28 && velocity > 0.35)) {
+        goToTrackIdx(trackIdx - 1, true);
+      } else {
+        goToTrackIdx(trackIdx, true);
+      }
+    }
+
+    viewport.addEventListener('pointerup', finishDrag);
+    viewport.addEventListener('pointercancel', finishDrag);
+
+    // Recentraliza instantaneamente em resize / mudança de orientação
+    const recenterInstant = () => {
+      if (trackIdx === 0 || trackIdx === N + 1) normalizeCloneIfNeeded();
+      track.classList.add('is-jumping');
+      track.style.transform = `translate3d(${getOffsetForTrackIdx(trackIdx)}px, 0, 0)`;
+      void track.offsetWidth;
+      track.classList.remove('is-jumping');
+    };
+
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(() => recenterInstant());
+      ro.observe(viewport);
+    } else {
+      window.addEventListener('resize', recenterInstant, { passive: true });
+    }
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        if (entries.some((en) => en.isIntersecting)) recenterInstant();
+      }, { rootMargin: '250px 0px' });
+      io.observe(carouselEl);
+    }
+
+    // Posicionamento inicial após layout
+    syncIndicators(0);
+    requestAnimationFrame(() => recenterInstant());
   })();
 
   /* ==========================================================================
@@ -2490,16 +2729,6 @@
       if (found >= 0) openCaseModal(found);
     }
   });
-  if (projectsGrid) {
-    projectsGrid.addEventListener('keydown', (e) => {
-      if (e.key !== 'Enter' && e.key !== ' ') return;
-      if (e.target.closest('[data-iris-card-bit]')) return;
-      const card = e.target.closest('[data-open-project]');
-      if (!card) return;
-      e.preventDefault();
-      openCaseModal(Number(card.getAttribute('data-open-project')));
-    });
-  }
 
   /* ==========================================================================
      14. MÓDULOS 3D INTERATIVOS NOS DOSSIÊS DE CASE

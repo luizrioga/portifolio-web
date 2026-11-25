@@ -62,7 +62,7 @@
     };
   </script>
 
-  <link rel="stylesheet" href="css/styles.css?v=20261125a" />
+  <link rel="stylesheet" href="css/styles.css?v=20261125b" />
 </head>
 <body class="bg-carbon text-ink antialiased selection:bg-limeTech selection:text-inkDark">
 
@@ -235,24 +235,24 @@
               Construir <span class="text-limeTech">Soluções.</span>
             </h1>
 
-            <p class="hidden md:block font-mono text-xs lg:text-[13px] tracking-[0.09em] uppercase text-ink/80 leading-relaxed">
+            <p class="hero-subline hidden md:block font-mono text-xs lg:text-[13px] tracking-[0.09em] uppercase text-ink/80 leading-relaxed">
               Entender sistemas. Explorar possibilidades. Construir soluções.
             </p>
           </div>
 
-          <div class="space-y-1.5 max-w-2xl">
+          <div class="space-y-1.5 md:space-y-2 max-w-2xl">
             <p class="md:hidden text-[13px] text-ink/85 leading-snug">
               Engenharia de Controle e Automação (UFOP) e estágio na Actech — dados, web na rotina e hardware em projetos de inovação.
             </p>
-            <p class="hidden md:block text-sm lg:text-[15.5px] text-ink/85 leading-relaxed">
+            <p class="hero-desc hidden md:block text-sm lg:text-[15.5px] text-ink/85 leading-relaxed">
               Estudante de Engenharia de Controle e Automação na UFOP e estagiário na Actech. Mapeei rotinas no chão de fábrica, medi tempos em área, automatizei fluxos de dados e construí aplicações web — além de protótipos de hardware em projetos de inovação.
             </p>
-            <p class="text-[11.5px] md:text-[13px] text-muted leading-snug md:leading-relaxed">
+            <p class="hero-avail text-[11.5px] md:text-[13px] text-muted leading-snug md:leading-relaxed">
               Aberto a novos projetos, estágios e propostas.
             </p>
           </div>
 
-          <div class="grid grid-cols-2 md:flex md:flex-wrap items-center gap-2 md:gap-3 pt-0.5">
+          <div class="hero-cta-row grid grid-cols-2 md:flex md:flex-wrap items-center gap-2 md:gap-3 pt-0.5">
             <a
               href="#works"
               class="spacex-btn spacex-btn--solid justify-center whitespace-nowrap px-2.5 sm:px-6 text-[10px] md:text-[11px]"
@@ -270,7 +270,7 @@
             </a>
           </div>
 
-          <div class="hidden md:flex flex-wrap items-center gap-x-5 gap-y-1.5 pt-1 font-mono text-[10.5px] lg:text-[11px] tracking-[0.08em] uppercase text-ink/75">
+          <div class="hero-legend hidden md:flex flex-wrap items-center gap-x-5 gap-y-1.5 pt-1 font-mono text-[10.5px] lg:text-[11px] tracking-[0.08em] uppercase text-ink/75">
             <span class="inline-flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-limeTech" aria-hidden="true"></span>Hardware</span>
             <span class="inline-flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#38BDF8]" aria-hidden="true"></span>Nuvem &amp; Web</span>
             <span class="inline-flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B]" aria-hidden="true"></span>Dados &amp; ETL</span>
@@ -512,11 +512,10 @@
     </section>
 
     <!-- ======================================================================
-         02 // PROJETOS SELECIONADOS — 4 CASES DO MESMO TAMANHO (ÍRIS EM 1º)
+         02 // PROJETOS SELECIONADOS — CENTER-MODE CAROUSEL COM PEEK EFFECT
          ====================================================================== -->
-    <section id="works" data-module="02 // PROJETOS" class="py-8 md:py-28 lg:py-32 bg-carbon border-b hairline-dark bg-tech-grid">
+    <section id="works" data-module="02 // PROJETOS" class="py-7 md:py-24 lg:py-28 bg-carbon border-b hairline-dark bg-tech-grid overflow-x-clip">
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
-
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-2 md:gap-6 items-end mb-4 md:mb-10 reveal">
           <div class="lg:col-span-8 space-y-1.5 md:space-y-3">
             <div class="font-mono text-[11px] md:text-xs tracking-[0.14em] uppercase text-limeTech">
@@ -529,19 +528,54 @@
           </div>
           <div class="lg:col-span-4 lg:text-right">
             <p class="font-mono text-[10px] md:text-xs text-muted uppercase tracking-wider">
-              <span class="md:hidden">TOQUE EM UM CASE PARA ABRIR O DOSSIÊ</span>
-              <span class="hidden md:inline">ESCOLHA UM PROJETO PARA EXPLORAR A ARQUITETURA E O DOSSIÊ</span>
+              <span class="md:hidden">DESLIZE OU TOQUE NAS LATERAIS PARA EXPLORAR</span>
+              <span class="hidden md:inline">ARRASTE, CLIQUE NAS LATERAIS OU USE ← → PARA EXPLORAR</span>
             </p>
           </div>
         </div>
+      </div>
 
-        <!-- Mobile (<768px): 4 tiles compactos cabendo em 1 tela sem scroll -->
-        <div id="projects-grid" class="grid grid-cols-1 gap-2.5 md:hidden"></div>
+      <!-- Center-Mode Carousel com Peek Effect (Desktop ~80% / Mobile ~88%) -->
+      <div
+        id="works-carousel"
+        class="works-carousel relative w-full focus:outline-none reveal"
+        tabindex="0"
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Carrossel de projetos selecionados"
+      >
+        <div id="works-carousel-viewport" class="works-carousel-viewport relative w-full overflow-hidden">
+          <div id="works-carousel-track" class="works-carousel-track flex items-stretch will-change-transform"></div>
+        </div>
 
-        <!-- Desktop/Tablet (>=768px): Console Interativo de Cases (seletor 4x + palco vivo sem rotação) -->
-        <div id="projects-showcase" class="hidden md:block space-y-5 reveal">
-          <div id="case-deck-tabs" class="grid grid-cols-2 lg:grid-cols-4 gap-3.5" role="tablist" aria-label="Selecionar projeto para inspecionar"></div>
-          <div id="case-deck-stage" class="case-deck-stage relative rounded-3xl bg-[#0D100F] border border-white/10 overflow-hidden" role="tabpanel" aria-live="polite"></div>
+        <!-- Controles inferiores + Paginação Expanding Pill Dots -->
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 mt-3.5 md:mt-7 flex flex-col items-center gap-2">
+          <div class="flex items-center justify-center gap-3 sm:gap-4">
+            <button
+              type="button"
+              id="works-carousel-prev"
+              aria-label="Projeto anterior"
+              class="works-nav-btn w-9 h-9 md:w-10 md:h-10 rounded-full bg-graphite border border-white/15 text-ink/85 flex items-center justify-center font-mono text-sm transition-all cursor-pointer"
+            >←</button>
+
+            <div
+              id="works-carousel-dots"
+              class="works-pill-dock inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+              role="tablist"
+              aria-label="Selecionar projeto no carrossel"
+            ></div>
+
+            <button
+              type="button"
+              id="works-carousel-next"
+              aria-label="Próximo projeto"
+              class="works-nav-btn w-9 h-9 md:w-10 md:h-10 rounded-full bg-graphite border border-white/15 text-ink/85 flex items-center justify-center font-mono text-sm transition-all cursor-pointer"
+            >→</button>
+          </div>
+
+          <div id="works-carousel-status" class="font-mono text-[10px] md:text-[10.5px] uppercase tracking-[0.14em] text-muted text-center" aria-live="polite">
+            01 / 04 · PROJETO ÍRIS · BITMIND
+          </div>
         </div>
       </div>
     </section>
@@ -1474,6 +1508,6 @@
   <script src="js/journey/fallback-2d.js?v=20261124c" defer></script>
   <script src="js/journey/engine.js?v=20261124c" defer></script>
 
-  <script src="js/main.js?v=20261125a" defer></script>
+  <script src="js/main.js?v=20261125b" defer></script>
 </body>
 </html>

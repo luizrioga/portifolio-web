@@ -140,6 +140,43 @@ main > section[id] {
   }
 }
 
+/* Desktop 1920x1080+: preserva exatamente a escala monumental e espaçamentos originais */
+@media (min-width: 1680px) and (min-height: 860px) {
+  .hero-inner {
+    padding-top: 1.75rem;
+    padding-bottom: 2.5rem;
+  }
+  .hero-content-stack {
+    max-width: 64rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  .hero-content-stack > * + * {
+    margin-top: 1.5rem;
+  }
+  .hero-title {
+    font-size: clamp(2.15rem, 6.4vw, 6.4rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+  }
+  .hero-subline {
+    font-size: 0.875rem;
+  }
+  .hero-desc {
+    font-size: 1rem;
+  }
+  .hero-avail {
+    font-size: 0.875rem;
+  }
+  .hero-cta-row {
+    padding-top: 0.25rem;
+  }
+  .hero-legend {
+    padding-top: 0.5rem;
+    font-size: 11px;
+  }
+}
+
 @media (max-width: 639px) {
   .hero-title {
     font-size: clamp(1.85rem, 8.2vw, 2.45rem);
@@ -614,68 +651,206 @@ main > section[id] {
   }
 }
 
-/* Interactive Desktop Case Deck & Architectural Depth Transition (Non-Rotating) */
-.case-deck-tab {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(180deg, #131614 0%, #0C0E0D 100%);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  transition:
-    transform 0.28s var(--ease-editorial),
-    border-color 0.28s var(--ease-editorial),
-    background-color 0.28s var(--ease-editorial),
-    box-shadow 0.32s var(--ease-editorial);
+/* ==========================================================================
+   CENTER-MODE CAROUSEL COM PEEK EFFECT & EXPANDING PILL DOTS (02 // PROJETOS)
+   ========================================================================== */
+.works-carousel {
+  --slide-w: 88%;
+  --slide-gap: 10px;
 }
 
-.case-deck-tab::before {
+@media (max-width: 379px) {
+  .works-carousel {
+    --slide-w: 86%;
+    --slide-gap: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .works-carousel {
+    --slide-w: min(80%, 1440px);
+    --slide-gap: 24px;
+  }
+}
+
+.works-carousel-viewport {
+  touch-action: pan-y;
+  cursor: grab;
+  padding-block: 6px 10px;
+}
+
+.works-carousel-viewport.is-dragging {
+  cursor: grabbing;
+}
+
+.works-carousel-track {
+  gap: var(--slide-gap);
+  transition: transform 0.62s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.works-carousel-track.is-dragging,
+.works-carousel-track.is-jumping {
+  transition: none !important;
+}
+
+.works-slide {
+  flex: 0 0 var(--slide-w);
+  width: var(--slide-w);
+  position: relative;
+  transition:
+    opacity 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.56s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.works-slide.is-jumping {
+  transition: none !important;
+}
+
+.works-slide[data-active="false"] {
+  opacity: 0.56;
+  transform: scale(0.955);
+  filter: saturate(0.78);
+}
+
+@media (min-width: 768px) {
+  .works-slide[data-active="false"] {
+    opacity: 0.46;
+    filter: saturate(0.72);
+  }
+}
+
+.works-slide[data-active="true"] {
+  opacity: 1;
+  transform: scale(1);
+  filter: saturate(1);
+}
+
+.works-slide-card {
+  position: relative;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  background:
+    radial-gradient(640px 360px at 14% 12%, var(--stage-glow, rgba(198, 241, 53, 0.12)), transparent 70%),
+    linear-gradient(180deg, #131614 0%, #0A0C0B 100%);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  box-shadow: 0 24px 54px -30px rgba(0, 0, 0, 0.9);
+  transition:
+    border-color 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.works-slide-card::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2.5px;
-  background: var(--case-accent, #C6F135);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.38s var(--ease-editorial);
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--case-accent, #C6F135) 0%, transparent 72%);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 6;
+  transition: opacity 0.38s ease;
 }
 
-.case-deck-tab:hover {
-  transform: translateY(-2px);
-  border-color: var(--case-accent-border, rgba(198, 241, 53, 0.4));
+.works-slide[data-active="true"] .works-slide-card {
+  border-color: var(--stage-border, rgba(198, 241, 53, 0.48));
+  box-shadow:
+    0 28px 64px -30px rgba(0, 0, 0, 0.92),
+    0 0 0 1px color-mix(in srgb, var(--case-accent, #C6F135) 18%, transparent);
 }
 
-.case-deck-tab[aria-selected="true"] {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--case-accent, #C6F135) 11%, #131614) 0%, #0D100F 100%);
-  border-color: var(--case-accent-border, rgba(198, 241, 53, 0.55));
-  box-shadow: 0 14px 36px -18px var(--case-accent-glow, rgba(198, 241, 53, 0.3));
+.works-slide[data-active="true"] .works-slide-card::before {
+  opacity: 1;
 }
 
-.case-deck-tab[aria-selected="true"]::before {
-  transform: scaleX(1);
+.works-slide-peek-shield {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.28s ease, opacity 0.28s ease;
 }
 
-.case-deck-stage {
-  background:
-    radial-gradient(640px 360px at 14% 12%, var(--stage-glow, rgba(198, 241, 53, 0.09)), transparent 70%),
-    linear-gradient(180deg, #121513 0%, #0A0C0B 100%);
-  border-color: var(--stage-border, rgba(255, 255, 255, 0.11));
-  transition: border-color 0.38s var(--ease-editorial);
+.works-slide[data-active="true"] .works-slide-peek-shield {
+  pointer-events: none;
+  opacity: 0;
 }
 
-@keyframes caseStageDepthIn {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 12px, 0) scale(0.992);
+@media (hover: hover) and (pointer: fine) {
+  .works-slide[data-active="false"]:hover {
+    opacity: 0.78;
+    transform: scale(0.974);
+    filter: saturate(0.94);
   }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
+  .works-slide[data-active="false"]:hover .works-slide-card {
+    border-color: var(--stage-border, rgba(198, 241, 53, 0.45));
   }
 }
 
-.case-stage-enter {
-  animation: caseStageDepthIn 0.36s var(--ease-editorial) both;
+/* Expanding Pill Dots Pagination */
+.works-pill-dock {
+  background: #232723;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 10px 24px -14px rgba(0, 0, 0, 0.85);
+}
+
+.works-pill-dot {
+  padding: 7px 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.works-pill-dot-bar {
+  display: block;
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+  background: #8E968C;
+  opacity: 0.6;
+  border: 1.5px solid transparent;
+  transition:
+    width 0.44s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.25s ease;
+}
+
+.works-pill-dot:hover .works-pill-dot-bar {
+  opacity: 0.95;
+  background: #C9D1C6;
+}
+
+.works-pill-dot[aria-selected="true"] .works-pill-dot-bar {
+  width: 36px;
+  background: #070907;
+  border-color: var(--pill-accent, #C6F135);
+  box-shadow:
+    0 0 12px var(--pill-glow, rgba(198, 241, 53, 0.38)),
+    inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .works-nav-btn:hover {
+    border-color: var(--active-accent, #C6F135);
+    color: var(--active-accent, #C6F135);
+    background-color: color-mix(in srgb, var(--active-accent, #C6F135) 12%, #0B0C0B);
+    transform: translateY(-1px);
+  }
 }
 
 .stage-node-btn {
@@ -696,11 +871,11 @@ main > section[id] {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .case-stage-enter {
-    animation: none !important;
-  }
-  .case-deck-tab,
-  .case-deck-tab::before,
+  .works-carousel-track,
+  .works-slide,
+  .works-slide-card,
+  .works-pill-dot-bar,
+  .works-nav-btn,
   .stage-node-btn,
   .etl-live-bar {
     transition: none !important;
