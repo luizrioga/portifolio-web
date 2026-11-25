@@ -427,12 +427,12 @@
       label: 'DADOS & ANÁLISE',
       code: 'MOD.01',
       tools: [
-        { name: 'Excel', projects: ['fretefy'], context: 'Modelagem analítica, cálculos automatizados e painéis operacionais.' },
-        { name: 'Power Query', projects: ['fretefy'], context: 'Pipeline ETL reproduzível sobre bases logísticas do Fretefy.' },
-        { name: 'Análise de dados', projects: ['fretefy', 'bigbag', 'agrobit'], context: 'Leitura de padrões, gargalos operacionais e dados ambientais.' },
-        { name: 'ETL', projects: ['fretefy'], context: 'Limpeza e modelagem de dados brutos em bases confiáveis.' },
-        { name: 'KPIs', projects: ['fretefy', 'bigbag'], context: 'Estruturação de indicadores como TPV, estoque, backlog e eficiência.' },
-        { name: 'Dashboards', projects: ['fretefy'], context: 'Visões interativas por turno, dia da semana e tipo de veículo.' }
+        { name: 'Excel', tier: 'core', projects: ['fretefy'], context: 'Modelagem analítica, cálculos automatizados e painéis operacionais na rotina industrial.' },
+        { name: 'Power Query', tier: 'core', projects: ['fretefy'], context: 'Pipeline ETL reproduzível sobre bases logísticas do Fretefy.' },
+        { name: 'Análise de dados', tier: 'core', projects: ['fretefy', 'bigbag', 'agrobit'], context: 'Leitura de padrões, gargalos operacionais e dados ambientais.' },
+        { name: 'ETL', tier: 'project', projects: ['fretefy'], context: 'Limpeza e modelagem de dados brutos em bases confiáveis.' },
+        { name: 'KPIs', tier: 'core', projects: ['fretefy', 'bigbag'], context: 'Estruturação de indicadores como TPV, estoque, backlog e eficiência.' },
+        { name: 'Dashboards', tier: 'project', projects: ['fretefy'], context: 'Visões interativas por turno, dia da semana e tipo de veículo.' }
       ]
     },
     {
@@ -440,11 +440,11 @@
       label: 'DESENVOLVIMENTO',
       code: 'MOD.02',
       tools: [
-        { name: 'HTML', projects: ['bigbag', 'agrobit'], context: 'Estrutura semântica para aplicações web operacionais.' },
-        { name: 'CSS', projects: ['bigbag', 'agrobit'], context: 'Interfaces responsivas orientadas à clareza de uso.' },
-        { name: 'JavaScript', projects: ['bigbag', 'agrobit'], context: 'Regras interativas, validações e consumo de APIs.' },
-        { name: 'Aplicações web', projects: ['bigbag', 'agrobit'], context: 'Interfaces web sob medida para centralizar rotinas reais.' },
-        { name: 'Git & VS Code', projects: ['bigbag', 'agrobit'], context: 'Versionamento e fluxo diário de desenvolvimento.' }
+        { name: 'HTML', tier: 'core', projects: ['bigbag', 'agrobit'], context: 'Estrutura semântica para aplicações web operacionais.' },
+        { name: 'CSS', tier: 'core', projects: ['bigbag', 'agrobit'], context: 'Interfaces responsivas orientadas à clareza de uso.' },
+        { name: 'JavaScript', tier: 'core', projects: ['bigbag', 'agrobit'], context: 'Regras interativas, validações e consumo de APIs.' },
+        { name: 'Aplicações web', tier: 'core', projects: ['bigbag', 'agrobit'], context: 'Interfaces web sob medida para centralizar rotinas reais.' },
+        { name: 'Git & VS Code', tier: 'core', projects: ['bigbag', 'agrobit'], context: 'Versionamento e fluxo diário de desenvolvimento.' }
       ]
     },
     {
@@ -452,9 +452,9 @@
       label: 'NUVEM & INFRA',
       code: 'MOD.03',
       tools: [
-        { name: 'Firebase', projects: ['bigbag'], context: 'Centralização em nuvem dos registros da triagem de Big Bags.' },
-        { name: 'Cloudflare R2', projects: ['bigbag'], context: 'Armazenamento de objetos integrado ao fluxo digital da operação.' },
-        { name: 'OSM & NASA POWER', projects: ['agrobit'], context: 'Consumo de APIs geoespaciais e climáticas no AGROBIT.' }
+        { name: 'Firebase', tier: 'core', projects: ['bigbag'], context: 'Centralização em nuvem dos registros da triagem de Big Bags.' },
+        { name: 'Cloudflare R2', tier: 'project', projects: ['bigbag'], context: 'Armazenamento de objetos integrado ao fluxo digital da operação.' },
+        { name: 'OSM & NASA POWER', tier: 'project', projects: ['agrobit'], context: 'Consumo de APIs geoespaciais e climáticas no AGROBIT.' }
       ]
     },
     {
@@ -462,10 +462,10 @@
       label: 'IA APLICADA',
       code: 'MOD.04',
       tools: [
-        { name: 'Gemini', projects: ['bigbag', 'agrobit'], context: 'Síntese assistida de relatórios operacionais e recomendações técnicas.' },
-        { name: 'APIs de IA', projects: ['bigbag', 'agrobit'], context: 'Integração da Gemini API nos fluxos de Big Bags e AGROBIT.' },
-        { name: 'Prototipação com IA', projects: ['bigbag', 'agrobit'], context: 'Aceleração de protótipos com revisão técnica humana.' },
-        { name: 'Engenharia de prompts', projects: ['bigbag', 'agrobit'], context: 'Instruções estruturadas para síntese técnica e consistência documental.' }
+        { name: 'Gemini', tier: 'core', projects: ['bigbag', 'agrobit'], context: 'Síntese assistida de relatórios operacionais e recomendações técnicas.' },
+        { name: 'APIs de IA', tier: 'core', projects: ['bigbag', 'agrobit'], context: 'Integração da Gemini API nos fluxos de Big Bags e AGROBIT.' },
+        { name: 'Prototipação com IA', tier: 'core', projects: ['bigbag', 'agrobit'], context: 'Aceleração de protótipos com revisão técnica humana.' },
+        { name: 'Engenharia de prompts', tier: 'project', projects: ['bigbag', 'agrobit'], context: 'Instruções estruturadas para síntese técnica e consistência documental.' }
       ]
     },
     {
@@ -473,9 +473,9 @@
       label: 'AUTOMAÇÃO',
       code: 'MOD.05',
       tools: [
-        { name: 'Apps Script', projects: ['bigbag'], context: 'Automação de processamento e ponte entre serviços.' },
-        { name: 'Power Automate', projects: ['bigbag'], context: 'Orquestração e disparo semanal de relatórios.' },
-        { name: 'Automação de fluxos', projects: ['fretefy', 'bigbag'], context: 'Redução de etapas manuais da coleta ao envio de informações.' }
+        { name: 'Apps Script', tier: 'project', projects: ['bigbag'], context: 'Automação de processamento e ponte entre serviços.' },
+        { name: 'Power Automate', tier: 'project', projects: ['bigbag'], context: 'Orquestração e disparo semanal de relatórios.' },
+        { name: 'Automação de fluxos', tier: 'core', projects: ['fretefy', 'bigbag'], context: 'Redução de etapas manuais da coleta ao envio de informações.' }
       ]
     },
     {
@@ -483,11 +483,11 @@
       label: 'ENGENHARIA & HARDWARE',
       code: 'MOD.06',
       tools: [
-        { name: 'Automação industrial', projects: ['iris', 'bigbag'], context: 'Formação técnica no IFMG e graduação em Eng. de Controle e Automação (UFOP).' },
-        { name: 'Arduino & ESP32', projects: ['iris', 'agrobit'], context: 'Protótipos embarcados (Íris) e conceito de sensor de solo (AGROBIT).' },
-        { name: 'Microeletrônica', projects: ['iris'], context: 'Circuitos, regulação de tensão e evolução Bit I → Bit II.' },
-        { name: 'Otimização de processos', projects: ['fretefy', 'bigbag'], context: 'Mapeamento de gargalos e melhoria contínua industrial.' },
-        { name: 'Cronoanálise & controles', projects: ['fretefy', 'bigbag'], context: 'Medição de tempos, listas de verificação, Qualyteam e rastreabilidade.' }
+        { name: 'Automação industrial', tier: 'core', projects: ['iris', 'bigbag'], context: 'Formação técnica no IFMG e graduação em Eng. de Controle e Automação (UFOP).' },
+        { name: 'Arduino & ESP32', tier: 'core', projects: ['iris', 'agrobit'], context: 'Protótipos embarcados (Íris) e conceito de sensor de solo (AGROBIT).' },
+        { name: 'Microeletrônica', tier: 'project', projects: ['iris'], context: 'Circuitos, regulação de tensão e evolução Bit I → Bit II.' },
+        { name: 'Otimização de processos', tier: 'core', projects: ['fretefy', 'bigbag'], context: 'Mapeamento de gargalos e melhoria contínua industrial.' },
+        { name: 'Cronoanálise & controles', tier: 'core', projects: ['fretefy', 'bigbag'], context: 'Medição de tempos, listas de verificação, Qualyteam e rastreabilidade.' }
       ]
     }
   ];
@@ -603,6 +603,16 @@
   updateScrollProgress();
 
   const mobileNavLinks = document.querySelectorAll('[data-mobile-nav]');
+  const MOBILE_BADGE_MAP = {
+    intro: '00 · INÍCIO',
+    thinking: '01 · SOBRE',
+    works: '02 · PROJETOS',
+    experience: '03 · ACTECH',
+    toolbox: '04 · STACK',
+    principles: '05 · PRINCÍPIOS',
+    outside: '06 · CAMPO',
+    connect: '07 · CONTATO'
+  };
 
   const sectionObserver = new IntersectionObserver(
     (entries) => {
@@ -610,16 +620,23 @@
         if (!entry.isIntersecting) return;
         const modLabel = entry.target.getAttribute('data-module');
         const secId = entry.target.id;
-        if (mobileModuleBadge && modLabel) mobileModuleBadge.textContent = modLabel.slice(0, 2);
+        if (mobileModuleBadge) {
+          mobileModuleBadge.textContent = MOBILE_BADGE_MAP[secId] || (modLabel ? modLabel.replace(' // ', ' · ') : '00');
+        }
         activeNavLinkEl = null;
         navLinks.forEach((link) => {
           const isActive = link.getAttribute('data-nav') === secId;
           if (isActive) activeNavLinkEl = link;
           link.classList.toggle('text-limeTech', isActive);
           link.classList.toggle('text-muted', !isActive);
+          if (isActive) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
         });
         mobileNavLinks.forEach((link) => {
-          link.setAttribute('data-active', String(link.getAttribute('data-mobile-nav') === secId));
+          const isActive = link.getAttribute('data-mobile-nav') === secId;
+          link.setAttribute('data-active', String(isActive));
+          if (isActive) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
         });
         moveNavSlider(activeNavLinkEl, false);
       });
@@ -1417,24 +1434,24 @@
   function getMobileThumb(project) {
     if (project.id === 'iris') {
       return `
-        <div class="w-14 h-14 rounded-xl border border-limeTech/35 bg-[#EEEDE7] flex items-center justify-center p-0.5 shrink-0 overflow-hidden">
+        <div class="w-16 h-16 rounded-xl border border-limeTech/35 bg-[#EEEDE7] flex items-center justify-center p-0.5 shrink-0 overflow-hidden">
           <img src="assets/bit-2.jpg?v=20261124a" alt="" loading="lazy" decoding="async" class="w-full h-full object-contain mix-blend-multiply select-none" />
         </div>`;
     }
     if (project.id === 'bigbag') {
       return `
-        <div class="w-14 h-14 rounded-xl border border-[#38BDF8]/35 bg-[#07090B] shrink-0 overflow-hidden">
+        <div class="w-16 h-16 rounded-xl border border-[#38BDF8]/35 bg-[#07090B] shrink-0 overflow-hidden">
           <img src="assets/bigbag-app.png?v=20261124b" alt="" loading="lazy" decoding="async" class="w-full h-full object-cover object-left-top" />
         </div>`;
     }
     if (project.id === 'fretefy') {
       return `
-        <div class="w-14 h-14 rounded-xl border border-[#F59E0B]/40 bg-[#0B0907] shrink-0 overflow-hidden">
+        <div class="w-16 h-16 rounded-xl border border-[#F59E0B]/40 bg-[#0B0907] shrink-0 overflow-hidden">
           <img src="assets/fretefy-panel.png?v=20261124b" alt="" loading="lazy" decoding="async" class="w-full h-full object-cover object-top" />
         </div>`;
     }
     return `
-      <div class="w-14 h-14 rounded-xl border border-[#34D399]/35 bg-carbon shrink-0 overflow-hidden">
+      <div class="w-16 h-16 rounded-xl border border-[#34D399]/35 bg-carbon shrink-0 overflow-hidden">
         <img src="assets/agrobit-team.jpg" alt="" loading="lazy" decoding="async" class="w-full h-full object-cover object-[50%_20%]" />
       </div>`;
   }
@@ -1458,7 +1475,7 @@
         const mInfo = MOBILE_CASE_META[p.id] || { title: p.name, meta: p.period };
         return `
         <article
-          class="project-card mission-case-card reveal rounded-xl p-3 flex flex-col justify-between cursor-pointer"
+          class="project-card mission-case-card reveal rounded-xl p-3 min-h-[82px] flex flex-col justify-center cursor-pointer"
           style="--reveal-delay: ${realIdx * 55}ms; --case-accent: ${th.accent}; --case-accent-border: ${th.border}; --case-accent-glow: ${th.glow};"
           data-open-project="${realIdx}"
           tabindex="0"
@@ -1472,10 +1489,10 @@
                 <span class="px-1.5 py-0.5 rounded font-semibold text-[#050606] leading-none shrink-0" style="background:${th.accent};">${p.index}</span>
                 <span class="font-medium truncate" style="color:${th.accent};">${p.shortTag}</span>
               </div>
-              <h3 class="font-display text-[15px] font-bold text-ink leading-tight truncate">${mInfo.title}</h3>
-              <p class="font-mono text-[10px] text-muted truncate">${mInfo.meta}</p>
+              <h3 class="font-display text-[15.5px] font-bold text-ink leading-tight truncate">${mInfo.title}</h3>
+              <p class="font-mono text-[10.5px] text-ink/70 truncate">${mInfo.meta}</p>
             </div>
-            <span class="w-8 h-8 rounded-lg bg-carbon border hairline-dark flex items-center justify-center shrink-0 font-mono text-xs font-semibold" style="color:${th.accent};" aria-hidden="true">→</span>
+            <span class="w-9 h-9 rounded-lg bg-carbon border hairline-dark flex items-center justify-center shrink-0 font-mono text-xs font-semibold" style="color:${th.accent};" aria-hidden="true">↗</span>
           </div>
         </article>`;
       })
@@ -1520,6 +1537,7 @@
         const th = CASE_THEMES[p.id] || { accent: '#C6F135', border: 'rgba(198,241,53,0.45)', glow: 'rgba(198,241,53,0.2)' };
         const mInfo = MOBILE_CASE_META[p.id] || { title: p.name, pill: p.period };
         const isSel = idx === activeIdx;
+        const year = (p.period || '').split(' · ')[0];
         return `
           <button
             type="button"
@@ -1536,11 +1554,14 @@
                 <span class="px-1.5 py-0.5 rounded font-semibold text-[#050606] leading-none shrink-0" style="background:${th.accent};">${p.index}</span>
                 <span class="uppercase tracking-wider truncate" style="color:${th.accent};">${p.shortTag}</span>
               </div>
-              <span class="w-1.5 h-1.5 rounded-full shrink-0 transition-opacity ${isSel ? 'opacity-100 acad-node-pulse' : 'opacity-20'}" style="background:${th.accent};"></span>
+              <span class="inline-flex items-center gap-1.5 text-muted shrink-0">
+                <span>${year}</span>
+                <span class="w-1.5 h-1.5 rounded-full transition-opacity ${isSel ? 'opacity-100 acad-node-pulse' : 'opacity-20'}" style="background:${th.accent};"></span>
+              </span>
             </div>
             <div class="space-y-0.5">
               <div class="font-display text-[15px] lg:text-base font-bold text-ink leading-snug truncate">${mInfo.title}</div>
-              <div class="font-mono text-[10px] text-muted truncate">${mInfo.pill}</div>
+              <div class="font-mono text-[10px] text-ink/65 truncate">${mInfo.pill}</div>
             </div>
           </button>`;
       }).join('');
@@ -1579,14 +1600,14 @@
               <span class="text-limeTech flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-limeTech acad-node-pulse"></span>LABORATÓRIO HARDWARE · BIT I ↔ BIT II</span>
               <span id="deck-iris-spec-tag" class="text-muted">PORTÁTIL · 2 BATERIAS</span>
             </div>
-            <div id="deck-iris-stage" data-current-bit="bit2" class="specimen-stage relative rounded-2xl border border-limeTech/35 flex-1 min-h-[305px] w-full flex items-center justify-center p-2.5 pb-11">
+            <div id="deck-iris-stage" data-current-bit="bit2" class="specimen-stage relative rounded-2xl border border-limeTech/35 flex-1 min-h-[330px] w-full flex items-center justify-center p-3 pb-12">
               <div class="spec-grid-overlay absolute inset-0"></div>
               <span class="pointer-events-none absolute top-2.5 left-2.5 w-3 h-3 reticle-tl"></span>
               <span class="pointer-events-none absolute top-2.5 right-2.5 w-3 h-3 reticle-tr"></span>
               <span class="pointer-events-none absolute bottom-2.5 left-2.5 w-3 h-3 reticle-bl"></span>
               <span class="pointer-events-none absolute bottom-2.5 right-2.5 w-3 h-3 reticle-br"></span>
               <div class="w-full h-full flex items-center justify-center">
-                <img id="deck-iris-img" src="assets/bit-2.jpg?v=20261124a" alt="Protótipo Bit II do Projeto Íris" loading="lazy" decoding="async" class="specimen-img max-h-[285px] max-w-[92%] object-contain select-none" />
+                <img id="deck-iris-img" src="assets/bit-2.jpg?v=20261124a" alt="Protótipo Bit II do Projeto Íris" loading="lazy" decoding="async" class="specimen-img max-h-[320px] max-w-[92%] object-contain select-none" />
               </div>
               <div class="absolute bottom-2.5 left-3 z-20 inline-flex p-0.5 rounded-lg bg-carbon/95 border hairline-dark font-mono text-[10px]">
                 <button type="button" data-deck-bit="bit1" class="px-2.5 py-1 rounded-md text-muted hover:text-ink transition-colors">Bit I · REV.01</button>
@@ -1614,8 +1635,8 @@
 
             <!-- Visão 1: Interface estilizada fiel ao sistema real -->
             <div id="deck-bb-panel-ui" class="flex-1 flex flex-col justify-between gap-3">
-              <div class="relative rounded-xl overflow-hidden border border-[#38BDF8]/30 bg-[#070A0D] flex-1 min-h-[260px] flex items-center justify-center p-1.5 group/bb">
-                <img src="assets/bigbag-app.png?v=20261124b" alt="Interface executiva do sistema de Triagem de Big Bags" loading="lazy" decoding="async" class="w-full h-full max-h-[305px] object-contain rounded-lg group-hover/bb:scale-[1.015] transition-transform duration-500" />
+              <div class="relative rounded-xl overflow-hidden border border-[#38BDF8]/30 bg-[#070A0D] flex-1 min-h-[290px] flex items-center justify-center p-1.5 group/bb">
+                <img src="assets/bigbag-app.png?v=20261124b" alt="Interface executiva do sistema de Triagem de Big Bags" loading="lazy" decoding="async" class="w-full h-full max-h-[345px] object-contain rounded-lg group-hover/bb:scale-[1.015] transition-transform duration-500" />
               </div>
               <div class="px-3.5 py-2.5 rounded-xl bg-carbon border hairline-dark font-mono text-[10px] text-ink/80 flex items-center justify-between gap-2">
                 <span>Visão Executiva em tempo real · triagem, estoque e backlog</span>
@@ -1663,8 +1684,8 @@
 
             <!-- Visão 1: Painel estilizado fiel ao BI de carregamento -->
             <div id="deck-fr-panel-ui" class="flex-1 flex flex-col justify-between gap-3">
-              <div class="relative rounded-xl overflow-hidden border border-[#F59E0B]/30 bg-[#090806] flex-1 min-h-[260px] flex items-center justify-center p-1.5 group/fr">
-                <img src="assets/fretefy-panel.png?v=20261124b" alt="Painel operacional de carregamento gerado pelo pipeline ETL em Power Query" loading="lazy" decoding="async" class="w-full h-full max-h-[305px] object-contain rounded-lg group-hover/fr:scale-[1.015] transition-transform duration-500" />
+              <div class="relative rounded-xl overflow-hidden border border-[#F59E0B]/30 bg-[#090806] flex-1 min-h-[290px] flex items-center justify-center p-1.5 group/fr">
+                <img src="assets/fretefy-panel.png?v=20261124b" alt="Painel operacional de carregamento gerado pelo pipeline ETL em Power Query" loading="lazy" decoding="async" class="w-full h-full max-h-[345px] object-contain rounded-lg group-hover/fr:scale-[1.015] transition-transform duration-500" />
               </div>
               <div class="px-3.5 py-2.5 rounded-xl bg-carbon border hairline-dark font-mono text-[10px] text-ink/80 flex items-center justify-between gap-2">
                 <span>Painel de carregamento · 8 KPIs por dia, turno, doca e frota</span>
@@ -1849,12 +1870,12 @@
       stageWrap.style.setProperty('--stage-border', th.border);
 
       stageWrap.innerHTML = `
-        <div class="${animate && !prefersReducedMotion ? 'case-stage-enter ' : ''}grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 p-6 lg:p-8 items-stretch">
-          <div class="lg:col-span-6 flex flex-col">
+        <div class="${animate && !prefersReducedMotion ? 'case-stage-enter ' : ''}grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 p-5 lg:p-7 items-stretch">
+          <div class="lg:col-span-7 flex flex-col">
             ${buildInteractiveLabHTML(p)}
           </div>
 
-          <div class="lg:col-span-6 flex flex-col justify-between gap-5">
+          <div class="lg:col-span-5 flex flex-col justify-between gap-5">
             <div class="space-y-4">
               <div class="flex items-center justify-between gap-3 font-mono text-[10.5px] uppercase tracking-widest">
                 <div class="flex items-center gap-2 min-w-0">
@@ -1862,39 +1883,41 @@
                   <span class="text-muted truncate">${p.period}</span>
                 </div>
                 <div class="inline-flex items-center gap-1.5 shrink-0">
-                  <button type="button" id="deck-prev-btn" aria-label="Projeto anterior" class="w-8 h-8 rounded-lg bg-carbon border hairline-dark hover:border-limeTech text-ink hover:text-limeTech transition-colors inline-flex items-center justify-center">←</button>
-                  <button type="button" id="deck-next-btn" aria-label="Próximo projeto" class="w-8 h-8 rounded-lg bg-carbon border hairline-dark hover:border-limeTech text-ink hover:text-limeTech transition-colors inline-flex items-center justify-center">→</button>
+                  <button type="button" id="deck-prev-btn" aria-label="Projeto anterior" class="w-9 h-9 rounded-lg bg-carbon border hairline-dark hover:border-limeTech text-ink hover:text-limeTech transition-colors inline-flex items-center justify-center">←</button>
+                  <button type="button" id="deck-next-btn" aria-label="Próximo projeto" class="w-9 h-9 rounded-lg bg-carbon border hairline-dark hover:border-limeTech text-ink hover:text-limeTech transition-colors inline-flex items-center justify-center">→</button>
                 </div>
               </div>
 
               <div class="space-y-1.5">
-                <h3 class="font-display text-2xl lg:text-[2.1rem] font-extrabold text-ink tracking-tight leading-[1.06]">${p.name}</h3>
+                <h3 class="font-display text-2xl lg:text-[2rem] font-extrabold text-ink tracking-tight leading-[1.06]">${p.name}</h3>
                 <p class="text-sm text-ink/80 leading-relaxed">${p.summary}</p>
               </div>
 
-              <div class="grid grid-cols-3 gap-2.5">
-                ${(p.highlights || []).map((h) => `
-                  <div class="p-2.5 rounded-xl bg-carbon border hairline-dark space-y-0.5">
+              <!-- Fatos-chave em faixa contínua (sem 3 caixas separadas) -->
+              <div class="grid grid-cols-3 divide-x divide-white/10 border-y hairline-dark py-3">
+                ${(p.highlights || []).map((h, hi) => `
+                  <div class="${hi === 0 ? 'pr-3' : hi === 2 ? 'pl-3' : 'px-3'} space-y-0.5 min-w-0">
                     <div class="font-mono text-[9px] uppercase tracking-wider text-muted truncate">${h.k}</div>
                     <div class="font-sans text-xs font-bold text-ink leading-snug">${h.v}</div>
                   </div>`).join('')}
               </div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                <div class="p-3 rounded-xl bg-carbon border hairline-dark space-y-1">
+              <!-- Antes (discreto) → Depois / Resultado (destaque editorial) -->
+              <div class="space-y-3">
+                <div class="pl-3 border-l border-white/15 space-y-0.5">
                   <div class="font-mono text-[9px] uppercase tracking-widest text-muted">ANTES</div>
-                  <p class="text-xs text-ink/75 leading-relaxed">${p.before}</p>
+                  <p class="text-xs text-ink/72 leading-relaxed">${p.before}</p>
                 </div>
-                <div class="p-3 rounded-xl border space-y-1" style="background:${th.badgeBg}; border-color:${th.border};">
-                  <div class="font-mono text-[9px] font-semibold uppercase tracking-widest" style="color:${th.accent};">DEPOIS // ${p.resultLabel.replace(' //', '')}</div>
+                <div class="p-3 rounded-r-xl border-l-2 space-y-1" style="background:${th.badgeBg}; border-left-color:${th.accent};">
+                  <div class="font-mono text-[9.5px] font-semibold uppercase tracking-widest" style="color:${th.accent};">DEPOIS // ${p.resultLabel.replace(' //', '')}</div>
                   <p class="text-xs text-ink/95 leading-relaxed">${p.after}</p>
                 </div>
               </div>
             </div>
 
             <div class="pt-4 border-t hairline-dark space-y-3.5">
-              <div class="flex flex-wrap gap-1.5 font-mono text-[10px] text-muted">
-                ${p.stack.map((t) => `<span class="px-2.5 py-1 rounded-md bg-carbon border hairline-dark text-ink/85">${t}</span>`).join('')}
+              <div class="flex flex-wrap gap-1.5 font-mono text-[10px] text-ink/80">
+                ${p.stack.map((t) => `<span class="px-2 py-0.5 rounded bg-white/[0.05]">${t}</span>`).join('')}
               </div>
 
               <div class="flex flex-wrap items-center justify-between gap-3">
@@ -1902,7 +1925,7 @@
                 <button
                   type="button"
                   data-open-project="${activeIdx}"
-                  class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-mono text-[11px] font-semibold uppercase tracking-wider text-[#050606] transition-transform hover:-translate-y-0.5 cursor-pointer"
+                  class="min-h-[42px] inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-mono text-[11px] font-semibold uppercase tracking-wider text-[#050606] transition-transform hover:-translate-y-0.5 cursor-pointer"
                   style="background:${th.accent};"
                 >
                   <span>Abrir dossiê completo</span>
@@ -2103,7 +2126,7 @@
 
             <div class="flex items-center justify-between gap-2 pt-2.5 border-t border-white/8">
               <div class="flex flex-wrap gap-1.5 font-mono text-[9.5px] text-ink/80">
-                ${ph.spineChips.map((c) => `<span class="px-2 py-0.5 rounded bg-carbon border hairline-dark">${c}</span>`).join('')}
+                ${ph.spineChips.map((c) => `<span class="px-2 py-0.5 rounded bg-white/[0.05]">${c}</span>`).join('')}
               </div>
               <span class="font-mono text-xs shrink-0 transition-transform ${isSel ? 'translate-x-0.5' : 'opacity-45'}" style="color:${ph.accent};" aria-hidden="true">→</span>
             </div>
@@ -2112,7 +2135,7 @@
 
       spineEl.innerHTML = `
         ${cardHTML(p2, 0)}
-        <div class="flex items-center gap-3 px-4 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.15em] text-muted select-none" aria-hidden="true">
+        <div class="hidden lg:flex items-center gap-3 px-4 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.15em] text-muted select-none" aria-hidden="true">
           <span class="h-[1px] flex-1 bg-gradient-to-r from-[#F59E0B]/40 via-limeTech/50 to-transparent"></span>
           <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-graphite border border-limeTech/30 text-limeTech font-semibold">
             <span>↑</span>
@@ -2236,11 +2259,11 @@
               </div>
 
               <!-- Leitura detalhada da frente selecionada -->
-              <div id="actech-frente-readout" class="p-3.5 rounded-xl bg-carbon border space-y-2" style="border-color:${ph.border};">
+              <div id="actech-frente-readout" class="p-4 rounded-xl bg-carbon/90 border space-y-2.5" style="border-color:${ph.border};">
                 <div class="flex flex-wrap items-center justify-between gap-2">
                   <div class="font-display text-[15px] font-bold text-ink">${f.num} · ${f.title}</div>
-                  <div class="flex flex-wrap gap-1 font-mono text-[9.5px]">
-                    ${f.tags.map((t) => `<span class="px-2 py-0.5 rounded bg-graphite border hairline-dark text-ink/85">${t}</span>`).join('')}
+                  <div class="flex flex-wrap gap-1.5 font-mono text-[9.5px]">
+                    ${f.tags.map((t) => `<span class="px-2 py-0.5 rounded bg-white/[0.06] text-ink/85">${t}</span>`).join('')}
                   </div>
                 </div>
                 <p class="text-xs sm:text-[13px] text-ink/85 leading-relaxed">${f.detail}</p>
@@ -2278,7 +2301,7 @@
             role="tab"
             aria-selected="${isSel}"
             data-actech-mob="${idx}"
-            class="actech-mob-tab py-2 px-2.5 rounded-lg border border-transparent text-left flex flex-col gap-0.5 cursor-pointer"
+            class="actech-mob-tab min-h-[48px] py-2 px-3 rounded-lg border border-transparent text-left flex flex-col justify-center gap-0.5 cursor-pointer"
             style="--phase-accent:${ph.accent}; --phase-border:${ph.border};"
           >
             <span class="inline-flex items-center gap-1.5 font-mono text-[10px] font-semibold uppercase tracking-wider" style="color:${isSel ? ph.accent : '#9EA59B'};">
@@ -2334,10 +2357,10 @@
             </span>
           </div>
 
-          <ul class="space-y-1.5">
+          <ul class="space-y-2">
             ${ph.frentes.map((item) => `
-              <li class="flex items-start gap-2 text-xs text-ink/90 leading-snug">
-                <span class="font-mono text-[9.5px] font-semibold pt-0.5 shrink-0" style="color:${ph.accent};">${item.num}</span>
+              <li class="flex items-start gap-2.5 text-[12.5px] text-ink/90 leading-snug">
+                <span class="font-mono text-[10px] font-semibold pt-0.5 shrink-0" style="color:${ph.accent};">${item.num}</span>
                 <span><strong class="text-ink font-semibold">${item.key}:</strong> ${item.short}</span>
               </li>`).join('')}
           </ul>
@@ -3312,6 +3335,7 @@
      ========================================================================== */
   const toolboxFiltersWrap = document.getElementById('toolbox-filters');
   const toolboxMatrixWrap = document.getElementById('toolbox-matrix');
+  const toolboxMobileDetail = document.getElementById('toolbox-mobile-detail');
   const inspectorBody = document.getElementById('toolbox-inspector-body');
   const resetToolBtn = document.getElementById('toolbox-reset-btn');
 
@@ -3412,7 +3436,7 @@
     }).join('');
 
     return `
-      <div class="p-3 rounded-xl bg-carbon border hairline-dark">
+      <div class="p-3 rounded-xl bg-carbon/65 border border-white/[0.07]">
         <div class="flex items-center justify-between font-mono text-[9.5px] uppercase tracking-widest text-muted mb-1">
           <span>COBERTURA MULTIDISCIPLINAR</span>
           <span class="text-limeTech">CLIQUE NO EIXO</span>
@@ -3430,11 +3454,76 @@
     toolboxFiltersWrap.querySelectorAll('[data-cat-filter]').forEach((b) => {
       const active = b.getAttribute('data-cat-filter') === activeCategory;
       b.setAttribute('aria-pressed', String(active));
-      b.className = `toolbox-filter-btn inline-flex items-center gap-2 px-3.5 py-2 rounded-lg font-mono text-[11px] tracking-wider uppercase border ${
+      b.className = `toolbox-filter-btn min-h-[38px] inline-flex items-center gap-2 px-3.5 py-2 rounded-lg font-mono text-[11px] tracking-wider uppercase border ${
         active
           ? 'bg-limeTech text-inkDark border-limeTech font-semibold'
-          : 'bg-graphite text-muted border-white/10 hover:text-ink hover:border-white/30'
+          : 'bg-graphite/70 text-muted border-white/10 hover:text-ink hover:border-white/30'
       }`;
+    });
+  }
+
+  function renderMobileToolDetail(tool) {
+    if (!toolboxMobileDetail) return;
+    if (!tool) {
+      toolboxMobileDetail.classList.add('hidden');
+      toolboxMobileDetail.innerHTML = '';
+      return;
+    }
+    const linked = tool.projects
+      .map((pid) => {
+        const idx = PROJECTS.findIndex((p) => p.id === pid);
+        return idx >= 0 ? { idx, project: PROJECTS[idx] } : null;
+      })
+      .filter(Boolean);
+    const tierLabel = tool.tier === 'core' ? 'Uso recorrente' : 'Frente específica';
+
+    toolboxMobileDetail.classList.remove('hidden');
+    toolboxMobileDetail.innerHTML = `
+      <div class="flex items-start justify-between gap-3">
+        <div class="space-y-0.5 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 font-mono text-[9.5px] uppercase tracking-wider">
+            <span class="text-muted">${tool.categoryCode} · ${tool.categoryLabel}</span>
+            <span class="inline-flex items-center gap-1 ${tool.tier === 'core' ? 'text-limeTech' : 'text-ink/70'}">
+              <span class="w-1.5 h-1.5 rounded-full ${tool.tier === 'core' ? 'bg-limeTech' : 'bg-white/35'}"></span>
+              <span>${tierLabel}</span>
+            </span>
+          </div>
+          <div class="font-display text-lg font-bold text-limeTech leading-tight">${tool.name}</div>
+        </div>
+        <button
+          type="button"
+          id="toolbox-mobile-close"
+          aria-label="Fechar detalhes da ferramenta"
+          class="min-w-[36px] min-h-[36px] rounded-lg bg-carbon border hairline-dark text-muted hover:text-ink inline-flex items-center justify-center shrink-0 font-mono text-sm"
+        >×</button>
+      </div>
+      <p class="text-[12.5px] text-ink/85 leading-relaxed">${tool.context}</p>
+      ${linked.length ? `
+        <div class="pt-2.5 border-t hairline-dark space-y-2">
+          <div class="font-mono text-[9.5px] uppercase tracking-widest text-muted">CASES VINCULADOS</div>
+          <div class="flex flex-wrap gap-2">
+            ${linked.map(({ idx, project }) => `
+              <button
+                type="button"
+                data-mobile-open-case="${idx}"
+                class="min-h-[38px] inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-carbon border border-limeTech/35 font-mono text-[10.5px] text-ink hover:border-limeTech"
+              >
+                <span class="text-limeTech font-semibold">${project.index}</span>
+                <span>${project.name.split(' · ')[0]}</span>
+                <span class="text-limeTech" aria-hidden="true">↗</span>
+              </button>`).join('')}
+          </div>
+        </div>` : ''}
+    `;
+
+    toolboxMobileDetail.querySelector('#toolbox-mobile-close')?.addEventListener('click', () => {
+      selectedTool = null;
+      renderMobileToolDetail(null);
+      renderInspectorDefault(false);
+      syncToolboxChipStates();
+    });
+    toolboxMobileDetail.querySelectorAll('[data-mobile-open-case]').forEach((b) => {
+      b.addEventListener('click', () => openCaseModal(Number(b.getAttribute('data-mobile-open-case'))));
     });
   }
 
@@ -3483,18 +3572,18 @@
         <div class="hidden sm:block">
           ${buildDomainRadarSVG()}
         </div>
-        <div class="grid grid-cols-3 gap-2 font-mono text-center">
-          <div class="p-2.5 rounded-xl bg-carbon border hairline-dark">
+        <div class="grid grid-cols-3 divide-x divide-white/10 border-t hairline-dark pt-4 font-mono text-center">
+          <div class="pr-2">
             <div class="font-display text-lg font-bold text-ink">06</div>
-            <div class="text-[9px] text-muted uppercase">Domínios</div>
+            <div class="text-[9.5px] text-muted uppercase">Domínios</div>
           </div>
-          <div class="p-2.5 rounded-xl bg-carbon border hairline-dark">
+          <div class="px-2">
             <div class="font-display text-lg font-bold text-ink">${totalTools}</div>
-            <div class="text-[9px] text-muted uppercase">Ferramentas</div>
+            <div class="text-[9.5px] text-muted uppercase">Ferramentas</div>
           </div>
-          <div class="p-2.5 rounded-xl bg-carbon border hairline-dark">
+          <div class="pl-2">
             <div class="font-display text-lg font-bold text-limeTech">${String(PROJECTS.length).padStart(2, '0')}</div>
-            <div class="text-[9px] text-muted uppercase">Cases</div>
+            <div class="text-[9.5px] text-muted uppercase">Cases</div>
           </div>
         </div>
       </div>`;
@@ -3519,6 +3608,7 @@
     const relatedNames = Array.from(findRelatedTools(tool)).slice(0, 6);
     const meta = TOOLBOX_META[tool.categoryId] || { icon: '' };
     const totalPadded = String(PROJECTS.length).padStart(2, '0');
+    const tierLabel = tool.tier === 'core' ? 'Uso recorrente' : 'Frente específica';
 
     inspectorBody.innerHTML = `
       <div class="${!prefersReducedMotion ? 'iso-detail-enter ' : ''}space-y-4">
@@ -3527,14 +3617,17 @@
             <div class="font-mono text-[10px] text-muted uppercase">${tool.categoryCode} · ${tool.categoryLabel}</div>
             <div class="font-display text-2xl font-bold text-limeTech leading-tight">${tool.name}</div>
           </div>
-          <span class="w-9 h-9 rounded-lg bg-carbon border border-limeTech/40 text-limeTech flex items-center justify-center shrink-0" aria-hidden="true">${meta.icon}</span>
+          <span class="w-9 h-9 rounded-lg bg-limeTech/10 text-limeTech flex items-center justify-center shrink-0" aria-hidden="true">${meta.icon}</span>
         </div>
 
         <p class="text-sm text-ink/90 leading-relaxed">${tool.context}</p>
 
-        <div class="px-3 py-2 rounded-xl bg-carbon border hairline-dark flex items-center justify-between font-mono text-[10px] uppercase tracking-wider">
-          <span class="text-muted">APLICADA NOS CASES</span>
-          <span class="text-limeTech font-semibold tabular-nums">${String(linked.length).padStart(2, '0')} de ${totalPadded}</span>
+        <div class="py-2.5 border-y hairline-dark flex items-center justify-between font-mono text-[10px] uppercase tracking-wider">
+          <span class="inline-flex items-center gap-1.5 text-ink/80">
+            <span class="w-1.5 h-1.5 rounded-full ${tool.tier === 'core' ? 'bg-limeTech' : 'bg-white/35'}"></span>
+            <span>${tierLabel}</span>
+          </span>
+          <span class="text-limeTech font-semibold tabular-nums">${String(linked.length).padStart(2, '0')} / ${totalPadded} CASES</span>
         </div>
 
         ${relatedNames.length ? `
@@ -3542,7 +3635,7 @@
             <div class="font-mono text-[10px] uppercase tracking-widest text-muted">TRABALHA EM CONJUNTO COM</div>
             <div class="flex flex-wrap gap-1.5">
               ${relatedNames.map((rn) => `
-                <button type="button" data-jump-tool="${rn}" class="px-2 py-1 rounded-md bg-carbon border hairline-dark hover:border-limeTech text-[10.5px] font-mono text-ink/85 hover:text-limeTech transition-colors">
+                <button type="button" data-jump-tool="${rn}" class="min-h-[32px] px-2.5 py-1 rounded-md bg-white/[0.05] hover:bg-limeTech/15 text-[10.5px] font-mono text-ink/85 hover:text-limeTech transition-colors">
                   ${rn}
                 </button>`).join('')}
             </div>
@@ -3575,6 +3668,7 @@
           renderToolboxMatrix(false);
         }
         renderInspectorTool(selectedTool);
+        renderMobileToolDetail(selectedTool);
         syncToolboxChipStates();
       });
     });
@@ -3612,13 +3706,13 @@
         <div
           data-module-card="${cat.id}"
           data-module-active="${hasSel}"
-          class="toolbox-module-card rounded-xl md:rounded-2xl bg-graphite border hairline-dark p-3 md:p-5 flex flex-col justify-between gap-2.5 md:gap-4 ${animate && !prefersReducedMotion ? 'filter-card-enter' : ''}"
-          style="--filter-delay: ${idx * 45}ms;"
+          class="toolbox-module-card rounded-xl md:rounded-2xl bg-graphite/55 border border-white/[0.07] p-3.5 md:p-5 flex flex-col justify-between gap-3 md:gap-4 ${animate && !prefersReducedMotion ? 'filter-card-enter' : ''}"
+          style="--filter-delay: ${idx * 45}ms; border-top: 2px solid ${meta.color || '#C6F135'}66;"
         >
-          <div class="space-y-2.5 md:space-y-3.5">
-            <div class="flex items-center md:items-start justify-between gap-2.5 md:gap-3 border-b hairline-dark pb-2 md:pb-3.5">
+          <div class="space-y-3 md:space-y-3.5">
+            <div class="flex items-center md:items-start justify-between gap-2.5 md:gap-3 border-b border-white/[0.08] pb-2.5 md:pb-3">
               <div class="flex items-center md:items-start gap-2.5 md:gap-3 min-w-0">
-                <span class="toolbox-mod-icon w-7 h-7 md:w-9 md:h-9 rounded-lg bg-carbon border hairline-dark flex items-center justify-center shrink-0" style="color:${meta.color || '#C6F135'}; border-color:${meta.color || '#C6F135'}40;" aria-hidden="true">
+                <span class="toolbox-mod-icon w-7 h-7 md:w-8 md:h-8 rounded-lg flex items-center justify-center shrink-0" style="color:${meta.color || '#C6F135'}; background:${meta.color || '#C6F135'}16;" aria-hidden="true">
                   ${meta.icon}
                 </span>
                 <div class="min-w-0">
@@ -3634,11 +3728,12 @@
               </div>
             </div>
 
-            <div class="flex flex-wrap gap-1.5 md:gap-2">
+            <div class="flex flex-wrap gap-2">
               ${cat.tools.map((tool) => {
                 const isSel = Boolean(selectedTool && selectedTool.name === tool.name);
                 const isRel = Boolean(selectedTool && !isSel && related.has(tool.name));
                 const isDimmed = Boolean(selectedTool && !isSel && !isRel);
+                const isCore = tool.tier === 'core';
                 return `
                   <button
                     type="button"
@@ -3647,16 +3742,17 @@
                     data-selected="${isSel}"
                     data-related="${isRel}"
                     data-dimmed="${isDimmed}"
-                    class="tool-chip inline-flex items-center gap-1 md:gap-1.5 px-2.5 py-1 md:px-3 md:py-1.5 rounded-lg bg-carbon border hairline-dark font-mono text-[11px] md:text-xs text-ink hover:border-limeTech/70"
+                    class="tool-chip min-h-[38px] inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-carbon/90 border ${isCore ? 'border-white/15' : 'border-white/[0.08]'} font-mono text-[11px] md:text-xs text-ink hover:border-limeTech/70"
                   >
+                    <span class="tool-chip__dot w-1.5 h-1.5 rounded-full shrink-0 ${isCore ? 'bg-limeTech' : 'bg-white/30'}" aria-hidden="true"></span>
                     <span>${tool.name}</span>
-                    <span class="hidden md:inline tool-chip__count text-[9.5px] opacity-60 tabular-nums">·${tool.projects.length}</span>
+                    <span class="hidden md:inline tool-chip__count text-[9.5px] opacity-55 tabular-nums">·${tool.projects.length}</span>
                   </button>`;
               }).join('')}
             </div>
           </div>
 
-          <div class="hidden md:flex pt-3 border-t hairline-dark items-center justify-between font-mono text-[9.5px] text-muted uppercase tracking-wider">
+          <div class="hidden md:flex pt-2.5 border-t border-white/[0.07] items-center justify-between font-mono text-[9.5px] text-muted uppercase tracking-wider">
             <span>${String(cat.tools.length).padStart(2, '0')} ITENS</span>
             <span class="text-ink/80">${uniqueProjects} ${uniqueProjects === 1 ? 'CASE' : 'CASES'}</span>
           </div>
@@ -3673,9 +3769,17 @@
         if (selectedTool && selectedTool.name === found.name) {
           selectedTool = null;
           renderInspectorDefault(true);
+          renderMobileToolDetail(null);
         } else {
           selectedTool = found;
           renderInspectorTool(selectedTool);
+          renderMobileToolDetail(selectedTool);
+          if (window.innerWidth < 768 && toolboxMobileDetail) {
+            const rect = toolboxMobileDetail.getBoundingClientRect();
+            if (rect.top < 64 || rect.top > window.innerHeight * 0.72) {
+              toolboxMobileDetail.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'nearest' });
+            }
+          }
         }
         syncToolboxChipStates();
       });
@@ -3685,6 +3789,7 @@
   resetToolBtn.addEventListener('click', () => {
     selectedTool = null;
     renderInspectorDefault(true);
+    renderMobileToolDetail(null);
     syncToolboxChipStates();
   });
 
@@ -3927,7 +4032,7 @@
             data-principle-pill="${idx}"
             data-active="${idx === 0}"
             style="--pill-accent:${item.accent};"
-            class="principle-pill shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-graphite border hairline-dark font-mono text-[10px] uppercase tracking-wider text-muted hover:text-ink"
+            class="principle-pill min-h-[38px] shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-graphite/70 border hairline-dark font-mono text-[10px] uppercase tracking-wider text-muted hover:text-ink"
           >
             <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:${item.accent};"></span>
             <span>${item.author.split(' ').slice(-1)[0]}</span>
