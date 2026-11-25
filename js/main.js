@@ -165,10 +165,10 @@
       roleShort: 'Líder Técnico · Bitmind',
       resultLabel: 'ENTREGA //',
       before: 'Protótipo inicial Bit I com processamento dedicado em Arduino Uno e shield em fenolite, mas ainda dependente de alimentação externa.',
-      after: 'Protótipo Bit II portátil e autônomo, com duas baterias, carregamento embarcado e cabos reforçados — apresentado na final da V Olimpíada do IFMG e na Rio Innovation Week 2023.',
+      after: 'Protótipo Bit II portátil e autônomo, com duas baterias, carregamento embarcado e cabos reforçados — apresentado na final da V Olimpíada de Inovação do IFMG e na Rio Innovation Week 2023.',
       metric: null,
-      cardSummary: 'Óculos com sensores, caixa de processamento (Bit I → Bit II) e pulseiras vibratórias para locomoção urbana assistiva.',
-      cardResult: 'Duas gerações funcionais (Bit I → Bit II) de dispositivo vestível assistivo de baixo custo, apresentadas na V Olimpíada do IFMG e na RIW 2023.',
+      cardSummary: 'Óculos com sensores, caixa de processamento e pulseiras vibratórias para locomoção urbana assistiva.',
+      cardResult: 'Duas gerações funcionais de dispositivo vestível assistivo de baixo custo, apresentadas na V Olimpíada de Inovação do IFMG e na RIW 2023.',
       highlights: [
         { k: 'EVOLUÇÃO', v: 'Bit I → Bit II' },
         { k: 'EXPOSIÇÃO', v: 'Final da V Olimpíada de Inovação do IFMG · RIW 2023' },
@@ -2163,11 +2163,13 @@
               <p class="text-xs text-ink/75 leading-relaxed pt-1">${ph.spineDesc}</p>
             </div>
 
-            <div class="flex items-center justify-between gap-2 pt-2.5 border-t border-white/8">
+            <div class="flex items-center justify-between gap-2 pt-3 border-t border-white/10">
               <div class="flex flex-wrap gap-1.5 font-mono text-[9.5px] text-ink/80">
                 ${ph.spineChips.map((c) => `<span class="px-2 py-0.5 rounded bg-white/[0.05]">${c}</span>`).join('')}
               </div>
-              <span class="font-mono text-xs shrink-0 transition-transform ${isSel ? 'translate-x-0.5' : 'opacity-45'}" style="color:${ph.accent};" aria-hidden="true">→</span>
+              ${isSel
+                ? `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md font-mono text-[9.5px] font-semibold uppercase tracking-wider shrink-0 border" style="color:${ph.accent}; background:${ph.glow}; border-color:${ph.border};"><span class="w-1.5 h-1.5 rounded-full" style="background:${ph.accent};"></span>Em exibição</span>`
+                : `<span class="actech-phase-cta inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.07] border border-white/25 font-mono text-[9.5px] font-semibold uppercase tracking-wider text-ink transition-all shrink-0">Explorar fase →</span>`}
             </div>
           </button>`;
       };
@@ -2196,10 +2198,13 @@
       });
     }
 
-    function renderDesktopStage(animate = false) {
+    function renderDesktopStage(animate = false, animateReadout = false) {
       if (!deskStageEl) return;
       const ph = PHASES[activePhaseIdx];
       const f = ph.frentes[activeFrenteIdx] || ph.frentes[0];
+      const nextFrenteIdx = (activeFrenteIdx + 1) % ph.frentes.length;
+      const nextFrente = ph.frentes[nextFrenteIdx];
+      const isLastFrente = activeFrenteIdx === ph.frentes.length - 1;
       deskStageEl.style.setProperty('--phase-accent', ph.accent);
       deskStageEl.style.setProperty('--phase-border', ph.border);
       deskStageEl.style.setProperty('--phase-glow', ph.glow);
@@ -2216,19 +2221,22 @@
                 <button
                   type="button"
                   data-open-project-by-id="${pr.id}"
-                  class="actech-proj-card group text-left p-2.5 rounded-xl bg-carbon border hairline-dark hover:border-white/25 flex items-center gap-3 cursor-pointer"
+                  class="actech-proj-card group text-left p-2.5 rounded-xl bg-carbon border border-white/15 hover:border-white/35 flex items-center gap-3 cursor-pointer"
                 >
-                  <div class="w-20 h-14 rounded-lg overflow-hidden border border-white/10 bg-[#070A0D] shrink-0">
+                  <div class="w-16 h-12 rounded-lg overflow-hidden border border-white/10 bg-[#070A0D] shrink-0">
                     <img src="${pr.img}" alt="Prévia ${pr.title}" loading="lazy" decoding="async" class="w-full h-full object-cover object-left-top group-hover:scale-105 transition-transform duration-500" />
                   </div>
                   <div class="min-w-0 flex-1 space-y-0.5">
                     <div class="flex items-center gap-1.5 font-mono text-[9.5px] uppercase tracking-wider">
                       <span class="px-1.5 py-0.5 rounded font-semibold text-[#050606] leading-none" style="background:${pr.accent};">${pr.index}</span>
-                      <span class="truncate font-semibold" style="color:${pr.accent};">DOSSIÊ ↗</span>
+                      <span class="truncate text-muted">DOSSIÊ TÉCNICO</span>
                     </div>
                     <div class="font-display text-sm font-bold text-ink truncate group-hover:text-limeTech transition-colors">${pr.title}</div>
                     <div class="font-mono text-[9.5px] text-muted truncate">${pr.sub}</div>
                   </div>
+                  <span class="actech-proj-cta inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg font-mono text-[9.5px] font-semibold uppercase tracking-wider shrink-0 border transition-all" style="color:${pr.accent}; border-color:${pr.accent}55; background:${pr.accent}14;">
+                    Abrir ↗
+                  </span>
                 </button>`).join('')}
             </div>
           </div>`
@@ -2270,35 +2278,61 @@
 
             <p class="text-[13.5px] text-ink/85 leading-relaxed">${ph.summary}</p>
 
-            <!-- Fluxo Interativo em 4 Etapas (Clique para inspecionar) -->
+            <!-- Fluxo Interativo em 4 Etapas (Clique ou avance pelas setas) -->
             <div class="space-y-2.5">
-              <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
-                <span>FLUXO DE ATUAÇÃO · SELECIONE UMA FRENTE</span>
-                <span style="color:${ph.accent};" class="font-semibold">${f.num} / 04</span>
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.14em] text-ink/80">
+                  <span class="w-1.5 h-1.5 rounded-full" style="background:${ph.accent};"></span>
+                  <span>EXPLORE AS 4 FRENTES · CLIQUE PARA INSPEÇÃO</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span style="color:${ph.accent};" class="font-mono text-[10.5px] font-semibold tabular-nums">${f.num} / 04</span>
+                  <div class="flex items-center gap-1">
+                    <button
+                      type="button"
+                      id="actech-frente-prev"
+                      class="actech-step-btn w-7 h-7 rounded-lg bg-carbon border border-white/20 text-ink/85 flex items-center justify-center font-mono text-xs transition-all cursor-pointer"
+                      aria-label="Frente anterior"
+                    >←</button>
+                    <button
+                      type="button"
+                      id="actech-frente-next"
+                      class="actech-step-btn w-7 h-7 rounded-lg bg-carbon border border-white/20 text-ink/85 flex items-center justify-center font-mono text-xs transition-all cursor-pointer"
+                      aria-label="Próxima frente"
+                    >→</button>
+                  </div>
+                </div>
               </div>
 
-              <div class="relative h-[2px] w-full rounded-full bg-white/8 overflow-hidden" aria-hidden="true">
+              <div class="relative h-[2px] w-full rounded-full bg-white/10 overflow-hidden" aria-hidden="true">
                 <div class="h-full transition-all duration-300" style="width:${((activeFrenteIdx + 1) / 4) * 100}%; background:${ph.accent};"></div>
               </div>
 
-              <div class="grid grid-cols-4 gap-2">
-                ${ph.frentes.map((item, idx) => `
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" role="tablist" aria-label="Selecionar frente de atuação">
+                ${ph.frentes.map((item, idx) => {
+                  const isActiveF = idx === activeFrenteIdx;
+                  return `
                   <button
                     type="button"
+                    role="tab"
+                    aria-selected="${isActiveF}"
                     data-actech-frente="${idx}"
-                    data-active="${idx === activeFrenteIdx}"
-                    class="actech-flow-node text-left p-2.5 rounded-xl space-y-1 cursor-pointer"
+                    data-active="${isActiveF}"
+                    class="actech-flow-node group text-left p-2.5 lg:p-3 rounded-xl flex flex-col justify-between gap-2 min-h-[68px] cursor-pointer"
                   >
-                    <div class="flex items-center justify-between font-mono text-[9.5px]">
-                      <span class="font-semibold" style="color:${ph.accent};">${item.num}</span>
-                      <span class="w-1.5 h-1.5 rounded-full ${idx === activeFrenteIdx ? 'opacity-100' : 'opacity-20'}" style="background:${ph.accent};"></span>
+                    <div class="flex items-center justify-between gap-1 font-mono text-[9.5px]">
+                      <span class="px-1.5 py-0.5 rounded font-semibold leading-none" style="${isActiveF ? `background:${ph.accent}; color:#050606;` : `background:rgba(255,255,255,0.08); color:${ph.accent};`}">${item.num}</span>
+                      ${isActiveF
+                        ? `<span class="inline-flex items-center gap-1 font-semibold uppercase tracking-wider text-[8.5px]" style="color:${ph.accent};"><span class="w-1.5 h-1.5 rounded-full acad-node-pulse" style="background:${ph.accent};"></span>Ativo</span>`
+                        : `<span class="actech-node-cue inline-flex items-center gap-0.5 text-[9px] text-ink/60 font-medium transition-all">Ver →</span>`}
                     </div>
-                    <div class="font-mono text-[10px] font-semibold text-ink truncate">${item.key}</div>
-                  </button>`).join('')}
+                    <div class="font-mono text-[10.5px] font-semibold leading-tight truncate ${isActiveF ? 'text-ink' : 'text-ink/80 group-hover:text-ink'}">${item.key}</div>
+                  </button>`;
+                }).join('')}
               </div>
 
               <!-- Leitura detalhada da frente selecionada -->
-              <div id="actech-frente-readout" class="p-4 rounded-xl bg-carbon/90 border space-y-2.5" style="border-color:${ph.border};">
+              <div id="actech-frente-readout" class="${animateReadout && !prefersReducedMotion ? 'actech-readout-enter ' : ''}p-4 rounded-xl bg-carbon/95 border space-y-3" style="border-color:${ph.border};">
                 <div class="flex flex-wrap items-center justify-between gap-2">
                   <div class="font-display text-[15px] font-bold text-ink">${f.num} · ${f.title}</div>
                   <div class="flex flex-wrap gap-1.5 font-mono text-[9.5px]">
@@ -2306,6 +2340,20 @@
                   </div>
                 </div>
                 <p class="text-xs sm:text-[13px] text-ink/85 leading-relaxed">${f.detail}</p>
+                <div class="flex flex-wrap items-center justify-between gap-2 pt-2.5 border-t border-white/10">
+                  <div class="flex items-center gap-1.5" aria-hidden="true">
+                    ${ph.frentes.map((_, idx) => `<span class="h-1.5 rounded-full transition-all" style="width:${idx === activeFrenteIdx ? '18px' : '6px'}; background:${idx === activeFrenteIdx ? ph.accent : 'rgba(255,255,255,0.2)'};"></span>`).join('')}
+                    <span class="font-mono text-[9.5px] text-muted uppercase tracking-wider ml-1.5">Frente ${f.num} de 04</span>
+                  </div>
+                  <button
+                    type="button"
+                    id="actech-next-frente-cta"
+                    class="actech-next-btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-mono text-[10px] font-semibold uppercase tracking-wider border transition-all cursor-pointer"
+                    style="color:${ph.accent}; border-color:${ph.border}; background:${ph.glow};"
+                  >
+                    <span>${isLastFrente ? `Voltar: ${nextFrente.num} · ${nextFrente.key} ↺` : `Próxima: ${nextFrente.num} · ${nextFrente.key} →`}</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -2319,8 +2367,23 @@
           const nextF = Number(btn.getAttribute('data-actech-frente'));
           if (nextF === activeFrenteIdx) return;
           activeFrenteIdx = nextF;
-          renderDesktopStage(false);
+          renderDesktopStage(false, true);
         });
+      });
+
+      document.getElementById('actech-frente-prev')?.addEventListener('click', () => {
+        activeFrenteIdx = (activeFrenteIdx - 1 + ph.frentes.length) % ph.frentes.length;
+        renderDesktopStage(false, true);
+      });
+
+      document.getElementById('actech-frente-next')?.addEventListener('click', () => {
+        activeFrenteIdx = (activeFrenteIdx + 1) % ph.frentes.length;
+        renderDesktopStage(false, true);
+      });
+
+      document.getElementById('actech-next-frente-cta')?.addEventListener('click', () => {
+        activeFrenteIdx = (activeFrenteIdx + 1) % ph.frentes.length;
+        renderDesktopStage(false, true);
       });
 
       document.getElementById('actech-jump-phase2')?.addEventListener('click', () => {
