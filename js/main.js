@@ -171,7 +171,7 @@
       cardResult: 'Duas gerações funcionais (Bit I → Bit II) de dispositivo vestível assistivo de baixo custo, apresentadas na V Olimpíada do IFMG e na RIW 2023.',
       highlights: [
         { k: 'EVOLUÇÃO', v: 'Bit I → Bit II' },
-        { k: 'EXPOSIÇÃO', v: 'Final IFMG · RIW 2023' },
+        { k: 'EXPOSIÇÃO', v: 'Final da V Olimpíada de Inovação do IFMG · RIW 2023' },
         { k: 'CARGA HORÁRIA', v: '240h · Olimpíada IFMG' }
       ],
       name: 'Projeto Íris · Bitmind',
@@ -179,8 +179,8 @@
       category: 'Hardware / Tecnologia Assistiva / Embarcados',
       summary: 'Dispositivo vestível de baixo custo para auxiliar pessoas com deficiência visual na locomoção urbana com feedback tátil.',
       problem: 'Obstáculos acima da linha da cintura e mudanças de ambiente exigem alertas táteis discretos e imediatos para apoio à mobilidade urbana.',
-      built: 'Desenvolvi o hardware embarcado e o firmware em Arduino com sensores nos óculos, caixa de processamento dedicada (evoluída do Bit I para o Bit II portátil com duas baterias e carregamento embarcado) e pulseiras vibratórias.',
-      role: 'Líder técnico da equipe Bitmind — desenvolvimento de hardware, software embarcado e apresentação para interessados e avaliadores.',
+      built: 'Coordenei tecnicamente, junto à equipe Bitmind, o desenvolvimento do hardware embarcado e do firmware em Arduino — integrando sensores nos óculos, caixa de processamento dedicada (evoluída do Bit I para o Bit II portátil com duas baterias e carregamento embarcado) e pulseiras vibratórias.',
+      role: 'Líder técnico da equipe Bitmind — coordenação técnica do hardware e firmware embarcado, além da apresentação para interessados e avaliadores.',
       stack: ['Hardware', 'Arduino / Embarcados', 'Ultrassônico', 'Feedback Háptico'],
       deliverables: [
         'Protótipo Bit I (REV.01): Arduino Uno + shield personalizado em fenolite com processamento dedicado',
@@ -2473,7 +2473,7 @@
 
             <article class="dossier-narrative-card p-4 sm:p-5 rounded-xl bg-carbon border hairline-dark border-l-2 border-l-[#38BDF8]/85 space-y-1.5 flex-1 flex flex-col justify-center">
               <div class="flex items-center justify-between gap-2">
-                <span class="font-mono text-[10px] uppercase tracking-widest text-[#38BDF8] font-semibold">02 // O QUE CONSTRUÍ</span>
+                <span class="font-mono text-[10px] uppercase tracking-widest text-[#38BDF8] font-semibold">${project.id === 'iris' || project.id === 'agrobit' ? '02 // ATUAÇÃO NA SOLUÇÃO' : '02 // O QUE CONSTRUÍ'}</span>
                 <svg class="w-3.5 h-3.5 text-[#38BDF8]/85 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l-4 3 4 3m8-6l4 3-4 3M14 5l-4 14" />
                 </svg>
@@ -2950,10 +2950,9 @@
 
               <div class="p-4 rounded-xl bg-carbon border hairline-dark space-y-2.5 flex-1">
                 <div class="font-mono text-[10px] uppercase tracking-widest text-limeTech">EVOLUÇÃO BIT I → BIT II</div>
-                <ul class="space-y-2 text-xs text-ink/85 leading-relaxed">
+                <ul class="space-y-2.5 text-xs text-ink/85 leading-relaxed">
                   <li><strong class="text-ink">Bit I (REV.01):</strong> Arduino Uno com shield personalizado em fenolite e processamento dedicado, dependendo de alimentação externa para operar.</li>
-                  <li><strong class="text-ink">Bit II (REV.02 · Autônomo):</strong> operação totalmente portátil com duas baterias e circuito de carregamento embarcado.</li>
-                  <li><strong class="text-ink">Robustez &amp; Portabilidade:</strong> maior rigidez nos cabos contra estresses mecânicos e estrutura mais compacta para uso diário.</li>
+                  <li><strong class="text-ink">Bit II (REV.02 · Autônomo):</strong> operação totalmente portátil com duas baterias e circuito de carregamento embarcado, além de maior rigidez nos cabos contra estresses mecânicos e estrutura mais compacta para uso diário.</li>
                 </ul>
               </div>
             </div>
@@ -3335,7 +3334,9 @@
      ========================================================================== */
   const toolboxFiltersWrap = document.getElementById('toolbox-filters');
   const toolboxMatrixWrap = document.getElementById('toolbox-matrix');
-  const toolboxMobileDetail = document.getElementById('toolbox-mobile-detail');
+  const toolboxMobDomains = document.getElementById('toolbox-mobile-domains');
+  const toolboxMobStage = document.getElementById('toolbox-mobile-stage');
+  const toolboxMobExpandBtn = document.getElementById('toolbox-mobile-expand-btn');
   const inspectorBody = document.getElementById('toolbox-inspector-body');
   const resetToolBtn = document.getElementById('toolbox-reset-btn');
 
@@ -3462,12 +3463,24 @@
     });
   }
 
-  function renderMobileToolDetail(tool) {
-    if (!toolboxMobileDetail) return;
+  let mobileActiveCatId = TOOLBOX_DATA[0].id;
+  let mobileShowAll = false;
+
+  const MOBILE_CAT_LABELS = {
+    data: 'Dados & Análise',
+    dev: 'Desenvolvimento',
+    cloud: 'Nuvem & Infra',
+    ai: 'IA Aplicada',
+    automation: 'Automação',
+    eng: 'Eng. & Hardware'
+  };
+
+  function buildMobileDetailBlock(tool) {
     if (!tool) {
-      toolboxMobileDetail.classList.add('hidden');
-      toolboxMobileDetail.innerHTML = '';
-      return;
+      return `
+        <div class="pt-2.5 border-t border-white/[0.08] font-mono text-[10.5px] text-muted">
+          Toque em uma ferramenta acima para ver contexto e cases vinculados.
+        </div>`;
     }
     const linked = tool.projects
       .map((pid) => {
@@ -3477,53 +3490,159 @@
       .filter(Boolean);
     const tierLabel = tool.tier === 'core' ? 'Uso recorrente' : 'Frente específica';
 
-    toolboxMobileDetail.classList.remove('hidden');
-    toolboxMobileDetail.innerHTML = `
-      <div class="flex items-start justify-between gap-3">
-        <div class="space-y-0.5 min-w-0">
-          <div class="flex flex-wrap items-center gap-2 font-mono text-[9.5px] uppercase tracking-wider">
-            <span class="text-muted">${tool.categoryCode} · ${tool.categoryLabel}</span>
-            <span class="inline-flex items-center gap-1 ${tool.tier === 'core' ? 'text-limeTech' : 'text-ink/70'}">
-              <span class="w-1.5 h-1.5 rounded-full ${tool.tier === 'core' ? 'bg-limeTech' : 'bg-white/35'}"></span>
-              <span>${tierLabel}</span>
-            </span>
+    return `
+      <div id="toolbox-mobile-detail" class="pt-3 border-t border-white/10 space-y-2.5">
+        <div class="flex items-start justify-between gap-2">
+          <div class="min-w-0 space-y-0.5">
+            <div class="flex flex-wrap items-center gap-2 font-mono text-[9.5px] uppercase tracking-wider">
+              <span class="font-semibold text-limeTech">${tool.name}</span>
+              <span class="text-muted">· ${tierLabel}</span>
+            </div>
+            <p class="text-[12.5px] text-ink/85 leading-snug">${tool.context}</p>
           </div>
-          <div class="font-display text-lg font-bold text-limeTech leading-tight">${tool.name}</div>
+          <button type="button" data-mob-tool-clear aria-label="Fechar detalhes" class="min-w-[32px] min-h-[32px] rounded-lg bg-carbon border hairline-dark text-muted hover:text-ink inline-flex items-center justify-center shrink-0 font-mono text-xs">×</button>
         </div>
-        <button
-          type="button"
-          id="toolbox-mobile-close"
-          aria-label="Fechar detalhes da ferramenta"
-          class="min-w-[36px] min-h-[36px] rounded-lg bg-carbon border hairline-dark text-muted hover:text-ink inline-flex items-center justify-center shrink-0 font-mono text-sm"
-        >×</button>
-      </div>
-      <p class="text-[12.5px] text-ink/85 leading-relaxed">${tool.context}</p>
-      ${linked.length ? `
-        <div class="pt-2.5 border-t hairline-dark space-y-2">
-          <div class="font-mono text-[9.5px] uppercase tracking-widest text-muted">CASES VINCULADOS</div>
-          <div class="flex flex-wrap gap-2">
+        ${linked.length ? `
+          <div class="flex flex-wrap gap-1.5">
             ${linked.map(({ idx, project }) => `
               <button
                 type="button"
                 data-mobile-open-case="${idx}"
-                class="min-h-[38px] inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-carbon border border-limeTech/35 font-mono text-[10.5px] text-ink hover:border-limeTech"
+                class="min-h-[36px] inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-carbon border border-limeTech/35 font-mono text-[10px] text-ink hover:border-limeTech"
               >
                 <span class="text-limeTech font-semibold">${project.index}</span>
                 <span>${project.name.split(' · ')[0]}</span>
                 <span class="text-limeTech" aria-hidden="true">↗</span>
               </button>`).join('')}
-          </div>
-        </div>` : ''}
-    `;
+          </div>` : ''}
+      </div>`;
+  }
 
-    toolboxMobileDetail.querySelector('#toolbox-mobile-close')?.addEventListener('click', () => {
-      selectedTool = null;
-      renderMobileToolDetail(null);
-      renderInspectorDefault(false);
-      syncToolboxChipStates();
+  function renderMobileToolbox() {
+    if (!toolboxMobDomains || !toolboxMobStage) return;
+
+    toolboxMobDomains.innerHTML = TOOLBOX_DATA.map((cat) => {
+      const meta = TOOLBOX_META[cat.id] || { color: '#C6F135', icon: '' };
+      const isAct = !mobileShowAll && cat.id === mobileActiveCatId;
+      const label = MOBILE_CAT_LABELS[cat.id] || cat.label;
+      return `
+        <button
+          type="button"
+          role="tab"
+          aria-selected="${isAct}"
+          data-mob-cat="${cat.id}"
+          class="min-h-[44px] px-2.5 py-2 rounded-xl border text-left flex items-center justify-between gap-2 transition-colors ${
+            isAct
+              ? 'bg-graphite text-ink'
+              : 'bg-graphite/45 border-white/[0.08] text-muted hover:text-ink'
+          }"
+          style="${isAct ? `border-color:${meta.color}88; background: color-mix(in srgb, ${meta.color} 10%, #141614);` : ''}"
+        >
+          <span class="flex items-center gap-2 min-w-0">
+            <span class="shrink-0" style="color:${meta.color};" aria-hidden="true">${meta.icon}</span>
+            <span class="font-mono text-[10.5px] font-semibold truncate ${isAct ? 'text-ink' : 'text-ink/80'}">${label}</span>
+          </span>
+          <span class="font-mono text-[9.5px] tabular-nums shrink-0 ${isAct ? 'font-semibold' : 'opacity-65'}" style="${isAct ? `color:${meta.color};` : ''}">${String(cat.tools.length).padStart(2, '0')}</span>
+        </button>`;
+    }).join('');
+
+    toolboxMobDomains.querySelectorAll('[data-mob-cat]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const nextId = btn.getAttribute('data-mob-cat');
+        mobileShowAll = false;
+        mobileActiveCatId = nextId;
+        if (selectedTool && selectedTool.categoryId !== nextId) selectedTool = null;
+        if (toolboxMobExpandBtn) {
+          toolboxMobExpandBtn.setAttribute('aria-expanded', 'false');
+          toolboxMobExpandBtn.textContent = `Ver todas (${ALL_TOOLS_FLAT.length}) ↓`;
+        }
+        renderMobileToolbox();
+      });
     });
-    toolboxMobileDetail.querySelectorAll('[data-mobile-open-case]').forEach((b) => {
+
+    const catsToShow = mobileShowAll
+      ? TOOLBOX_DATA
+      : TOOLBOX_DATA.filter((c) => c.id === mobileActiveCatId);
+
+    const cardsHtml = catsToShow.map((cat) => {
+      const meta = TOOLBOX_META[cat.id] || { color: '#C6F135', sub: '', icon: '' };
+      const uniqueProjects = new Set(cat.tools.flatMap((t) => t.projects)).size;
+      const showInlineDetail = !mobileShowAll;
+      const activeToolInCat = selectedTool && selectedTool.categoryId === cat.id ? selectedTool : null;
+
+      return `
+        <div
+          class="rounded-xl bg-graphite/65 border border-white/[0.08] p-3.5 space-y-3"
+          style="border-top: 2px solid ${meta.color}80;"
+        >
+          <div class="flex items-center justify-between gap-2">
+            <div class="min-w-0">
+              <div class="font-mono text-[11px] font-semibold text-ink tracking-wider truncate">${cat.label}</div>
+              <p class="text-[11px] text-muted truncate mt-0.5">${meta.sub}</p>
+            </div>
+            <span class="font-mono text-[9.5px] shrink-0" style="color:${meta.color};">${uniqueProjects} ${uniqueProjects === 1 ? 'CASE' : 'CASES'}</span>
+          </div>
+
+          <div class="flex flex-wrap gap-1.5">
+            ${cat.tools.map((tool) => {
+              const isSel = Boolean(selectedTool && selectedTool.name === tool.name);
+              const isCore = tool.tier === 'core';
+              return `
+                <button
+                  type="button"
+                  data-mob-tool-cat="${cat.id}"
+                  data-mob-tool-name="${tool.name}"
+                  data-selected="${isSel}"
+                  class="tool-chip min-h-[38px] inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-carbon/90 border ${isCore ? 'border-white/15' : 'border-white/[0.08]'} font-mono text-[11px] text-ink"
+                >
+                  <span class="tool-chip__dot w-1.5 h-1.5 rounded-full shrink-0 ${isCore ? 'bg-limeTech' : 'bg-white/30'}" aria-hidden="true"></span>
+                  <span>${tool.name}</span>
+                </button>`;
+            }).join('')}
+          </div>
+
+          ${showInlineDetail ? buildMobileDetailBlock(activeToolInCat) : ''}
+        </div>`;
+    }).join('');
+
+    toolboxMobStage.innerHTML = mobileShowAll
+      ? `${selectedTool ? `<div class="mb-3 rounded-xl bg-graphite border border-limeTech/35 px-3.5 pb-3.5">${buildMobileDetailBlock(selectedTool)}</div>` : ''}<div class="space-y-2.5">${cardsHtml}</div>`
+      : cardsHtml;
+
+    toolboxMobStage.querySelectorAll('[data-mob-tool-name]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const found = ALL_TOOLS_FLAT.find(
+          (t) => t.categoryId === btn.getAttribute('data-mob-tool-cat') && t.name === btn.getAttribute('data-mob-tool-name')
+        );
+        if (!found) return;
+        selectedTool = selectedTool && selectedTool.name === found.name ? null : found;
+        if (selectedTool) renderInspectorTool(selectedTool);
+        else renderInspectorDefault(false);
+        syncToolboxChipStates();
+        renderMobileToolbox();
+      });
+    });
+    toolboxMobStage.querySelectorAll('[data-mob-tool-clear]').forEach((b) => {
+      b.addEventListener('click', () => {
+        selectedTool = null;
+        renderInspectorDefault(false);
+        syncToolboxChipStates();
+        renderMobileToolbox();
+      });
+    });
+    toolboxMobStage.querySelectorAll('[data-mobile-open-case]').forEach((b) => {
       b.addEventListener('click', () => openCaseModal(Number(b.getAttribute('data-mobile-open-case'))));
+    });
+  }
+
+  if (toolboxMobExpandBtn) {
+    toolboxMobExpandBtn.addEventListener('click', () => {
+      mobileShowAll = !mobileShowAll;
+      toolboxMobExpandBtn.setAttribute('aria-expanded', String(mobileShowAll));
+      toolboxMobExpandBtn.textContent = mobileShowAll
+        ? 'Compactar ↑'
+        : `Ver todas (${ALL_TOOLS_FLAT.length}) ↓`;
+      renderMobileToolbox();
     });
   }
 
@@ -3668,7 +3787,7 @@
           renderToolboxMatrix(false);
         }
         renderInspectorTool(selectedTool);
-        renderMobileToolDetail(selectedTool);
+        renderMobileToolbox();
         syncToolboxChipStates();
       });
     });
@@ -3769,18 +3888,11 @@
         if (selectedTool && selectedTool.name === found.name) {
           selectedTool = null;
           renderInspectorDefault(true);
-          renderMobileToolDetail(null);
         } else {
           selectedTool = found;
           renderInspectorTool(selectedTool);
-          renderMobileToolDetail(selectedTool);
-          if (window.innerWidth < 768 && toolboxMobileDetail) {
-            const rect = toolboxMobileDetail.getBoundingClientRect();
-            if (rect.top < 64 || rect.top > window.innerHeight * 0.72) {
-              toolboxMobileDetail.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'nearest' });
-            }
-          }
         }
+        renderMobileToolbox();
         syncToolboxChipStates();
       });
     });
@@ -3789,13 +3901,14 @@
   resetToolBtn.addEventListener('click', () => {
     selectedTool = null;
     renderInspectorDefault(true);
-    renderMobileToolDetail(null);
+    renderMobileToolbox();
     syncToolboxChipStates();
   });
 
   renderToolboxFilters();
   renderInspectorDefault(false);
   renderToolboxMatrix(false);
+  renderMobileToolbox();
 
   /* ==========================================================================
      17b. MATRIZ ACADÊMICA INTERATIVA (SEM BARRAS DE PROFICIÊNCIA)
