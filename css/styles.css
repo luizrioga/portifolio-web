@@ -3020,11 +3020,11 @@ body.blueprint-mode article {
 
 @media (max-height: 760px) and (min-width: 1024px) {
   .actech-sticky-stage > div {
-    padding-top: 12px !important;
-    padding-bottom: 12px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
   }
   .actech-heading {
-    font-size: clamp(1.38rem, 1.9vw, 1.82rem);
+    font-size: clamp(1.2rem, 1.52vw, 1.52rem);
     line-height: 1.1;
   }
   .actech-heading-br {
@@ -3034,11 +3034,11 @@ body.blueprint-mode article {
     display: inline;
   }
   .actech-curve-canvas {
-    height: clamp(355px, calc(100vh - 196px), 470px);
-    --stem-h: 20px;
+    height: clamp(355px, calc(100vh - 188px), 475px);
+    --stem-h: 16px;
   }
   .actech-node-callout {
-    bottom: calc(var(--stem-h, 20px) + 8px);
+    bottom: calc(var(--stem-h, 16px) + 7px);
     padding: 2px 2px;
   }
   .actech-callout-period {
@@ -3050,8 +3050,13 @@ body.blueprint-mode article {
   }
   .actech-callout-desc {
     font-size: 11.25px;
-    line-height: 1.38;
+    line-height: 1.36;
     margin-top: 3px;
+  }
+  .actech-callout-more {
+    margin-top: 5px;
+    padding: 2px 8px;
+    font-size: 8.8px;
   }
   .actech-callout-case-btn {
     margin-top: 5px;
@@ -3226,8 +3231,9 @@ body.blueprint-mode article {
 .actech-node-callout {
   position: absolute;
   bottom: calc(var(--stem-h, 42px) + 12px);
-  width: clamp(255px, 24.5vw, 345px);
-  padding: 6px 2px;
+  width: clamp(285px, 27.5vw, 390px);
+  padding: 8px 4px;
+  border-radius: 14px;
   cursor: pointer;
   opacity: 0.28;
   transform: translate3d(0, 10px, 0);
@@ -3243,7 +3249,7 @@ body.blueprint-mode article {
   border-radius: 28px;
   background: radial-gradient(
     ellipse 72% 68% at 50% 55%,
-    color-mix(in srgb, var(--node-accent, #C6F135) 10%, rgba(255, 255, 255, 0.05)) 0%,
+    color-mix(in srgb, var(--node-accent, #C6F135) 11%, rgba(255, 255, 255, 0.055)) 0%,
     transparent 74%
   );
   opacity: 0;
@@ -3262,7 +3268,7 @@ body.blueprint-mode article {
 }
 
 .actech-node[data-reached="true"] .actech-node-callout {
-  opacity: 0.86;
+  opacity: 0.88;
   transform: translate3d(0, 0, 0);
 }
 
@@ -3278,14 +3284,80 @@ body.blueprint-mode article {
 @media (hover: hover) and (pointer: fine) {
   .actech-node:hover .actech-node-callout {
     opacity: 1;
-    transform: translate3d(0, -2px, 0);
+    transform: translate3d(0, -3px, 0);
   }
   .actech-node:hover .actech-node-callout::before {
-    opacity: 0.85;
+    opacity: 0.95;
   }
   .actech-node:hover .actech-node-dot-core {
-    transform: scale(1.26);
+    transform: scale(1.3);
   }
+  .actech-node:hover .actech-callout-more {
+    border-color: var(--node-accent, #C6F135);
+    color: var(--node-accent, #C6F135);
+    background: color-mix(in srgb, var(--node-accent, #C6F135) 14%, rgba(11, 12, 11, 0.92));
+  }
+  .actech-node:hover .actech-callout-more-arrow {
+    transform: translate(2px, -1px);
+  }
+}
+
+.actech-callout-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(243, 244, 240, 0.78);
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  transition:
+    color 0.24s var(--ease-editorial),
+    border-color 0.24s var(--ease-editorial),
+    background-color 0.24s var(--ease-editorial);
+}
+
+.actech-node[data-active="true"] .actech-callout-more {
+  color: var(--node-accent, #C6F135);
+  border-color: color-mix(in srgb, var(--node-accent, #C6F135) 48%, transparent);
+  background: color-mix(in srgb, var(--node-accent, #C6F135) 10%, rgba(11, 12, 11, 0.88));
+}
+
+.actech-callout-more-arrow {
+  display: inline-block;
+  transition: transform 0.24s var(--ease-editorial);
+}
+
+.actech-modal-panel {
+  position: relative;
+}
+
+.actech-modal-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--stage-accent, #C6F135) 0%, transparent 82%);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.actech-mob-card-trigger {
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 6px 8px;
+  margin: -6px -8px;
+  transition: background-color 0.24s var(--ease-editorial);
+}
+
+.actech-mob-card-trigger:active {
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .actech-callout-period {

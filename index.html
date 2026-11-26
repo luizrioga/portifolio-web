@@ -62,7 +62,7 @@
     };
   </script>
 
-  <link rel="stylesheet" href="css/styles.css?v=20261126a" />
+  <link rel="stylesheet" href="css/styles.css?v=20261126b" />
 </head>
 <body class="bg-carbon text-ink antialiased selection:bg-limeTech selection:text-inkDark">
 
@@ -594,7 +594,7 @@
           <div class="max-w-[1440px] w-full mx-auto px-6 lg:px-10 h-full flex flex-col justify-between py-5 xl:py-7 relative z-10">
 
             <!-- Cabeçalho Editorial Compacto -->
-            <div class="grid grid-cols-12 gap-6 items-end">
+            <div class="grid grid-cols-12 gap-6 items-start">
               <div class="col-span-7 space-y-2">
                 <div class="inline-flex items-center gap-2 font-mono text-xs tracking-[0.14em] uppercase text-limeTech">
                   <span class="w-1.5 h-1.5 rounded-full bg-limeTech acad-node-pulse shrink-0" aria-hidden="true"></span>
@@ -613,10 +613,10 @@
                 <div class="inline-flex items-center gap-2.5 font-mono text-[10px] uppercase tracking-[0.15em] text-muted">
                   <span class="inline-flex items-center gap-1.5 text-ink/75">
                     <span class="w-1.5 h-1.5 rounded-full bg-white/80"></span>
-                    <span>Role para percorrer</span>
+                    <span>Role ou clique em uma etapa</span>
                   </span>
                   <span class="text-white/20">·</span>
-                  <span id="actech-progress-readout" class="text-limeTech font-semibold tabular-nums">ETAPA 01 / 04</span>
+                  <span id="actech-progress-readout" class="text-limeTech font-semibold tabular-nums">ETAPA 01 / 03</span>
                 </div>
               </div>
             </div>
@@ -1572,6 +1572,43 @@
     </div>
   </div>
 
+  <!-- ========================================================================
+       MODAL DE DETALHES — TRAJETÓRIA ACTECH
+       ======================================================================== -->
+  <div
+    id="actech-modal"
+    data-open="false"
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="actech-modal-title"
+    class="modal-backdrop fixed inset-0 z-[72] bg-[#040608]/62 flex items-end sm:items-center justify-center p-0 sm:p-6 lg:p-10"
+  >
+    <div class="modal-panel actech-modal-panel w-full max-w-[820px] max-h-[92svh] sm:max-h-[86vh] bg-carbon border-t sm:border border-white/15 rounded-t-2xl sm:rounded-2xl shadow-[0_32px_90px_rgba(0,0,0,0.84),0_0_0_1px_rgba(255,255,255,0.08)] flex flex-col overflow-hidden">
+      <div class="px-4 sm:px-7 py-3.5 sm:py-4 bg-graphite border-b hairline-dark flex items-center justify-between gap-3 shrink-0">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <span id="actech-modal-badge" class="px-2.5 py-1 rounded font-mono text-[10.5px] font-semibold text-inkDark shrink-0">01 / 03</span>
+          <span id="actech-modal-period" class="font-mono text-[10.5px] sm:text-[11px] uppercase tracking-wider text-muted truncate"></span>
+        </div>
+        <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <button id="actech-modal-prev" type="button" aria-label="Etapa anterior na Actech" class="min-w-[38px] min-h-[38px] px-2.5 sm:px-3 py-1.5 rounded-lg border hairline-dark bg-carbon text-muted hover:text-ink hover:border-white/30 font-mono text-xs transition-colors cursor-pointer">
+            <span aria-hidden="true">←</span><span class="hidden sm:inline"> Anterior</span>
+          </button>
+          <button id="actech-modal-next" type="button" aria-label="Próxima etapa na Actech" class="min-w-[38px] min-h-[38px] px-2.5 sm:px-3 py-1.5 rounded-lg border hairline-dark bg-carbon text-muted hover:text-ink hover:border-white/30 font-mono text-xs transition-colors cursor-pointer">
+            <span class="hidden sm:inline">Próxima </span><span aria-hidden="true">→</span>
+          </button>
+          <button id="actech-modal-close" type="button" aria-label="Fechar detalhes da etapa" class="ml-0.5 min-w-[38px] min-h-[38px] p-2 rounded-lg border hairline-dark bg-carbon text-ink hover:border-limeTech hover:text-limeTech transition-colors inline-flex items-center justify-center cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="square" d="M6 6l12 12M18 6l-12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="actech-modal-body" class="flex-1 overflow-y-auto px-4 sm:px-7 py-4 sm:py-5 space-y-4 sm:space-y-5"></div>
+    </div>
+  </div>
+
   <!-- Modal de Registro de Exploração / Segredos Interativos -->
   <div
     id="explorer-modal"
@@ -1625,6 +1662,6 @@
   <script src="js/journey/fallback-2d.js?v=20261124c" defer></script>
   <script src="js/journey/engine.js?v=20261124c" defer></script>
 
-  <script src="js/main.js?v=20261126a" defer></script>
+  <script src="js/main.js?v=20261126b" defer></script>
 </body>
 </html>

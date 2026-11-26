@@ -2246,7 +2246,7 @@
   })();
 
   /* ==========================================================================
-     13b. EXPERIÊNCIA PROFISSIONAL — ACTECH (TIMELINE CURVA COM SCROLL)
+     13b. EXPERIÊNCIA PROFISSIONAL — ACTECH (TIMELINE CURVA 3 ETAPAS + MODAL)
      ========================================================================== */
   (function initActechExperience() {
     const sectionEl = document.getElementById('experience');
@@ -2266,6 +2266,15 @@
     const mobBeamEl = document.getElementById('actech-mob-beam');
     const mobSparkEl = document.getElementById('actech-mob-spark');
 
+    const actechModalEl = document.getElementById('actech-modal');
+    const actechModalPanel = actechModalEl ? actechModalEl.querySelector('.actech-modal-panel') : null;
+    const actechModalBadge = document.getElementById('actech-modal-badge');
+    const actechModalPeriod = document.getElementById('actech-modal-period');
+    const actechModalBody = document.getElementById('actech-modal-body');
+    const actechModalClose = document.getElementById('actech-modal-close');
+    const actechModalPrev = document.getElementById('actech-modal-prev');
+    const actechModalNext = document.getElementById('actech-modal-next');
+
     if (!sectionEl || (!nodesLayer && !mobNodesEl)) return;
 
     const VIEWBOX_W = 1200;
@@ -2276,74 +2285,148 @@
       {
         id: 'aprendiz',
         num: '01',
+        status: 'CONCLUÍDA',
         period: 'JUN/2024 – DEZ/2025',
         shortLabel: '01 · Aprendiz',
-        role: 'Jovem Aprendiz · Operação',
-        desc: 'Cronoanálises em campo, controle de estoque e checklists, padronização no Qualyteam e diagnóstico de gargalos no chão de fábrica.',
+        role: 'Jovem Aprendiz',
+        area: 'Actech · Operação & Processos Industriais',
+        desc: 'Base prática no chão de fábrica: cronoanálises em campo, controle de estoque e checklists, padronização no Qualyteam e diagnóstico de gargalos.',
+        modalSummary: 'Primeiro ciclo em ambiente industrial, construindo base sólida diretamente no chão de fábrica: medição de tempos reais, controle de estoque e embalagens, padronização documental e mapeamento de gargalos que abriram caminho para a digitalização.',
+        frentes: [
+          {
+            num: '01',
+            title: 'Cronoanálises & indicadores em campo',
+            detail: 'Medi tempos diretamente no chão de fábrica com cronoanálises e levantei KPIs de desempenho de operadores e equipamentos na rotina produtiva.'
+          },
+          {
+            num: '02',
+            title: 'Estoque, embalagens & checklists',
+            detail: 'Acompanhei controle de estoque, organização de embalagens e listas de verificação de carregamento no fluxo diário da planta.'
+          },
+          {
+            num: '03',
+            title: 'Padronização documental no Qualyteam',
+            detail: 'Padronizei procedimentos operacionais e apoiei a organização e controle de documentos da área dentro do sistema Qualyteam.'
+          },
+          {
+            num: '04',
+            title: 'Mapeamento de gargalos & rastreabilidade',
+            detail: 'Mapeei gargalos reais da rotina física e apoiei iniciativas iniciais de rastreabilidade que prepararam a transição para o estágio.'
+          }
+        ],
         tags: ['Cronoanálises', 'Qualyteam', 'Estoque & Checklists', 'KPIs'],
+        projects: [],
         accent: '#F59E0B',
         t: 0.004,
         reachAt: 0.04,
         scrollTarget: 0.14,
         align: 'left',
-        caseId: null,
         isFuture: false
       },
       {
-        id: 'estagio-dados',
+        id: 'estagio',
         num: '02',
-        period: 'FEV/2026',
-        shortLabel: '02 · Estágio & ETL',
-        role: 'Estagiário · Dados & ETL',
-        desc: 'Evolução interna para Embalagem & Expedição: ETL do Fretefy em Power Query, TPV mensal em < 5 min, 8 KPIs e envios semanais automáticos.',
-        tags: ['Power Query', 'ETL', 'TPV < 5 min', '8 KPIs'],
+        status: 'ATUAL',
+        period: 'FEV/2026 – ATUAL',
+        shortLabel: '02 · Estágio',
+        role: 'Estagiário de Embalagem & Expedição',
+        area: 'Actech · Processos, Dados & Digitalização',
+        desc: 'Evolução interna para a expedição: ETL do Fretefy (TPV < 5 min e 8 KPIs), sistema web de Triagem de Big Bags em nuvem, procedimentos e treinamento em área.',
+        modalSummary: 'Evolução interna para a área de Embalagem & Expedição, estruturando dados logísticos, automatizando planilhas e envios recorrentes e construindo aplicação web em nuvem para eliminar conferências manuais e dar visibilidade à operação.',
+        frentes: [
+          {
+            num: '01',
+            title: 'Bases de carregamento & 8 KPIs (Fretefy)',
+            detail: 'Estruturei bases de carregamento do Fretefy em Power Query, gerando o TPV mensal em menos de 5 minutos e consolidando 8 indicadores operacionais.'
+          },
+          {
+            num: '02',
+            title: 'Sistema web de Triagem de Big Bags',
+            detail: 'Construí aplicação web em nuvem (HTML/CSS/JS, Firebase, Cloudflare R2 e Gemini API) centralizando apontamentos diários, evidências e rastreabilidade.'
+          },
+          {
+            num: '03',
+            title: 'Automação de planilhas & envios semanais',
+            detail: 'Automatizei tratamentos recorrentes e o disparo semanal de estoque, backlog e chegadas aos interessados via Power Automate e Apps Script.'
+          },
+          {
+            num: '04',
+            title: 'Rotina em área, padrões & treinamento',
+            detail: 'Acompanhei a rotina diretamente em área, redigi procedimentos operacionais claros e apoiei o treinamento da equipe na adoção dos fluxos digitais.'
+          }
+        ],
+        tags: ['Power Query', 'Firebase', 'Cloudflare R2', 'Gemini API', '8 KPIs'],
+        projects: [
+          {
+            id: 'fretefy',
+            index: '03',
+            title: 'Automação Fretefy',
+            sub: 'Power Query · TPV < 5 min · 8 KPIs',
+            accent: '#F59E0B',
+            img: 'assets/fretefy-panel.png?v=20261124b'
+          },
+          {
+            id: 'bigbag',
+            index: '02',
+            title: 'Triagem de Big Bags',
+            sub: 'Web · Firebase · R2 · Gemini API',
+            accent: '#38BDF8',
+            img: 'assets/bigbag-app.png?v=20261124b'
+          }
+        ],
         accent: '#38BDF8',
         t: 0.305,
         reachAt: 0.305,
-        scrollTarget: 0.37,
+        scrollTarget: 0.40,
         align: 'left',
-        caseId: 'fretefy',
-        caseLabel: 'Ver Case Fretefy ↗',
-        isFuture: false
-      },
-      {
-        id: 'estagio-nuvem',
-        num: '03',
-        period: '2026 · ATUAL',
-        shortLabel: '03 · Nuvem & Web',
-        role: 'Digitalização & Nuvem',
-        desc: 'Sistema web de Triagem de Big Bags (Firebase, R2 e Gemini API), procedimentos operacionais padrão e treinamento da equipe em área.',
-        tags: ['Web App', 'Firebase', 'Cloudflare R2', 'Gemini API'],
-        accent: '#C6F135',
-        t: 0.705,
-        reachAt: 0.705,
-        scrollTarget: 0.75,
-        align: 'right',
-        caseId: 'bigbag',
-        caseLabel: 'Ver Case Big Bags ↗',
         isFuture: false
       },
       {
         id: 'analista',
-        num: '04',
+        num: '03',
+        status: 'EFETIVAÇÃO',
         period: 'PRÓXIMO CICLO · EFETIVAÇÃO',
-        shortLabel: '04 · Analista',
+        shortLabel: '03 · Analista de Processos',
         role: 'Analista de Processos',
+        area: 'Actech · Engenharia de Processos & Melhoria Contínua',
         desc: 'Contratação na Actech como Analista de Processos — consolidando desenho de processos, melhoria contínua, indicadores e automação ponta a ponta.',
+        modalSummary: 'Próximo passo na Actech com efetivação como Analista de Processos — unindo vivência de chão de fábrica, domínio de dados e desenvolvimento de ferramentas digitais para estruturar e evoluir processos industriais ponta a ponta.',
+        frentes: [
+          {
+            num: '01',
+            title: 'Desenho & padronização de processos',
+            detail: 'Mapeamento estruturado dos fluxos operacionais e logísticos, definindo padrões claros, enxutos e auditáveis para a planta.'
+          },
+          {
+            num: '02',
+            title: 'Melhoria contínua & redução de gargalos',
+            detail: 'Análise de tempos, perdas e variabilidade em campo para sustentar ganhos recorrentes de produtividade e confiabilidade.'
+          },
+          {
+            num: '03',
+            title: 'Governança de indicadores & dados',
+            detail: 'Consolidação de KPIs operacionais e rotinas automatizadas de tratamento de dados para acelerar decisões da gestão.'
+          },
+          {
+            num: '04',
+            title: 'Digitalização & automação em escala',
+            detail: 'Expansão de ferramentas web, integrações e fluxos automatizados conectando o chão de fábrica aos controles gerenciais.'
+          }
+        ],
         tags: ['Efetivação', 'Processos', 'Melhoria Contínua', 'Indicadores'],
+        projects: [],
         accent: '#C6F135',
-        t: 0.905,
-        reachAt: 0.905,
-        scrollTarget: 0.96,
+        t: 0.785,
+        reachAt: 0.785,
+        scrollTarget: 0.90,
         align: 'right',
-        caseId: null,
         isFuture: true
       }
     ];
 
     const CASES = [
       { id: 'fretefy', label: 'Case Fretefy ↗', accent: '#F59E0B', milestoneIdx: 1 },
-      { id: 'bigbag', label: 'Case Big Bags ↗', accent: '#38BDF8', milestoneIdx: 2 }
+      { id: 'bigbag', label: 'Case Big Bags ↗', accent: '#38BDF8', milestoneIdx: 1 }
     ];
 
     let totalLen = 0;
@@ -2351,6 +2434,8 @@
     let targetProgress = currentProgress;
     let activeIdx = 0;
     let hoveredIdx = null;
+    let modalStageIdx = 0;
+    let lastActechTrigger = null;
     let rafId = null;
     let isNearViewport = true;
 
@@ -2359,6 +2444,146 @@
     const dockCaseButtons = [];
     const mobileItems = [];
 
+    /* ---- MODAL DE DETALHES DA ETAPA ---- */
+    function renderActechModal(idx) {
+      if (!actechModalBody) return;
+      modalStageIdx = ((idx % MILESTONES.length) + MILESTONES.length) % MILESTONES.length;
+      const m = MILESTONES[modalStageIdx];
+
+      if (actechModalPanel) {
+        actechModalPanel.style.setProperty('--stage-accent', m.accent);
+      }
+      if (actechModalBadge) {
+        actechModalBadge.textContent = `${m.num} / 0${MILESTONES.length}`;
+        actechModalBadge.style.background = m.accent;
+      }
+      if (actechModalPeriod) {
+        actechModalPeriod.textContent = m.period;
+      }
+
+      const projectsBlock = m.projects.length
+        ? `
+          <div class="space-y-2.5 pt-3.5 border-t hairline-dark">
+            <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.14em]">
+              <span class="text-muted">DOSSIÊS TÉCNICOS DESTA ETAPA</span>
+              <span style="color:${m.accent};">ABRIR CASE COMPLETO</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              ${m.projects.map((pr) => `
+                <button
+                  type="button"
+                  data-actech-open-case="${pr.id}"
+                  class="group text-left p-2.5 rounded-xl bg-graphite border border-white/15 hover:border-white/35 flex items-center gap-3 transition-all cursor-pointer"
+                >
+                  <div class="w-14 h-11 rounded-lg overflow-hidden border border-white/10 bg-[#070A0D] shrink-0">
+                    <img src="${pr.img}" alt="Prévia ${pr.title}" loading="lazy" decoding="async" class="w-full h-full object-cover object-left-top group-hover:scale-105 transition-transform duration-500" />
+                  </div>
+                  <div class="min-w-0 flex-1 space-y-0.5">
+                    <div class="flex items-center gap-1.5 font-mono text-[9.5px] uppercase tracking-wider">
+                      <span class="px-1.5 py-0.5 rounded font-semibold text-[#050606] leading-none" style="background:${pr.accent};">${pr.index}</span>
+                      <span class="text-muted truncate">DOSSIÊ</span>
+                    </div>
+                    <div class="font-display text-sm font-bold text-ink truncate group-hover:text-limeTech transition-colors">${pr.title}</div>
+                    <div class="font-mono text-[9.5px] text-muted truncate">${pr.sub}</div>
+                  </div>
+                  <span class="font-mono text-xs font-semibold shrink-0" style="color:${pr.accent};">↗</span>
+                </button>
+              `).join('')}
+            </div>
+          </div>`
+        : '';
+
+      actechModalBody.innerHTML = `
+        <div class="space-y-2">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-mono text-[10px] font-semibold uppercase tracking-wider border" style="color:${m.accent}; border-color:${m.accent}66; background:${m.accent}18;">
+              ${m.isFuture ? '<span class="w-1.5 h-1.5 rounded-full bg-limeTech acad-node-pulse"></span>' : ''}
+              <span>${m.status}</span>
+            </span>
+            <span class="font-mono text-[11px] text-muted">${m.area}</span>
+          </div>
+          <h3 id="actech-modal-title" class="font-display text-xl sm:text-2xl font-extrabold text-ink tracking-tight leading-tight">${m.role}</h3>
+          <p class="text-[13.5px] sm:text-sm text-ink/85 leading-relaxed">${m.modalSummary}</p>
+        </div>
+
+        <div class="space-y-2.5">
+          <div class="font-mono text-[10px] uppercase tracking-[0.14em]" style="color:${m.accent};">
+            FRENTES DE ATUAÇÃO &amp; ENTREGAS
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            ${m.frentes.map((f) => `
+              <article class="p-3.5 rounded-xl bg-graphite/90 border border-white/10 space-y-1.5">
+                <div class="flex items-center gap-2">
+                  <span class="font-mono text-[10px] font-semibold px-1.5 py-0.5 rounded text-[#050606] leading-none" style="background:${m.accent};">${f.num}</span>
+                  <h4 class="font-display text-[13.5px] font-bold text-ink leading-snug">${f.title}</h4>
+                </div>
+                <p class="text-xs text-ink/78 leading-relaxed">${f.detail}</p>
+              </article>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-1.5">
+          ${m.tags.map((t) => `<span class="px-2.5 py-0.5 rounded-md bg-white/[0.05] border border-white/10 font-mono text-[10px] text-ink/85">${t}</span>`).join('')}
+        </div>
+
+        ${projectsBlock}
+      `;
+
+      actechModalBody.scrollTop = 0;
+
+      actechModalBody.querySelectorAll('[data-actech-open-case]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const cid = btn.getAttribute('data-actech-open-case');
+          const found = PROJECTS.findIndex((p) => p.id === cid);
+          if (found >= 0) {
+            closeActechModal(true);
+            openCaseModal(found);
+          }
+        });
+      });
+    }
+
+    function openActechModal(idx) {
+      if (!actechModalEl) return;
+      lastActechTrigger = document.activeElement;
+      setBackgroundPaused(true);
+      renderActechModal(idx);
+      actechModalEl.setAttribute('data-open', 'true');
+      actechModalEl.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => actechModalClose && actechModalClose.focus(), 50);
+    }
+
+    function closeActechModal(keepPaused = false) {
+      if (!actechModalEl || actechModalEl.getAttribute('data-open') !== 'true') return;
+      actechModalEl.setAttribute('data-open', 'false');
+      actechModalEl.setAttribute('aria-hidden', 'true');
+      if (!keepPaused) {
+        document.body.style.overflow = '';
+        setBackgroundPaused(false);
+        if (lastActechTrigger && typeof lastActechTrigger.focus === 'function') {
+          lastActechTrigger.focus();
+        }
+      }
+    }
+
+    if (actechModalEl) {
+      actechModalClose?.addEventListener('click', () => closeActechModal(false));
+      actechModalPrev?.addEventListener('click', () => renderActechModal(modalStageIdx - 1));
+      actechModalNext?.addEventListener('click', () => renderActechModal(modalStageIdx + 1));
+      actechModalEl.addEventListener('click', (e) => {
+        if (e.target === actechModalEl) closeActechModal(false);
+      });
+      document.addEventListener('keydown', (e) => {
+        if (actechModalEl.getAttribute('data-open') !== 'true') return;
+        if (e.key === 'Escape') { e.preventDefault(); closeActechModal(false); }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); renderActechModal(modalStageIdx + 1); }
+        else if (e.key === 'ArrowLeft') { e.preventDefault(); renderActechModal(modalStageIdx - 1); }
+      });
+    }
+
+    /* ---- CURVA LUMINOSA & SCROLL ---- */
     function ensurePathMeasured() {
       if (!activePath) return false;
       if (totalLen > 0) return true;
@@ -2417,13 +2642,19 @@
           <button
             type="button"
             class="actech-node-dot-btn"
-            data-actech-jump="${idx}"
-            aria-label="Ir para etapa ${m.num}: ${m.role}"
+            data-actech-open-stage="${idx}"
+            aria-label="Abrir detalhes da etapa ${m.num}: ${m.role}"
           >
             <span class="actech-node-dot-halo" aria-hidden="true"></span>
             <span class="actech-node-dot-core" aria-hidden="true"></span>
           </button>
-          <div class="actech-node-callout" data-actech-callout="${idx}">
+          <div
+            class="actech-node-callout"
+            role="button"
+            tabindex="0"
+            data-actech-open-stage="${idx}"
+            aria-label="Ler detalhes completos de ${m.role}"
+          >
             <div class="actech-callout-period">
               ${m.isFuture
                 ? `<span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-limeTech acad-node-pulse"></span><span>${m.period}</span></span>`
@@ -2431,9 +2662,10 @@
             </div>
             <h3 class="actech-callout-role">${m.role}</h3>
             <p class="actech-callout-desc">${m.desc}</p>
-            ${m.caseId
-              ? `<button type="button" data-open-project-by-id="${m.caseId}" class="actech-callout-case-btn">${m.caseLabel}</button>`
-              : ''}
+            <span class="actech-callout-more">
+              <span>Ler detalhes</span>
+              <span class="actech-callout-more-arrow" aria-hidden="true">↗</span>
+            </span>
           </div>
         </div>
       `).join('');
@@ -2451,16 +2683,15 @@
         });
       });
 
-      nodesLayer.querySelectorAll('[data-actech-jump]').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          scrollToMilestone(Number(btn.getAttribute('data-actech-jump')));
+      nodesLayer.querySelectorAll('[data-actech-open-stage]').forEach((el) => {
+        el.addEventListener('click', () => {
+          openActechModal(Number(el.getAttribute('data-actech-open-stage')));
         });
-      });
-
-      nodesLayer.querySelectorAll('[data-actech-callout]').forEach((box) => {
-        box.addEventListener('click', (e) => {
-          if (e.target.closest('[data-open-project-by-id]')) return;
-          scrollToMilestone(Number(box.getAttribute('data-actech-callout')));
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openActechModal(Number(el.getAttribute('data-actech-open-stage')));
+          }
         });
       });
 
@@ -2483,24 +2714,44 @@
         dockStepsEl.querySelectorAll('[data-actech-dock-step]').forEach((btn) => {
           dockStepButtons.push(btn);
           btn.addEventListener('click', () => {
-            scrollToMilestone(Number(btn.getAttribute('data-actech-dock-step')));
+            const idx = Number(btn.getAttribute('data-actech-dock-step'));
+            if (idx === activeIdx) {
+              openActechModal(idx);
+            } else {
+              scrollToMilestone(idx);
+            }
           });
         });
       }
 
       if (dockCasesEl) {
-        dockCasesEl.innerHTML = CASES.map((c) => `
+        dockCasesEl.innerHTML = `
           <button
             type="button"
-            data-open-project-by-id="${c.id}"
-            data-actech-case-idx="${c.milestoneIdx}"
-            data-highlighted="false"
+            id="actech-dock-read-btn"
             class="actech-dock-case-btn"
-            style="--case-accent:${c.accent};"
+            data-highlighted="true"
+            style="--case-accent:#C6F135;"
           >
-            <span>${c.label}</span>
+            <span>Ler etapa ↗</span>
           </button>
-        `).join('');
+          ${CASES.map((c) => `
+            <button
+              type="button"
+              data-open-project-by-id="${c.id}"
+              data-actech-case-idx="${c.milestoneIdx}"
+              data-highlighted="false"
+              class="actech-dock-case-btn"
+              style="--case-accent:${c.accent};"
+            >
+              <span>${c.label}</span>
+            </button>
+          `).join('')}
+        `;
+
+        document.getElementById('actech-dock-read-btn')?.addEventListener('click', () => {
+          openActechModal(hoveredIdx !== null ? hoveredIdx : activeIdx);
+        });
 
         dockCaseButtons.length = 0;
         dockCasesEl.querySelectorAll('[data-actech-case-idx]').forEach((btn) => {
@@ -2521,7 +2772,13 @@
           <span class="actech-mob-dot" aria-hidden="true"></span>
           <span class="actech-mob-tick" aria-hidden="true"></span>
 
-          <div class="space-y-1.5">
+          <div
+            class="actech-mob-card-trigger space-y-1.5"
+            role="button"
+            tabindex="0"
+            data-actech-mob-open="${idx}"
+            aria-label="Abrir detalhes completos de ${m.role}"
+          >
             <div class="inline-flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.13em] font-semibold" style="color:${m.accent};">
               ${m.isFuture ? '<span class="w-1.5 h-1.5 rounded-full bg-limeTech acad-node-pulse"></span>' : ''}
               <span>${m.num} // ${m.period}</span>
@@ -2529,10 +2786,11 @@
             <h3 class="font-display text-lg sm:text-xl font-bold text-ink leading-snug">${m.role}</h3>
             <p class="text-[13px] sm:text-sm text-ink/78 leading-relaxed">${m.desc}</p>
             <div class="flex flex-wrap items-center gap-1.5 pt-1">
-              ${m.tags.map((t) => `<span class="px-2 py-0.5 rounded bg-white/[0.05] border border-white/10 font-mono text-[9.5px] text-ink/80">${t}</span>`).join('')}
-              ${m.caseId
-                ? `<button type="button" data-open-project-by-id="${m.caseId}" class="actech-callout-case-btn !mt-0 ml-1" style="--node-accent:${m.accent};">${m.caseLabel}</button>`
-                : ''}
+              ${m.tags.slice(0, 4).map((t) => `<span class="px-2 py-0.5 rounded bg-white/[0.05] border border-white/10 font-mono text-[9.5px] text-ink/80">${t}</span>`).join('')}
+              <span class="actech-callout-more !mt-0 ml-0.5" style="--node-accent:${m.accent}; color:${m.accent}; border-color:${m.accent}66;">
+                <span>Ler detalhes</span>
+                <span aria-hidden="true">↗</span>
+              </span>
             </div>
           </div>
         </article>
@@ -2540,6 +2798,17 @@
 
       mobileItems.length = 0;
       mobNodesEl.querySelectorAll('[data-actech-mob-item]').forEach((el) => mobileItems.push(el));
+      mobNodesEl.querySelectorAll('[data-actech-mob-open]').forEach((el) => {
+        el.addEventListener('click', () => {
+          openActechModal(Number(el.getAttribute('data-actech-mob-open')));
+        });
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openActechModal(Number(el.getAttribute('data-actech-mob-open')));
+          }
+        });
+      });
     }
 
     function syncUIState(focusIdx, progressVal) {
@@ -2556,9 +2825,14 @@
       });
 
       if (dockMetaEl) {
-        dockMetaEl.innerHTML = m.tags
+        dockMetaEl.innerHTML = m.tags.slice(0, 4)
           .map((t) => `<span class="px-2 py-0.5 rounded bg-white/[0.045] border border-white/10 font-mono text-[9.5px] text-ink/80 whitespace-nowrap">${t}</span>`)
           .join('');
+      }
+
+      const readBtn = document.getElementById('actech-dock-read-btn');
+      if (readBtn) {
+        readBtn.style.setProperty('--case-accent', m.accent);
       }
 
       dockCaseButtons.forEach((btn) => {
@@ -2567,7 +2841,7 @@
       });
 
       if (readoutEl) {
-        readoutEl.textContent = `ETAPA ${m.num} / 04`;
+        readoutEl.textContent = `ETAPA ${m.num} / 0${MILESTONES.length}`;
       }
     }
 
