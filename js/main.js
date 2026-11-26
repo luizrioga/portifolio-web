@@ -4060,18 +4060,18 @@
   let mobileShowAll = false;
 
   const MOBILE_CAT_LABELS = {
-    data: 'Dados & Análise',
-    dev: 'Desenvolvimento',
-    cloud: 'Nuvem & Infra',
-    ai: 'IA Aplicada',
+    data: 'Dados',
+    dev: 'Dev',
+    cloud: 'Nuvem',
+    ai: 'IA',
     automation: 'Automação',
-    eng: 'Eng. & Hardware'
+    eng: 'Eng/HW'
   };
 
   function buildMobileDetailBlock(tool) {
     if (!tool) {
       return `
-        <div class="pt-2.5 border-t border-white/[0.08] font-mono text-[10.5px] text-muted">
+        <div class="pt-3 border-t border-white/[0.08] font-mono text-[10px] text-muted/85">
           Toque em uma ferramenta acima para ver contexto e cases vinculados.
         </div>`;
     }
@@ -4084,24 +4084,24 @@
     const tierLabel = tool.tier === 'core' ? 'Uso recorrente' : 'Frente específica';
 
     return `
-      <div id="toolbox-mobile-detail" class="pt-3 border-t border-white/10 space-y-2.5">
+      <div id="toolbox-mobile-detail" class="pt-3.5 border-t border-white/10 space-y-2.5">
         <div class="flex items-start justify-between gap-2">
-          <div class="min-w-0 space-y-0.5">
-            <div class="flex flex-wrap items-center gap-2 font-mono text-[9.5px] uppercase tracking-wider">
+          <div class="min-w-0 space-y-1">
+            <div class="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-wider">
               <span class="font-semibold text-limeTech">${tool.name}</span>
               <span class="text-muted">· ${tierLabel}</span>
             </div>
-            <p class="text-[12.5px] text-ink/85 leading-snug">${tool.context}</p>
+            <p class="text-[13px] text-ink/85 leading-relaxed">${tool.context}</p>
           </div>
-          <button type="button" data-mob-tool-clear aria-label="Fechar detalhes" class="min-w-[32px] min-h-[32px] rounded-lg bg-carbon border hairline-dark text-muted hover:text-ink inline-flex items-center justify-center shrink-0 font-mono text-xs">×</button>
+          <button type="button" data-mob-tool-clear aria-label="Fechar detalhes" class="min-w-[30px] min-h-[30px] rounded-full text-muted hover:text-ink inline-flex items-center justify-center shrink-0 font-mono text-sm">×</button>
         </div>
         ${linked.length ? `
-          <div class="flex flex-wrap gap-1.5">
+          <div class="flex flex-wrap gap-2 pt-0.5">
             ${linked.map(({ idx, project }) => `
               <button
                 type="button"
                 data-mobile-open-case="${idx}"
-                class="min-h-[36px] inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-carbon border border-limeTech/35 font-mono text-[10px] text-ink hover:border-limeTech"
+                class="min-h-[34px] inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-limeTech/[0.08] border border-limeTech/40 font-mono text-[10px] text-ink hover:border-limeTech"
               >
                 <span class="text-limeTech font-semibold">${project.index}</span>
                 <span>${project.name.split(' · ')[0]}</span>
@@ -4124,18 +4124,12 @@
           role="tab"
           aria-selected="${isAct}"
           data-mob-cat="${cat.id}"
-          class="min-h-[44px] px-2.5 py-2 rounded-xl border text-left flex items-center justify-between gap-2 transition-colors ${
-            isAct
-              ? 'bg-graphite text-ink'
-              : 'bg-graphite/45 border-white/[0.08] text-muted hover:text-ink'
-          }"
-          style="${isAct ? `border-color:${meta.color}88; background: color-mix(in srgb, ${meta.color} 10%, #141614);` : ''}"
+          class="toolbox-mob-tab inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider"
+          style="--tab-accent:${meta.color};"
         >
-          <span class="flex items-center gap-2 min-w-0">
-            <span class="shrink-0" style="color:${meta.color};" aria-hidden="true">${meta.icon}</span>
-            <span class="font-mono text-[10.5px] font-semibold truncate ${isAct ? 'text-ink' : 'text-ink/80'}">${label}</span>
-          </span>
-          <span class="font-mono text-[9.5px] tabular-nums shrink-0 ${isAct ? 'font-semibold' : 'opacity-65'}" style="${isAct ? `color:${meta.color};` : ''}">${String(cat.tools.length).padStart(2, '0')}</span>
+          <span class="w-1.5 h-1.5 rounded-full shrink-0 transition-transform" style="background:${isAct ? meta.color : 'rgba(255,255,255,0.22)'};"></span>
+          <span class="${isAct ? 'font-semibold text-ink' : 'text-muted'}">${label}</span>
+          <span class="text-[9.5px] tabular-nums opacity-60">${cat.tools.length}</span>
         </button>`;
     }).join('');
 
@@ -4150,6 +4144,11 @@
           toolboxMobExpandBtn.textContent = `Ver todas (${ALL_TOOLS_FLAT.length}) ↓`;
         }
         renderMobileToolbox();
+        const activeTab = toolboxMobDomains.querySelector(`[data-mob-cat="${nextId}"]`);
+        if (activeTab) {
+          const targetLeft = activeTab.offsetLeft - (toolboxMobDomains.clientWidth - activeTab.offsetWidth) / 2;
+          toolboxMobDomains.scrollTo({ left: Math.max(0, targetLeft), behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+        }
       });
     });
 
@@ -4157,26 +4156,23 @@
       ? TOOLBOX_DATA
       : TOOLBOX_DATA.filter((c) => c.id === mobileActiveCatId);
 
-    const cardsHtml = catsToShow.map((cat) => {
+    const groupsHtml = catsToShow.map((cat, idx) => {
       const meta = TOOLBOX_META[cat.id] || { color: '#C6F135', sub: '', icon: '' };
       const uniqueProjects = new Set(cat.tools.flatMap((t) => t.projects)).size;
       const showInlineDetail = !mobileShowAll;
       const activeToolInCat = selectedTool && selectedTool.categoryId === cat.id ? selectedTool : null;
 
       return `
-        <div
-          class="rounded-xl bg-graphite/65 border border-white/[0.08] p-3.5 space-y-3"
-          style="border-top: 2px solid ${meta.color}80;"
-        >
-          <div class="flex items-center justify-between gap-2">
+        <div class="${idx > 0 ? 'pt-4 border-t border-white/[0.08] ' : ''}space-y-3">
+          <div class="flex items-baseline justify-between gap-2">
             <div class="min-w-0">
-              <div class="font-mono text-[11px] font-semibold text-ink tracking-wider truncate">${cat.label}</div>
-              <p class="text-[11px] text-muted truncate mt-0.5">${meta.sub}</p>
+              <div class="font-mono text-[10.5px] font-semibold tracking-[0.12em] uppercase" style="color:${meta.color};">${cat.label}</div>
+              <p class="text-[12px] text-ink/70 mt-0.5">${meta.sub}</p>
             </div>
-            <span class="font-mono text-[9.5px] shrink-0" style="color:${meta.color};">${uniqueProjects} ${uniqueProjects === 1 ? 'CASE' : 'CASES'}</span>
+            <span class="font-mono text-[9.5px] text-muted shrink-0">${uniqueProjects} ${uniqueProjects === 1 ? 'CASE' : 'CASES'}</span>
           </div>
 
-          <div class="flex flex-wrap gap-1.5">
+          <div class="flex flex-wrap gap-2">
             ${cat.tools.map((tool) => {
               const isSel = Boolean(selectedTool && selectedTool.name === tool.name);
               const isCore = tool.tier === 'core';
@@ -4186,9 +4182,10 @@
                   data-mob-tool-cat="${cat.id}"
                   data-mob-tool-name="${tool.name}"
                   data-selected="${isSel}"
-                  class="tool-chip min-h-[38px] inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-carbon/90 border ${isCore ? 'border-white/15' : 'border-white/[0.08]'} font-mono text-[11px] text-ink"
+                  style="--cat-accent:${meta.color};"
+                  class="toolbox-mob-pill min-h-[36px] inline-flex items-center gap-1.5 px-3 py-1 font-mono text-[11px] text-ink/90 cursor-pointer"
                 >
-                  <span class="tool-chip__dot w-1.5 h-1.5 rounded-full shrink-0 ${isCore ? 'bg-limeTech' : 'bg-white/30'}" aria-hidden="true"></span>
+                  <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:${isSel ? meta.color : isCore ? '#C6F135' : 'rgba(255,255,255,0.28)'};" aria-hidden="true"></span>
                   <span>${tool.name}</span>
                 </button>`;
             }).join('')}
@@ -4199,8 +4196,8 @@
     }).join('');
 
     toolboxMobStage.innerHTML = mobileShowAll
-      ? `${selectedTool ? `<div class="mb-3 rounded-xl bg-graphite border border-limeTech/35 px-3.5 pb-3.5">${buildMobileDetailBlock(selectedTool)}</div>` : ''}<div class="space-y-2.5">${cardsHtml}</div>`
-      : cardsHtml;
+      ? `${selectedTool ? `<div class="mb-4 pb-1">${buildMobileDetailBlock(selectedTool)}</div>` : ''}<div class="space-y-4">${groupsHtml}</div>`
+      : groupsHtml;
 
     toolboxMobStage.querySelectorAll('[data-mob-tool-name]').forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -4653,11 +4650,13 @@
   })();
 
   /* ==========================================================================
-     18. PRINCÍPIOS — BLOCO EDITORIAL DE LEITURA CALMA (10 PENSADORES)
+     18. PRINCÍPIOS — MANIFESTO EDITORIAL ABERTO & ÍNDICE TIPOGRÁFICO (10)
      ========================================================================== */
   (function initPrinciplesEditorial() {
     const reader = document.getElementById('principles-editorial-reader');
     const authorRail = document.getElementById('principles-author-rail');
+    const segDotsWrap = document.getElementById('principles-progress-dots');
+    const ambientWash = document.getElementById('principles-ambient-wash');
     const liveCounter = document.getElementById('principles-live-counter');
     const prevBtn = document.getElementById('principles-prev-btn');
     const nextBtn = document.getElementById('principles-next-btn');
@@ -4677,26 +4676,47 @@
             data-principle-pill="${idx}"
             data-active="${idx === 0}"
             style="--pill-accent:${item.accent};"
-            class="principle-index-btn shrink-0 lg:shrink text-left px-3 py-2 lg:px-3.5 lg:py-2.5 rounded-xl flex items-center lg:flex-col lg:items-start justify-between gap-2 lg:gap-0.5 cursor-pointer"
+            class="principle-row-btn shrink-0 lg:shrink text-left flex items-center justify-between gap-3 whitespace-nowrap"
           >
-            <div class="flex items-center gap-1.5 font-mono text-[9.5px] uppercase tracking-wider w-full justify-between">
-              <span class="inline-flex items-center gap-1.5 min-w-0">
-                <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:${item.accent};"></span>
-                <span class="hidden lg:inline text-muted tabular-nums">${item.index}</span>
-                <span class="lg:hidden font-semibold text-ink/90 whitespace-nowrap">${item.author.split(' ').slice(-1)[0]}</span>
+            <span class="inline-flex items-center gap-2.5 min-w-0">
+              <span class="principle-row-dot shrink-0" aria-hidden="true"></span>
+              <span class="hidden lg:inline font-mono text-[10px] text-muted/70 tabular-nums shrink-0">${item.index}</span>
+              <span class="principle-row-name font-display text-[13px] lg:text-[14px] font-semibold tracking-tight truncate">
+                <span class="lg:hidden">${item.author.split(' ').length > 2 ? item.author.split(' ').slice(-1)[0] : item.author}</span>
+                <span class="hidden lg:inline">${item.author}</span>
               </span>
-              <span class="hidden lg:inline text-[8.5px] text-muted truncate">${item.discipline}</span>
-            </div>
-            <div class="hidden lg:block font-display text-[13px] font-bold text-ink leading-snug truncate w-full">${item.author}</div>
+            </span>
+            <span class="hidden lg:inline font-mono text-[9px] uppercase tracking-[0.14em] text-muted/65 shrink-0">${item.discipline}</span>
+          </button>`
+      ).join('');
+    }
+
+    if (segDotsWrap) {
+      segDotsWrap.innerHTML = PRINCIPLES.map(
+        (item, idx) => `
+          <button
+            type="button"
+            data-principle-seg="${idx}"
+            data-active="${idx === 0}"
+            style="--seg-accent:${item.accent};"
+            class="principle-seg-btn"
+            aria-label="Ir para ${item.author}"
+          >
+            <span class="principle-seg-bar"></span>
           </button>`
       ).join('');
     }
 
     const pills = authorRail ? Array.from(authorRail.querySelectorAll('[data-principle-pill]')) : [];
+    const segs = segDotsWrap ? Array.from(segDotsWrap.querySelectorAll('[data-principle-seg]')) : [];
 
-    function renderEditorial(idx, animate = true) {
+    function renderEditorial(idx, animate = true, scrollMobTab = false) {
       activeIdx = (idx + total) % total;
       const item = PRINCIPLES[activeIdx];
+
+      if (ambientWash) {
+        ambientWash.style.setProperty('--p-accent', item.accent);
+      }
 
       if (liveCounter) {
         liveCounter.textContent = `${item.index} / ${totalPadded}`;
@@ -4705,36 +4725,35 @@
 
       reader.innerHTML = `
         <article
-          class="principle-editorial-card ${animate && !prefersReducedMotion ? 'principle-editorial-enter ' : ''}h-full rounded-2xl p-6 sm:p-8 lg:p-10 flex flex-col justify-between gap-6 sm:gap-8"
+          class="principle-open-stage ${animate && !prefersReducedMotion ? 'principle-open-enter ' : ''}space-y-6 sm:space-y-7 py-1"
           style="--p-accent:${item.accent};"
         >
-          <div class="flex items-center justify-between gap-3 border-b hairline-dark pb-4 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.14em]">
-            <div class="flex items-center gap-2 min-w-0">
-              <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:${item.accent};"></span>
-              <span class="font-semibold truncate" style="color:${item.accent};">${item.discipline} · ${item.theme}</span>
-            </div>
-            <span class="text-muted tabular-nums shrink-0">${item.index} / ${totalPadded}</span>
+          <div class="flex items-center gap-3 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
+            <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:${item.accent}; box-shadow: 0 0 10px ${item.accent};"></span>
+            <span class="font-semibold" style="color:${item.accent};">${item.discipline} · ${item.theme}</span>
+            <span class="h-[1px] flex-1 bg-white/[0.08]" aria-hidden="true"></span>
+            <span class="text-muted/75 tabular-nums shrink-0">${item.index}</span>
           </div>
 
-          <blockquote class="space-y-5 my-auto">
-            <p class="font-display text-xl sm:text-2xl lg:text-[1.85rem] font-bold text-ink leading-[1.32] tracking-[-0.02em]">
+          <blockquote class="space-y-4 sm:space-y-5">
+            <p class="font-display text-[1.45rem] sm:text-[1.85rem] lg:text-[2.25rem] font-bold text-ink leading-[1.24] tracking-[-0.025em]">
               ${item.quote}
             </p>
-            <footer class="flex flex-wrap items-baseline justify-between gap-2 pt-1">
-              <span class="font-mono text-xs sm:text-[13px] tracking-wider uppercase font-semibold" style="color:${item.accent};">
+            <footer class="flex flex-wrap items-baseline gap-x-3 gap-y-1 pt-1">
+              <span class="font-mono text-xs sm:text-[13px] tracking-[0.12em] uppercase font-semibold" style="color:${item.accent};">
                 — ${item.author}
               </span>
-              <span class="font-mono text-[10px] text-muted uppercase tracking-wider">
+              <span class="font-mono text-[10px] text-muted/75 uppercase tracking-[0.12em]">
                 ${item.role}
               </span>
             </footer>
           </blockquote>
 
-          <div class="pt-4 border-t hairline-dark grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-4 items-baseline">
-            <div class="sm:col-span-3 font-mono text-[9.5px] uppercase tracking-widest text-muted">
+          <div class="pt-5 border-t border-white/[0.08] grid grid-cols-1 sm:grid-cols-12 gap-1.5 sm:gap-4 items-baseline">
+            <div class="sm:col-span-3 font-mono text-[9.5px] uppercase tracking-[0.16em] text-muted/75">
               NOTA // LR
             </div>
-            <p class="sm:col-span-9 text-xs sm:text-[13.5px] text-ink/82 leading-relaxed">
+            <p class="sm:col-span-9 text-[13px] sm:text-[14px] text-ink/80 leading-relaxed">
               ${item.note}
             </p>
           </div>
@@ -4745,20 +4764,40 @@
         pill.setAttribute('data-active', String(isAct));
         pill.setAttribute('aria-selected', String(isAct));
       });
+
+      segs.forEach((seg, i) => {
+        seg.setAttribute('data-active', String(i === activeIdx));
+      });
+
+      if (scrollMobTab && authorRail && window.innerWidth < 1024) {
+        const activePill = pills[activeIdx];
+        if (activePill) {
+          const targetLeft = activePill.offsetLeft - (authorRail.clientWidth - activePill.offsetWidth) / 2;
+          authorRail.scrollTo({ left: Math.max(0, targetLeft), behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+        }
+      }
     }
 
     pills.forEach((pill) => {
       pill.addEventListener('click', () => {
         const nextIdx = Number(pill.getAttribute('data-principle-pill'));
         if (nextIdx === activeIdx) return;
-        renderEditorial(nextIdx, true);
+        renderEditorial(nextIdx, true, true);
       });
     });
 
-    if (prevBtn) prevBtn.addEventListener('click', () => renderEditorial(activeIdx - 1, true));
-    if (nextBtn) nextBtn.addEventListener('click', () => renderEditorial(activeIdx + 1, true));
+    segs.forEach((seg) => {
+      seg.addEventListener('click', () => {
+        const nextIdx = Number(seg.getAttribute('data-principle-seg'));
+        if (nextIdx === activeIdx) return;
+        renderEditorial(nextIdx, true, true);
+      });
+    });
 
-    // Suporte a deslize suave no mobile dentro do card de leitura
+    if (prevBtn) prevBtn.addEventListener('click', () => renderEditorial(activeIdx - 1, true, true));
+    if (nextBtn) nextBtn.addEventListener('click', () => renderEditorial(activeIdx + 1, true, true));
+
+    // Suporte a deslize suave no mobile dentro da área de leitura
     let touchStartX = 0;
     let touchStartY = 0;
     reader.addEventListener('touchstart', (e) => {
@@ -4771,11 +4810,11 @@
       const dx = e.changedTouches[0].clientX - touchStartX;
       const dy = e.changedTouches[0].clientY - touchStartY;
       if (Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy) * 1.2) {
-        renderEditorial(activeIdx + (dx < 0 ? 1 : -1), true);
+        renderEditorial(activeIdx + (dx < 0 ? 1 : -1), true, true);
       }
     }, { passive: true });
 
-    renderEditorial(0, false);
+    renderEditorial(0, false, false);
   })();
 
   /* ==========================================================================
