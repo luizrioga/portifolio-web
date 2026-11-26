@@ -623,48 +623,6 @@ main > section[id] {
     linear-gradient(180deg, rgba(5, 6, 6, 0.42) 0%, rgba(5, 6, 6, 0.08) 38%, rgba(5, 6, 6, 0.94) 100%);
 }
 
-.spacex-cinema-band--framed {
-  width: 100%;
-  left: auto;
-  margin-left: 0;
-  min-height: clamp(410px, 54vh, 520px);
-  border-radius: 20px;
-  border: 1px solid rgba(198, 241, 53, 0.28);
-  box-shadow: 0 24px 56px -28px rgba(0, 0, 0, 0.9);
-}
-
-/* Stage Tab Switcher (01 // SOBRE & 04 // FORMAÇÃO) */
-.stage-tab-btn {
-  color: var(--ink-muted);
-  border: 1px solid transparent;
-  background: transparent;
-}
-
-.stage-tab-btn:hover:not([aria-selected="true"]) {
-  color: var(--ink-primary);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.stage-tab-btn[aria-selected="true"] {
-  color: #050606;
-  background: var(--accent-lime);
-  border-color: var(--accent-lime);
-  box-shadow: 0 8px 20px -10px rgba(198, 241, 53, 0.65);
-}
-
-.stage-tab-btn[aria-selected="true"] .acad-node-pulse {
-  background: #050606;
-}
-
-.stage-panel-enter {
-  animation: stagePanelIn 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes stagePanelIn {
-  from { opacity: 0; transform: translate3d(0, 8px, 0); }
-  to { opacity: 1; transform: translate3d(0, 0, 0); }
-}
-
 /* Floating Right-Edge Chapter Telemetry Rail (xl+ Non-Linear Jump HUD) */
 .telemetry-rail {
   pointer-events: auto;
@@ -744,9 +702,6 @@ main > section[id] {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .stage-panel-enter {
-    animation: none !important;
-  }
   .telemetry-node__bar,
   .telemetry-node__label {
     transition: none !important;

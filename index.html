@@ -62,7 +62,7 @@
     };
   </script>
 
-  <link rel="stylesheet" href="css/styles.css?v=20261125c" />
+  <link rel="stylesheet" href="css/styles.css?v=20261125d" />
 </head>
 <body class="bg-carbon text-ink antialiased selection:bg-limeTech selection:text-inkDark">
 
@@ -114,16 +114,8 @@
       </div>
 
       <!-- Menu mobile -->
-      <div class="flex lg:hidden items-center gap-2">
-        <button
-          id="mobile-module-badge-btn"
-          type="button"
-          aria-label="Abrir índice de seções"
-          class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-graphite/90 border hairline-dark hover:border-limeTech font-mono text-[10px] tracking-wider uppercase text-limeTech transition-colors cursor-pointer"
-        >
-          <span id="mobile-module-badge">00 · INÍCIO</span>
-          <span class="text-[9px] opacity-75" aria-hidden="true">▾</span>
-        </button>
+      <div class="flex lg:hidden items-center gap-2.5">
+        <span id="mobile-module-badge" class="font-mono text-[10.5px] tracking-wider uppercase text-limeTech">00 · INÍCIO</span>
         <button
           id="mobile-menu-btn"
           type="button"
@@ -289,59 +281,47 @@
     </section>
 
     <!-- ======================================================================
-         FAIXA DE INDICADORES INTERATIVOS (PORTAS DE SALTO RÁPIDO NÃO-LINEAR)
+         FAIXA DE INDICADORES (RESTAURADA COM TOM FACTUAL E CONTAGENS DINÂMICAS)
          ====================================================================== -->
-    <div id="mission-metrics" class="mission-metrics-band border-b hairline-dark py-4 sm:py-8 lg:py-9">
+    <div id="mission-metrics" class="mission-metrics-band border-b hairline-dark py-5 sm:py-9">
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
-        <div class="mission-metrics-grid grid grid-cols-2 lg:grid-cols-4 gap-y-4 gap-x-4 sm:gap-y-5 sm:gap-x-5 lg:gap-0 lg:divide-x divide-white/10">
-          <a href="#works" class="metric-jump-cell group lg:py-1.5 lg:pr-7 space-y-1 reveal block rounded-lg transition-colors">
-            <div class="flex items-center justify-between gap-2">
-              <div class="mission-metric-num text-limeTech" data-projects-count data-count-to="4" data-count-pad="2">04</div>
-              <span class="font-mono text-xs text-muted group-hover:text-limeTech group-hover:translate-x-0.5 transition-all" aria-hidden="true">→</span>
-            </div>
-            <div class="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.14em] text-ink font-semibold group-hover:text-limeTech transition-colors">Cases documentados</div>
-            <p class="hidden sm:block text-xs text-muted leading-snug">Hardware, web, nuvem, ETL e IA aplicados a problemas reais.</p>
-          </a>
+        <div class="mission-metrics-grid grid grid-cols-2 lg:grid-cols-4 gap-y-5 gap-x-4 sm:gap-y-7 sm:gap-x-5 lg:gap-0 lg:divide-x divide-white/10">
+          <div class="lg:py-2 lg:pr-8 space-y-1 sm:space-y-2 reveal">
+            <div class="mission-metric-num text-limeTech" data-projects-count data-count-to="4" data-count-pad="2">04</div>
+            <div class="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.14em] text-ink font-semibold">Cases documentados</div>
+            <p class="hidden sm:block text-xs text-muted leading-relaxed">Hardware, web, nuvem, ETL e IA aplicados a problemas reais.</p>
+          </div>
 
-          <a href="#experience" class="metric-jump-cell group lg:py-1.5 lg:px-7 space-y-1 reveal block rounded-lg transition-colors" style="--reveal-delay: 70ms;">
-            <div class="flex items-center justify-between gap-2">
-              <div class="mission-metric-num text-[#38BDF8]" data-count-to="2" data-count-suffix="+">2+</div>
-              <span class="font-mono text-xs text-muted group-hover:text-[#38BDF8] group-hover:translate-x-0.5 transition-all" aria-hidden="true">→</span>
-            </div>
-            <div class="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.14em] text-ink font-semibold group-hover:text-[#38BDF8] transition-colors">Anos em ambiente industrial</div>
-            <p class="hidden sm:block text-xs text-muted leading-snug">Desde jun/2024 na Actech, entre operação, processos e digitalização.</p>
-          </a>
+          <div class="lg:py-2 lg:px-8 space-y-1 sm:space-y-2 reveal" style="--reveal-delay: 70ms;">
+            <div class="mission-metric-num text-[#38BDF8]" data-count-to="2" data-count-suffix="+">2+</div>
+            <div class="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.14em] text-ink font-semibold">Anos em ambiente industrial</div>
+            <p class="hidden sm:block text-xs text-muted leading-relaxed">Desde jun/2024 na Actech, entre operação, processos e digitalização.</p>
+          </div>
 
-          <button type="button" data-open-project-by-id="iris" class="metric-jump-cell group text-left lg:py-1.5 lg:px-7 space-y-1 reveal block rounded-lg transition-colors cursor-pointer" style="--reveal-delay: 140ms;">
-            <div class="flex items-center justify-between gap-2">
-              <div class="mission-metric-num text-[#F59E0B]" data-count-to="2" data-count-pad="2">02</div>
-              <span class="font-mono text-xs text-muted group-hover:text-[#F59E0B] group-hover:translate-x-0.5 transition-all" aria-hidden="true">↗</span>
-            </div>
-            <div class="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.14em] text-ink font-semibold group-hover:text-[#F59E0B] transition-colors">Gerações de hardware</div>
-            <p class="hidden sm:block text-xs text-muted leading-snug">Bit I evoluído para Bit II autônomo e portátil em projeto de inovação.</p>
-          </button>
+          <div class="lg:py-2 lg:px-8 space-y-1 sm:space-y-2 reveal" style="--reveal-delay: 140ms;">
+            <div class="mission-metric-num text-[#F59E0B]" data-count-to="2" data-count-pad="2">02</div>
+            <div class="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.14em] text-ink font-semibold">Gerações de hardware</div>
+            <p class="hidden sm:block text-xs text-muted leading-relaxed">Bit I evoluído para Bit II autônomo e portátil em projeto de inovação.</p>
+          </div>
 
-          <button type="button" data-jump-academic-tab="certs" class="metric-jump-cell group text-left lg:py-1.5 lg:pl-7 space-y-1 reveal block rounded-lg transition-colors cursor-pointer" style="--reveal-delay: 210ms;">
-            <div class="flex items-center justify-between gap-2">
-              <div id="metrics-certs-count" class="mission-metric-num text-ink" data-certs-count data-count-to="15" data-count-pad="2">15</div>
-              <span class="font-mono text-xs text-muted group-hover:text-limeTech group-hover:translate-x-0.5 transition-all" aria-hidden="true">→</span>
-            </div>
-            <div class="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.14em] text-ink font-semibold group-hover:text-limeTech transition-colors">Certificações &amp; Acervo 3D</div>
-            <p class="hidden sm:block text-xs text-muted leading-snug">Google AI, NASA Space Apps, Estudante Destaque IFMG e OBMEP.</p>
-          </button>
+          <div class="lg:py-2 lg:pl-8 space-y-1 sm:space-y-2 reveal" style="--reveal-delay: 210ms;">
+            <div id="metrics-certs-count" class="mission-metric-num text-ink" data-certs-count data-count-to="15" data-count-pad="2">15</div>
+            <div class="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.14em] text-ink font-semibold">Certificações &amp; méritos</div>
+            <p class="hidden sm:block text-xs text-muted leading-relaxed">Google AI Professional, NASA Space Apps, Estudante Destaque IFMG e OBMEP.</p>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- ======================================================================
-         01 // SOBRE & TRAJETÓRIA — PALCO COM 2 ABAS (VISÃO & PERFIL ↔ RIW 2023)
+         01 // SOBRE & TRAJETÓRIA (PILARES + RETRATO + DESTAQUE BITMIND RIW)
          ====================================================================== -->
-    <section id="thinking" data-module="01 // SOBRE" class="py-8 md:py-14 lg:py-16 bg-carbon border-b hairline-dark relative">
+    <section id="thinking" data-module="01 // SOBRE" class="pt-9 pb-8 sm:pt-14 lg:pt-16 md:pb-0 bg-carbon border-b hairline-dark relative">
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
 
-        <!-- Cabeçalho unificado + Seletor de Abas do Palco -->
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 md:mb-8 reveal">
-          <div class="space-y-1.5 md:space-y-2.5">
+        <!-- Intro + 3 Pilares + Retrato no Palco -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-10 lg:gap-12 items-start mb-8 md:mb-10 lg:mb-14">
+          <div class="lg:col-span-8 space-y-4 md:space-y-7 reveal">
             <div class="font-mono text-xs tracking-[0.14em] uppercase text-limeTech">
               01 // SOBRE &amp; TRAJETÓRIA
             </div>
@@ -349,44 +329,10 @@
               Investigar o fluxo.<br />
               Eliminar atrito.
             </h2>
-          </div>
-
-          <div
-            class="stage-tab-rail w-full md:w-auto grid grid-cols-2 md:inline-flex items-center gap-1 p-1 rounded-xl bg-graphite border hairline-dark"
-            role="tablist"
-            aria-label="Alternar visão geral e destaque Rio Innovation Week"
-          >
-            <button
-              type="button"
-              role="tab"
-              aria-selected="true"
-              aria-controls="sobre-panel-profile"
-              data-sobre-tab="profile"
-              class="stage-tab-btn px-2.5 sm:px-3.5 py-2 rounded-lg font-mono text-[9.5px] sm:text-[10.5px] uppercase tracking-wider font-semibold transition-all cursor-pointer whitespace-nowrap text-center"
-            >
-              01 · Visão &amp; Perfil
-            </button>
-            <button
-              type="button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="sobre-panel-riw"
-              data-sobre-tab="riw"
-              class="stage-tab-btn inline-flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-2 rounded-lg font-mono text-[9.5px] sm:text-[10.5px] uppercase tracking-wider font-semibold transition-all cursor-pointer whitespace-nowrap"
-            >
-              <span class="w-1.5 h-1.5 rounded-full bg-limeTech acad-node-pulse shrink-0" aria-hidden="true"></span>
-              <span>02 · Missão RIW 2023</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- ABA 01: VISÃO, 3 PILARES & RETRATO NO PALCO -->
-        <div id="sobre-panel-profile" role="tabpanel" class="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 lg:gap-10 items-start">
-          <div class="lg:col-span-8 space-y-5 md:space-y-6 reveal">
             <p class="md:hidden text-xs text-ink/80 leading-relaxed">
               Começo entendendo o gargalo na prática — mapeio processos, automatizo dados, construo apps web e exploro hardware em projetos de inovação.
             </p>
-            <p class="hidden md:block text-base lg:text-[17px] text-ink/82 leading-relaxed max-w-2xl">
+            <p class="hidden md:block text-lg text-ink/80 leading-relaxed max-w-2xl">
               Não começo pela ferramenta — começo entendendo o gargalo na prática. Mapeei processos físicos em área, medi tempos reais e construí automações de dados, aplicações web e protótipos de hardware em projetos de inovação para eliminar retrabalho.
             </p>
 
@@ -416,9 +362,9 @@
             </div>
 
             <!-- 3 Pilares editoriais abertos (desktop/tablet — ritmo sem excesso de caixas) -->
-            <div class="hidden md:grid grid-cols-3 pt-5 border-t hairline-dark md:divide-x divide-white/10">
-              <article class="pr-5 flex flex-col justify-between gap-4 reveal" style="--reveal-delay: 60ms;">
-                <div class="space-y-2">
+            <div class="hidden md:grid grid-cols-3 pt-6 border-t hairline-dark md:divide-x divide-white/10">
+              <article class="pr-6 flex flex-col justify-between gap-5 reveal" style="--reveal-delay: 60ms;">
+                <div class="space-y-2.5">
                   <div class="flex items-center gap-2 font-mono text-[10.5px] tracking-wider">
                     <span class="w-4 h-[2px] bg-[#F59E0B] inline-block" aria-hidden="true"></span>
                     <span class="text-[#F59E0B] font-semibold">01</span>
@@ -432,8 +378,8 @@
                 <div class="font-mono text-[10px] tracking-wider text-[#F59E0B]/90">PROCESSO → GARGALO REAL</div>
               </article>
 
-              <article class="px-5 flex flex-col justify-between gap-4 reveal" style="--reveal-delay: 120ms;">
-                <div class="space-y-2">
+              <article class="px-6 flex flex-col justify-between gap-5 reveal" style="--reveal-delay: 120ms;">
+                <div class="space-y-2.5">
                   <div class="flex items-center gap-2 font-mono text-[10.5px] tracking-wider">
                     <span class="w-4 h-[2px] bg-[#38BDF8] inline-block" aria-hidden="true"></span>
                     <span class="text-[#38BDF8] font-semibold">02</span>
@@ -447,8 +393,8 @@
                 <div class="font-mono text-[10px] tracking-wider text-[#38BDF8]/90">ENGENHARIA · NUVEM · IA</div>
               </article>
 
-              <article class="pl-5 flex flex-col justify-between gap-4 reveal" style="--reveal-delay: 180ms;">
-                <div class="space-y-2">
+              <article class="pl-6 flex flex-col justify-between gap-5 reveal" style="--reveal-delay: 180ms;">
+                <div class="space-y-2.5">
                   <div class="flex items-center gap-2 font-mono text-[10.5px] tracking-wider">
                     <span class="w-4 h-[2px] bg-limeTech inline-block" aria-hidden="true"></span>
                     <span class="text-limeTech font-semibold">03</span>
@@ -462,29 +408,11 @@
                 <div class="font-mono text-[10px] tracking-wider text-limeTech">PROTÓTIPO → ROTINA</div>
               </article>
             </div>
-
-            <!-- Chamada interativa compacta para alternar à Aba 02 (Missão RIW 2023) -->
-            <div class="p-3.5 sm:p-4 rounded-xl bg-graphite/80 border border-limeTech/25 flex flex-wrap items-center justify-between gap-3">
-              <div class="flex items-center gap-3 min-w-0">
-                <img src="assets/bitmind-riw.jpg" alt="" loading="lazy" decoding="async" class="w-12 h-10 rounded-lg object-cover border border-white/15 shrink-0" />
-                <div class="min-w-0">
-                  <div class="font-mono text-[9.5px] uppercase tracking-widest text-limeTech font-semibold">MISSÃO EM DESTAQUE · RIW 2023</div>
-                  <div class="text-xs sm:text-[13px] text-ink/85 truncate">Única equipe da rede IFMG levada à Rio Innovation Week</div>
-                </div>
-              </div>
-              <button
-                type="button"
-                data-sobre-jump="riw"
-                class="px-3 py-1.5 rounded-lg bg-limeTech/12 border border-limeTech/40 hover:bg-limeTech hover:text-inkDark font-mono text-[10px] font-semibold uppercase tracking-wider text-limeTech transition-colors shrink-0 cursor-pointer"
-              >
-                Ver Missão RIW →
-              </button>
-            </div>
           </div>
 
           <!-- Retrato no palco (moldura única limpa, sem caixa dupla) -->
           <aside class="lg:col-span-4 reveal" style="--reveal-delay: 120ms;">
-            <div class="spatial-tilt portrait-stage-glow max-w-[300px] mx-auto md:max-w-none rounded-2xl bg-[#0D1012] border border-[#38BDF8]/25 p-2.5 md:p-3 space-y-2" data-tilt-max="5">
+            <div class="spatial-tilt portrait-stage-glow max-w-[320px] mx-auto md:max-w-none rounded-2xl bg-[#0D1012] border border-[#38BDF8]/25 p-2.5 md:p-3.5 space-y-2.5" data-tilt-max="5">
               <div class="flex items-center justify-between px-1 font-mono text-[9.5px] md:text-[10px] tracking-widest uppercase text-muted">
                 <span class="text-[#38BDF8] font-semibold">PALCO // LUIZ RIOGA</span>
                 <span class="text-limeTech">APRESENTAÇÃO &amp; PITCH</span>
@@ -527,64 +455,54 @@
           </aside>
         </div>
 
-        <!-- ABA 02: DESTAQUE EDITORIAL — EQUIPE BITMIND · RIO INNOVATION WEEK 2023 -->
-        <div id="sobre-panel-riw" role="tabpanel" class="hidden">
-          <div class="spacex-cinema-band spacex-cinema-band--framed mb-0">
-            <img
-              src="assets/bitmind-riw.jpg"
-              alt="Equipe Bitmind no estande do Instituto Federal durante a Rio Innovation Week 2023"
-              width="1080"
-              height="720"
-              loading="lazy"
-              decoding="async"
-              class="spacex-cinema-img"
-            />
-            <div class="spacex-cinema-vignette" aria-hidden="true"></div>
+        <!-- DESTAQUE EDITORIAL: EQUIPE BITMIND · RIO INNOVATION WEEK 2023 -->
+        <div class="spacex-cinema-band mb-0 reveal">
+          <img
+            src="assets/bitmind-riw.jpg"
+            alt="Equipe Bitmind no estande do Instituto Federal durante a Rio Innovation Week 2023"
+            width="1080"
+            height="720"
+            loading="lazy"
+            decoding="async"
+            class="spacex-cinema-img"
+          />
+          <div class="spacex-cinema-vignette" aria-hidden="true"></div>
 
-            <div class="relative z-10 w-full px-5 md:px-8 lg:px-10 py-5 md:py-10 lg:py-12">
-              <div class="max-w-2xl space-y-2.5 md:space-y-4">
-                <div class="inline-flex items-center gap-2 md:gap-2.5 font-mono text-[10px] md:text-[11px] uppercase tracking-[0.14em] md:tracking-[0.16em] text-limeTech">
-                  <span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-limeTech acad-node-pulse shrink-0"></span>
-                  <span class="md:hidden">MISSÃO EM DESTAQUE · RIW 2023</span>
-                  <span class="hidden md:inline">MISSÃO EM DESTAQUE · RIO INNOVATION WEEK 2023</span>
-                </div>
+          <div class="relative z-10 max-w-[1440px] w-full mx-auto px-4 md:px-6 lg:px-10 py-4 md:py-16 lg:py-20">
+            <div class="max-w-2xl space-y-2.5 md:space-y-5">
+              <div class="inline-flex items-center gap-2 md:gap-2.5 font-mono text-[10px] md:text-[11px] uppercase tracking-[0.14em] md:tracking-[0.16em] text-limeTech">
+                <span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-limeTech acad-node-pulse shrink-0"></span>
+                <span class="md:hidden">MISSÃO EM DESTAQUE · RIW 2023</span>
+                <span class="hidden md:inline">MISSÃO EM DESTAQUE · RIO INNOVATION WEEK 2023</span>
+              </div>
 
-                <h3 class="font-display text-xl md:text-4xl lg:text-[3.1rem] font-extrabold text-ink uppercase tracking-tight leading-[1.02] md:leading-[0.98]">
-                  Da bancada do IFMG<br />
-                  ao Píer Mauá.
-                </h3>
+              <h3 class="font-display text-xl md:text-5xl lg:text-[3.4rem] font-extrabold text-ink uppercase tracking-tight leading-[1.02] md:leading-[0.98]">
+                Da bancada do IFMG<br />
+                ao Píer Mauá.
+              </h3>
 
-                <p class="md:hidden text-xs text-ink/85 leading-relaxed">
-                  Líder técnico no <strong class="text-ink font-semibold">Projeto Íris</strong> — levamos a <strong class="text-limeTech font-semibold">única equipe da rede IFMG</strong> à Rio Innovation Week 2023.
-                </p>
-                <p class="hidden md:block text-sm lg:text-base text-ink/90 leading-relaxed max-w-xl">
-                  Líder técnico no <strong class="text-ink font-semibold">Projeto Íris</strong>: coordenei, junto à equipe Bitmind, o desenvolvimento do hardware, do firmware embarcado e a apresentação ao vivo até levarmos a <strong class="text-limeTech font-semibold">única equipe da rede IFMG</strong> para a Rio Innovation Week 2023.
-                </p>
+              <p class="md:hidden text-xs text-ink/85 leading-relaxed">
+                Líder técnico no <strong class="text-ink font-semibold">Projeto Íris</strong> — levamos a <strong class="text-limeTech font-semibold">única equipe da rede IFMG</strong> à Rio Innovation Week 2023.
+              </p>
+              <p class="hidden md:block text-base lg:text-lg text-ink/90 leading-relaxed max-w-xl">
+                Líder técnico no <strong class="text-ink font-semibold">Projeto Íris</strong>: coordenei, junto à equipe Bitmind, o desenvolvimento do hardware, do firmware embarcado e a apresentação ao vivo até levarmos a <strong class="text-limeTech font-semibold">única equipe da rede IFMG</strong> para a Rio Innovation Week 2023.
+              </p>
 
-                <div class="hidden md:flex flex-wrap items-center gap-x-5 gap-y-1.5 pt-1 font-mono text-[10.5px] uppercase tracking-widest text-ink/85">
-                  <span class="inline-flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-limeTech"></span>FINALISTA V OLIMPÍADA DE INOVAÇÃO DO IFMG</span>
-                  <span class="inline-flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#38BDF8]"></span>240H DE PROJETO</span>
-                  <span class="inline-flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B]"></span>BIT I → BIT II</span>
-                </div>
+              <div class="hidden md:flex flex-wrap items-center gap-x-5 gap-y-1.5 pt-1 font-mono text-[11px] uppercase tracking-widest text-ink/85">
+                <span class="inline-flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-limeTech"></span>FINALISTA V OLIMPÍADA DE INOVAÇÃO DO IFMG</span>
+                <span class="inline-flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#38BDF8]"></span>240H DE PROJETO</span>
+                <span class="inline-flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B]"></span>BIT I → BIT II</span>
+              </div>
 
-                <div class="flex flex-wrap items-center gap-2.5 pt-1 md:pt-2">
-                  <button
-                    type="button"
-                    data-open-project-by-id="iris"
-                    class="spacex-btn spacex-btn--lime justify-center"
-                  >
-                    <span>Explorar Case Íris</span>
-                    <span aria-hidden="true">→</span>
-                  </button>
-                  <button
-                    type="button"
-                    data-sobre-jump="profile"
-                    class="spacex-btn justify-center"
-                  >
-                    <span aria-hidden="true">←</span>
-                    <span>Visão &amp; Perfil</span>
-                  </button>
-                </div>
+              <div class="flex flex-wrap items-center gap-3 pt-1 md:pt-3">
+                <button
+                  type="button"
+                  data-open-project-by-id="iris"
+                  class="spacex-btn spacex-btn--lime w-full md:w-auto justify-center"
+                >
+                  <span>Explorar Case Íris</span>
+                  <span aria-hidden="true">→</span>
+                </button>
               </div>
             </div>
           </div>
@@ -723,59 +641,26 @@
 
 
     <!-- ======================================================================
-         04 // FORMAÇÃO & CERTIFICAÇÕES — PALCO COM 2 ABAS (FORMAÇÃO ↔ ACERVO 3D)
+         04 // FORMAÇÃO & CERTIFICAÇÕES (REGISTRO ACADÊMICO + ACERVO 3D)
          ====================================================================== -->
     <section id="academic" data-module="04 // FORMAÇÃO" class="py-8 md:py-14 lg:py-16 bg-carbon border-b hairline-dark relative">
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
-        <!-- Cabeçalho unificado + Seletor de Abas (Formação & Méritos ↔ Acervo 3D [15]) -->
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 md:mb-8 reveal">
-          <div class="space-y-1.5 md:space-y-2">
-            <div class="inline-flex items-center gap-2 font-mono text-xs tracking-[0.14em] uppercase text-limeTech">
-              <span class="w-1.5 h-1.5 rounded-full bg-limeTech"></span>
-              <span>04 // FORMAÇÃO &amp; CERTIFICAÇÕES</span>
-            </div>
-            <h2 class="section-title text-ink">
-              Formação &amp; acervo.
-            </h2>
-          </div>
-
-          <div
-            class="stage-tab-rail w-full md:w-auto grid grid-cols-2 md:inline-flex items-center gap-1 p-1 rounded-xl bg-graphite border hairline-dark"
-            role="tablist"
-            aria-label="Alternar formação acadêmica e acervo 3D de certificações"
-          >
-            <button
-              type="button"
-              role="tab"
-              aria-selected="true"
-              aria-controls="academic-panel-record"
-              data-acad-stage-tab="record"
-              class="stage-tab-btn px-2.5 sm:px-3.5 py-2 rounded-lg font-mono text-[9.5px] sm:text-[10.5px] uppercase tracking-wider font-semibold transition-all cursor-pointer whitespace-nowrap text-center"
-            >
-              <span>01 · Formação</span><span class="hidden sm:inline"> &amp; Méritos</span>
-            </button>
-            <button
-              type="button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="academic-panel-certs"
-              data-acad-stage-tab="certs"
-              class="stage-tab-btn inline-flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-2 rounded-lg font-mono text-[9.5px] sm:text-[10.5px] uppercase tracking-wider font-semibold transition-all cursor-pointer whitespace-nowrap"
-            >
-              <span class="w-1.5 h-1.5 rounded-full bg-limeTech acad-node-pulse shrink-0" aria-hidden="true"></span>
-              <span>02 · Acervo 3D [<span data-certs-count>15</span>]</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- ABA 01: REGISTRO ACADÊMICO (Mobile: Formação antes de Reconhecimentos · Desktop: 2 colunas preservadas) -->
-        <div id="academic-panel-record" role="tabpanel">
-          <div id="academic-record" class="grid grid-cols-1 lg:grid-cols-12 lg:grid-rows-[auto_1fr] gap-y-5 sm:gap-y-6 lg:gap-y-4 lg:gap-x-8 reveal items-start">
-            <!-- Bloco 1: Descrição + Matriz interativa (Desktop col esquerda linha 1) -->
-            <div class="order-1 lg:col-span-4 lg:col-start-1 lg:row-start-1 space-y-4">
+        <!-- REGISTRO ACADÊMICO (Mobile: Formação antes de Reconhecimentos · Desktop: 2 colunas preservadas) -->
+        <div id="academic-record" class="grid grid-cols-1 lg:grid-cols-12 lg:grid-rows-[auto_1fr] gap-y-6 sm:gap-y-7 lg:gap-y-5 lg:gap-x-10 reveal items-start">
+          <!-- Bloco 1: Cabeçalho + Matriz interativa (Desktop col esquerda linha 1) -->
+          <div class="order-1 lg:col-span-4 lg:col-start-1 lg:row-start-1 space-y-5">
+            <div class="space-y-2.5">
+              <div class="inline-flex items-center gap-2 font-mono text-xs tracking-[0.14em] uppercase text-limeTech">
+                <span class="w-1.5 h-1.5 rounded-full bg-limeTech"></span>
+                <span>04 // FORMAÇÃO &amp; CERTIFICAÇÕES</span>
+              </div>
+              <h2 class="font-display text-3xl sm:text-4xl lg:text-[2.55rem] font-extrabold tracking-tight text-ink leading-[1.04]">
+                Formação &amp; méritos.
+              </h2>
               <p class="hidden md:block text-sm text-ink/75 leading-relaxed">
                 Formação que une teoria rigorosa de engenharia à execução em bancadas de testes e chão de fábrica — da microeletrônica embarcada à arquitetura de software, dados e IA.
               </p>
+            </div>
 
             <!-- Matriz interativa: Base · Técnicas · Atuação (desktop/tablet) -->
             <div id="diff-matrix-shell" class="hidden md:block diff-matrix-shell relative overflow-hidden p-4 rounded-xl bg-graphite border hairline-dark space-y-3">
@@ -844,24 +729,6 @@
                 </div>
               </div>
             </div>
-
-            <!-- Convite direto para a Aba 02 (Galeria 3D Animada de Certificados) -->
-            <button
-              type="button"
-              data-acad-stage-jump="certs"
-              class="w-full p-3.5 rounded-xl bg-graphite/90 border border-limeTech/30 hover:border-limeTech flex items-center justify-between gap-3 text-left transition-all group cursor-pointer"
-            >
-              <div class="min-w-0 space-y-0.5">
-                <div class="inline-flex items-center gap-1.5 font-mono text-[9.5px] uppercase tracking-widest text-limeTech font-semibold">
-                  <span class="w-1.5 h-1.5 rounded-full bg-limeTech acad-node-pulse shrink-0" aria-hidden="true"></span>
-                  <span>ACERVO 3D · 15 CERTIFICADOS</span>
-                </div>
-                <div class="text-xs text-ink/85 truncate">Google AI, NASA Space Apps, IFMG e mais</div>
-              </div>
-              <span class="px-2.5 py-1.5 rounded-lg bg-limeTech/15 border border-limeTech/40 font-mono text-[10px] font-semibold uppercase tracking-wider text-limeTech group-hover:bg-limeTech group-hover:text-inkDark transition-colors shrink-0">
-                Abrir 3D →
-              </span>
-            </button>
           </div>
 
           <!-- Bloco 2 no mobile (Formação primeiro) / Coluna direita no desktop -->
@@ -1071,53 +938,44 @@
               </div>
             </article>
           </div>
-          </div>
         </div>
 
-        <!-- ABA 02: GALERIA 3D ANIMADA DE CERTIFICADOS (100% PRESERVADA EM MOVIMENTO) -->
-        <div id="academic-panel-certs" role="tabpanel" class="hidden">
-          <div id="certificados">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4 mb-3 sm:mb-4">
-              <div class="space-y-1">
-                <div class="inline-flex items-center gap-2 font-mono text-xs tracking-[0.14em] uppercase text-limeTech">
-                  <span class="w-1.5 h-1.5 rounded-full bg-limeTech"></span>
-                  <span id="certs-count-badge">CERTIFICADOS · ACERVO [<span data-certs-count>15</span>]</span>
-                </div>
-                <h3 class="font-display text-2xl sm:text-3xl font-bold text-ink tracking-tight">
-                  Qualificações &amp; premiações.
-                </h3>
+        <!-- ==================================================================
+             GALERIA 3D ANIMADA DE CERTIFICADOS (SEMPRE VISÍVEL E EM MOVIMENTO)
+             ================================================================== -->
+        <div id="certificados" class="mt-8 sm:mt-12 lg:mt-14 pt-6 sm:pt-10 lg:pt-12 border-t hairline-dark reveal">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4 mb-3 sm:mb-4 lg:mb-6">
+            <div class="space-y-1.5 sm:space-y-2">
+              <div class="inline-flex items-center gap-2 font-mono text-xs tracking-[0.14em] uppercase text-limeTech">
+                <span class="w-1.5 h-1.5 rounded-full bg-limeTech"></span>
+                <span id="certs-count-badge">CERTIFICADOS · ACERVO [<span data-certs-count>15</span>]</span>
               </div>
-
-              <div class="flex flex-wrap items-center gap-2.5 font-mono text-[11px]">
-                <button
-                  type="button"
-                  data-acad-stage-jump="record"
-                  class="min-h-[40px] inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-carbon border hairline-dark hover:border-white/35 text-muted hover:text-ink transition-colors uppercase tracking-wider cursor-pointer"
-                >
-                  <span aria-hidden="true">←</span>
-                  <span>Formação &amp; Méritos</span>
-                </button>
-                <button
-                  id="certs-play-toggle"
-                  type="button"
-                  aria-pressed="false"
-                  class="min-h-[40px] inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-graphite border hairline-dark hover:border-limeTech text-ink transition-colors uppercase tracking-wider cursor-pointer"
-                >
-                  <span id="certs-play-dot" class="w-1.5 h-1.5 rounded-full bg-limeTech"></span>
-                  <span id="certs-play-label">Pausar 3D</span>
-                </button>
-              </div>
+              <h3 class="font-display text-2xl sm:text-3xl lg:text-4xl font-bold text-ink tracking-tight">
+                Qualificações &amp; premiações.
+              </h3>
             </div>
 
-            <div id="certs-3d-viewport" class="certs-3d-viewport" data-paused="false">
-              <div class="certs-edge-mask" aria-hidden="true"></div>
-              <div id="certs-3d-plane" class="certs-3d-plane">
-                <div class="certs-row">
-                  <div id="certs-track-top" class="certs-track certs-track--left" aria-label="Certificados linha superior"></div>
-                </div>
-                <div class="certs-row">
-                  <div id="certs-track-bottom" class="certs-track certs-track--right" aria-label="Certificados linha inferior"></div>
-                </div>
+            <div class="flex items-center gap-3 font-mono text-[11px]">
+              <button
+                id="certs-play-toggle"
+                type="button"
+                aria-pressed="false"
+                class="min-h-[40px] inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-graphite border hairline-dark hover:border-limeTech text-ink transition-colors uppercase tracking-wider"
+              >
+                <span id="certs-play-dot" class="w-1.5 h-1.5 rounded-full bg-limeTech"></span>
+                <span id="certs-play-label">Pausar 3D</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="certs-3d-viewport" class="certs-3d-viewport" data-paused="false">
+            <div class="certs-edge-mask" aria-hidden="true"></div>
+            <div id="certs-3d-plane" class="certs-3d-plane">
+              <div class="certs-row">
+                <div id="certs-track-top" class="certs-track certs-track--left" aria-label="Certificados linha superior"></div>
+              </div>
+              <div class="certs-row">
+                <div id="certs-track-bottom" class="certs-track certs-track--right" aria-label="Certificados linha inferior"></div>
               </div>
             </div>
           </div>
@@ -1126,7 +984,7 @@
     </section>
 
     <!-- ======================================================================
-         05 // FERRAMENTAS & STACK (CONSOLE DE 1 TELA POR DOMÍNIO + VER TODAS)
+         05 // FERRAMENTAS & STACK (100% PT-BR)
          ====================================================================== -->
     <section id="toolbox" data-module="05 // FERRAMENTAS" class="py-8 md:py-14 lg:py-16 bg-[#080A08] border-b hairline-dark">
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
@@ -1560,7 +1418,7 @@
     </section>
   </main>
 
-  <!-- Trilho Lateral Flutuante de Capítulos (Salto Não-Linear em 1 Clique · Desktop xl+) -->
+  <!-- Trilho Lateral Flutuante de Capítulos (Salto em 1 Clique · Desktop xl+) -->
   <nav
     id="telemetry-rail"
     aria-label="Índice rápido de capítulos"
@@ -1667,6 +1525,6 @@
   <script src="js/journey/fallback-2d.js?v=20261124c" defer></script>
   <script src="js/journey/engine.js?v=20261124c" defer></script>
 
-  <script src="js/main.js?v=20261125c" defer></script>
+  <script src="js/main.js?v=20261125d" defer></script>
 </body>
 </html>
