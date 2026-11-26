@@ -603,6 +603,8 @@
   updateScrollProgress();
 
   const mobileNavLinks = document.querySelectorAll('[data-mobile-nav]');
+  const telemetryRailEl = document.getElementById('telemetry-rail');
+  const railLinks = document.querySelectorAll('[data-rail-nav]');
   const MOBILE_BADGE_MAP = {
     intro: '00 · INÍCIO',
     thinking: '01 · SOBRE',
@@ -639,6 +641,15 @@
           if (isActive) link.setAttribute('aria-current', 'location');
           else link.removeAttribute('aria-current');
         });
+        railLinks.forEach((link) => {
+          const isActive = link.getAttribute('data-rail-nav') === secId;
+          link.setAttribute('data-active', String(isActive));
+          if (isActive) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        });
+        if (telemetryRailEl) {
+          telemetryRailEl.classList.toggle('is-over-light', secId === 'outside');
+        }
         moveNavSlider(activeNavLinkEl, false);
       });
     },
@@ -735,6 +746,12 @@
 
   if (mobileMenuBtn) {
     mobileMenuBtn.addEventListener('click', () => {
+      setMobileMenu(mobileMenuBtn.getAttribute('aria-expanded') !== 'true');
+    });
+  }
+  const mobileBadgeBtn = document.getElementById('mobile-module-badge-btn');
+  if (mobileBadgeBtn && mobileMenuBtn) {
+    mobileBadgeBtn.addEventListener('click', () => {
       setMobileMenu(mobileMenuBtn.getAttribute('aria-expanded') !== 'true');
     });
   }
@@ -1388,6 +1405,86 @@
         io.observe(semWrap);
       }
     }
+  })();
+
+  /* ==========================================================================
+     12c. PALCOS COM ABAS INTERNAS (01 // SOBRE ↔ RIW  &  04 // FORMAÇÃO ↔ ACERVO 3D)
+     ========================================================================== */
+  (function initStageTabs() {
+    // 1. 01 // SOBRE (Visão & Perfil ↔ Missão RIW 2023)
+    const sobreTabs = Array.from(document.querySelectorAll('[data-sobre-tab]'));
+    const sobrePanels = {
+      profile: document.getElementById('sobre-panel-profile'),
+      riw: document.getElementById('sobre-panel-riw')
+    };
+
+    function setSobreTab(key, animate = true) {
+      if (!sobrePanels[key]) return;
+      sobreTabs.forEach((btn) => {
+        const isSel = btn.getAttribute('data-sobre-tab') === key;
+        btn.setAttribute('aria-selected', String(isSel));
+      });
+      Object.entries(sobrePanels).forEach(([k, panel]) => {
+        if (!panel) return;
+        const show = k === key;
+        panel.classList.toggle('hidden', !show);
+        if (show && animate && !prefersReducedMotion) {
+          panel.classList.remove('stage-panel-enter');
+          void panel.offsetWidth;
+          panel.classList.add('stage-panel-enter');
+        }
+      });
+    }
+
+    sobreTabs.forEach((btn) => {
+      btn.addEventListener('click', () => setSobreTab(btn.getAttribute('data-sobre-tab'), true));
+    });
+    document.querySelectorAll('[data-sobre-jump]').forEach((btn) => {
+      btn.addEventListener('click', () => setSobreTab(btn.getAttribute('data-sobre-jump'), true));
+    });
+
+    // 2. 04 // FORMAÇÃO (Formação & Méritos ↔ Acervo 3D [15])
+    const acadTabs = Array.from(document.querySelectorAll('[data-acad-stage-tab]'));
+    const acadPanels = {
+      record: document.getElementById('academic-panel-record'),
+      certs: document.getElementById('academic-panel-certs')
+    };
+
+    function setAcademicStageTab(key, animate = true) {
+      if (!acadPanels[key]) return;
+      acadTabs.forEach((btn) => {
+        const isSel = btn.getAttribute('data-acad-stage-tab') === key;
+        btn.setAttribute('aria-selected', String(isSel));
+      });
+      Object.entries(acadPanels).forEach(([k, panel]) => {
+        if (!panel) return;
+        const show = k === key;
+        panel.classList.toggle('hidden', !show);
+        if (show && animate && !prefersReducedMotion) {
+          panel.classList.remove('stage-panel-enter');
+          void panel.offsetWidth;
+          panel.classList.add('stage-panel-enter');
+        }
+      });
+      window.dispatchEvent(new CustomEvent('academic-certs-shown', { detail: { visible: key === 'certs' } }));
+    }
+
+    acadTabs.forEach((btn) => {
+      btn.addEventListener('click', () => setAcademicStageTab(btn.getAttribute('data-acad-stage-tab'), true));
+    });
+    document.querySelectorAll('[data-acad-stage-jump]').forEach((btn) => {
+      btn.addEventListener('click', () => setAcademicStageTab(btn.getAttribute('data-acad-stage-jump'), true));
+    });
+
+    // 3. Salto direto da faixa de indicadores (#mission-metrics) para Formação -> Acervo 3D
+    document.querySelectorAll('[data-jump-academic-tab]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const tabKey = btn.getAttribute('data-jump-academic-tab') || 'certs';
+        setAcademicStageTab(tabKey, true);
+        const sec = document.getElementById('academic');
+        if (sec) sec.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+      });
+    });
   })();
 
   /* ==========================================================================
@@ -3714,7 +3811,7 @@
     c.tools.map((t) => ({ ...t, categoryId: c.id, categoryLabel: c.label, categoryCode: c.code }))
   );
 
-  let activeCategory = 'all';
+  let activeCategory = TOOLBOX_DATA[0].id;
   let selectedTool = null;
 
   function findRelatedTools(tool) {
@@ -3988,13 +4085,13 @@
   function renderToolboxFilters() {
     const totalTools = ALL_TOOLS_FLAT.length;
     const cats = [
-      { id: 'all', label: 'TODOS', count: totalTools, icon: '' },
       ...TOOLBOX_DATA.map((c) => ({
         id: c.id,
         label: c.label,
         count: c.tools.length,
         icon: (TOOLBOX_META[c.id] && TOOLBOX_META[c.id].icon) || ''
-      }))
+      })),
+      { id: 'all', label: 'VER TODAS', count: totalTools, icon: '' }
     ];
     toolboxFiltersWrap.innerHTML = cats
       .map((c) => `
@@ -4143,14 +4240,94 @@
   }
 
   function renderToolboxMatrix(animate = false) {
-    const visibleCats = activeCategory === 'all' ? TOOLBOX_DATA : TOOLBOX_DATA.filter((c) => c.id === activeCategory);
+    const isAllMode = activeCategory === 'all';
+    const visibleCats = isAllMode ? TOOLBOX_DATA : TOOLBOX_DATA.filter((c) => c.id === activeCategory);
     const related = findRelatedTools(selectedTool);
+
+    toolboxMatrixWrap.className = isAllMode
+      ? 'lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4'
+      : 'lg:col-span-8 grid grid-cols-1 gap-4';
 
     toolboxMatrixWrap.innerHTML = visibleCats
       .map((cat, idx) => {
-        const meta = TOOLBOX_META[cat.id] || { sub: '', icon: '' };
+        const meta = TOOLBOX_META[cat.id] || { sub: '', icon: '', color: '#C6F135' };
         const hasSel = Boolean(selectedTool && selectedTool.categoryId === cat.id);
         const uniqueProjects = new Set(cat.tools.flatMap((t) => t.projects)).size;
+        const catIndex = TOOLBOX_DATA.findIndex((c) => c.id === cat.id);
+        const nextCat = TOOLBOX_DATA[(catIndex + 1) % TOOLBOX_DATA.length];
+
+        if (!isAllMode) {
+          return `
+          <div
+            data-module-card="${cat.id}"
+            data-module-active="${hasSel}"
+            class="toolbox-module-card rounded-2xl bg-graphite/70 border border-white/[0.1] p-5 lg:p-6 flex flex-col justify-between gap-5 ${animate && !prefersReducedMotion ? 'filter-card-enter' : ''}"
+            style="--filter-delay: 0ms; border-top: 2px solid ${meta.color};"
+          >
+            <div class="space-y-5">
+              <div class="flex flex-wrap items-start justify-between gap-3 border-b border-white/10 pb-4">
+                <div class="flex items-start gap-3.5 min-w-0">
+                  <span class="toolbox-mod-icon w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style="color:${meta.color}; background:${meta.color}18; border:1px solid ${meta.color}40;" aria-hidden="true">
+                    ${meta.icon}
+                  </span>
+                  <div class="min-w-0 space-y-0.5">
+                    <div class="flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest">
+                      <span style="color:${meta.color};" class="font-semibold">${cat.code}</span>
+                      <span class="text-muted">· ${String(cat.tools.length).padStart(2, '0')} FERRAMENTAS</span>
+                    </div>
+                    <h3 class="font-display text-lg lg:text-xl font-bold text-ink leading-tight">${cat.label}</h3>
+                    <p class="text-xs text-muted leading-relaxed">${meta.sub}</p>
+                  </div>
+                </div>
+                <span class="px-2.5 py-1 rounded-lg bg-carbon border hairline-dark font-mono text-[10px] font-semibold uppercase tracking-wider shrink-0" style="color:${meta.color};">
+                  ${uniqueProjects} ${uniqueProjects === 1 ? 'CASE CONECTADO' : 'CASES CONECTADOS'}
+                </span>
+              </div>
+
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                ${cat.tools.map((tool) => {
+                  const isSel = Boolean(selectedTool && selectedTool.name === tool.name);
+                  const isRel = Boolean(selectedTool && !isSel && related.has(tool.name));
+                  const isDimmed = Boolean(selectedTool && !isSel && !isRel);
+                  const isCore = tool.tier === 'core';
+                  return `
+                    <button
+                      type="button"
+                      data-tool-cat="${cat.id}"
+                      data-tool-name="${tool.name}"
+                      data-selected="${isSel}"
+                      data-related="${isRel}"
+                      data-dimmed="${isDimmed}"
+                      class="tool-chip text-left p-3.5 rounded-xl bg-carbon/90 border ${isCore ? 'border-white/15' : 'border-white/[0.08]'} hover:border-limeTech/70 flex flex-col justify-between gap-2.5 cursor-pointer"
+                    >
+                      <div class="flex items-center justify-between gap-2 font-mono text-[9.5px]">
+                        <span class="inline-flex items-center gap-1.5 text-muted">
+                          <span class="tool-chip__dot w-1.5 h-1.5 rounded-full shrink-0 ${isCore ? 'bg-limeTech' : 'bg-white/30'}" aria-hidden="true"></span>
+                          <span>${isCore ? 'Recorrente' : 'Específica'}</span>
+                        </span>
+                        <span class="tabular-nums text-muted">${tool.projects.length}c</span>
+                      </div>
+                      <div class="font-mono text-xs font-semibold text-ink leading-snug">${tool.name}</div>
+                    </button>`;
+                }).join('')}
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+              <div class="flex items-center gap-1.5" aria-hidden="true">
+                ${TOOLBOX_DATA.map((c, ci) => `<span class="h-1.5 rounded-full transition-all" style="width:${ci === catIndex ? '18px' : '6px'}; background:${ci === catIndex ? meta.color : 'rgba(255,255,255,0.2)'};"></span>`).join('')}
+                <span class="font-mono text-[9.5px] text-muted uppercase tracking-wider ml-1.5">Domínio ${String(catIndex + 1).padStart(2, '0')} de 06</span>
+              </div>
+              <button
+                type="button"
+                data-toolbox-next-domain="${nextCat.id}"
+                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-carbon border border-white/15 hover:border-limeTech font-mono text-[10px] font-semibold uppercase tracking-wider text-ink hover:text-limeTech transition-colors cursor-pointer"
+              >
+                <span>Próximo: ${nextCat.label} →</span>
+              </button>
+            </div>
+          </div>`;
+        }
 
         return `
         <div
@@ -4209,6 +4386,10 @@
         </div>`;
       })
       .join('');
+
+    toolboxMatrixWrap.querySelectorAll('[data-toolbox-next-domain]').forEach((btn) => {
+      btn.addEventListener('click', () => selectToolboxCategory(btn.getAttribute('data-toolbox-next-domain')));
+    });
 
     toolboxMatrixWrap.querySelectorAll('[data-tool-name]').forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -4943,6 +5124,21 @@
     bottomTrack.style.transform = `translate3d(${botX.toFixed(2)}px, 0, 0)`;
 
     bindVisibility(viewport, (visible) => (visible ? loop.start() : loop.stop()), '80px');
+
+    window.addEventListener('academic-certs-shown', (e) => {
+      const show = Boolean(e.detail && e.detail.visible);
+      if (show) {
+        requestAnimationFrame(() => {
+          base = getPlaneBase();
+          measurePeriods();
+          topTrack.style.transform = `translate3d(${topX.toFixed(2)}px, 0, 0)`;
+          bottomTrack.style.transform = `translate3d(${botX.toFixed(2)}px, 0, 0)`;
+          loop.start();
+        });
+      } else {
+        loop.stop();
+      }
+    });
   })();
 
   /* ==========================================================================

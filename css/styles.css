@@ -623,6 +623,136 @@ main > section[id] {
     linear-gradient(180deg, rgba(5, 6, 6, 0.42) 0%, rgba(5, 6, 6, 0.08) 38%, rgba(5, 6, 6, 0.94) 100%);
 }
 
+.spacex-cinema-band--framed {
+  width: 100%;
+  left: auto;
+  margin-left: 0;
+  min-height: clamp(410px, 54vh, 520px);
+  border-radius: 20px;
+  border: 1px solid rgba(198, 241, 53, 0.28);
+  box-shadow: 0 24px 56px -28px rgba(0, 0, 0, 0.9);
+}
+
+/* Stage Tab Switcher (01 // SOBRE & 04 // FORMAÇÃO) */
+.stage-tab-btn {
+  color: var(--ink-muted);
+  border: 1px solid transparent;
+  background: transparent;
+}
+
+.stage-tab-btn:hover:not([aria-selected="true"]) {
+  color: var(--ink-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.stage-tab-btn[aria-selected="true"] {
+  color: #050606;
+  background: var(--accent-lime);
+  border-color: var(--accent-lime);
+  box-shadow: 0 8px 20px -10px rgba(198, 241, 53, 0.65);
+}
+
+.stage-tab-btn[aria-selected="true"] .acad-node-pulse {
+  background: #050606;
+}
+
+.stage-panel-enter {
+  animation: stagePanelIn 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes stagePanelIn {
+  from { opacity: 0; transform: translate3d(0, 8px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+/* Floating Right-Edge Chapter Telemetry Rail (xl+ Non-Linear Jump HUD) */
+.telemetry-rail {
+  pointer-events: auto;
+}
+
+.telemetry-node {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 4px 2px;
+  text-decoration: none;
+}
+
+.telemetry-node__label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 6px;
+  background: rgba(11, 12, 11, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--ink-primary);
+  opacity: 0;
+  transform: translate3d(6px, 0, 0);
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.85);
+  transition: opacity 0.2s ease, transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease;
+}
+
+.telemetry-node:hover .telemetry-node__label,
+.telemetry-node:focus-visible .telemetry-node__label {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  border-color: rgba(198, 241, 53, 0.48);
+}
+
+.telemetry-node__bar {
+  display: block;
+  width: 10px;
+  height: 4px;
+  border-radius: 9999px;
+  background: rgba(158, 165, 155, 0.45);
+  border: 1px solid rgba(11, 12, 11, 0.5);
+  transition:
+    width 0.36s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.telemetry-node:hover .telemetry-node__bar {
+  width: 16px;
+  background: var(--ink-primary);
+}
+
+.telemetry-node[data-active="true"] .telemetry-node__bar {
+  width: 24px;
+  background: var(--accent-lime);
+  box-shadow: 0 0 10px rgba(198, 241, 53, 0.6);
+}
+
+.telemetry-node[data-active="true"] .telemetry-node__label {
+  color: var(--accent-lime);
+  border-color: rgba(198, 241, 53, 0.5);
+}
+
+.telemetry-rail.is-over-light .telemetry-node__bar {
+  background: rgba(16, 18, 16, 0.35);
+  border-color: rgba(234, 232, 225, 0.45);
+}
+
+.telemetry-rail.is-over-light .telemetry-node[data-active="true"] .telemetry-node__bar {
+  background: #101210;
+  box-shadow: 0 0 0 1px rgba(234, 232, 225, 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage-panel-enter {
+    animation: none !important;
+  }
+  .telemetry-node__bar,
+  .telemetry-node__label {
+    transition: none !important;
+  }
+}
+
 @media (max-width: 767px) {
   .spacex-cinema-band {
     width: 100%;
