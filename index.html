@@ -62,7 +62,7 @@
     };
   </script>
 
-  <link rel="stylesheet" href="css/styles.css?v=20261125e" />
+  <link rel="stylesheet" href="css/styles.css?v=20261125f" />
 </head>
 <body class="bg-carbon text-ink antialiased selection:bg-limeTech selection:text-inkDark">
 
@@ -581,61 +581,85 @@
     </section>
 
     <!-- ======================================================================
-         03 // EXPERIÊNCIA INDUSTRIAL — ACTECH (CONSOLE INTERATIVO + MOBILE 1 TELA)
+         03 // EXPERIÊNCIA INDUSTRIAL — ACTECH (TIMELINE + EXPANDABLE CARDS + SCROLL STORYTELLING)
          ====================================================================== -->
-    <section id="experience" data-module="03 // ACTECH" class="py-8 md:py-14 lg:py-16 bg-[#070807] border-b hairline-dark relative overflow-hidden">
+    <section id="experience" data-module="03 // ACTECH" class="actech-section py-10 md:py-14 lg:py-16 bg-[#070807] border-b hairline-dark relative overflow-hidden">
       <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 md:gap-6 items-end mb-5 md:mb-7 reveal">
-          <div class="lg:col-span-7 space-y-1.5 md:space-y-3.5">
-            <div class="inline-flex items-center gap-2 font-mono text-[9.5px] sm:text-xs tracking-[0.05em] sm:tracking-[0.14em] uppercase text-limeTech leading-snug">
+        <!-- Cabeçalho editorial amplo com identidade unificada na mesma empresa -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-8 items-end mb-6 md:mb-8 reveal">
+          <div class="lg:col-span-7 space-y-2 md:space-y-3">
+            <div class="inline-flex items-center gap-2 font-mono text-[10px] sm:text-xs tracking-[0.12em] uppercase text-limeTech">
               <span class="w-1.5 h-1.5 rounded-full bg-limeTech acad-node-pulse shrink-0" aria-hidden="true"></span>
-              <span>03 // EXPERIÊNCIA PROFISSIONAL · ACTECH · 2+ ANOS</span>
+              <span>03 // EXPERIÊNCIA · ACTECH · 2+ ANOS</span>
             </div>
             <h2 class="section-title text-ink">
               Da rotina operacional<br />
               à digitalização.
             </h2>
           </div>
-          <div class="hidden md:flex lg:col-span-5 flex-col items-start lg:items-end">
-            <p class="text-sm lg:text-base text-ink/80 lg:text-right leading-relaxed max-w-lg">
-              Mais de dois anos em ambiente industrial na Actech: comecei como Jovem Aprendiz medindo tempos e padronizando rotinas, e hoje atuo como Estagiário de Embalagem &amp; Expedição estruturando dados e ferramentas para a área.
+          <div class="lg:col-span-5 lg:text-right">
+            <p class="text-sm lg:text-[15px] text-ink/75 leading-relaxed max-w-lg lg:ml-auto">
+              Trajetória contínua na mesma empresa: comecei como Jovem Aprendiz no chão de fábrica e evoluí para Estagiário de Embalagem &amp; Expedição estruturando dados, automações e ferramentas web.
             </p>
           </div>
         </div>
 
-        <!-- Mobile (<768px): Seletor compacto em abas cabendo em ~1 tela -->
-        <div class="md:hidden space-y-3">
-          <div id="actech-mobile-tabs" class="grid grid-cols-2 gap-1.5 p-1 rounded-xl bg-graphite border hairline-dark" role="tablist" aria-label="Alternar fases na Actech"></div>
-          <div id="actech-mobile-stage" role="tabpanel" aria-live="polite"></div>
-        </div>
+        <!-- A · HORIZONTAL PROGRESSION TIMELINE (discreta, conectando as duas etapas na Actech) -->
+        <div
+          id="actech-timeline"
+          class="actech-timeline mb-5 md:mb-7 reveal"
+          role="tablist"
+          aria-label="Etapas da trajetória na Actech"
+        >
+          <button
+            type="button"
+            role="tab"
+            id="actech-node-aprendiz"
+            aria-selected="false"
+            aria-controls="actech-card-aprendiz"
+            data-actech-select="aprendiz"
+            class="actech-tl-node actech-tl-node--start group"
+          >
+            <span class="actech-tl-dot" aria-hidden="true"></span>
+            <span class="flex flex-col text-left min-w-0">
+              <span class="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.08em] sm:tracking-[0.14em] text-muted whitespace-nowrap">
+                <span class="sm:hidden">01 · 2024–25</span>
+                <span class="hidden sm:inline">01 · Jun/2024 – Dez/2025</span>
+              </span>
+              <span class="font-display text-xs sm:text-sm font-bold text-ink transition-colors whitespace-nowrap">Jovem Aprendiz</span>
+            </span>
+          </button>
 
-        <!-- Desktop/Tablet (>=768px): Console Interativo de Evolução Industrial -->
-        <div id="experience-container" class="hidden md:grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-stretch reveal">
-          <!-- Coluna Esquerda: Espinha Cronológica Interativa + Telemetria Factual -->
-          <div class="lg:col-span-5 flex flex-col justify-between gap-4">
-            <div id="actech-phase-spine" class="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-col gap-3 flex-1" role="tablist" aria-label="Selecionar fase na Actech"></div>
-
-            <!-- Barra de Fatos da Planta (faixa aberta contínua, sem 3 caixas separadas) -->
-            <div class="grid grid-cols-3 divide-x divide-white/10 border-y hairline-dark py-3.5">
-              <div class="pr-3 space-y-0.5">
-                <div class="font-display text-lg font-extrabold text-limeTech tabular-nums leading-none">2+ anos</div>
-                <div class="font-mono text-[9.5px] uppercase tracking-wider text-muted pt-1">Desde Jun/2024</div>
-              </div>
-              <div class="px-3 space-y-0.5">
-                <div class="font-display text-lg font-extrabold text-[#F59E0B] tabular-nums leading-none">02 fases</div>
-                <div class="font-mono text-[9.5px] uppercase tracking-wider text-muted pt-1">Aprendiz → Estágio</div>
-              </div>
-              <div class="pl-3 space-y-0.5">
-                <div class="font-display text-lg font-extrabold text-[#38BDF8] tabular-nums leading-none">02 cases</div>
-                <div class="font-mono text-[9.5px] uppercase tracking-wider text-muted pt-1">Big Bags · Fretefy</div>
-              </div>
+          <div class="actech-tl-rail" aria-hidden="true">
+            <span class="actech-tl-caption hidden sm:inline-block font-mono text-[9px] uppercase tracking-[0.18em] text-muted">ACTECH · EVOLUÇÃO INTERNA</span>
+            <div class="actech-tl-track">
+              <div id="actech-tl-fill" class="actech-tl-fill"></div>
             </div>
           </div>
 
-          <!-- Coluna Direita: Palco Interativo da Fase + Fluxo Clicável + Preview Visual -->
-          <div id="actech-desktop-stage" class="actech-stage-panel lg:col-span-7 relative rounded-2xl bg-[#0D100F] border border-white/10 overflow-hidden flex flex-col justify-between" role="tabpanel" aria-live="polite"></div>
+          <button
+            type="button"
+            role="tab"
+            id="actech-node-estagio"
+            aria-selected="true"
+            aria-controls="actech-card-estagio"
+            data-actech-select="estagio"
+            class="actech-tl-node actech-tl-node--end group"
+          >
+            <span class="flex flex-col text-right min-w-0">
+              <span class="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.08em] sm:tracking-[0.14em] text-limeTech whitespace-nowrap">
+                <span class="sm:hidden">02 · 2026–Atual</span>
+                <span class="hidden sm:inline">02 · Fev/2026 – Atual</span>
+              </span>
+              <span class="font-display text-xs sm:text-sm font-bold text-ink transition-colors whitespace-nowrap">Estagiário</span>
+            </span>
+            <span class="actech-tl-dot actech-tl-dot--current" aria-hidden="true"></span>
+          </button>
         </div>
+
+        <!-- C · TWO EXPANDABLE EDITORIAL CARDS (Desktop: flex expand horizontal · Mobile: accordion vertical suave) -->
+        <div id="actech-cards" class="actech-cards reveal" data-active-role="estagio"></div>
       </div>
     </section>
 
@@ -1521,6 +1545,6 @@
   <script src="js/journey/fallback-2d.js?v=20261124c" defer></script>
   <script src="js/journey/engine.js?v=20261124c" defer></script>
 
-  <script src="js/main.js?v=20261125e" defer></script>
+  <script src="js/main.js?v=20261125f" defer></script>
 </body>
 </html>
