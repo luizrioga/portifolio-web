@@ -165,7 +165,7 @@
       roleShort: 'Líder Técnico · Bitmind',
       resultLabel: 'ENTREGA //',
       before: 'Protótipo inicial Bit I com processamento dedicado em Arduino Uno e shield em fenolite, mas ainda dependente de alimentação externa.',
-      after: 'Protótipo Bit II portátil e autônomo, com duas baterias, carregamento embarcado e cabos reforçados — apresentado na final da V Olimpíada de Inovação do IFMG e na Rio Innovation Week 2023.',
+      after: 'Protótipo Bit II portátil e autônomo, com duas baterias, carregamento embarcado e cabos reforçados — apresentado na final da V Olimpíada de Inovação do IFMG.',
       metric: null,
       cardSummary: 'Óculos com sensores, caixa de processamento e pulseiras vibratórias para locomoção urbana assistiva.',
       cardResult: 'Duas gerações funcionais de dispositivo vestível assistivo de baixo custo, apresentadas na V Olimpíada de Inovação do IFMG e na RIW 2023.',
@@ -1537,7 +1537,7 @@
             </div>
             <div data-deck-iris-caption class="px-3.5 py-2.5 rounded-xl bg-carbon border hairline-dark font-mono text-[10.5px] text-ink/85 flex items-center justify-between gap-2">
               <span>REV.02 · Autônomo com 2 baterias, carregamento embarcado e cabos reforçados</span>
-              <span class="text-limeTech shrink-0">RIW 2023</span>
+              <span class="text-limeTech shrink-0">V OLIMPÍADA IFMG</span>
             </div>
           </div>`;
       }
@@ -1697,7 +1697,7 @@
             if (cap) {
               cap.innerHTML = key === 'bit1'
                 ? '<span>REV.01 · Processamento dedicado em Arduino Uno + shield em fenolite com alimentação externa</span><span class="text-limeTech shrink-0">IFMG OP</span>'
-                : '<span>REV.02 · Autônomo com 2 baterias, carregamento embarcado e cabos reforçados</span><span class="text-limeTech shrink-0">RIW 2023</span>';
+                : '<span>REV.02 · Autônomo com 2 baterias, carregamento embarcado e cabos reforçados</span><span class="text-limeTech shrink-0">V OLIMPÍADA IFMG</span>';
             }
             btns.forEach((b) => {
               const on = b.getAttribute('data-deck-bit') === key;
@@ -2145,6 +2145,7 @@
     viewport.addEventListener('pointerdown', (e) => {
       if (e.pointerType === 'mouse' && e.button !== 0) return;
       if (e.pointerType === 'mouse' && e.target.closest('button:not(.works-slide-peek-shield), a')) return;
+      if (e.pointerType === 'mouse') e.preventDefault();
       if (trackIdx === 0 || trackIdx === N + 1) normalizeCloneIfNeeded();
 
       pointerActive = true;
@@ -2172,6 +2173,7 @@
           isDragging = true;
           viewport.classList.add('is-dragging');
           track.classList.add('is-dragging');
+          try { window.getSelection?.()?.removeAllRanges?.(); } catch (_) {}
           try { viewport.setPointerCapture(e.pointerId); } catch (_) {}
         } else {
           return;
@@ -4402,80 +4404,19 @@
   })();
 
   /* ==========================================================================
-     18. PRINCÍPIOS — CARROSSEL ORBITAL 3D RESTAURADO (10 PENSADORES)
+     18. PRINCÍPIOS — BLOCO EDITORIAL DE LEITURA CALMA (10 PENSADORES)
      ========================================================================== */
-  (function initPrinciplesCarousel() {
-    const wrap = document.getElementById('principles-orbit-wrap');
-    const stage = document.getElementById('principles-wheel-stage');
+  (function initPrinciplesEditorial() {
+    const reader = document.getElementById('principles-editorial-reader');
     const authorRail = document.getElementById('principles-author-rail');
-    const compassRing = document.getElementById('principles-compass-ring');
     const liveCounter = document.getElementById('principles-live-counter');
-    const progressFill = document.getElementById('principles-progress-fill');
     const prevBtn = document.getElementById('principles-prev-btn');
     const nextBtn = document.getElementById('principles-next-btn');
-    if (!wrap || !stage || !PRINCIPLES.length) return;
+    if (!reader || !PRINCIPLES.length) return;
 
     const total = PRINCIPLES.length;
-    const AUTO_MS = 6000;
+    const totalPadded = String(total).padStart(2, '0');
     let activeIdx = 0;
-    let rotTurns = 0;
-    let elapsedMs = 0;
-    let isHoverPaused = false;
-    let isKeyboardFocused = false;
-    let inView = false;
-
-    const isPaused = () => isHoverPaused || isKeyboardFocused;
-    const syncPausedAttr = () => wrap.setAttribute('data-paused', String(isPaused()));
-
-    function syncProgressBar() {
-      if (!progressFill) return;
-      if (prefersReducedMotion) {
-        progressFill.style.transform = 'scaleX(1)';
-        return;
-      }
-      const ratio = clamp(elapsedMs / AUTO_MS, 0, 1);
-      progressFill.style.transform = `scaleX(${ratio.toFixed(4)})`;
-    }
-
-    stage.innerHTML = PRINCIPLES.map(
-      (item, idx) => `
-        <article
-          class="principle-slide"
-          data-slide-idx="${idx}"
-          data-pos="hidden"
-          style="--p-accent:${item.accent};"
-          aria-hidden="${idx !== 0}"
-        >
-          <div class="flex items-center justify-between gap-3 border-b hairline-dark pb-3.5 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.14em]">
-            <div class="flex items-center gap-2 min-w-0">
-              <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:${item.accent};"></span>
-              <span class="font-semibold truncate" style="color:${item.accent};">${item.discipline} · ${item.theme}</span>
-            </div>
-            <span class="text-muted tabular-nums shrink-0">${item.index} / ${String(total).padStart(2, '0')}</span>
-          </div>
-
-          <blockquote class="space-y-4 my-auto">
-            <p class="principle-quote-text text-ink">${item.quote}</p>
-            <footer class="flex flex-wrap items-baseline justify-between gap-2 pt-1">
-              <span class="font-mono text-xs sm:text-[13px] tracking-wider uppercase font-semibold" style="color:${item.accent};">
-                — ${item.author}
-              </span>
-              <span class="font-mono text-[10px] text-muted uppercase tracking-wider">
-                ${item.role}
-              </span>
-            </footer>
-          </blockquote>
-
-          <div class="pt-3.5 border-t hairline-dark grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-4 items-baseline">
-            <div class="sm:col-span-3 font-mono text-[9.5px] uppercase tracking-widest text-muted">
-              NOTA // LR
-            </div>
-            <p class="sm:col-span-9 text-xs sm:text-[13.5px] text-ink/82 leading-relaxed">
-              ${item.note}
-            </p>
-          </div>
-        </article>`
-    ).join('');
 
     if (authorRail) {
       authorRail.innerHTML = PRINCIPLES.map(
@@ -4487,167 +4428,105 @@
             data-principle-pill="${idx}"
             data-active="${idx === 0}"
             style="--pill-accent:${item.accent};"
-            class="principle-pill min-h-[38px] shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-graphite/70 border hairline-dark font-mono text-[10px] uppercase tracking-wider text-muted hover:text-ink"
+            class="principle-index-btn shrink-0 lg:shrink text-left px-3 py-2 lg:px-3.5 lg:py-2.5 rounded-xl flex items-center lg:flex-col lg:items-start justify-between gap-2 lg:gap-0.5 cursor-pointer"
           >
-            <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:${item.accent};"></span>
-            <span>${item.author.split(' ').slice(-1)[0]}</span>
+            <div class="flex items-center gap-1.5 font-mono text-[9.5px] uppercase tracking-wider w-full justify-between">
+              <span class="inline-flex items-center gap-1.5 min-w-0">
+                <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:${item.accent};"></span>
+                <span class="hidden lg:inline text-muted tabular-nums">${item.index}</span>
+                <span class="lg:hidden font-semibold text-ink/90 whitespace-nowrap">${item.author.split(' ').slice(-1)[0]}</span>
+              </span>
+              <span class="hidden lg:inline text-[8.5px] text-muted truncate">${item.discipline}</span>
+            </div>
+            <div class="hidden lg:block font-display text-[13px] font-bold text-ink leading-snug truncate w-full">${item.author}</div>
           </button>`
       ).join('');
     }
 
-    const slides = Array.from(stage.querySelectorAll('[data-slide-idx]'));
     const pills = authorRail ? Array.from(authorRail.querySelectorAll('[data-principle-pill]')) : [];
 
-    function updatePositions(nextIdx, dirHint = 0) {
-      const prevIdx = activeIdx;
-      const targetIdx = (nextIdx + total) % total;
+    function renderEditorial(idx, animate = true) {
+      activeIdx = (idx + total) % total;
+      const item = PRINCIPLES[activeIdx];
 
-      let delta = targetIdx - prevIdx;
-      if (dirHint !== 0) {
-        delta = dirHint;
-      } else {
-        if (delta > total / 2) delta -= total;
-        if (delta < -total / 2) delta += total;
-      }
-      rotTurns += delta;
-      activeIdx = targetIdx;
-      elapsedMs = 0;
-
-      const cur = PRINCIPLES[activeIdx];
       if (liveCounter) {
-        liveCounter.textContent = `${cur.index} / ${String(total).padStart(2, '0')}`;
-        liveCounter.style.color = cur.accent;
-      }
-      if (compassRing && !prefersReducedMotion) {
-        compassRing.style.transform = `rotate(${(rotTurns * (360 / total)).toFixed(1)}deg)`;
-      }
-      if (progressFill) {
-        progressFill.style.setProperty('--p-accent', cur.accent);
+        liveCounter.textContent = `${item.index} / ${totalPadded}`;
+        liveCounter.style.color = item.accent;
       }
 
-      slides.forEach((slide, i) => {
-        let rel = (i - activeIdx + total) % total;
-        if (rel > total / 2) rel -= total;
+      reader.innerHTML = `
+        <article
+          class="principle-editorial-card ${animate && !prefersReducedMotion ? 'principle-editorial-enter ' : ''}h-full rounded-2xl p-6 sm:p-8 lg:p-10 flex flex-col justify-between gap-6 sm:gap-8"
+          style="--p-accent:${item.accent};"
+        >
+          <div class="flex items-center justify-between gap-3 border-b hairline-dark pb-4 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.14em]">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:${item.accent};"></span>
+              <span class="font-semibold truncate" style="color:${item.accent};">${item.discipline} · ${item.theme}</span>
+            </div>
+            <span class="text-muted tabular-nums shrink-0">${item.index} / ${totalPadded}</span>
+          </div>
 
-        let pos = 'hidden';
-        if (rel === 0) pos = 'center';
-        else if (rel === -1) pos = 'left';
-        else if (rel === 1) pos = 'right';
-        else if (rel === -2) pos = 'far-left';
-        else if (rel === 2) pos = 'far-right';
+          <blockquote class="space-y-5 my-auto">
+            <p class="font-display text-xl sm:text-2xl lg:text-[1.85rem] font-bold text-ink leading-[1.32] tracking-[-0.02em]">
+              ${item.quote}
+            </p>
+            <footer class="flex flex-wrap items-baseline justify-between gap-2 pt-1">
+              <span class="font-mono text-xs sm:text-[13px] tracking-wider uppercase font-semibold" style="color:${item.accent};">
+                — ${item.author}
+              </span>
+              <span class="font-mono text-[10px] text-muted uppercase tracking-wider">
+                ${item.role}
+              </span>
+            </footer>
+          </blockquote>
 
-        slide.setAttribute('data-pos', pos);
-        slide.setAttribute('aria-hidden', String(pos !== 'center'));
-      });
+          <div class="pt-4 border-t hairline-dark grid grid-cols-1 sm:grid-cols-12 gap-2 sm:gap-4 items-baseline">
+            <div class="sm:col-span-3 font-mono text-[9.5px] uppercase tracking-widest text-muted">
+              NOTA // LR
+            </div>
+            <p class="sm:col-span-9 text-xs sm:text-[13.5px] text-ink/82 leading-relaxed">
+              ${item.note}
+            </p>
+          </div>
+        </article>`;
 
       pills.forEach((pill, i) => {
         const isAct = i === activeIdx;
         pill.setAttribute('data-active', String(isAct));
         pill.setAttribute('aria-selected', String(isAct));
       });
-
-      syncProgressBar();
     }
-
-    // Relógio único sincronizado (barra GPU scaleX + troca de slide nunca dessincronizam nem travam)
-    const cycleLoop = createLoop((dt) => {
-      if (prefersReducedMotion || !inView || document.hidden || isPaused()) return;
-      elapsedMs += dt;
-      if (elapsedMs >= AUTO_MS) {
-        updatePositions(activeIdx + 1, 1);
-      } else {
-        syncProgressBar();
-      }
-    });
-
-    function step(dir) {
-      updatePositions(activeIdx + dir, dir);
-      if (!prefersReducedMotion && inView && !cycleLoop.running) cycleLoop.start();
-    }
-
-    slides.forEach((slide) => {
-      slide.addEventListener('click', () => {
-        const pos = slide.getAttribute('data-pos');
-        if (pos === 'left') step(-1);
-        else if (pos === 'right') step(1);
-      });
-    });
 
     pills.forEach((pill) => {
-      pill.addEventListener('click', (e) => {
-        if (e.detail > 0) pill.blur(); // Clique de mouse/toque não prende focusin
-        isKeyboardFocused = false;
-        syncPausedAttr();
-        const idx = Number(pill.getAttribute('data-principle-pill'));
-        if (idx === activeIdx) return;
-        updatePositions(idx, 0);
-        if (!prefersReducedMotion && inView && !cycleLoop.running) cycleLoop.start();
+      pill.addEventListener('click', () => {
+        const nextIdx = Number(pill.getAttribute('data-principle-pill'));
+        if (nextIdx === activeIdx) return;
+        renderEditorial(nextIdx, true);
       });
     });
 
-    if (prevBtn) prevBtn.addEventListener('click', (e) => { if (e.detail > 0) prevBtn.blur(); step(-1); });
-    if (nextBtn) nextBtn.addEventListener('click', (e) => { if (e.detail > 0) nextBtn.blur(); step(1); });
+    if (prevBtn) prevBtn.addEventListener('click', () => renderEditorial(activeIdx - 1, true));
+    if (nextBtn) nextBtn.addEventListener('click', () => renderEditorial(activeIdx + 1, true));
 
-    // Pausa com cursor do mouse mantida — mas nunca trava no toque ou após clique
-    if (isFinePointer && canHover) {
-      wrap.addEventListener('pointerenter', (e) => {
-        if (e.pointerType !== 'mouse') return;
-        isHoverPaused = true;
-        syncPausedAttr();
-      });
-      wrap.addEventListener('pointerleave', (e) => {
-        if (e.pointerType !== 'mouse') return;
-        isHoverPaused = false;
-        syncPausedAttr();
-      });
-    }
-    wrap.addEventListener('focusin', (e) => {
-      if (e.target && e.target.matches && e.target.matches(':focus-visible')) {
-        isKeyboardFocused = true;
-        syncPausedAttr();
-      }
-    });
-    wrap.addEventListener('focusout', (e) => {
-      if (!e.relatedTarget || !wrap.contains(e.relatedTarget)) {
-        isKeyboardFocused = false;
-        syncPausedAttr();
-      }
-    });
-
+    // Suporte a deslize suave no mobile dentro do card de leitura
     let touchStartX = 0;
     let touchStartY = 0;
-    stage.addEventListener('touchstart', (e) => {
+    reader.addEventListener('touchstart', (e) => {
       if (!e.touches.length) return;
       touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
     }, { passive: true });
-    stage.addEventListener('touchend', (e) => {
+    reader.addEventListener('touchend', (e) => {
       if (!e.changedTouches.length) return;
       const dx = e.changedTouches[0].clientX - touchStartX;
       const dy = e.changedTouches[0].clientY - touchStartY;
       if (Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy) * 1.2) {
-        step(dx < 0 ? 1 : -1);
+        renderEditorial(activeIdx + (dx < 0 ? 1 : -1), true);
       }
     }, { passive: true });
 
-    bindVisibility(wrap, (visible) => {
-      inView = visible;
-      if (visible) {
-        // Limpa estado preso ao chegar na seção (só pausa se o cursor realmente estiver sobre o bloco)
-        isHoverPaused = Boolean(isFinePointer && canHover && wrap.matches(':hover'));
-        isKeyboardFocused = false;
-        syncPausedAttr();
-        if (elapsedMs >= AUTO_MS * 0.92) elapsedMs = 0;
-        syncProgressBar();
-        if (!prefersReducedMotion) cycleLoop.start();
-      } else {
-        isHoverPaused = false;
-        syncPausedAttr();
-        cycleLoop.stop();
-      }
-    }, '80px');
-
-    updatePositions(0, 0);
+    renderEditorial(0, false);
   })();
 
   /* ==========================================================================

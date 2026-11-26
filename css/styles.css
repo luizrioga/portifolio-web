@@ -762,10 +762,15 @@ main > section[id] {
   touch-action: pan-y;
   cursor: grab;
   padding-block: 6px 10px;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-.works-carousel-viewport.is-dragging {
-  cursor: grabbing;
+.works-carousel-viewport.is-dragging,
+.works-carousel-viewport.is-dragging * {
+  cursor: grabbing !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
 }
 
 .works-carousel-track {
@@ -2287,6 +2292,59 @@ button.bg-limeTech:active {
   transform-origin: left center;
   transform: scaleX(0);
   will-change: transform;
+}
+
+/* Calm Editorial Reading Block (06 // PRINCÍPIOS) */
+.principle-editorial-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #101210 0%, #0A0C0B 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 22px 48px -32px rgba(0, 0, 0, 0.88);
+}
+
+.principle-editorial-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--p-accent, #C6F135) 0%, transparent 68%);
+  pointer-events: none;
+}
+
+.principle-editorial-enter {
+  animation: principleEditorialFade 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes principleEditorialFade {
+  from { opacity: 0.35; transform: translate3d(0, 5px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+.principle-index-btn {
+  background: rgba(18, 20, 18, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition:
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease;
+}
+
+.principle-index-btn:hover:not([data-active="true"]) {
+  background: rgba(26, 29, 26, 0.9);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.principle-index-btn[data-active="true"] {
+  background: color-mix(in srgb, var(--pill-accent, #C6F135) 10%, #131614);
+  border-color: color-mix(in srgb, var(--pill-accent, #C6F135) 55%, transparent);
+  box-shadow: inset 2px 0 0 var(--pill-accent, #C6F135);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .principle-editorial-enter {
+    animation: none !important;
+  }
 }
 
 .principle-pill {

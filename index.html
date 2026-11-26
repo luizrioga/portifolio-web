@@ -62,7 +62,7 @@
     };
   </script>
 
-  <link rel="stylesheet" href="css/styles.css?v=20261125d" />
+  <link rel="stylesheet" href="css/styles.css?v=20261125e" />
 </head>
 <body class="bg-carbon text-ink antialiased selection:bg-limeTech selection:text-inkDark">
 
@@ -926,11 +926,8 @@
                           <p class="text-ink/75 leading-relaxed">Liderança técnica da equipe Bitmind até a Rio Innovation Week 2023.</p>
                         </div>
                       </div>
-                      <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t hairline-dark font-mono text-[10.5px]">
-                        <span class="hidden sm:inline text-muted">FORMAÇÃO INTEGRADA CONCLUÍDA COM MÉRITO</span>
-                        <button type="button" data-open-project-by-id="iris" class="text-limeTech hover:underline underline-offset-4">
-                          Abrir Case Projeto Íris ↗
-                        </button>
+                      <div class="pt-2 border-t hairline-dark font-mono text-[10.5px]">
+                        <span class="text-muted">FORMAÇÃO INTEGRADA CONCLUÍDA COM MÉRITO</span>
                       </div>
                     </div>
                   </div>
@@ -1045,14 +1042,13 @@
     </section>
 
     <!-- ======================================================================
-         06 // PRINCÍPIOS — CARROSSEL ORBITAL 3D RESTAURADO (10 PENSADORES)
+         06 // PRINCÍPIOS — BLOCO EDITORIAL DE LEITURA CALMA (10 PENSADORES)
          ====================================================================== -->
     <section id="principles" data-module="06 // PRINCÍPIOS" class="py-8 md:py-14 lg:py-16 bg-[#050606] border-b hairline-dark relative overflow-hidden">
-      <div class="cosmos-horizon-glow" aria-hidden="true"></div>
       <div class="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
 
-        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-5 sm:mb-8 reveal">
-          <div class="space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8 reveal">
+          <div class="space-y-2.5">
             <div class="font-mono text-xs tracking-[0.14em] uppercase text-limeTech">
               06 // PRINCÍPIOS
             </div>
@@ -1068,16 +1064,16 @@
               <button
                 id="principles-prev-btn"
                 type="button"
-                aria-label="Frase anterior"
-                class="w-10 h-10 rounded-lg bg-graphite border hairline-dark hover:border-limeTech text-ink hover:text-limeTech transition-colors inline-flex items-center justify-center"
+                aria-label="Pensador anterior"
+                class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-graphite border hairline-dark hover:border-limeTech text-ink hover:text-limeTech transition-colors inline-flex items-center justify-center cursor-pointer"
               >
                 <span aria-hidden="true">←</span>
               </button>
               <button
                 id="principles-next-btn"
                 type="button"
-                aria-label="Próxima frase"
-                class="w-10 h-10 rounded-lg bg-graphite border hairline-dark hover:border-limeTech text-ink hover:text-limeTech transition-colors inline-flex items-center justify-center"
+                aria-label="Próximo pensador"
+                class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-graphite border hairline-dark hover:border-limeTech text-ink hover:text-limeTech transition-colors inline-flex items-center justify-center cursor-pointer"
               >
                 <span aria-hidden="true">→</span>
               </button>
@@ -1085,27 +1081,27 @@
           </div>
         </div>
 
-        <div id="principles-orbit-wrap" data-paused="false" class="principles-orbit-wrap reveal">
-          <svg class="principles-compass-bg" viewBox="0 0 600 600" fill="none" aria-hidden="true">
-            <circle cx="300" cy="300" r="272" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4 8" />
-            <circle cx="300" cy="300" r="228" stroke="rgba(255,255,255,0.045)" stroke-width="1" />
-            <g id="principles-compass-ring" class="principles-compass-ring">
-              <line x1="300" y1="22" x2="300" y2="40" stroke="#C6F135" stroke-width="2" />
-              <line x1="300" y1="560" x2="300" y2="574" stroke="rgba(255,255,255,0.22)" stroke-width="1.2" />
-              <line x1="26" y1="300" x2="40" y2="300" stroke="rgba(255,255,255,0.22)" stroke-width="1.2" />
-              <line x1="560" y1="300" x2="574" y2="300" stroke="rgba(255,255,255,0.22)" stroke-width="1.2" />
-              <circle cx="300" cy="28" r="3.5" fill="#C6F135" />
-            </g>
-          </svg>
+        <!-- Leitura editorial calma: Citação em foco (esq.) + Índice clicável dos 10 pensadores (dir. / mobile abaixo) -->
+        <div id="principles-editorial-wrap" class="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-7 items-stretch reveal">
+          <div
+            id="principles-editorial-reader"
+            class="lg:col-span-7"
+            role="tabpanel"
+            aria-live="polite"
+            aria-label="Citação e reflexão do modelo mental selecionado"
+          ></div>
 
-          <div id="principles-wheel-stage" class="principles-wheel-stage" role="region" aria-roledescription="carrossel" aria-label="Modelos mentais e citações rotativas"></div>
-
-          <div class="relative z-10 mt-1 space-y-4">
-            <div class="max-w-[740px] mx-auto h-[2px] w-full rounded-full bg-white/8 overflow-hidden" aria-hidden="true">
-              <div id="principles-progress-fill" class="principles-progress-fill"></div>
+          <div class="lg:col-span-5 flex flex-col justify-between gap-3">
+            <div class="hidden lg:flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.14em] text-muted px-1">
+              <span>ÍNDICE DE REFERÊNCIAS</span>
+              <span>SELECIONE PARA LER</span>
             </div>
-
-            <div id="principles-author-rail" class="max-w-5xl mx-auto flex items-center sm:flex-wrap sm:justify-center gap-1.5 overflow-x-auto sm:overflow-visible no-scrollbar pb-1" role="tablist" aria-label="Selecionar pensador"></div>
+            <div
+              id="principles-author-rail"
+              class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 lg:pb-0 lg:grid lg:grid-cols-2 lg:gap-2 lg:overflow-visible lg:flex-1"
+              role="tablist"
+              aria-label="Selecionar pensador"
+            ></div>
           </div>
         </div>
       </div>
@@ -1525,6 +1521,6 @@
   <script src="js/journey/fallback-2d.js?v=20261124c" defer></script>
   <script src="js/journey/engine.js?v=20261124c" defer></script>
 
-  <script src="js/main.js?v=20261125d" defer></script>
+  <script src="js/main.js?v=20261125e" defer></script>
 </body>
 </html>
