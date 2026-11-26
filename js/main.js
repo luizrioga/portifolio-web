@@ -2246,350 +2246,465 @@
   })();
 
   /* ==========================================================================
-     13b. EXPERIÊNCIA INDUSTRIAL — ACTECH (TIMELINE + EXPANDABLE CARDS + SCROLL)
+     13b. EXPERIÊNCIA PROFISSIONAL — ACTECH (TIMELINE CURVA COM SCROLL)
      ========================================================================== */
   (function initActechExperience() {
     const sectionEl = document.getElementById('experience');
-    const cardsWrap = document.getElementById('actech-cards');
-    const timelineEl = document.getElementById('actech-timeline');
-    const nodeAprendiz = document.getElementById('actech-node-aprendiz');
-    const nodeEstagio = document.getElementById('actech-node-estagio');
-    if (!sectionEl || !cardsWrap) return;
+    const trackEl = document.getElementById('actech-scroll-track');
+    const stickyEl = document.getElementById('actech-sticky-stage');
+    const activePath = document.getElementById('actech-path-active');
+    const bloomPath = document.getElementById('actech-path-bloom');
+    const sparkEl = document.getElementById('actech-travel-spark');
+    const nodesLayer = document.getElementById('actech-nodes-layer');
+    const dockStepsEl = document.getElementById('actech-dock-steps');
+    const dockMetaEl = document.getElementById('actech-dock-meta');
+    const dockCasesEl = document.getElementById('actech-dock-cases');
+    const readoutEl = document.getElementById('actech-progress-readout');
 
-    // Ordem cronológica natural (01 Jovem Aprendiz → 02 Estagiário) na mesma empresa (Actech)
-    const ROLES = [
+    const mobTimelineEl = document.getElementById('actech-mobile-timeline');
+    const mobNodesEl = document.getElementById('actech-mobile-nodes');
+    const mobBeamEl = document.getElementById('actech-mob-beam');
+    const mobSparkEl = document.getElementById('actech-mob-spark');
+
+    if (!sectionEl || (!nodesLayer && !mobNodesEl)) return;
+
+    const VIEWBOX_W = 1200;
+    const VIEWBOX_H = 520;
+    const PATH_UNITS = 1000;
+
+    const MILESTONES = [
       {
         id: 'aprendiz',
-        step: '01',
-        badge: 'PRIMEIRA ETAPA',
+        num: '01',
         period: 'JUN/2024 – DEZ/2025',
-        role: 'Jovem Aprendiz',
-        area: 'Actech · Operação & Processos Industriais',
-        teaser: 'Contato inicial com o ambiente industrial: cronoanálises em campo, controle de rotina e padronização documental.',
-        summary: 'Base prática diretamente no chão de fábrica: medi tempos com cronoanálises, acompanhei estoque e checklists, padronizei documentos no Qualyteam e mapeei gargalos que prepararam a digitalização.',
-        expandCue: 'Ver primeira etapa',
-        pillars: [
-          {
-            num: '01',
-            title: 'Cronoanálises & medição em campo',
-            detail: 'Medição de tempos no chão de fábrica e levantamento de KPIs de desempenho de operadores e equipamentos.'
-          },
-          {
-            num: '02',
-            title: 'Estoque, embalagens & checklists',
-            detail: 'Acompanhamento de controle de estoque, organização de embalagens e verificações diárias de carregamento.'
-          },
-          {
-            num: '03',
-            title: 'Padronização no Qualyteam',
-            detail: 'Estruturação de procedimentos operacionais e controle documental da área dentro do sistema Qualyteam.'
-          },
-          {
-            num: '04',
-            title: 'Diagnóstico de gargalos',
-            detail: 'Mapeamento de atritos da rotina física e iniciativas iniciais de rastreabilidade na planta.'
-          }
-        ],
-        projects: []
+        shortLabel: '01 · Aprendiz',
+        role: 'Jovem Aprendiz · Operação',
+        desc: 'Cronoanálises em campo, controle de estoque e checklists, padronização no Qualyteam e diagnóstico de gargalos no chão de fábrica.',
+        tags: ['Cronoanálises', 'Qualyteam', 'Estoque & Checklists', 'KPIs'],
+        accent: '#F59E0B',
+        t: 0.004,
+        reachAt: 0.04,
+        scrollTarget: 0.14,
+        align: 'left',
+        caseId: null,
+        isFuture: false
       },
       {
-        id: 'estagio',
-        step: '02',
-        badge: 'POSIÇÃO ATUAL',
-        period: 'FEV/2026 – ATUAL',
-        role: 'Estagiário de Embalagem & Expedição',
-        area: 'Actech · Processos, Dados & Digitalização',
-        teaser: 'Evolução com maior autonomia na mesma planta: indicadores logísticos, automação de fluxos e ferramentas web.',
-        summary: 'Evolução interna com maior autonomia na expedição: estruturo bases de dados e indicadores, automatizo rotinas recorrentes e desenvolvo aplicações web em nuvem para reduzir trabalho manual.',
-        expandCue: 'Ver posição atual',
-        pillars: [
-          {
-            num: '01',
-            title: 'Dados de carregamento & 8 KPIs',
-            detail: 'Bases do Fretefy estruturadas em Power Query, fechando o TPV mensal em menos de 5 minutos e consolidando 8 indicadores.'
-          },
-          {
-            num: '02',
-            title: 'Automação de fluxos & envios',
-            detail: 'Planilhas automatizadas e disparo semanal de estoque, backlog e chegadas aos interessados da operação.'
-          },
-          {
-            num: '03',
-            title: 'Digitalização em nuvem',
-            detail: 'Aplicação web de Triagem de Big Bags integrando HTML/CSS/JS, Firebase, Cloudflare R2 e Gemini API.'
-          },
-          {
-            num: '04',
-            title: 'Rotina em área & treinamento',
-            detail: 'Acompanhamento de campo, redação de procedimentos operacionais e apoio à equipe na adoção dos fluxos digitais.'
-          }
-        ],
-        projects: [
-          {
-            id: 'bigbag',
-            index: '02',
-            title: 'Triagem de Big Bags',
-            sub: 'Web · Firebase · Cloudflare R2 · Gemini API',
-            img: 'assets/bigbag-app.png?v=20261124b'
-          },
-          {
-            id: 'fretefy',
-            index: '03',
-            title: 'Automação Fretefy',
-            sub: 'Power Query · TPV < 5 min · 8 KPIs',
-            img: 'assets/fretefy-panel.png?v=20261124b'
-          }
-        ]
+        id: 'estagio-dados',
+        num: '02',
+        period: 'FEV/2026',
+        shortLabel: '02 · Estágio & ETL',
+        role: 'Estagiário · Dados & ETL',
+        desc: 'Evolução interna para Embalagem & Expedição: ETL do Fretefy em Power Query, TPV mensal em < 5 min, 8 KPIs e envios semanais automáticos.',
+        tags: ['Power Query', 'ETL', 'TPV < 5 min', '8 KPIs'],
+        accent: '#38BDF8',
+        t: 0.305,
+        reachAt: 0.305,
+        scrollTarget: 0.37,
+        align: 'left',
+        caseId: 'fretefy',
+        caseLabel: 'Ver Case Fretefy ↗',
+        isFuture: false
+      },
+      {
+        id: 'estagio-nuvem',
+        num: '03',
+        period: '2026 · ATUAL',
+        shortLabel: '03 · Nuvem & Web',
+        role: 'Digitalização & Nuvem',
+        desc: 'Sistema web de Triagem de Big Bags (Firebase, R2 e Gemini API), procedimentos operacionais padrão e treinamento da equipe em área.',
+        tags: ['Web App', 'Firebase', 'Cloudflare R2', 'Gemini API'],
+        accent: '#C6F135',
+        t: 0.705,
+        reachAt: 0.705,
+        scrollTarget: 0.75,
+        align: 'right',
+        caseId: 'bigbag',
+        caseLabel: 'Ver Case Big Bags ↗',
+        isFuture: false
+      },
+      {
+        id: 'analista',
+        num: '04',
+        period: 'PRÓXIMO CICLO · EFETIVAÇÃO',
+        shortLabel: '04 · Analista',
+        role: 'Analista de Processos',
+        desc: 'Contratação na Actech como Analista de Processos — consolidando desenho de processos, melhoria contínua, indicadores e automação ponta a ponta.',
+        tags: ['Efetivação', 'Processos', 'Melhoria Contínua', 'Indicadores'],
+        accent: '#C6F135',
+        t: 0.905,
+        reachAt: 0.905,
+        scrollTarget: 0.96,
+        align: 'right',
+        caseId: null,
+        isFuture: true
       }
     ];
 
-    function buildCardHTML(item) {
-      const isCurrent = item.id === 'estagio';
-      const isExpanded = isCurrent;
-      const projectsBlock = item.projects.length
-        ? `
-          <div class="pt-4 mt-4 border-t hairline-dark space-y-2.5">
-            <div class="flex items-center justify-between font-mono text-[9.5px] uppercase tracking-[0.15em] text-muted">
-              <span>PROJETOS RELEVANTES NA POSIÇÃO</span>
-              <span class="text-limeTech/90">ABRIR DOSSIÊ</span>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
-              ${item.projects.map((pr) => `
-                <button
-                  type="button"
-                  data-open-project-by-id="${pr.id}"
-                  class="actech-proj-link group"
-                >
-                  <div class="flex items-center gap-3 min-w-0">
-                    <img src="${pr.img}" alt="Prévia ${pr.title}" loading="lazy" decoding="async" class="w-11 h-8 rounded-md object-cover object-left-top border border-white/10 shrink-0" />
-                    <div class="min-w-0">
-                      <div class="font-display text-xs sm:text-[13px] font-bold text-ink group-hover:text-limeTech transition-colors truncate">${pr.index} · ${pr.title}</div>
-                      <div class="font-mono text-[9.5px] text-muted truncate">${pr.sub}</div>
-                    </div>
-                  </div>
-                  <span class="actech-proj-arrow font-mono text-xs text-muted shrink-0" aria-hidden="true">↗</span>
-                </button>`).join('')}
-            </div>
-          </div>`
-        : `
-          <div class="pt-4 mt-4 border-t hairline-dark flex flex-wrap items-center justify-between gap-3">
-            <span class="font-mono text-[10px] uppercase tracking-[0.12em] text-muted">Base operacional para a evolução interna em Fev/2026</span>
-            <button
-              type="button"
-              data-actech-select="estagio"
-              class="inline-flex items-center gap-1.5 font-mono text-[10.5px] font-semibold uppercase tracking-wider text-limeTech hover:underline underline-offset-4 cursor-pointer"
-            >
-              <span>Ver posição atual (Estagiário)</span>
-              <span aria-hidden="true">→</span>
-            </button>
-          </div>`;
+    const CASES = [
+      { id: 'fretefy', label: 'Case Fretefy ↗', accent: '#F59E0B', milestoneIdx: 1 },
+      { id: 'bigbag', label: 'Case Big Bags ↗', accent: '#38BDF8', milestoneIdx: 2 }
+    ];
 
-      return `
-        <article
-          id="actech-card-${item.id}"
-          data-actech-card="${item.id}"
-          data-state="${isExpanded ? 'expanded' : 'compact'}"
-          class="actech-card p-4 sm:p-6 lg:p-7"
-          aria-labelledby="actech-heading-${item.id}"
-        >
-          <!-- Cabeçalho interativo do card (clicável em qualquer estado compact / accordion mobile) -->
-          <div class="space-y-2">
-            <div class="flex items-center justify-between gap-3 font-mono text-[9.5px] sm:text-[10px] uppercase tracking-[0.14em]">
-              <span class="inline-flex items-center gap-2 ${isCurrent ? 'text-limeTech' : 'text-muted'}">
-                ${isCurrent ? '<span class="w-1.5 h-1.5 rounded-full bg-limeTech acad-node-pulse shrink-0" aria-hidden="true"></span>' : '<span class="w-1.5 h-1.5 rounded-full bg-white/35 shrink-0" aria-hidden="true"></span>'}
-                <span>${item.step} · ${item.period}</span>
-              </span>
-              <span class="${isCurrent ? 'text-limeTech font-semibold' : 'text-muted'}">${item.badge}</span>
-            </div>
+    let totalLen = 0;
+    let currentProgress = prefersReducedMotion ? 1 : 0.14;
+    let targetProgress = currentProgress;
+    let activeIdx = 0;
+    let hoveredIdx = null;
+    let rafId = null;
+    let isNearViewport = true;
 
-            <div class="space-y-1">
-              <button
-                type="button"
-                data-actech-trigger="${item.id}"
-                aria-expanded="${isExpanded}"
-                aria-controls="actech-drawer-${item.id}"
-                class="w-full text-left flex items-start justify-between gap-3 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-limeTech/80 rounded-md"
-              >
-                <h3 id="actech-heading-${item.id}" class="font-display text-lg sm:text-2xl lg:text-[1.68rem] font-extrabold text-ink tracking-tight leading-snug group-hover:text-limeTech transition-colors">
-                  ${item.role}
-                </h3>
-                <span class="lg:hidden font-mono text-xs text-muted pt-1 shrink-0 transition-transform" data-actech-chevron="${item.id}" aria-hidden="true">
-                  ${isExpanded ? '−' : '+'}
-                </span>
-              </button>
-              <div class="font-mono text-[10px] sm:text-[10.5px] text-muted">${item.area}</div>
-            </div>
-          </div>
+    const desktopNodes = [];
+    const dockStepButtons = [];
+    const dockCaseButtons = [];
+    const mobileItems = [];
 
-          <!-- Visão enxuta exibida apenas quando o card está em estado secundário/compacto -->
-          <div class="actech-compact-only pt-3.5 md:pt-5 lg:pt-6">
-            <p class="hidden md:block text-[13px] text-ink/70 leading-relaxed">${item.teaser}</p>
-            <div class="pt-3.5 md:pt-4 md:mt-5 lg:mt-auto border-t hairline-dark flex items-center justify-between font-mono text-[10px] sm:text-[10.5px] uppercase tracking-wider text-ink/75">
-              <span>${item.expandCue}</span>
-              <span class="actech-expand-cue text-limeTech" aria-hidden="true">→</span>
-            </div>
-          </div>
-
-          <!-- Conteúdo editorial expandido (sem caixas aninhadas — tipografia limpa + hairlines) -->
-          <div id="actech-drawer-${item.id}" class="actech-card-drawer">
-            <div class="actech-card-drawer-inner pt-3 lg:pt-4">
-              <div class="space-y-3.5 lg:space-y-4">
-                <p class="text-[13.5px] sm:text-sm lg:text-[14.5px] text-ink/82 leading-relaxed max-w-2xl">
-                  ${item.summary}
-                </p>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-7 gap-y-3 lg:gap-y-3.5 pt-3.5 border-t hairline-dark">
-                  ${item.pillars.map((pl) => `
-                    <div class="space-y-1">
-                      <div class="flex items-baseline gap-2">
-                        <span class="font-mono text-[10px] font-semibold text-limeTech/90 tabular-nums shrink-0">${pl.num}</span>
-                        <h4 class="font-display text-[13.5px] sm:text-sm font-bold text-ink leading-snug">${pl.title}</h4>
-                      </div>
-                      <p class="text-xs sm:text-[12.5px] text-ink/70 leading-relaxed pl-6">${pl.detail}</p>
-                    </div>`).join('')}
-                </div>
-              </div>
-
-              ${projectsBlock}
-            </div>
-          </div>
-        </article>`;
-    }
-
-    cardsWrap.innerHTML = ROLES.map(buildCardHTML).join('');
-
-    const cardEls = {
-      aprendiz: document.getElementById('actech-card-aprendiz'),
-      estagio: document.getElementById('actech-card-estagio')
-    };
-    const timelineNodes = {
-      aprendiz: nodeAprendiz,
-      estagio: nodeEstagio
-    };
-
-    let activeRole = 'estagio';
-    let manualLocked = false;
-    let scrollLineProgress = 1;
-
-    function updateTimelineFill() {
-      // Combina a progressão de scroll com o estado selecionado (sempre discreta e fluida)
-      const targetLine = manualLocked
-        ? (activeRole === 'aprendiz' ? 0.24 : 1)
-        : Math.max(0.18, scrollLineProgress);
-      sectionEl.style.setProperty('--actech-line-p', targetLine.toFixed(3));
-    }
-
-    function setActiveRole(roleId, isUserAction = false) {
-      if (!cardEls[roleId]) return;
-      if (isUserAction) manualLocked = true;
-      const changed = activeRole !== roleId;
-      activeRole = roleId;
-      cardsWrap.setAttribute('data-active-role', roleId);
-
-      Object.entries(cardEls).forEach(([id, el]) => {
-        if (!el) return;
-        const expanded = id === roleId;
-        el.setAttribute('data-state', expanded ? 'expanded' : 'compact');
-        const trigger = el.querySelector('[data-actech-trigger]');
-        if (trigger) trigger.setAttribute('aria-expanded', String(expanded));
-        const chev = el.querySelector(`[data-actech-chevron="${id}"]`);
-        if (chev) chev.textContent = expanded ? '−' : '+';
-        if (expanded && changed && !prefersReducedMotion) {
-          const inner = el.querySelector('.actech-card-drawer-inner');
-          if (inner) {
-            inner.classList.remove('actech-editorial-reveal');
-            void inner.offsetWidth;
-            inner.classList.add('actech-editorial-reveal');
-          }
+    function ensurePathMeasured() {
+      if (!activePath) return false;
+      if (totalLen > 0) return true;
+      try {
+        const len = activePath.getTotalLength();
+        if (len > 10) {
+          totalLen = len;
+          positionDesktopNodes();
+          return true;
         }
-      });
-
-      Object.entries(timelineNodes).forEach(([id, node]) => {
-        if (!node) return;
-        node.setAttribute('aria-selected', String(id === roleId));
-      });
-
-      updateTimelineFill();
+      } catch (_) {}
+      return false;
     }
 
-    // Clique nos nós da timeline horizontal e no atalho interno
-    sectionEl.addEventListener('click', (e) => {
-      if (e.target.closest('[data-open-project-by-id]')) return; // Deixa o modal abrir sem colapsar card
+    function positionDesktopNodes() {
+      if (!activePath || totalLen <= 0) return;
+      MILESTONES.forEach((m, idx) => {
+        const nodeEl = desktopNodes[idx];
+        if (!nodeEl) return;
+        const pt = activePath.getPointAtLength(m.t * totalLen);
+        nodeEl.style.setProperty('--node-x', `${(pt.x / VIEWBOX_W) * 100}%`);
+        nodeEl.style.setProperty('--node-y', `${(pt.y / VIEWBOX_H) * 100}%`);
+      });
+    }
 
-      const selectBtn = e.target.closest('[data-actech-select]');
-      if (selectBtn) {
-        setActiveRole(selectBtn.getAttribute('data-actech-select'), true);
+    function scrollToMilestone(idx) {
+      const m = MILESTONES[idx];
+      if (!m || !trackEl) return;
+      hoveredIdx = null;
+      if (prefersReducedMotion || window.innerWidth < 1024) {
+        activeIdx = idx;
+        syncUIState(idx, 1);
         return;
       }
+      const topOffset = 56;
+      const trackTopDoc = window.scrollY + trackEl.getBoundingClientRect().top;
+      const vh = window.innerHeight || 900;
+      const travel = Math.max(1, trackEl.offsetHeight - (vh - topOffset));
+      const normalized = Math.max(0, Math.min(1, (m.scrollTarget - 0.14) / 0.86));
+      const destY = trackTopDoc - topOffset + normalized * travel;
+      window.scrollTo({ top: Math.max(0, destY), behavior: 'smooth' });
+    }
 
-      const trigger = e.target.closest('[data-actech-trigger]');
-      if (trigger) {
-        const id = trigger.getAttribute('data-actech-trigger');
-        if (id !== activeRole) setActiveRole(id, true);
-        return;
+    function buildDesktopDOM() {
+      if (!nodesLayer) return;
+      nodesLayer.innerHTML = MILESTONES.map((m, idx) => `
+        <div
+          class="actech-node actech-node--align-${m.align}"
+          data-actech-node="${idx}"
+          data-reached="${idx === 0 || prefersReducedMotion ? 'true' : 'false'}"
+          data-active="${idx === 0 ? 'true' : 'false'}"
+          data-future="${m.isFuture ? 'true' : 'false'}"
+          style="--node-accent:${m.accent};"
+        >
+          <span class="actech-node-stem" aria-hidden="true"></span>
+          <button
+            type="button"
+            class="actech-node-dot-btn"
+            data-actech-jump="${idx}"
+            aria-label="Ir para etapa ${m.num}: ${m.role}"
+          >
+            <span class="actech-node-dot-halo" aria-hidden="true"></span>
+            <span class="actech-node-dot-core" aria-hidden="true"></span>
+          </button>
+          <div class="actech-node-callout" data-actech-callout="${idx}">
+            <div class="actech-callout-period">
+              ${m.isFuture
+                ? `<span class="inline-flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-limeTech acad-node-pulse"></span><span>${m.period}</span></span>`
+                : `<span>${m.period}</span>`}
+            </div>
+            <h3 class="actech-callout-role">${m.role}</h3>
+            <p class="actech-callout-desc">${m.desc}</p>
+            ${m.caseId
+              ? `<button type="button" data-open-project-by-id="${m.caseId}" class="actech-callout-case-btn">${m.caseLabel}</button>`
+              : ''}
+          </div>
+        </div>
+      `).join('');
+
+      desktopNodes.length = 0;
+      nodesLayer.querySelectorAll('[data-actech-node]').forEach((el, idx) => {
+        desktopNodes.push(el);
+        el.addEventListener('mouseenter', () => {
+          hoveredIdx = idx;
+          syncUIState(idx, currentProgress);
+        });
+        el.addEventListener('mouseleave', () => {
+          hoveredIdx = null;
+          syncUIState(activeIdx, currentProgress);
+        });
+      });
+
+      nodesLayer.querySelectorAll('[data-actech-jump]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          scrollToMilestone(Number(btn.getAttribute('data-actech-jump')));
+        });
+      });
+
+      nodesLayer.querySelectorAll('[data-actech-callout]').forEach((box) => {
+        box.addEventListener('click', (e) => {
+          if (e.target.closest('[data-open-project-by-id]')) return;
+          scrollToMilestone(Number(box.getAttribute('data-actech-callout')));
+        });
+      });
+
+      if (dockStepsEl) {
+        dockStepsEl.innerHTML = MILESTONES.map((m, idx) => `
+          <button
+            type="button"
+            role="tab"
+            aria-selected="${idx === 0 ? 'true' : 'false'}"
+            data-actech-dock-step="${idx}"
+            class="actech-dock-pill"
+            style="--pill-accent:${m.accent};"
+          >
+            <span class="w-1.5 h-1.5 rounded-full" style="background:${m.accent};"></span>
+            <span>${m.shortLabel}</span>
+          </button>
+        `).join('');
+
+        dockStepButtons.length = 0;
+        dockStepsEl.querySelectorAll('[data-actech-dock-step]').forEach((btn) => {
+          dockStepButtons.push(btn);
+          btn.addEventListener('click', () => {
+            scrollToMilestone(Number(btn.getAttribute('data-actech-dock-step')));
+          });
+        });
       }
 
-      const compactCard = e.target.closest('.actech-card[data-state="compact"]');
-      if (compactCard) {
-        const id = compactCard.getAttribute('data-actech-card');
-        if (id) setActiveRole(id, true);
+      if (dockCasesEl) {
+        dockCasesEl.innerHTML = CASES.map((c) => `
+          <button
+            type="button"
+            data-open-project-by-id="${c.id}"
+            data-actech-case-idx="${c.milestoneIdx}"
+            data-highlighted="false"
+            class="actech-dock-case-btn"
+            style="--case-accent:${c.accent};"
+          >
+            <span>${c.label}</span>
+          </button>
+        `).join('');
+
+        dockCaseButtons.length = 0;
+        dockCasesEl.querySelectorAll('[data-actech-case-idx]').forEach((btn) => {
+          dockCaseButtons.push(btn);
+        });
+      }
+    }
+
+    function buildMobileDOM() {
+      if (!mobNodesEl) return;
+      mobNodesEl.innerHTML = MILESTONES.map((m, idx) => `
+        <article
+          class="actech-mob-item"
+          data-actech-mob-item="${idx}"
+          data-reached="${idx === 0 || prefersReducedMotion ? 'true' : 'false'}"
+          style="--node-accent:${m.accent};"
+        >
+          <span class="actech-mob-dot" aria-hidden="true"></span>
+          <span class="actech-mob-tick" aria-hidden="true"></span>
+
+          <div class="space-y-1.5">
+            <div class="inline-flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.13em] font-semibold" style="color:${m.accent};">
+              ${m.isFuture ? '<span class="w-1.5 h-1.5 rounded-full bg-limeTech acad-node-pulse"></span>' : ''}
+              <span>${m.num} // ${m.period}</span>
+            </div>
+            <h3 class="font-display text-lg sm:text-xl font-bold text-ink leading-snug">${m.role}</h3>
+            <p class="text-[13px] sm:text-sm text-ink/78 leading-relaxed">${m.desc}</p>
+            <div class="flex flex-wrap items-center gap-1.5 pt-1">
+              ${m.tags.map((t) => `<span class="px-2 py-0.5 rounded bg-white/[0.05] border border-white/10 font-mono text-[9.5px] text-ink/80">${t}</span>`).join('')}
+              ${m.caseId
+                ? `<button type="button" data-open-project-by-id="${m.caseId}" class="actech-callout-case-btn !mt-0 ml-1" style="--node-accent:${m.accent};">${m.caseLabel}</button>`
+                : ''}
+            </div>
+          </div>
+        </article>
+      `).join('');
+
+      mobileItems.length = 0;
+      mobNodesEl.querySelectorAll('[data-actech-mob-item]').forEach((el) => mobileItems.push(el));
+    }
+
+    function syncUIState(focusIdx, progressVal) {
+      const m = MILESTONES[focusIdx] || MILESTONES[0];
+
+      desktopNodes.forEach((el, idx) => {
+        const reached = prefersReducedMotion || progressVal >= MILESTONES[idx].reachAt - 0.005;
+        el.setAttribute('data-reached', reached ? 'true' : 'false');
+        el.setAttribute('data-active', idx === focusIdx ? 'true' : 'false');
+      });
+
+      dockStepButtons.forEach((btn, idx) => {
+        btn.setAttribute('aria-selected', idx === focusIdx ? 'true' : 'false');
+      });
+
+      if (dockMetaEl) {
+        dockMetaEl.innerHTML = m.tags
+          .map((t) => `<span class="px-2 py-0.5 rounded bg-white/[0.045] border border-white/10 font-mono text-[9.5px] text-ink/80 whitespace-nowrap">${t}</span>`)
+          .join('');
+      }
+
+      dockCaseButtons.forEach((btn) => {
+        const targetMilestone = Number(btn.getAttribute('data-actech-case-idx'));
+        btn.setAttribute('data-highlighted', targetMilestone === focusIdx ? 'true' : 'false');
+      });
+
+      if (readoutEl) {
+        readoutEl.textContent = `ETAPA ${m.num} / 04`;
+      }
+    }
+
+    function paintDesktop(progress) {
+      if (!activePath || !bloomPath) return;
+      if (!ensurePathMeasured()) return;
+
+      const clamped = Math.max(0.008, Math.min(1, progress));
+      const dashOffset = PATH_UNITS * (1 - clamped);
+      activePath.style.strokeDashoffset = String(dashOffset);
+      bloomPath.style.strokeDashoffset = String(dashOffset);
+
+      const pt = activePath.getPointAtLength(clamped * totalLen);
+      const px = (pt.x / VIEWBOX_W) * 100;
+      const py = (pt.y / VIEWBOX_H) * 100;
+
+      if (sparkEl) {
+        sparkEl.style.left = `${px}%`;
+        sparkEl.style.top = `${py}%`;
+        sparkEl.setAttribute('data-visible', clamped > 0.015 ? 'true' : 'false');
+      }
+
+      if (stickyEl) {
+        stickyEl.style.setProperty('--beam-x', `${px}%`);
+        stickyEl.style.setProperty('--beam-y', `${py}%`);
+      }
+
+      let derivedIdx = 0;
+      for (let i = MILESTONES.length - 1; i >= 0; i--) {
+        if (clamped >= MILESTONES[i].reachAt - 0.005) {
+          derivedIdx = i;
+          break;
+        }
+      }
+      activeIdx = derivedIdx;
+      const displayIdx = hoveredIdx !== null ? hoveredIdx : activeIdx;
+      syncUIState(displayIdx, clamped);
+    }
+
+    function updateMobileScroll() {
+      if (!mobTimelineEl || !mobBeamEl) return;
+      if (prefersReducedMotion) {
+        mobBeamEl.style.transform = 'scaleY(1)';
+        if (mobSparkEl) mobSparkEl.style.top = '100%';
+        mobileItems.forEach((el) => el.setAttribute('data-reached', 'true'));
+        return;
+      }
+      const rect = mobTimelineEl.getBoundingClientRect();
+      const vh = window.innerHeight || 800;
+      const anchorY = vh * 0.62;
+      const raw = (anchorY - rect.top) / Math.max(1, rect.height);
+      const p = Math.max(0.06, Math.min(1, raw));
+      mobBeamEl.style.transform = `scaleY(${p})`;
+      if (mobSparkEl) mobSparkEl.style.top = `${p * 100}%`;
+
+      mobileItems.forEach((el, idx) => {
+        const itemRect = el.getBoundingClientRect();
+        const reached = idx === 0 || itemRect.top <= anchorY + 26 || p >= 0.96;
+        el.setAttribute('data-reached', reached ? 'true' : 'false');
+      });
+    }
+
+    function computeDesktopTarget() {
+      if (prefersReducedMotion) return 1;
+      if (!trackEl) return 0.14;
+      const rect = trackEl.getBoundingClientRect();
+      const vh = window.innerHeight || 900;
+      const topOffset = 56;
+      const travel = Math.max(1, rect.height - (vh - topOffset));
+
+      if (rect.top > topOffset) {
+        const entryStart = vh * 0.72;
+        const entryRatio = Math.max(0, Math.min(1, (entryStart - rect.top) / Math.max(1, entryStart - topOffset)));
+        return 0.03 + entryRatio * 0.11;
+      }
+      const scrolled = topOffset - rect.top;
+      const stickyRatio = Math.max(0, Math.min(1, scrolled / travel));
+      return 0.14 + stickyRatio * 0.86;
+    }
+
+    function tick() {
+      rafId = null;
+      if (document.body.classList.contains('is-modal-open')) return;
+
+      if (window.innerWidth >= 1024) {
+        targetProgress = computeDesktopTarget();
+        const diff = targetProgress - currentProgress;
+        if (Math.abs(diff) < 0.0005 || prefersReducedMotion) {
+          currentProgress = targetProgress;
+          paintDesktop(currentProgress);
+        } else {
+          currentProgress += diff * 0.16;
+          paintDesktop(currentProgress);
+          rafId = requestAnimationFrame(tick);
+        }
+      } else {
+        updateMobileScroll();
+      }
+    }
+
+    function requestUpdate() {
+      if (!isNearViewport && window.innerWidth >= 1024) return;
+      if (!rafId) rafId = requestAnimationFrame(tick);
+    }
+
+    buildDesktopDOM();
+    buildMobileDOM();
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        isNearViewport = entries.some((en) => en.isIntersecting);
+        if (isNearViewport) {
+          ensurePathMeasured();
+          requestUpdate();
+        }
+      }, { rootMargin: '260px 0px' });
+      io.observe(sectionEl);
+    }
+
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', () => {
+      totalLen = 0;
+      ensurePathMeasured();
+      requestUpdate();
+    }, { passive: true });
+
+    // Pintura inicial imediata após layout
+    requestAnimationFrame(() => {
+      ensurePathMeasured();
+      if (window.innerWidth >= 1024) {
+        currentProgress = computeDesktopTarget();
+        targetProgress = currentProgress;
+        paintDesktop(currentProgress);
+      } else {
+        updateMobileScroll();
       }
     });
-
-    // Acessibilidade por teclado na timeline horizontal (ArrowLeft / ArrowRight / Home / End)
-    if (timelineEl) {
-      timelineEl.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' || e.key === 'End') {
-          e.preventDefault();
-          setActiveRole('estagio', true);
-          nodeEstagio?.focus();
-        } else if (e.key === 'ArrowLeft' || e.key === 'Home') {
-          e.preventDefault();
-          setActiveRole('aprendiz', true);
-          nodeAprendiz?.focus();
-        }
-      });
-    }
-
-    // B · Scroll Storytelling sutil: desenha a linha verde 01 → 02 e conduz a transição no desktop
-    if (!prefersReducedMotion) {
-      let ticking = false;
-      let inScrollZone = false;
-
-      function syncScrollStory() {
-        ticking = false;
-        const rect = sectionEl.getBoundingClientRect();
-        const vh = window.innerHeight || 800;
-        // Progresso 0 quando a seção começa a entrar na base da tela -> 1 quando assenta na área de leitura
-        const raw = (vh * 0.92 - rect.top) / (vh * 0.56);
-        scrollLineProgress = clamp(raw, 0.16, 1);
-
-        if (!manualLocked && window.innerWidth >= 1024) {
-          if (scrollLineProgress < 0.42 && activeRole !== 'aprendiz') {
-            setActiveRole('aprendiz', false);
-          } else if (scrollLineProgress >= 0.42 && activeRole !== 'estagio') {
-            setActiveRole('estagio', false);
-          }
-        }
-        updateTimelineFill();
-      }
-
-      const onScroll = () => {
-        if (!inScrollZone || ticking) return;
-        ticking = true;
-        requestAnimationFrame(syncScrollStory);
-      };
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      bindVisibility(sectionEl, (visible) => {
-        inScrollZone = visible;
-        if (visible) syncScrollStory();
-      }, '260px');
-
-      syncScrollStory();
-    } else {
-      setActiveRole('estagio', true);
-    }
   })();
 
   document.addEventListener('click', (e) => {
@@ -4444,7 +4559,7 @@
       .join('; ');
     const RECRUITER_BRIEF = [
       'LUIZ RIOGA — Engenharia de Controle e Automação (UFOP · Escola de Minas — 4 de 10 períodos concluídos · 5º em curso) | Técnico em Automação Industrial (IFMG · Estudante Destaque 2023)',
-      'Experiência: 2+ anos na Actech — Jovem Aprendiz (Jun/2024–Dez/2025) e Estagiário de Embalagem & Expedição (Fev/2026–atual).',
+      'Experiência: 2+ anos na Actech — Jovem Aprendiz (Jun/2024–Dez/2025), Estagiário de Embalagem & Expedição (Fev/2026) e efetivação como Analista de Processos.',
       `Cases documentados (${String(PROJECTS.length).padStart(2, '0')}): ${casesListText}.`,
       'Disponibilidade: aberto a novos projetos, estágios e propostas (remoto ou híbrido a partir de Ouro Preto/MG).',
       'Portfólio: https://luizrioga.com | Contato: contato@luizrioga.com | LinkedIn: https://www.linkedin.com/in/luiz-rioga/ | GitHub: https://github.com/luizrioga'
