@@ -4501,7 +4501,7 @@
   renderMobileToolbox();
 
   /* ==========================================================================
-     17b. MATRIZ ACADÊMICA INTERATIVA (SEM BARRAS DE PROFICIÊNCIA)
+     17b. QUADRO DE INSÍGNIAS — SELOS CONQUISTADOS, EM ROTA & CAMPO (PATCHES)
      ========================================================================== */
   (function initDifferentialsMatrix() {
     const shell = document.getElementById('diff-matrix-shell');
@@ -4512,38 +4512,78 @@
     if (!shell || !grid) return;
 
     const modeBtns = Array.from(shell.querySelectorAll('[data-diff-mode]'));
-    const MODE_ORDER = ['base', 'hard', 'soft'];
+    const MODE_ORDER = ['selos', 'rota', 'campo'];
     const CYCLE_MS = 5500;
 
+    function buildPatchCrest(iconSvg, color, isTarget) {
+      return `
+        <svg class="patch-crest" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <polygon
+            points="20,2.5 35,11 35,29 20,37.5 5,29 5,11"
+            fill="${color}18"
+            stroke="${color}"
+            stroke-width="1.35"
+            ${isTarget ? 'stroke-dasharray="3.5 2.5"' : ''}
+            stroke-linejoin="round"
+          />
+          <polygon
+            points="20,6.2 31.8,12.9 31.8,27.1 20,33.8 8.2,27.1 8.2,12.9"
+            fill="none"
+            stroke="${color}"
+            stroke-opacity="0.34"
+            stroke-width="0.85"
+            stroke-dasharray="2 2"
+          />
+          <g stroke="${color}" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">
+            ${iconSvg}
+          </g>
+        </svg>`;
+    }
+
+    const PATCH_ICONS = {
+      ai: '<path d="M20 12.5l1.9 5.1 5.1 1.9-5.1 1.9-1.9 5.1-1.9-5.1-5.1-1.9 5.1-1.9 1.9-5.1z"/><circle cx="25.5" cy="14.5" r="1.1" fill="currentColor" stroke="none"/>',
+      orbit: '<circle cx="20" cy="20" r="3.2"/><ellipse cx="20" cy="20" rx="8.8" ry="3.8" transform="rotate(-28 20 20)"/><circle cx="26.2" cy="15.8" r="1.4" fill="currentColor" stroke="none"/>',
+      star: '<path d="M20 12.2l2.3 4.8 5.2.7-3.8 3.6.9 5.2-4.6-2.5-4.6 2.5.9-5.2-3.8-3.6 5.2-.7 2.3-4.8z"/>',
+      math: '<polygon points="20,12 27.5,16.5 27.5,24.5 20,28.5 12.5,24.5 12.5,16.5"/><path d="M20 12v16.5M12.5 16.5L20 20.5l7.5-4"/>',
+      git: '<circle cx="15.5" cy="14.5" r="2"/><circle cx="15.5" cy="25.5" r="2"/><circle cx="24.5" cy="18.5" r="2"/><path d="M15.5 16.5v7M24.5 20.5c0 3-4.5 3-9 3"/>',
+      process: '<path d="M14.5 17a5.5 5.5 0 0 1 9.6-2.5"/><path d="M24.5 12.5v2.8h-2.8"/><path d="M25.5 23a5.5 5.5 0 0 1-9.6 2.5"/><path d="M15.5 27.5v-2.8h2.8"/>',
+      eng: '<path d="M13.5 25.5h13M15.5 22.5v-5.5l4.5-3.5 4.5 3.5v5.5"/><path d="M18.5 22.5v-3.5h3v3.5"/>',
+      cloud: '<path d="M15 24.5h9.5a3.5 3.5 0 0 0 .7-6.9 4.8 4.8 0 0 0-9.1-1.3 3.3 3.3 0 0 0-1.1 8.2z"/>',
+      mic: '<rect x="17.5" y="12.5" width="5" height="8.5" rx="2.5"/><path d="M14.5 19.5a5.5 5.5 0 0 0 11 0M20 25v3M17 28h6"/>',
+      chip: '<rect x="16" y="16" width="8" height="8" rx="1.2"/><path d="M18 12.5v3.5M22 12.5v3.5M18 24v3.5M22 24v3.5M12.5 18h3.5M12.5 22h3.5M24 18h3.5M24 22h3.5"/>',
+      compass: '<circle cx="20" cy="20" r="7.5"/><polygon points="23.5,16.5 21.2,21.2 16.5,23.5 18.8,18.8"/>',
+      field: '<path d="M14 20.5l3.6 3.5 8.4-8.2"/><path d="M13.5 14h4M13.5 26.5h13"/>'
+    };
+
     const MODES = {
-      base: {
-        eyebrow: 'BASE // FORMAÇÃO & PRÁTICA',
-        tag: 'TEORIA → PRÁTICA',
+      selos: {
+        eyebrow: 'INSÍGNIAS // SELOS CONQUISTADOS',
+        tag: 'MÉRITO COMPROVADO',
         items: [
-          { cat: 'ENGENHARIA', title: 'Controle & Automação', sub: 'UFOP · Escola de Minas', color: '#C6F135' },
-          { cat: 'TÉCNICO', title: 'Automação Industrial', sub: 'IFMG · CLP & Bancada', color: '#F59E0B' },
-          { cat: 'INOVAÇÃO', title: 'Hardware, Web & IA', sub: 'Bitmind · RIW · AgTech', color: '#38BDF8' },
-          { cat: 'OPERACIONAL', title: 'Indústria & Dados', sub: 'Actech · Expedição', color: '#A78BFA' }
+          { badge: '2026', title: 'Google AI Pro', sub: 'Coursera · 8 módulos', color: '#C6F135', icon: 'ai', target: false },
+          { badge: '2026', title: 'NASA Space Apps', sub: 'Desafio Global · AgTech', color: '#38BDF8', icon: 'orbit', target: false },
+          { badge: '2023', title: 'Rio Innovation Week', sub: 'Exposição Bitmind · 3ª ed.', color: '#F59E0B', icon: 'star', target: false },
+          { badge: '1.280h', title: 'Aprendizagem Ind.', sub: 'Rede Cidadã · 2025', color: '#A78BFA', icon: 'math', target: false }
         ]
       },
-      hard: {
-        eyebrow: 'COMPETÊNCIAS // TÉCNICAS',
-        tag: 'FERRAMENTAS APLICADAS',
+      rota: {
+        eyebrow: 'RADAR // PRÓXIMOS SELOS',
+        tag: 'EM PREPARAÇÃO',
         items: [
-          { cat: 'DADOS & ETL', title: 'Power Query & Excel', sub: 'TPV · 8 KPIs · Dashboards', color: '#F59E0B' },
-          { cat: 'WEB & NUVEM', title: 'Web, Firebase & R2', sub: 'HTML · CSS · JS · APIs', color: '#38BDF8' },
-          { cat: 'AUTOMAÇÃO & IA', title: 'Gemini & Automate', sub: 'Apps Script · Fluxos', color: '#C6F135' },
-          { cat: 'HARDWARE', title: 'Arduino, ESP32 & CLP', sub: 'Sensores · Bancada', color: '#34D399' }
+          { badge: 'META', title: 'GitHub Foundations', sub: 'Em preparo · Git & fluxo', color: '#38BDF8', icon: 'git', target: true },
+          { badge: 'PRÓXIMO', title: 'Analista Processos', sub: 'Efetivação · Actech', color: '#C6F135', icon: 'process', target: true },
+          { badge: 'RADAR', title: 'Cloud & Dados', sub: 'Trilha de certificações', color: '#A78BFA', icon: 'cloud', target: true },
+          { badge: 'CONTÍNUO', title: 'IA & Automação', sub: 'Agentes & integrações', color: '#F59E0B', icon: 'ai', target: true }
         ]
       },
-      soft: {
-        eyebrow: 'COMPETÊNCIAS // ATUAÇÃO',
-        tag: 'ROTINA & EQUIPE',
+      campo: {
+        eyebrow: 'INSÍGNIAS // PALCO & CAMPO',
+        tag: 'PRÁTICA & EQUIPE',
         items: [
-          { cat: 'EQUIPE', title: 'Trabalho em Equipe', sub: 'Bitmind · Bitmindop', color: '#C6F135' },
-          { cat: 'COMUNICAÇÃO', title: 'Pitch & Procedimentos', sub: 'RIW · Treinamentos', color: '#38BDF8' },
-          { cat: 'VISÃO DE PROCESSO', title: 'Ponta a Ponta', sub: 'Chão de fábrica → nuvem', color: '#F59E0B' },
-          { cat: 'ORGANIZAÇÃO', title: 'Rotina & Padrão', sub: 'Qualyteam · Actech', color: '#A78BFA' }
+          { badge: '2024', title: 'Palestrante Técnico', sub: 'IFMG Itabirito · Autom.', color: '#F59E0B', icon: 'mic', target: false },
+          { badge: '2023', title: 'Ministrante', sub: 'Oficina · Lixo Eletrônico', color: '#34D399', icon: 'chip', target: false },
+          { badge: 'BITMIND', title: 'Líder de Equipe', sub: 'V Olimpíada → RIW 2023', color: '#38BDF8', icon: 'compass', target: false },
+          { badge: 'ACTECH', title: 'Treinamento em Área', sub: 'Adoção de fluxos digitais', color: '#C6F135', icon: 'field', target: false }
         ]
       }
     };
@@ -4582,17 +4622,24 @@
         .map(
           (item, idx) => `
           <div
-            class="diff-tile ${animate && !prefersReducedMotion ? 'is-entering ' : ''}h-full min-h-[96px] flex flex-col justify-between gap-2 p-3 rounded-lg bg-carbon border hairline-dark"
-            style="border-top:2px solid ${item.color}; --diff-delay:${idx * 55}ms;"
+            class="diff-tile patch-tile ${animate && !prefersReducedMotion ? 'is-entering ' : ''}h-full min-h-[112px] flex flex-col justify-between gap-2.5 p-3 rounded-lg border hairline-dark"
+            data-status="${item.target ? 'target' : 'earned'}"
+            style="--patch-color:${item.color}; border-top:2px solid ${item.color}; --diff-delay:${idx * 55}ms;"
           >
-            <div class="space-y-1">
-              <div class="flex items-center justify-between gap-1 font-mono text-[9px] uppercase tracking-wider" style="color:${item.color};">
-                <span class="truncate font-semibold">${item.cat}</span>
-                <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:${item.color};"></span>
-              </div>
-              <div class="font-display text-[12.5px] font-bold text-ink leading-snug">${item.title}</div>
+            <div class="flex items-start justify-between gap-2">
+              ${buildPatchCrest(PATCH_ICONS[item.icon] || PATCH_ICONS.star, item.color, item.target)}
+              <span
+                class="patch-status-pill shrink-0"
+                style="color:${item.color}; background:${item.color}16; border:1px solid ${item.color}${item.target ? '52' : '40'};"
+              >
+                <span class="w-1.5 h-1.5 rounded-full ${item.target ? 'acad-node-pulse' : ''}" style="background:${item.color};"></span>
+                <span>${item.badge}</span>
+              </span>
             </div>
-            <div class="font-mono text-[9.5px] text-muted truncate">${item.sub}</div>
+            <div class="space-y-0.5 min-w-0">
+              <div class="font-display text-[12.5px] font-bold text-ink leading-snug truncate">${item.title}</div>
+              <div class="font-mono text-[9.5px] text-muted truncate">${item.sub}</div>
+            </div>
           </div>`
         )
         .join('');
@@ -4646,7 +4693,7 @@
       }
     }, '0px');
 
-    renderMode('base', false);
+    renderMode('selos', false);
   })();
 
   /* ==========================================================================
