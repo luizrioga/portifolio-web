@@ -1209,45 +1209,6 @@ main > section[id] {
     background-color: #101210;
     transform: translateY(-2px);
   }
-  .diff-tile:hover .patch-crest {
-    transform: scale(1.07) rotate(-3deg);
-    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--patch-color, #C6F135) 55%, transparent));
-  }
-}
-
-.patch-tile {
-  background:
-    radial-gradient(circle at 18% 18%, color-mix(in srgb, var(--patch-color, #C6F135) 9%, transparent) 0%, transparent 62%),
-    #0B0C0B;
-}
-
-.patch-tile[data-status="target"] {
-  border-style: dashed;
-  border-color: rgba(255, 255, 255, 0.14);
-  background:
-    radial-gradient(circle at 18% 18%, color-mix(in srgb, var(--patch-color, #38BDF8) 7%, transparent) 0%, transparent 58%),
-    #0A0B0A;
-}
-
-.patch-crest {
-  width: 34px;
-  height: 34px;
-  flex-shrink: 0;
-  transition: transform 0.3s var(--ease-editorial), filter 0.3s var(--ease-editorial);
-}
-
-.patch-status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 2px 6px;
-  border-radius: 9999px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 8.5px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  line-height: 1.2;
 }
 
 /* ==========================================================================
