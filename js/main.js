@@ -4501,7 +4501,7 @@
   renderMobileToolbox();
 
   /* ==========================================================================
-     17b. MATRIZ ACADÊMICA INTERATIVA (SEM BARRAS DE PROFICIÊNCIA)
+     17b. MATRIZ COMPLEMENTAR — CERTIFICAÇÕES, ESTUDOS & ATIVIDADES
      ========================================================================== */
   (function initDifferentialsMatrix() {
     const shell = document.getElementById('diff-matrix-shell');
@@ -4512,38 +4512,38 @@
     if (!shell || !grid) return;
 
     const modeBtns = Array.from(shell.querySelectorAll('[data-diff-mode]'));
-    const MODE_ORDER = ['base', 'hard', 'soft'];
+    const MODE_ORDER = ['certs', 'estudos', 'atividades'];
     const CYCLE_MS = 5500;
 
     const MODES = {
-      base: {
-        eyebrow: 'BASE // FORMAÇÃO & PRÁTICA',
-        tag: 'TEORIA → PRÁTICA',
+      certs: {
+        eyebrow: 'EXTRACURRICULAR // CERTIFICAÇÕES',
+        tag: 'CONCLUÍDAS & RADAR',
         items: [
-          { cat: 'ENGENHARIA', title: 'Controle & Automação', sub: 'UFOP · Escola de Minas', color: '#C6F135' },
-          { cat: 'TÉCNICO', title: 'Automação Industrial', sub: 'IFMG · CLP & Bancada', color: '#F59E0B' },
-          { cat: 'INOVAÇÃO', title: 'Hardware, Web & IA', sub: 'Bitmind · RIW · AgTech', color: '#38BDF8' },
-          { cat: 'OPERACIONAL', title: 'Indústria & Dados', sub: 'Actech · Expedição', color: '#A78BFA' }
+          { cat: 'CONCLUÍDA · 2026', title: 'Google AI Pro', sub: 'Coursera · 8 módulos', color: '#C6F135', pulse: false },
+          { cat: 'EM PREPARO', title: 'GitHub Foundations', sub: 'Git, fluxo & colaboração', color: '#38BDF8', pulse: true },
+          { cat: 'GLOBAL · 2026', title: 'NASA Space Apps', sub: 'Desafio global · AgTech', color: '#F59E0B', pulse: false },
+          { cat: '1.280H · 2025', title: 'Aprendizagem Ind.', sub: 'Rede Cidadã · Actech', color: '#A78BFA', pulse: false }
         ]
       },
-      hard: {
-        eyebrow: 'COMPETÊNCIAS // TÉCNICAS',
-        tag: 'FERRAMENTAS APLICADAS',
+      estudos: {
+        eyebrow: 'APROFUNDAMENTO // EM ANDAMENTO',
+        tag: 'CURSOS & FOCO ATUAL',
         items: [
-          { cat: 'DADOS & ETL', title: 'Power Query & Excel', sub: 'TPV · 8 KPIs · Dashboards', color: '#F59E0B' },
-          { cat: 'WEB & NUVEM', title: 'Web, Firebase & R2', sub: 'HTML · CSS · JS · APIs', color: '#38BDF8' },
-          { cat: 'AUTOMAÇÃO & IA', title: 'Gemini & Automate', sub: 'Apps Script · Fluxos', color: '#C6F135' },
-          { cat: 'HARDWARE', title: 'Arduino, ESP32 & CLP', sub: 'Sensores · Bancada', color: '#34D399' }
+          { cat: 'IA & WORKSHOPS', title: 'CustomGPTs & IA', sub: 'Oficinas IFMG · Gemini', color: '#C6F135', pulse: false },
+          { cat: 'DADOS & ETL', title: 'Power Query & BI', sub: 'Modelagem, KPIs & SQL', color: '#F59E0B', pulse: true },
+          { cat: 'DESENVOLVIMENTO', title: 'Front-End & Nuvem', sub: 'Web, Git, Firebase & R2', color: '#38BDF8', pulse: true },
+          { cat: 'PROCESSOS', title: 'Eng. de Processos', sub: 'Melhoria contínua · Actech', color: '#A78BFA', pulse: true }
         ]
       },
-      soft: {
-        eyebrow: 'COMPETÊNCIAS // ATUAÇÃO',
-        tag: 'ROTINA & EQUIPE',
+      atividades: {
+        eyebrow: 'EXTENSÃO // EVENTOS & PALCO',
+        tag: 'ALÉM DA SALA',
         items: [
-          { cat: 'EQUIPE', title: 'Trabalho em Equipe', sub: 'Bitmind · Bitmindop', color: '#C6F135' },
-          { cat: 'COMUNICAÇÃO', title: 'Pitch & Procedimentos', sub: 'RIW · Treinamentos', color: '#38BDF8' },
-          { cat: 'VISÃO DE PROCESSO', title: 'Ponta a Ponta', sub: 'Chão de fábrica → nuvem', color: '#F59E0B' },
-          { cat: 'ORGANIZAÇÃO', title: 'Rotina & Padrão', sub: 'Qualyteam · Actech', color: '#A78BFA' }
+          { cat: 'UFOP · 2024', title: 'Encontro de Saberes', sub: 'Mostra acadêmica · UFOP', color: '#C6F135', pulse: false },
+          { cat: 'PALESTRANTE · 2024', title: 'IFMG Itabirito', sub: 'Projetos de Automação', color: '#F59E0B', pulse: false },
+          { cat: 'MINISTRANTE · 2023', title: 'Oficina Prática', sub: 'Lixo Eletrônico · IFMG', color: '#34D399', pulse: false },
+          { cat: 'EVENTO · 2023', title: 'Rio Innovation Week', sub: 'Exposição · Equipe Bitmind', color: '#38BDF8', pulse: false }
         ]
       }
     };
@@ -4588,7 +4588,7 @@
             <div class="space-y-1">
               <div class="flex items-center justify-between gap-1 font-mono text-[9px] uppercase tracking-wider" style="color:${item.color};">
                 <span class="truncate font-semibold">${item.cat}</span>
-                <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:${item.color};"></span>
+                <span class="w-1.5 h-1.5 rounded-full shrink-0 ${item.pulse ? 'acad-node-pulse' : ''}" style="background:${item.color};"></span>
               </div>
               <div class="font-display text-[12.5px] font-bold text-ink leading-snug">${item.title}</div>
             </div>
@@ -4646,7 +4646,7 @@
       }
     }, '0px');
 
-    renderMode('base', false);
+    renderMode('certs', false);
   })();
 
   /* ==========================================================================
